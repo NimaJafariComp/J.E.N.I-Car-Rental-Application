@@ -45,6 +45,8 @@ Please follow the steps accordingly
 	1. To download, use this link: https://dev.mysql.com/downloads/workbench/
 	2. Execute the download
 	3. Open the MySQL Workbench
+ 	4. Press "Local instance MySQL80" under MySQL Connections
+  	5. Enter your password and press ok	 	
 
 6. Running the Code
 	- As mentioned above, you can either use the Python files or the MySQL file that is given in the folder
