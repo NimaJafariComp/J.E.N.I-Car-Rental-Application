@@ -57,9 +57,9 @@ Please follow the steps accordingly
 		create_database.py
 		create_tables.py
 		print_tables.put
-		main.py
+		main_database.py
 		In the same directory, in no particular order.
-	2. Open the main.py file and input your username in the variable my_username
+	2. Open the main_database.py file and input your username in the variable my_username
 		and your password in the variable my_password
 		- Again, note that your username will be "root" if you did not change it
 			when downloading MySQL
