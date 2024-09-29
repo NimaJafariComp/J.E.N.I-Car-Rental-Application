@@ -65,24 +65,42 @@ Please follow the steps accordingly
 	4. This should give you an output, in some format, of the following:
 	
 		(1, '1FTWW31P95EB34134', 600, 35, Decimal('150.00'), 1, '7KJV105')
-		(2, '5TDKK3DC9BS182760', 532, 25, Decimal('70.00'), 1, '6IPZ437')
-		(3, 'JHLRE3H57AC023983', 234, 40, Decimal('80.00'), 1, '5YGW550')
-		(4, 'JTKDE167060163343', 124, 42, Decimal('160.00'), 1, '8CMH868')
-		(5, '1GNUKKE34AR110094', 942, 50, Decimal('180.00'), 1, '2LHU996')
-		(1, 'Elijah Sagaran', datetime.date(2000, 10, 2), 'elijahsagaran@gmail.com')
-		(2, 'Johnny Aguilar', datetime.date(2000, 11, 3), 'johnnyaguilar@gmail.com')
-		(3, 'Irma Alicon', datetime.date(2000, 12, 4), 'irmaalicon@gmail.com')
-		(4, 'Nima Jafari', datetime.date(2000, 9, 1), 'nimajafari@gmail.com')
-		(1, datetime.date(2024, 1, 19), datetime.date(2024, 2, 19), 1, 1, 2)
-		(2, datetime.date(2024, 10, 17), datetime.date(2024, 10, 20), 0, 2, 2)
-		(3, datetime.date(2024, 12, 9), datetime.date(2024, 12, 29), 1, 1, 4)
-		(4, datetime.date(2024, 12, 24), datetime.date(2024, 12, 29), 1, 3, 5)
-		(5, datetime.date(2024, 12, 28), datetime.date(2024, 12, 30), 0, 4, 1)
-		(1, 'Scratch on hood', 10, 1, 1)
-		(2, None, 11, 1, 2)
-		(3, 'Dent on left door', 6, 4, 2)
-		(4, None, 9, 5, 3)
-		(5, None, 12, 2, 4)
+		
+  		(2, '5TDKK3DC9BS182760', 532, 25, Decimal('70.00'), 1, '6IPZ437')
+		
+  		(3, 'JHLRE3H57AC023983', 234, 40, Decimal('80.00'), 1, '5YGW550')
+		
+  		(4, 'JTKDE167060163343', 124, 42, Decimal('160.00'), 1, '8CMH868')
+		
+  		(5, '1GNUKKE34AR110094', 942, 50, Decimal('180.00'), 1, '2LHU996')
+		
+  		(1, 'Elijah Sagaran', datetime.date(2000, 10, 2), 'elijahsagaran@gmail.com')
+		
+  		(2, 'Johnny Aguilar', datetime.date(2000, 11, 3), 'johnnyaguilar@gmail.com')
+		
+  		(3, 'Irma Alicon', datetime.date(2000, 12, 4), 'irmaalicon@gmail.com')
+		
+  		(4, 'Nima Jafari', datetime.date(2000, 9, 1), 'nimajafari@gmail.com')
+		
+  		(1, datetime.date(2024, 1, 19), datetime.date(2024, 2, 19), 1, 1, 2)
+		
+  		(2, datetime.date(2024, 10, 17), datetime.date(2024, 10, 20), 0, 2, 2)
+		
+  		(3, datetime.date(2024, 12, 9), datetime.date(2024, 12, 29), 1, 1, 4)
+		
+  		(4, datetime.date(2024, 12, 24), datetime.date(2024, 12, 29), 1, 3, 5)
+		
+  		(5, datetime.date(2024, 12, 28), datetime.date(2024, 12, 30), 0, 4, 1)
+		
+  		(1, 'Scratch on hood', 10, 1, 1)
+		
+  		(2, None, 11, 1, 2)
+		
+  		(3, 'Dent on left door', 6, 4, 2)
+		
+  		(4, None, 9, 5, 3)
+		
+  		(5, None, 12, 2, 4)
 		
 		This example output is from NotePad++, output from different IDE will vary.
 		But as long as the data values are the same, it is fine 
