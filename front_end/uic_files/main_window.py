@@ -16,19 +16,19 @@ class Ui_main_Window(object):
         main_Window.setObjectName("main_Window")
         main_Window.resize(1155, 912)
         main_Window.setStyleSheet("background-color:rgb(255, 255, 255)")
-
         self.central_widget = QtWidgets.QWidget(main_Window)
         self.central_widget.setObjectName("central_widget")
-
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.central_widget)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        
         self.main_frame = QtWidgets.QFrame(self.central_widget)
         self.main_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.main_frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.main_frame.setObjectName("main_frame")
-
         self.verticalLayout_3.addWidget(self.main_frame)
         main_Window.setCentralWidget(self.central_widget)
+        self.status_bar = QtWidgets.QStatusBar(main_Window)
+        self.status_bar.setObjectName("status_bar")
+        main_Window.setStatusBar(self.status_bar)
 
         self.retranslateUi(main_Window)
         QtCore.QMetaObject.connectSlotsByName(main_Window)
