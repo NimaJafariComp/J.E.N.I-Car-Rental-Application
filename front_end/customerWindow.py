@@ -9,7 +9,7 @@ class customer_window(QtWidgets.QWidget):
         self.customer_layout.setSpacing(0)
 
         self.top_frame = QtWidgets.QWidget(self)
-        self.top_frame.setFixedHeight(50)
+        self.top_frame.setFixedHeight(100)
         self.top_frame.setStyleSheet(
             "background: grey;"
         )

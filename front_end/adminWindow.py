@@ -9,7 +9,7 @@ class admin_window(QWidget):
         self.admin_layout.setSpacing(0)
         
         self.top_frame = QFrame(self)
-        self.top_frame.setMaximumSize(QSize(16777215,50))
+        self.top_frame.setMaximumHeight(100)
         self.top_frame.setFrameShape(QFrame.StyledPanel)
         self.top_frame.setFrameShadow(QFrame.Raised)
         self.top_frame.setStyleSheet(
