@@ -13,7 +13,7 @@ def create_database(my_username, my_password):
     # remove the previously made database making it possible to run the code again after modification
     mycursor.execute("DROP DATABASE IF EXISTS CarAppProject")
     # creating databases 
-    mycursor.execute("create database CarAppProject")
+    mycursor.execute("create database carappproject")
      
     # getting a list of databases in localhost
     mycursor.execute("show databases")

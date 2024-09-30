@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS CarAppProject;
 create database CarAppProject;
 
-use CarAppProject;
+use carappproject;
 
 create table Vehicles(
 	CarID int auto_increment primary key,
