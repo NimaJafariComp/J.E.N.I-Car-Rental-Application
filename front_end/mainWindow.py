@@ -9,15 +9,19 @@ class main_window(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        self.setContentsMargins(0, 0, 0, 0)
         self.resize(1155, 912)
         self.setStyleSheet("background-color:rgb(255, 255, 255)")
 
         self.central_widget = QWidget(self)
         self.central_widget.setObjectName("central_widget")
 
+
         self.stacked_widget = QStackedLayout(self.central_widget)
         self.stacked_widget.setObjectName("stacked_widget")
-        
+        self.stacked_widget.setSpacing(0)
+        self.stacked_widget.setContentsMargins(0, 0, 0, 0)       
+
         self.setCentralWidget(self.central_widget)
 
         self.c_window = customer_window()
