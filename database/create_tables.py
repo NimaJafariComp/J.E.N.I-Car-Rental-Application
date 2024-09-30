@@ -8,8 +8,19 @@ def create_tables(my_username, my_password):
         database = "carappproject"
     )
 
+    # creates an instance of cursor class 
     mycursor = mydb.cursor()
 
+    # creates Vehicles tables with the following data fields:
+    # CarID: Automatic assignment, increments by 1 per insert of car. 
+    #        Used as reference key by other tables: VehicleType, Reservation, Reports
+    # VIN: String input from user
+    # Mileage: Integer input from user. BIGINT type lets users store big value for Mileage
+    # MPG: Integer input from user.
+    # Price: Decimal/Float input from user.
+    # IsActive: Boolean input. False = 0, True = any other number other than 0.
+    # LicensePlate: A string input from user. Limited to 7 characters
+    # Data fields with "not null" must have an input from the user
     mycursor.execute("create table Vehicles("+
                         "CarID int auto_increment primary key," +
                         "VIN varchar(255) unique not null," +
@@ -18,8 +29,28 @@ def create_tables(my_username, my_password):
                         "Price decimal(7, 2) not null," +
                         "IsActive bool," +
                         "LicensePlate char(7) unique not null)")
-                        
 
+    # creates VehicleType tables with the following data fields:
+    # CarYear: A year input. Input must be 4 characters. 
+    # Model: A string input from user
+    # Make: A string input from user
+    # CarType: A string input from user
+    # CarID: Integer input from user. A foreign key with reference to Vehicle
+    mycursor.execute("create table VehicleType("+
+                         "CarYear year not null,"+
+                         "Model varchar(255) not null,"+
+                         "Make varchar(255) not null,"+
+                         "Color varchar(255) not null,"+
+                         "CarType varchar(255),"+
+                         "CarID int unique not null,"+
+                         "constraint FK_VehicleType foreign key (CarID) references Vehicles(CarID))")
+
+    # create Customers tables with the following data fields:
+    # CustomerID: Automatic assignment. Increments by 1 per data insert.
+    #             Reference key for Reports and Reservations
+    # FullName: A string input from user
+    # DOB: A date input from user. Format is: yyyy-mm-dd
+    # Email: A string input from user
     mycursor.execute("create table Customers(" +
                         "CustomerID int auto_increment primary key," +
                         "FullName varchar(255) not null," +
@@ -54,6 +85,15 @@ def create_tables(my_username, my_password):
             ('1GNUKKE34AR110094', 942, 50, 180.0, 1, '2LHU996')
     ]
 
+    sql_insert_vehicle_types = "insert into VehicleType (CarYear, Model, Make, Color, CarType, CarID) values (%s, %s, %s, %s, %s, %s)"
+    vehicle_type_values = [
+        ('2016', 'Camaro', 'Chevrolet', 'Red', 'Pony Car', 1),
+        ('2013', 'Sentra', 'Nissan', 'Grey', 'Compact Car', 2),
+        ('2019', 'Sorento', 'Kia', 'Black', 'SUV',  3),
+        ('2017', '911 Carrera 4 GTS', 'Porsche', 'White', 'Coupe', 4),
+        ('2019', 'R8', 'Audi', 'Grey', 'Sports Car', 5)
+    ]
+    
     sql_insert_customers = "insert into Customers (FullName, DOB, Email) values (%s, %s, %s)"
     customer_values = [
             ('Elijah Sagaran', '2000-10-2', 'elijahsagaran@gmail.com'),
@@ -81,6 +121,7 @@ def create_tables(my_username, my_password):
     ]
 
     mycursor.executemany(sql_insert_vehicles, vehicle_values)
+    mycursor.executemany(sql_insert_vehicle_types, vehicle_type_values)
     mycursor.executemany(sql_insert_customers, customer_values)
     mycursor.executemany(sql_insert_reservations, reservation_values)
     mycursor.executemany(sql_insert_reports, report_values)
