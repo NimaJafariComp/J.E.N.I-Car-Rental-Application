@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS CarAppProject;
 create database CarAppProject;
 
 use CarAppProject;
@@ -10,6 +11,13 @@ create table Vehicles(
     Price decimal(7, 2) not null,
     IsActive bool,
     LicensePlate char(7) unique not null
+);
+
+create table Administrator(
+    AdminID int auto_increment primary key,
+    `User` varchar(255) not null,           
+    Email varchar(255) not null,           
+    `Password` varchar(255) not null          
 );
 
 create table Customers(
@@ -44,6 +52,7 @@ create table Reports(
     references Customers(CustomerID)
 );
 
+
 insert into Vehicles (VIN, Mileage, MPG, Price, IsActive, LicensePlate)
 values
 	('1FTWW31P95EB34134', 600, 35, 150.0, 1, '7KJV105'),
@@ -51,6 +60,11 @@ values
 	('JHLRE3H57AC023983', 234, 40, 80.0, 1, '5YGW550'),
 	('JTKDE167060163343', 124, 42, 160.0, 1, '8CMH868'),
 	('1GNUKKE34AR110094', 942, 50, 180.0, 1, '2LHU996');
+    
+insert into Administrator (`User`, Email, `Password`)
+values
+	('Admin', 'adminJeni@gmail.com', 'Admin1234');
+    
     
 insert into Customers (FullName, DOB, Email)
 values
@@ -70,12 +84,13 @@ values
 insert into Reports (Damage, GasAmount, Vehicle, Customer)
 values
 	('Scratch on hood', 10, 1, 1),
-	(null, 11, 1, 2),
+	('Engine rattling', 11, 1, 2),
 	('Dent on left door', 6, 4, 2),
-	(null, 9, 5, 3),
-	(null, 12, 2, 4);
+	('AC not working', 9, 5, 3),
+	('Flat tire', 12, 2, 4);
     
 select * from Vehicles;
+select * from Administrator;
 select * from Customers;
 select * from Reservations;
 select * from Reports;

@@ -44,7 +44,19 @@ def create_tables(my_username, my_password):
                          "CarType varchar(255),"+
                          "CarID int unique not null,"+
                          "constraint FK_VehicleType foreign key (CarID) references Vehicles(CarID))")
-
+    
+    # Create Administrator table with the following data fields:
+    # AdminID: Automatic assignment. Increments by 1 per data insert.
+    #           Primary key for identifying administrators uniquely.
+    # User: A string input from user. Represents the username for the administrator.
+    # Email: A string input from user. Represents the email address of the administrator.
+    # Password: A string input from user.
+    mycursor.execute("CREATE TABLE Administrator(" +
+                         "AdminID INT AUTO_INCREMENT PRIMARY KEY, " +
+                         "`User` VARCHAR(255) NOT NULL, " +
+                         "Email VARCHAR(255) NOT NULL, " +
+                         "`Password` VARCHAR(255) NOT NULL)")
+    
     # create Customers tables with the following data fields:
     # CustomerID: Automatic assignment. Increments by 1 per data insert.
     #             Reference key for Reports and Reservations
@@ -94,6 +106,11 @@ def create_tables(my_username, my_password):
         ('2019', 'R8', 'Audi', 'Grey', 'Sports Car', 5)
     ]
     
+    sql_insert_admin = "insert into Administrator (`User`, Email, `Password`) VALUES (%s, %s, %s)"
+    admin_values = [
+          ('Admin', 'adminJeni@gmail.com', 'Admin1234')
+    ]
+    
     sql_insert_customers = "insert into Customers (FullName, DOB, Email) values (%s, %s, %s)"
     customer_values = [
             ('Elijah Sagaran', '2000-10-2', 'elijahsagaran@gmail.com'),
@@ -114,15 +131,16 @@ def create_tables(my_username, my_password):
     sql_insert_reports = "insert into Reports (Damages, GasAmount, Vehicle, Customer) values (%s, %s, %s, %s)"
     report_values = [
             ('Scratch on hood', 10, 1, 1),
-            (None, 11, 1, 2),
-            ('Dent on left door', 6, 4, 2),
-            (None, 9, 5, 3),
-            (None, 12, 2, 4)
+	    ('Engine rattling', 11, 1, 2),
+	    ('Dent on left door', 6, 4, 2),
+	    ('AC not working', 9, 5, 3),
+	    ('Flat tire', 12, 2, 4)
     ]
 
     mycursor.executemany(sql_insert_vehicles, vehicle_values)
     mycursor.executemany(sql_insert_vehicle_types, vehicle_type_values)
     mycursor.executemany(sql_insert_customers, customer_values)
+    mycursor.executemany(sql_insert_admin, admin_values)
     mycursor.executemany(sql_insert_reservations, reservation_values)
     mycursor.executemany(sql_insert_reports, report_values)
     mydb.commit()
