@@ -11,7 +11,7 @@ def create_database(my_username, my_password):
     mycursor = mydb.cursor()
      
     # creating databases 
-    mycursor.execute("create database CarAppProject")
+    mycursor.execute("create database carappproject")
      
     # getting a list of databases in localhost
     mycursor.execute("show databases")
