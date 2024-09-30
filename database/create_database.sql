@@ -1,6 +1,6 @@
-create database CarAppProject;
+create database carappproject;
 
-use CarAppProject;
+use carappproject;
 
 create table Vehicles(
 	CarID int auto_increment primary key,
