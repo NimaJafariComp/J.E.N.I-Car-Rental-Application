@@ -69,6 +69,7 @@ class test:
             print("CarID is:", result[0])
             return result[0]
         else:
+            print(f"Car with VIN {uVIN} doesnt exist in database")
             return None 
         
         for x in mycursor:

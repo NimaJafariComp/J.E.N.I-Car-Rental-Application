@@ -15,6 +15,11 @@ database_object.get_car_info(carID1)
 carID2 = database_object.get_car_id('JNKCV51EX4M613978')
 
 database_object.get_car_info(carID2)
+
 carID3 = database_object.get_car_id('JNKCV51EX4M613300')
 
 database_object.get_car_info(carID3)
+
+carID4 = database_object.get_car_id('JNKCV51EX4M613366')
+
+database_object.get_car_info(carID4)
