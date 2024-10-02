@@ -79,3 +79,17 @@ class test:
     
     # def add_car_type(CarYear, Model, Make, Color, CarType, CarID):
         # pass
+
+    # Description: function to update Mileage
+    # Input: CarID, an integer
+    #        Mileage, an integer
+    # Output: None
+    def update_mileage(self, CarID, updated_mileage):
+        self.connect_to_mysql()
+        mycursor = self.mydb.cursor()
+        
+        sql_update_mileage = "update Vehicles set Mileage = %s where CarID = %s"
+        update_values = (updated_mileage, CarID)
+        
+        mycursor.execute(sql_update_mileage, update_values)
+        self.mydb.commit()
