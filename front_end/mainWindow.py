@@ -37,6 +37,8 @@ class main_window(QMainWindow):
         self.c_window.admin_button.clicked.connect(self.on_click_admin)
         self.a_window.customer_button.clicked.connect(self.on_click_customer)
 
+        self.center()
+
 
     def on_click_admin(self):
         self.stacked_widget.setCurrentIndex(2)
@@ -51,6 +53,20 @@ class main_window(QMainWindow):
 
     def on_click_customer(self):
         self.stacked_widget.setCurrentIndex(0)
+
+    # Method to center the window on the screen
+    def center(self):
+        # Get the rectangle of the screen where the application is being displayed
+        qr = self.frameGeometry()
+        
+        # Get the center point of the screen
+        cp = QDesktopWidget().availableGeometry().center()
+        
+        # Move the rectangle's center point to the center of the screen
+        qr.moveCenter(cp)
+        
+        # Move the top-left of the window to the top-left of the rectangle
+        self.move(qr.topLeft())
 
 
 if __name__ == "__main__":
