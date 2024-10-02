@@ -23,14 +23,13 @@ class customer_window(QWidget):
         # Set up the font
         self.set_font = font()
         self.font = QFont(self.set_font.font_family, 16)
-        self.font.setBold(True)
+        #self.font.setBold(True)
 
 
-        self.top_frame = QWidget(self)
+        self.top_frame = QFrame(self)
+        self.top_frame.setFrameShape(QFrame.StyledPanel)
         self.top_frame.setFixedHeight(150)
-        self.top_frame.setStyleSheet(
-            "background: lightgrey;"
-        )
+        self.top_frame.setStyleSheet("background: white;")
 
         self.top_frame_layout = QHBoxLayout(self.top_frame)
         self.top_frame_layout.addWidget(self.logo)
@@ -39,11 +38,8 @@ class customer_window(QWidget):
         self.top_frame_layout.addWidget(self.admin_button)
         self.admin_button.setFixedWidth(200)
         self.admin_button.setFixedHeight(75)
-        self.admin_button.setStyleSheet(
-            "background-color: white;"
-            "border: 3px soild black;"
-            "border-radius: 5px;"
-        )
+        self.admin_button.setFont(self.font)
+        self.admin_button.setStyleSheet("background:white; border-radius: 5px; border: 3px solid lightgrey;")
 
         self.customer_layout.addWidget(self.top_frame)
 
