@@ -21,7 +21,7 @@ class login(QWidget):
         # Set up the font
         self.set_font = font()
         self.font = QFont(self.set_font.font_family, 16)
-        self.font.setBold(True)
+        #self.font.setBold(True)
 
         # Set up the main layout
         self.login_layout = QVBoxLayout(self)
