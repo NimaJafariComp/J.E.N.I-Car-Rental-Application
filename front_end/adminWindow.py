@@ -24,7 +24,7 @@ class admin_window(QWidget):
         self.customer_button.setStyleSheet(
             "background-color:white" 
             #"border : 2px solid black;"
-            #"border-radius : 20px;"
+            #"border-radius : 10px;"
  
         )
 
