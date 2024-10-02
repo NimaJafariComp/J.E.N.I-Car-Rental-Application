@@ -23,6 +23,9 @@ class admin_window(QWidget):
         self.top_frame_layout.addWidget(self.customer_button)
         self.customer_button.setStyleSheet(
             "background:white" 
+            "border : 2px solid black;"
+            "border-radius : 20px;"
+ 
         )
 
         self.bottom_frame = QFrame(self)

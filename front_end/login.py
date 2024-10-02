@@ -19,12 +19,17 @@ class login(QWidget):
         self.login_button = QPushButton("Login", self)
         self.pw_box.setStyleSheet(
             "background:white;"
+            "border : 2px solid black;"
+            "border-radius : 20px;"
         )
         self.login_button.setStyleSheet(
             "background:white;"
+            "border : 2px solid black;"
+            "border-radius : 20px;"
         )
         self.login_window.setStyleSheet(
             "background:grey;"
+            "border-radius: 35px;"
         )
         self.login_window_layout = QVBoxLayout(self.login_window) 
         self.login_window_layout.addStretch()
