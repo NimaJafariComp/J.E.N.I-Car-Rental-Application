@@ -13,7 +13,7 @@ class main_window(QMainWindow):
         self.setContentsMargins(0, 0, 0, 0)
         self.resize(1155, 912)
         self.setStyleSheet("background-color:rgb(255, 255, 255)")
-        self.setGeometry(150, 150, 1920, 1080)
+        self.setGeometry(150, 150, 2560, 1600)
 
         self.central_widget = QWidget(self)
         self.central_widget.setObjectName("central_widget")
@@ -47,6 +47,7 @@ class main_window(QMainWindow):
         self.entered_pw = self.log_window.pw_box.text()
         if self.pw == self.entered_pw: 
             self.stacked_widget.setCurrentIndex(1)
+            self.log_window.pw_box.clear()
 
     def on_click_customer(self):
         self.stacked_widget.setCurrentIndex(0)
