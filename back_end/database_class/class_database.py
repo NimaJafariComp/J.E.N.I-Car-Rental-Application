@@ -32,7 +32,14 @@ class test:
     #        uLicensePlate, a string - Car's license plate
     # Output: None
     def add_car(self, uVIN, uMileage, uMPG, uPrice, uIsActive, uLicensePlate):
+        
+        existing_car_id = self.get_car_id(uVIN) #checking if car exists already
+        if existing_car_id is not None: 
+            print(f"Car with VIN {uVIN} already exists with CarID: {existing_car_id}.")
+            return
+    
         sql_insert_vehicle = "insert into Vehicles (VIN, Mileage, MPG, Price, IsActive, LicensePlate) values (%s, %s, %s, %s, %s, %s)"
+        print(f"Car with VIN {uVIN} added to database with CarID: {existing_car_id}.")
         vehicle_value = (uVIN, uMileage, uMPG, uPrice, uIsActive, uLicensePlate)
         
         self.connect_to_mysql()
@@ -57,11 +64,18 @@ class test:
         select_prompt = "select CarID from Vehicles where VIN = %s"
         adr = [uVIN]
         mycursor.execute(select_prompt, adr)
+        result = mycursor.fetchone()
+        if result:
+            print("CarID is:", result[0])
+            return result[0]
+        else:
+            return None 
+        
         for x in mycursor:
             print("CarID is: ", x[0])
             carID = x[0]
             
-        return carID
+       
     
     # Description: function to get a car's info from MySQL through CarID
     # Input: CarID, an integer
