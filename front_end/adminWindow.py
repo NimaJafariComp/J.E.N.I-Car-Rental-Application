@@ -22,9 +22,9 @@ class admin_window(QWidget):
         self.customer_button = QPushButton("Customer", self.top_frame)
         self.top_frame_layout.addWidget(self.customer_button)
         self.customer_button.setStyleSheet(
-            "background:white" 
-            "border : 2px solid black;"
-            "border-radius : 20px;"
+            "background-color:white" 
+            #"border : 2px solid black;"
+            #"border-radius : 20px;"
  
         )
 
