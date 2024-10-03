@@ -5,15 +5,16 @@ from PyQt5.QtGui import *
 from customerWindow import customer_window
 from adminWindow import admin_window
 from login import login
+from screenSettings import screen_setting
 
 class main_window(QMainWindow):
     def __init__(self):
         super().__init__()
-
+        self.screen = screen_setting()
         self.setContentsMargins(0, 0, 0, 0)
         self.resize(1155, 912)
         self.setStyleSheet("background-color:rgb(255, 255, 255)")
-        self.setGeometry(0, 0, 2560, 1600)
+        self.setGeometry(0, 0, int(2560*self.screen.screen_ratio), int(1600*self.screen.screen_ratio))
 
         self.central_widget = QWidget(self)
         self.central_widget.setObjectName("central_widget")
@@ -39,10 +40,7 @@ class main_window(QMainWindow):
 
         self.center()
         # Get screen information
-        screen = QApplication.primaryScreen()
-        dpi = screen.logicalDotsPerInch()
-        print(f"Screen DPI: {dpi}")
- 
+        self.screen.print_dpi()  
 
 
     def on_click_admin(self):
