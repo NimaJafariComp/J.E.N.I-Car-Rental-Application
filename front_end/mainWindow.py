@@ -13,7 +13,7 @@ class main_window(QMainWindow):
         self.setContentsMargins(0, 0, 0, 0)
         self.resize(1155, 912)
         self.setStyleSheet("background-color:rgb(255, 255, 255)")
-        self.setGeometry(150, 150, 2560, 1600)
+        self.setGeometry(0, 0, 2560, 1600)
 
         self.central_widget = QWidget(self)
         self.central_widget.setObjectName("central_widget")
@@ -38,6 +38,11 @@ class main_window(QMainWindow):
         self.a_window.customer_button.clicked.connect(self.on_click_customer)
 
         self.center()
+        # Get screen information
+        screen = QApplication.primaryScreen()
+        dpi = screen.logicalDotsPerInch()
+        print(f"Screen DPI: {dpi}")
+ 
 
 
     def on_click_admin(self):
