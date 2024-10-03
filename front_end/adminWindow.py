@@ -2,10 +2,12 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from font import font
+from screenSettings import screen_setting
 
 class admin_window(QWidget):
     def __init__(self):
         super().__init__()
+        self.screen = screen_setting() 
         self.admin_layout = QVBoxLayout(self)
         self.logo = QLabel(self)
         self.top_frame = QFrame(self)
@@ -27,12 +29,12 @@ class admin_window(QWidget):
     def setup_logo(self):#set up logo img
         self.logo.setPixmap(self.pixmap)
         self.logo.resize(self.pixmap.width(), self.pixmap.height())
-        self.scaled_pixmap = self.pixmap.scaled(120, 120, aspectRatioMode=1)  # width, height
+        self.scaled_pixmap = self.pixmap.scaled(int(60*self.screen.screen_ratio), int(60*self.screen.screen_ratio), aspectRatioMode=1)  # width, height
         self.logo.setPixmap(self.scaled_pixmap)
         self.logo.setStyleSheet("border: none;")
 
     def setup_topbar(self):
-        self.top_frame.setMaximumHeight(150)
+        self.top_frame.setMaximumHeight(int(100*self.screen.screen_ratio))
         self.top_frame.setFrameShape(QFrame.StyledPanel)
         self.top_frame.setFrameShadow(QFrame.Raised)
         self.top_frame.setStyleSheet("background:white;")
@@ -41,8 +43,8 @@ class admin_window(QWidget):
         self.top_frame_layout.addWidget(self.customer_button)
         
     def setup_bottom(self):
-        self.customer_button.setFixedWidth(200)
-        self.customer_button.setFixedHeight(75)
+        self.customer_button.setFixedWidth(int(100*self.screen.screen_ratio))
+        self.customer_button.setFixedHeight(int(40*self.screen.screen_ratio))
         self.customer_button.setFont(self.font)
         self.customer_button.setStyleSheet("color: white; background: #efbe25; border-radius: 5px;")
 

@@ -2,19 +2,21 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from font import font
+from screenSettings import screen_setting
 
 class login(QWidget):
     def __init__(self):
         super().__init__()
         # Set the background color of the main window to dark grey
         self.setStyleSheet("background-color:darkgrey;")
+        self.screen = screen_setting()
 
         #set up logo img
         self.logo = QLabel(self)
         self.pixmap = QPixmap("logo/FullLogo.png")
         self.logo.setPixmap(self.pixmap)
         self.logo.resize(self.pixmap.width(), self.pixmap.height())
-        self.scaled_pixmap = self.pixmap.scaled(700, 700, aspectRatioMode=1)  # width, height
+        self.scaled_pixmap = self.pixmap.scaled(int(300*self.screen.screen_ratio), int(300*self.screen.screen_ratio), aspectRatioMode=1)  # width, height
         self.logo.setPixmap(self.scaled_pixmap)
         self.logo.setStyleSheet("border: none;")
 
@@ -30,11 +32,8 @@ class login(QWidget):
 
         # Create the inner login window
         self.login_window = QWidget(self)
-        self.login_window.setFixedWidth(800)
-        self.login_window.setFixedHeight(1200)
-
-        # Add a margin around the login window to make the dark grey background visible
-        self.login_layout.setContentsMargins(20, 20, 20, 20)  # Adjust the margin size as needed
+        self.login_window.setFixedWidth(int(400*self.screen.screen_ratio))
+        self.login_window.setFixedHeight(int(600*self.screen.screen_ratio))
 
         # Create label and set font
         self.admin_label = QLabel("ADMIN", self)
@@ -44,8 +43,8 @@ class login(QWidget):
         # Password box
         self.pw_box = QLineEdit(self)
         self.pw_box.setPlaceholderText("Enter Password")
-        self.pw_box.setFixedWidth(600)
-        self.pw_box.setFixedHeight(80)
+        self.pw_box.setFixedWidth(int(300*self.screen.screen_ratio))
+        self.pw_box.setFixedHeight(int(40*self.screen.screen_ratio))
         self.pw_box.setEchoMode(QLineEdit.Password)
         self.pw_box.setStyleSheet(
             "background-color:white;"
@@ -56,11 +55,11 @@ class login(QWidget):
         # Login button
         self.login_button = QPushButton("Login", self)
         self.login_button.setFont(self.font)
-        self.login_button.setFixedWidth(250)
-        self.login_button.setFixedHeight(80)
+        self.login_button.setFixedWidth(int(125*self.screen.screen_ratio))
+        self.login_button.setFixedHeight(int(40*self.screen.screen_ratio))
         self.login_button.setStyleSheet(
             "background-color: #efbe25; color: white;"
-            "border : 1px solid lightgrey;"
+            "border: none;"
             "border-radius : 5px;"
         )
 

@@ -14,7 +14,7 @@ class main_window(QMainWindow):
         self.setContentsMargins(0, 0, 0, 0)
         self.resize(1155, 912)
         self.setStyleSheet("background-color:rgb(255, 255, 255)")
-        self.setGeometry(0, 0, int(2560*self.screen.screen_ratio), int(1600*self.screen.screen_ratio))
+        self.setGeometry(0, 0, int(1920*self.screen.screen_ratio), int(1080*self.screen.screen_ratio))
 
         self.central_widget = QWidget(self)
         self.central_widget.setObjectName("central_widget")
