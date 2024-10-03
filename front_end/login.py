@@ -39,7 +39,7 @@ class login(QWidget):
         # Create label and set font
         self.admin_label = QLabel("ADMIN", self)
         self.admin_label.setFont(self.font)
-        self.admin_label.setStyleSheet("border: none;")
+        self.admin_label.setStyleSheet("color: #efbe25; border: none;")
 
         # Password box
         self.pw_box = QLineEdit(self)
@@ -59,7 +59,7 @@ class login(QWidget):
         self.login_button.setFixedWidth(250)
         self.login_button.setFixedHeight(80)
         self.login_button.setStyleSheet(
-            "background-color:white;"
+            "background-color: #efbe25; color: white;"
             "border : 1px solid lightgrey;"
             "border-radius : 5px;"
         )

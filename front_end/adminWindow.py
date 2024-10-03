@@ -9,7 +9,7 @@ class admin_window(QWidget):
         self.admin_layout = QVBoxLayout(self)
         self.logo = QLabel(self)
         self.top_frame = QFrame(self)
-        self.pixmap = QPixmap("logo/FullLogo.png")
+        self.pixmap = QPixmap("logo/HalfLogo.png")
         self.top_frame_layout = QHBoxLayout(self.top_frame)
         self.customer_button = QPushButton("Customer", self.top_frame)
         self.bottom_frame = QFrame(self)
@@ -17,7 +17,6 @@ class admin_window(QWidget):
         # Set up the font
         self.set_font = font()
         self.font = QFont(self.set_font.font_family, 16)
-        #self.font.setBold(True)
 
         self.setup_logo()
         self.setup_topbar()
@@ -45,7 +44,7 @@ class admin_window(QWidget):
         self.customer_button.setFixedWidth(200)
         self.customer_button.setFixedHeight(75)
         self.customer_button.setFont(self.font)
-        self.customer_button.setStyleSheet("background:white; border-radius: 5px; border: 3px solid lightgrey;")
+        self.customer_button.setStyleSheet("color: white; background: #efbe25; border-radius: 5px;")
 
 
     def setup_button(self):

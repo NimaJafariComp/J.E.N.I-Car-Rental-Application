@@ -8,7 +8,7 @@ class customer_window(QWidget):
     def __init__(self):
         super().__init__()
         self.logo = QLabel(self)
-        self.pixmap = QPixmap("logo/FullLogo.png")
+        self.pixmap = QPixmap("logo/HalfLogo.png")
         self.customer_layout = QVBoxLayout(self)
         self.top_frame = QFrame(self)
         self.top_frame_layout = QHBoxLayout(self.top_frame)
@@ -41,7 +41,7 @@ class customer_window(QWidget):
         self.admin_button.setFixedWidth(200)
         self.admin_button.setFixedHeight(75)
         self.admin_button.setFont(self.font)
-        self.admin_button.setStyleSheet("background:white; border-radius: 5px; border: 3px solid lightgrey;")
+        self.admin_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
 
     def setup_bottomframe(self):
         self.bottom_frame.setFrameShape(QFrame.StyledPanel)
