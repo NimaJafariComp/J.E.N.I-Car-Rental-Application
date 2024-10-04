@@ -5,7 +5,6 @@ from PyQt5.QtGui import *
 from customerWindow import customer_window
 from adminWindow import admin_window
 from login import login
-from screenConfig import screen_config
 
 
 class main_window(QMainWindow):
@@ -72,6 +71,7 @@ class main_window(QMainWindow):
 
 if __name__ == "__main__":
     import sys
+    from screenConfig import screen_config
     screen_config = screen_config()
     app = QApplication(sys.argv)
     window = main_window()

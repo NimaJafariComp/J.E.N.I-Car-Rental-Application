@@ -54,4 +54,11 @@ class customer_window(QWidget):
         self.customer_layout.addWidget(self.top_frame)
         self.customer_layout.addWidget(self.bottom_frame)
 
-
+if __name__ == "__main__":
+    import sys
+    from screenConfig import screen_config
+    screen_config = screen_config()
+    app = QApplication(sys.argv)
+    window = customer_window()
+    window.show()
+    sys.exit(app.exec_())

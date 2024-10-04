@@ -81,3 +81,11 @@ class login(QWidget):
         # Add the login window to the main layout, centering it
         self.login_layout.addWidget(self.login_window, alignment=Qt.AlignCenter)
 
+if __name__ == "__main__":
+    import sys
+    from screenConfig import screen_config
+    screen_config = screen_config()
+    app = QApplication(sys.argv)
+    window = login()
+    window.show()
+    sys.exit(app.exec_())

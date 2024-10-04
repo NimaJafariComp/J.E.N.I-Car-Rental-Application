@@ -56,3 +56,12 @@ class admin_window(QWidget):
         self.admin_layout.setSpacing(0)
         self.admin_layout.addWidget(self.top_frame)
         self.admin_layout.addWidget(self.bottom_frame)
+
+if __name__ == "__main__":
+    import sys
+    from screenConfig import screen_config
+    screen_config = screen_config()
+    app = QApplication(sys.argv)
+    window = admin_window()
+    window.show()
+    sys.exit(app.exec_())
