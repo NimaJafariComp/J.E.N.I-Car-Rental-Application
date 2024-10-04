@@ -10,25 +10,30 @@ from login import login
 class main_window(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.central_widget = QWidget(self)
+        self.stacked_widget = QStackedLayout(self.central_widget)
+        self.c_window = customer_window()
+        self.a_window = admin_window()
+        self.log_window = login()
+
+        self.center()
+        self.setup_mainwindow()
+        self.manage_stack()
+
+    def setup_mainwindow(self):
         self.setContentsMargins(0, 0, 0, 0)
         self.resize(1155, 912)
         self.setStyleSheet("background-color:rgb(255, 255, 255)")
         self.setGeometry(0, 0, 1920, 1080)
 
-        self.central_widget = QWidget(self)
+    def manage_stack(self):
         self.central_widget.setObjectName("central_widget")
-
-
-        self.stacked_widget = QStackedLayout(self.central_widget)
+        self.setCentralWidget(self.central_widget)
+        
         self.stacked_widget.setObjectName("stacked_widget")
         self.stacked_widget.setSpacing(0)
         self.stacked_widget.setContentsMargins(0, 0, 0, 0)       
 
-        self.setCentralWidget(self.central_widget)
-
-        self.c_window = customer_window()
-        self.a_window = admin_window()
-        self.log_window = login()
         self.stacked_widget.addWidget(self.c_window)
         self.stacked_widget.addWidget(self.a_window)
         self.stacked_widget.addWidget(self.log_window)
@@ -36,9 +41,6 @@ class main_window(QMainWindow):
 
         self.c_window.admin_button.clicked.connect(self.on_click_admin)
         self.a_window.customer_button.clicked.connect(self.on_click_customer)
-
-        self.center()
-
 
     def on_click_admin(self):
         self.stacked_widget.setCurrentIndex(2)

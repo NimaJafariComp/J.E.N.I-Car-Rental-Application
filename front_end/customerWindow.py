@@ -7,13 +7,22 @@ from font import font
 class customer_window(QWidget):
     def __init__(self):
         super().__init__()
-        self.logo = QLabel(self)
-        self.pixmap = QPixmap("logo/HalfLogo.png")
+        # setup customer window layout
         self.customer_layout = QVBoxLayout(self)
+
+        # setup Qframes
         self.top_frame = QFrame(self)
         self.top_frame_layout = QHBoxLayout(self.top_frame)
-        self.admin_button = QPushButton("Admin",self.top_frame)
         self.bottom_frame = QFrame(self)
+
+        # setup sub widgets
+        self.admin_button = QPushButton("Admin",self.top_frame)
+
+        # setup logo
+        self.logo = QLabel(self)
+        self.pixmap = QPixmap("logo/HalfLogo.png")
+
+        # setup font
         self.set_font = font()
         self.font = QFont(self.set_font.font_family, 16)
 

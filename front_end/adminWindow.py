@@ -6,13 +6,20 @@ from font import font
 class admin_window(QWidget):
     def __init__(self):
         super().__init__()
+        # setup admin window layout
         self.admin_layout = QVBoxLayout(self)
-        self.logo = QLabel(self)
+
+        # setup diffrent Qframes
         self.top_frame = QFrame(self)
-        self.pixmap = QPixmap("logo/HalfLogo.png")
         self.top_frame_layout = QHBoxLayout(self.top_frame)
-        self.customer_button = QPushButton("Customer", self.top_frame)
         self.bottom_frame = QFrame(self)
+
+        # setup other sub widgets
+        self.customer_button = QPushButton("Customer", self.top_frame)
+
+        # set up logo
+        self.logo = QLabel(self)
+        self.pixmap = QPixmap("logo/HalfLogo.png")
 
         # Set up the font
         self.set_font = font()
@@ -24,7 +31,7 @@ class admin_window(QWidget):
         self.setup_button()
         self.setup_widget()
 
-    def setup_logo(self):#set up logo img
+    def setup_logo(self):
         self.logo.setPixmap(self.pixmap)
         self.logo.resize(self.pixmap.width(), self.pixmap.height())
         self.scaled_pixmap = self.pixmap.scaled(60, 60, aspectRatioMode=1)  # width, height
