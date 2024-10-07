@@ -43,7 +43,7 @@ def create_tables(my_username, my_password):
                          "Color varchar(255) not null,"+
                          "CarType varchar(255),"+
                          "CarID int unique not null,"+
-                         "constraint FK_VehicleType foreign key (CarID) references Vehicles(CarID))")
+                         "constraint FK_VehicleType foreign key (CarID) references Vehicles(CarID) ON DELETE CASCADE)")
     
     # Create Administrator table with the following data fields:
     # AdminID: Automatic assignment. Increments by 1 per data insert.
@@ -76,17 +76,17 @@ def create_tables(my_username, my_password):
                         "Insurance boolean not null," +
                         "CustomerID int not null," +
                         "Vehicle int not null," +
-                        "constraint FK_CustomerReservation foreign key (CustomerID) references Customers(CustomerID)," +
-                        "constraint FK_VehicleReservation foreign key (Vehicle) references Vehicles(CarID))")
+                        "constraint FK_CustomerReservation foreign key (CustomerID) references Customers(CustomerID)ON DELETE CASCADE," +
+                        "constraint FK_VehicleReservation foreign key (Vehicle) references Vehicles(CarID)ON DELETE CASCADE)")
 
     mycursor.execute("create table Reports(" +
                         "ReportID int auto_increment primary key," +
                         "Damages varchar(255)," +
                         "GasAmount int not null," +
                         "Vehicle int not null," +
-                        "Customer int not null," +
-                        "constraint FK_VehicleReport foreign key (Vehicle) references Vehicles(CarID)," +
-                        "constraint FK_CustomerReport foreign key (Customer) references Customers(CustomerID))")
+                        "CustomerID int not null," +
+                        "constraint FK_VehicleReport foreign key (Vehicle) references Vehicles(CarID)ON DELETE CASCADE," +
+                        "constraint FK_CustomerReport foreign key (CustomerID) references Customers(CustomerID)ON DELETE CASCADE)")
 
     sql_insert_vehicles = "insert into Vehicles (VIN, Mileage, MPG, Price, IsActive, LicensePlate) values (%s, %s, %s, %s, %s, %s)"
     vehicle_values = [
@@ -128,7 +128,7 @@ def create_tables(my_username, my_password):
             ('2024-12-28', '2024-12-30', 0, 4, 1)
     ]
 
-    sql_insert_reports = "insert into Reports (Damages, GasAmount, Vehicle, Customer) values (%s, %s, %s, %s)"
+    sql_insert_reports = "insert into Reports (Damages, GasAmount, Vehicle, CustomerID) values (%s, %s, %s, %s)"
     report_values = [
             ('Scratch on hood', 10, 1, 1),
 	    ('Engine rattling', 11, 1, 2),
@@ -143,5 +143,6 @@ def create_tables(my_username, my_password):
     mycursor.executemany(sql_insert_admin, admin_values)
     mycursor.executemany(sql_insert_reservations, reservation_values)
     mycursor.executemany(sql_insert_reports, report_values)
+    
     mydb.commit()
 

@@ -99,7 +99,7 @@ class test:
     # Input: CarID, an integer
     #        Mileage, an integer
     # Output: None
-    def change_mileage(self, CarID, updated_mileage):
+    def update_mileage(self, CarID, updated_mileage):
         self.connect_to_mysql()
         mycursor = self.mydb.cursor()
         
@@ -108,68 +108,151 @@ class test:
         
         mycursor.execute(sql_update_mileage, update_values)
         self.mydb.commit()
-
- # Function: add_vehicle_type(self, u_car_year, u_model, u_make, u_color, u_car_type)
-    # Description: function to add Vehicle Type to database associated with
-    #              the newly added car
-    # Input: u_car_year, a year with format yyyy
-    #        u_model, a string
-    #        u_make, a string
-    #        u_color, a string
-    #        u_car_type, a string
+        
+    
+    # update an existing reservation by ReservationID
+    # Input: ReservationID, an integer - ID of the reservation to update
+    #        StartDate, EndDate, Insurance, CustomerID, Vehicle, optional values to update
     # Output: None
-    def add_vehicle_type(self, u_car_year, u_model, u_make, u_color, u_car_type, car_id):
+    def update_reservation(self, ReservationID, StartDate=None, EndDate=None, Insurance=None, CustomerID=None, Vehicle=None):
         self.connect_to_mysql()
         mycursor = self.mydb.cursor()
         
-        sql_insert_vehicle_type = "insert into VehicleType (CarYear, Model, Make, Color, CarType, CarId) values (%s, %s, %s, %s, %s, %s)"
-        vehicle_type_value = (u_car_year, u_model, u_make, u_color, u_car_type, car_id)
+        update_query = "UPDATE Reservations SET "
+        update_values = []
+        if StartDate:
+            update_query += "StartDate = %s, "
+            update_values.append(StartDate)
+        if EndDate:
+            update_query += "EndDate = %s, "
+            update_values.append(EndDate)
+        if Insurance is not None:
+            update_query += "Insurance = %s, "
+            update_values.append(Insurance)
+        if CustomerID:
+            update_query += "CustomerID = %s, "
+            update_values.append(CustomerID)
+        if Vehicle:
+            update_query += "Vehicle = %s, "
+            update_values.append(Vehicle)
         
-        mycursor.execute(sql_insert_vehicle_type, vehicle_type_value)
+        update_query = update_query.rstrip(', ') + " WHERE ReservationID = %s"
+        update_values.append(ReservationID)
+        
+        mycursor.execute(update_query, tuple(update_values))
         self.mydb.commit()
+        print(f"Reservation {ReservationID} updated.")
         
-    def get_vehicle_type(self, car_id):
+        
+    
+    # remove an existing reservation
+    # Input: ReservationID, an integer - ID of the reservation to remove
+    # Output: None
+    def remove_reservation(self, ReservationID):
         self.connect_to_mysql()
         mycursor = self.mydb.cursor()
         
-        select_prompt = "select * from VehicleType where CarID = %s"
-        mycursor.execute(select_prompt, [car_id])
-        result = mycursor.fetchone()
-        
-        return result
-        
-    def get_inventory(self):
-        inventory = []
-        self.connect_to_mysql()
-        mycursor = self.mydb.cursor()
-        
-        mycursor.execute("select CarID, VIN, Mileage, MPG, Price, LicensePlate from Vehicles")
-        myresult = mycursor.fetchall()
-        
-        for x in myresult:
-            inventory.append(x)
-        
-        return inventory
-        
-    def get_active_inventory(self):
-        inventory = []
-        self.connect_to_mysql()
-        mycursor = self.mydb.cursor()
-        
-        mycursor.execute("select * from Vehicles where IsActive = 1")
-        myresult = mycursor.fetchall()
-        
-        for x in myresult:
-            inventory.append(x)
-        
-        return inventory
-        
-    def retire_car(self, car_id):
-        self.connect_to_mysql()
-        mycursor = self.mydb.cursor()
-        
-        sql_retire_car = "update Vehicles set IsActive = %s where CarID = %s"
-        value = (0, car_id)
-        
-        mycursor.execute(sql_retire_car, value)
+        delete_query = "DELETE FROM Reservations WHERE ReservationID = %s"
+        mycursor.execute(delete_query, (ReservationID,))
         self.mydb.commit()
+        print(f"Reservation {ReservationID} has been removed.")
+    
+    
+    
+    # update an existing report by ReportID
+    # Input: ReportID, an integer - ID of the report to update
+    #        Damages, GasAmount, Vehicle, Customer, optional values to update
+    # Output: None
+    def update_report(self, ReportID, Damages=None, GasAmount=None, Vehicle=None, Customer=None):
+        self.connect_to_mysql()
+        mycursor = self.mydb.cursor()
+        
+        update_query = "UPDATE Reports SET "
+        update_values = []
+        if Damages:
+            update_query += "Damages = %s, "
+            update_values.append(Damages)
+        if GasAmount:
+            update_query += "GasAmount = %s, "
+            update_values.append(GasAmount)
+        if Vehicle:
+            update_query += "Vehicle = %s, "
+            update_values.append(Vehicle)
+        if Customer:
+            update_query += "Customer = %s, "
+            update_values.append(Customer)
+        
+        update_query = update_query.rstrip(', ') + " WHERE ReportID = %s"
+        update_values.append(ReportID)
+        
+        mycursor.execute(update_query, tuple(update_values))
+        self.mydb.commit()
+        print(f"Report {ReportID} updated.")
+    
+    
+    # remove an existing report
+    # Input: ReportID, an integer - ID of the report to remove
+    # Output: None
+    def remove_report(self, ReportID):
+        self.connect_to_mysql()
+        mycursor = self.mydb.cursor()
+        
+        delete_query = "DELETE FROM Reports WHERE ReportID = %s"
+        mycursor.execute(delete_query, (ReportID,))
+        self.mydb.commit()
+        print(f"Report {ReportID} has been removed.")
+        
+    
+    
+    #update an existing customer by CustomerID
+    # Input: CustomerID, an integer - ID of the customer to update
+    #        FullName, DOB, Email, optional values to update
+    # Output: None
+    def update_customer(self, CustomerID, FullName=None, DOB=None, Email=None):
+        self.connect_to_mysql()
+        mycursor = self.mydb.cursor()
+        
+        update_query = "UPDATE Customers SET "
+        update_values = []
+        if FullName:
+            update_query += "FullName = %s, "
+            update_values.append(FullName)
+        if DOB:
+            update_query += "DOB = %s, "
+            update_values.append(DOB)
+        if Email:
+            update_query += "Email = %s, "
+            update_values.append(Email)
+        
+        update_query = update_query.rstrip(', ') + " WHERE CustomerID = %s"
+        update_values.append(CustomerID)
+        
+        mycursor.execute(update_query, tuple(update_values))
+        self.mydb.commit()
+        print(f"Customer {CustomerID} updated.")
+        
+    
+    # Remove an existing customer
+    # Input: CustomerID, an integer - ID of the customer to remove
+    # Output: None
+    def remove_customer(self, CustomerID):
+        self.connect_to_mysql()
+        mycursor = self.mydb.cursor()
+
+        # Delete the customer from the Customers table
+        delete_customer_query = "DELETE FROM Customers WHERE CustomerID = %s"
+        mycursor.execute(delete_customer_query, (CustomerID,))
+        
+        # Commit all the changes
+        self.mydb.commit()
+
+        # Print confirmation
+        print(f"Customer {CustomerID} has been removed along with their reservations and reports.")
+
+
+
+
+
+
+
+

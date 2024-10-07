@@ -45,3 +45,6 @@ def print_tables(my_username, my_password):
 
     for x in myresult:
         print(x)
+
+
+print("\n")
