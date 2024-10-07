@@ -99,7 +99,7 @@ class test:
     # Input: CarID, an integer
     #        Mileage, an integer
     # Output: None
-    def update_mileage(self, CarID, updated_mileage):
+    def change_mileage(self, CarID, updated_mileage):
         self.connect_to_mysql()
         mycursor = self.mydb.cursor()
         
@@ -107,4 +107,69 @@ class test:
         update_values = (updated_mileage, CarID)
         
         mycursor.execute(sql_update_mileage, update_values)
+        self.mydb.commit()
+
+ # Function: add_vehicle_type(self, u_car_year, u_model, u_make, u_color, u_car_type)
+    # Description: function to add Vehicle Type to database associated with
+    #              the newly added car
+    # Input: u_car_year, a year with format yyyy
+    #        u_model, a string
+    #        u_make, a string
+    #        u_color, a string
+    #        u_car_type, a string
+    # Output: None
+    def add_vehicle_type(self, u_car_year, u_model, u_make, u_color, u_car_type, car_id):
+        self.connect_to_mysql()
+        mycursor = self.mydb.cursor()
+        
+        sql_insert_vehicle_type = "insert into VehicleType (CarYear, Model, Make, Color, CarType, CarId) values (%s, %s, %s, %s, %s, %s)"
+        vehicle_type_value = (u_car_year, u_model, u_make, u_color, u_car_type, car_id)
+        
+        mycursor.execute(sql_insert_vehicle_type, vehicle_type_value)
+        self.mydb.commit()
+        
+    def get_vehicle_type(self, car_id):
+        self.connect_to_mysql()
+        mycursor = self.mydb.cursor()
+        
+        select_prompt = "select * from VehicleType where CarID = %s"
+        mycursor.execute(select_prompt, [car_id])
+        result = mycursor.fetchone()
+        
+        return result
+        
+    def get_inventory(self):
+        inventory = []
+        self.connect_to_mysql()
+        mycursor = self.mydb.cursor()
+        
+        mycursor.execute("select CarID, VIN, Mileage, MPG, Price, LicensePlate from Vehicles")
+        myresult = mycursor.fetchall()
+        
+        for x in myresult:
+            inventory.append(x)
+        
+        return inventory
+        
+    def get_active_inventory(self):
+        inventory = []
+        self.connect_to_mysql()
+        mycursor = self.mydb.cursor()
+        
+        mycursor.execute("select * from Vehicles where IsActive = 1")
+        myresult = mycursor.fetchall()
+        
+        for x in myresult:
+            inventory.append(x)
+        
+        return inventory
+        
+    def retire_car(self, car_id):
+        self.connect_to_mysql()
+        mycursor = self.mydb.cursor()
+        
+        sql_retire_car = "update Vehicles set IsActive = %s where CarID = %s"
+        value = (0, car_id)
+        
+        mycursor.execute(sql_retire_car, value)
         self.mydb.commit()
