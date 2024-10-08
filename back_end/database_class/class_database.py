@@ -163,7 +163,7 @@ class test:
     # Input: ReportID, an integer - ID of the report to update
     #        Damages, GasAmount, Vehicle, Customer, optional values to update
     # Output: None
-    def update_report(self, ReportID, Damages=None, GasAmount=None, Vehicle=None, Customer=None):
+    def update_report(self, ReportID, Damages=None, GasAmount=None, Vehicle=None, ReservationID=None):
         self.connect_to_mysql()
         mycursor = self.mydb.cursor()
         
@@ -178,9 +178,9 @@ class test:
         if Vehicle:
             update_query += "Vehicle = %s, "
             update_values.append(Vehicle)
-        if Customer:
+        if ReservationID:
             update_query += "Customer = %s, "
-            update_values.append(Customer)
+            update_values.append(ReservationID)
         
         update_query = update_query.rstrip(', ') + " WHERE ReportID = %s"
         update_values.append(ReportID)
@@ -247,7 +247,7 @@ class test:
         self.mydb.commit()
 
         # Print confirmation
-        print(f"Customer {CustomerID} has been removed along with their reservations and reports.")
+        print(f"Customer {CustomerID} has been removed along with their reservations.")
 
 
 

@@ -27,7 +27,7 @@ def create_tables(my_username, my_password):
                         "Mileage bigint not null," +
                         "MPG int not null," +
                         "Price decimal(7, 2) not null," +
-                        "IsActive bool," +
+                        "IsActive bool default(1)," +
                         "LicensePlate char(7) unique not null)")
 
     # creates VehicleType tables with the following data fields:
@@ -84,17 +84,17 @@ def create_tables(my_username, my_password):
                         "Damages varchar(255)," +
                         "GasAmount int not null," +
                         "Vehicle int not null," +
-                        "CustomerID int not null," +
+                        "ReservationID int," + #allow null
                         "constraint FK_VehicleReport foreign key (Vehicle) references Vehicles(CarID)ON DELETE CASCADE," +
-                        "constraint FK_CustomerReport foreign key (CustomerID) references Customers(CustomerID)ON DELETE CASCADE)")
+                        "constraint FK_ReservationReport foreign key (ReservationID) references Reservations(ReservationID)ON DELETE SET NULL)") #if reservation is deleted set resID to null but keep it
 
-    sql_insert_vehicles = "insert into Vehicles (VIN, Mileage, MPG, Price, IsActive, LicensePlate) values (%s, %s, %s, %s, %s, %s)"
+    sql_insert_vehicles = "insert into Vehicles (VIN, Mileage, MPG, Price, LicensePlate) values (%s, %s, %s, %s, %s)"
     vehicle_values = [
-            ('1FTWW31P95EB34134', 600, 35, 150.0, 1, '7KJV105'),
-            ('5TDKK3DC9BS182760', 532, 25, 70.0, 1, '6IPZ437'),
-            ('JHLRE3H57AC023983', 234, 40, 80.0, 1, '5YGW550'),
-            ('JTKDE167060163343', 124, 42, 160.0, 1, '8CMH868'),
-            ('1GNUKKE34AR110094', 942, 50, 180.0, 1, '2LHU996')
+            ('1FTWW31P95EB34134', 600, 35, 150.0, '7KJV105'),
+            ('5TDKK3DC9BS182760', 532, 25, 70.0, '6IPZ437'),
+            ('JHLRE3H57AC023983', 234, 40, 80.0, '5YGW550'),
+            ('JTKDE167060163343', 124, 42, 160.0, '8CMH868'),
+            ('1GNUKKE34AR110094', 942, 50, 180.0, '2LHU996')
     ]
 
     sql_insert_vehicle_types = "insert into VehicleType (CarYear, Model, Make, Color, CarType, CarID) values (%s, %s, %s, %s, %s, %s)"
@@ -128,7 +128,7 @@ def create_tables(my_username, my_password):
             ('2024-12-28', '2024-12-30', 0, 4, 1)
     ]
 
-    sql_insert_reports = "insert into Reports (Damages, GasAmount, Vehicle, CustomerID) values (%s, %s, %s, %s)"
+    sql_insert_reports = "insert into Reports (Damages, GasAmount, Vehicle, ReservationID) values (%s, %s, %s, %s)"
     report_values = [
             ('Scratch on hood', 10, 1, 1),
 	    ('Engine rattling', 11, 1, 2),
