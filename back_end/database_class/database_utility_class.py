@@ -172,13 +172,15 @@ class DBUtils:
         myresult = mycursor.fetchone()
         
         return myresult[0]
+        
+    # def get_reports(self, car_id):
 
     # update an existing reservation by ReservationID
     # Input: ReservationID, an integer - ID of the reservation to update
     #        StartDate, EndDate, Insurance, CustomerID, Vehicle, optional values to update
     # Output: None        
     @staticmethod
-    def update_reservation(self, uReservationID, uStartDate=None, uEndDate=None, uInsurance=None, uCustomerID=None, uVehicle=None):
+    def update_reservation(uReservationID, uStartDate=None, uEndDate=None, uInsurance=None, uCustomerID=None, uVehicle=None):
         update_query = "UPDATE Reservation SET "
         update_values = []
         if uStartDate:
@@ -187,13 +189,13 @@ class DBUtils:
         if uEndDate:
             update_query += "EndDate = %s. "
             update_values.append(uEndDate)
-        if Insurance:
+        if uInsurance:
             update_query += "Insurance = %s, "
             update_values.append(uInsurance)
-        if CustomerID:
+        if uCustomerID:
             update_query += "CustomerID = %s, "
             update_values.append(uCustomerID)
-        if Vehicle:
+        if uVehicle:
             update_query += "Vehicle = %s, "
             update_values.append(uVehicle)
             
@@ -218,13 +220,94 @@ class DBUtils:
         
         # For testing purposes
         print(f"Reservation {uReservationID} has been removed.")
+    
+    # update an existing report by ReportID
+    # Input: ReportID, an integer - ID of the report to update
+    #        Damages, GasAmount, Vehicle, Customer, optional values to update
+    # Output: None
+    @staticmethod
+    def update_report(uReportID, uDamage=None, uGasAmount=None, uVehicle=None, uReservationID=None):
+        update_query = "UPDATE Reports SET "
+        update_values = []
         
-     
+        if uDamages:
+            update_query += "Damages = %s, "
+            update_values.append(uDamages)
+        if uGasAmount:
+            update_query += "GasAmount = %s, "
+            update_values.append(uGasAmount)
+        if uVehicle:
+            update_query += "Vehicle = %s, "
+            update_values.append(uVehicles)
+        if uReservationID:
+            update_query += "Customer = %s, "
+            update_values.append(uReservationID)
+            
+        update_query = update_query.rstrip(', ') + " WHERE ReportID = %s"
+        update_values.append(uReportID)
+        
+        mycursor.execute(update_query, tuple(update_values))
+        mydb.commit()
+        
+        # For testing
+        print(f"Report {uReportID} updated.")
+    
+    # remove an existing report
+    # Input: ReportID, an integer - ID of the report to remove
+    # Output: None
+    @staticmethod
+    def remove_report(uReportID):
+        delete_query = "DELETE FROM Reports WHERE ReportID = %s"
+        mycursor.execute(delete_query, (uReportID,))
+        mydb.commit()
+        
+        # For testing
+        print(f"Report {uReportID} has been removed.")
 
+    #update an existing customer by CustomerID
+    # Input: CustomerID, an integer - ID of the customer to update
+    #        FullName, DOB, Email, optional values to update
+    # Output: None
+    @staticmethod
+    def update_customer(uCustomerID, uFullName=None, uDOB=None, uEmail=None):
+        update_query = "UPDATE Customers SET "
+        update_values = []
+        
+        if uFullName:
+            update_query += "FullName = %s, "
+            update_values.append(uFullName)
+        if uDOB:
+            update_query += "DOB = %s, "
+            update_values.append(uDOB)
+        if uEmail:
+            update_query += "Email = %s, "
+            update_values.append(uEmail)
+            
+        update_query = update_query.rstrip(', ') + " WHERE CustomerID = %s"
+        update_values.append(uCustomerID)
+        
+        mycursor.execute(update_query, tuple(update_values))
+        mydb.commit()
+        
+        # For testing
+        print(f"Customer {uCustomerID} updated.")
+        
+    # Remove an existing customer
+    # Input: CustomerID, an integer - ID of the customer to remove
+    # Output: None
+    @staticmethod
+    def remove_customer(self, CustomerID):
+        # Delete the customer from the Customers table
+        delete_customer_query = "DELETE FROM Customers WHERE CustomerID = %s"
+        mycursor.execute(delete_customer_query, (CustomerID,))
+        
+        # Commit all the changes
+        self.mydb.commit()
 
+        # Print confirmation
+        print(f"Customer {CustomerID} has been removed along with their reservations.")
 
-
-
+    
 
 
 
