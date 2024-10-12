@@ -296,21 +296,39 @@ class DBUtils:
     # Input: CustomerID, an integer - ID of the customer to remove
     # Output: None
     @staticmethod
-    def remove_customer(self, CustomerID):
+    def remove_customer(uCustomerID):
         # Delete the customer from the Customers table
         delete_customer_query = "DELETE FROM Customers WHERE CustomerID = %s"
-        mycursor.execute(delete_customer_query, (CustomerID,))
+        mycursor.execute(delete_customer_query, (uCustomerID,))
         
         # Commit all the changes
-        self.mydb.commit()
+        mydb.commit()
 
         # Print confirmation
-        print(f"Customer {CustomerID} has been removed along with their reservations.")
+        print(f"Customer {uCustomerID} has been removed along with their reservations.")
 
-    
-
-
-
+    # Function: search(startDate, endDate)
+    # Input: startDate, a date with format yyyy-mm-dd
+    #        endDate, a date with format yyyy-mm-dd
+    # Output: list of tuples 
+    # Description: returns a list that contains tuples. Tuples
+    # in the list contains the information about cars that are available
+    # during the desired reservation period
+    @staticmethod
+    def search_database(start_date, end_date):
+        inventory = []
+        sql_select_search = "select * from Vehicles where CarID not in \
+                            (select Vehicle from Reservations where \
+                            %s < EndDate and %s > StartDate)"
+        date_values = (start_date, end_date)
+        
+        mycursor.execute(sql_select_search, date_values)
+        myresult = mycursor.fetchall()
+        
+        for car in myresult:
+            inventory.append(car)
+            
+        return inventory
 
 
 

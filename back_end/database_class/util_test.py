@@ -16,3 +16,10 @@ for x in (car1, car2, car3):
 car_object = cc.car('4T1BF1FK3EU338253', 100, 50, 250.00, '7IVQ651')
 car_object.set_car_id(6)
 car_object.update_mileage(200)
+
+# test for basic search function in DB class
+# should return list of cars containing all cars except Vehicle with CarID = 2
+inventory = dbu.DBUtils.search_database('2024-02-10','2024-02-12')
+
+for x in inventory:
+    print(x)
