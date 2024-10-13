@@ -2,18 +2,43 @@ import database_utility_class as dbu
 
 class car:
     
-    def __init__(self, uVin, uMileage, uMPG, uPrice, uLicensePlate):
+    def __init__(self, uVin, uMileage, uMPG, uPrice, uLicensePlate, uCarYear, uModel, uMake, uColor, uCarType):
         self.vin = uVin
         self.mileage = uMileage
         self.mpg = uMPG
         self.price = uPrice
         self.license_plate = uLicensePlate
-        self.type = None
+        self.car_year = uCarYear
+        self.model = uModel
+        self.make = uMake
+        self.color = uColor
+        self.car_type = uCarType
         self.reports = []
         self.reservations = []
         self.car_id = None
         
 
+    def __repr__(self):
+        return 'Car Info:\n \
+                Car ID: {} \n \
+                VIN: {} \n \
+                Mileage: {} \n \
+                MPG: {} \n \
+                Price: {} \n \
+                License Plate: {} \n \
+                Car Year: {} \n \
+                Make: {} \n \
+                Model: {} \n \
+                Color: {} \n \
+                Car Type: {} \n'.format(self.car_id, self.vin, self.mileage, self.mpg, self.price,
+                self.license_plate, self.car_year, self.make, self.model, self.color, self.car_type)
+    
+    def set_car_id(self, car_id):
+        self.car_id = car_id
+    
+    def get_car_id(self):
+        return self.car_id
+    
     def add_report(self, report_id):
         self.reports.append(report_id)
         

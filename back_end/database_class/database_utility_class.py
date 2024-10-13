@@ -3,13 +3,14 @@ import mysql.connector
 # Error Checks might be better handled by the calling class
 # Instead of this class handling it
 
-# Function: initialize_connectio()
+"""
+# Function: initialize_connectio(
 # Input: None
 # Output: None
 # Description: initializes the connection to database, must be called
 #               in application startup. 
-
-def initialize_connection():
+"""
+def initialize_connection() -> None:
     username = input("Enter your MySQL Username: ")
     upassword = input("Enter your MySQL Password: ")
 
@@ -25,9 +26,9 @@ def initialize_connection():
 
     mycursor = mydb.cursor()
 
-
+"""
 # Description: function to add a singular car to MySQL.
-#               prints out the CarID number assigned to it by MySQL
+#               prints out the CarID number assigned to it by MySQL     
 # Input: uVIN, a string - Car's VIN number
 #        uMileage, an integer - Car's Mileage
 #        uMPG, an integer - Car's miles/gallon
@@ -35,22 +36,24 @@ def initialize_connection():
 #        uIsActive, 0 or 1 - If car is retired or not
 #        uLicensePlate, a string - Car's license plate
 # Output: None
-
-def add_car(uVIN, uMileage, uMPG, uPrice, uLicensePlate):
-    sql_insert_vehicle = "insert into Vehicles (VIN, Mileage, MPG, Price, LicensePlate) \
-                            values (%s, %s, %s, %s, %s)"
-    vehicle_value = (uVIN, uMileage, uMPG, uPrice, uLicensePlate)
+"""
+def add_car(uVIN: str, uMileage: int, uMPG: int, uPrice: float, uLicensePlate: str,
+            uCarYear: str, uModel: str, uMake: str, uColor: str, uCarType: str)-> None:
+    sql_insert_vehicle = "insert into Vehicles (VIN, Mileage, MPG, Price, LicensePlate, CarYear, Model, Make, Color, CarType) \
+                            values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    vehicle_value = (uVIN, uMileage, uMPG, uPrice, uLicensePlate, uCarYear, uModel, uMake, uColor, uCarType)
     
     mycursor.execute(sql_insert_vehicle, vehicle_value)
     mydb.commit()
     
-    # do error checks in the inventory_class itself?
+    """ do error checks in the inventory_class itself? """
 
+"""
 # Description: function to get assigned CarID number by MySQL
 # Input: uVIN, a string - Car's VIN
 # Output: carID, an integer
-
-def get_car_id(uVIN):
+"""
+def get_car_id(uVIN: str) -> int:
     select_prompt = "select CarID from Vehicles where VIN = %s"
     mycursor.execute(select_prompt, [uVIN])
     result = mycursor.fetchone()
@@ -60,25 +63,27 @@ def get_car_id(uVIN):
     else:
         return Nones
 
+"""
 # might not be needed???
 # Description: function to get a car's info from MySQL through CarID
 # Input: CarID, an integer
-# Output: list of the following values:
+# Output: tuple of the following values:
 #           CarID, VIN, Mileage, MPG, Price, IsActive, LicensePlate    
-
-def get_car_info(car_id):
+"""
+def get_car_info(car_id: int) -> tuple:
     select_prompt = "select * from Vehicles where CarID = %s"
     mycursor.execute(select_prompt, [car_id])
     result = mycursor.fetchone()
     
     return result
 
+"""
 # Description: function to change Mileage
 # Input: CarID, an integer
 #        Mileage, an integer
 # Output: None    
-
-def change_mileage(car_id, new_mileage):
+"""
+def change_mileage(car_id: int, new_mileage: int) -> None:
     # need error check in the higher level function
     sql_update_mileage = "update Vehicles set Mileage = %s \
                         where CarId = %s"
@@ -86,7 +91,8 @@ def change_mileage(car_id, new_mileage):
     
     mycursor.execute(sql_update_mileage, update_value)
     mydb.commit()
-    
+
+"""
 # add_vehicle_type and get_vehicle_type removed
 # needs to change database table Vehicle to contain Vehicle Type
 
@@ -100,12 +106,12 @@ def change_mileage(car_id, new_mileage):
 #           Price, float/decimal
 #           LicensePlate, stiring
 # Description: queries all rows from Vehicles table in database
-
-def get_inventory():
+"""
+def get_inventory() -> list[tuple]:
     inventory = []
     
-    sql_select_car = "select CarID, VIN, Mileage, MPG, Price, LicensePlate \
-                        from Vehicles"
+    sql_select_car = "select CarID, VIN, Mileage, MPG, Price, LicensePlate, CarYear, Model, Make, \
+                        Color, CarType from Vehicles"
     mycursor.execute(sql_select_car)
     myresult = mycursor.fetchall()
     
@@ -114,6 +120,7 @@ def get_inventory():
         
     return inventory
 
+"""
 # Function: get_active_inventory()
 # Input: None
 # Output: list of tuples, each tuple consists of different fields
@@ -125,8 +132,8 @@ def get_inventory():
 #           LicensePlate, stiring
 # Description: queries all rows from Vehicles table in database
 #               where IsActive == 1
-
-def get_active_inventory():
+"""
+def get_active_inventory() -> list[tuple]:
     inventory = []
     mycursor.execute("select * from Vehicles where IsActive = 1")
     myresult = mycursor.fetchall()
@@ -136,18 +143,20 @@ def get_active_inventory():
         
     return inventory
 
+"""
 # Function: deactivate_car()
 # Input: car_id, integer 
 # Output: None 
 # Description: sets the IsActive field in database to 0, making it not active
-
-def deactivate_car(car_id):
+"""
+def deactivate_car(car_id: int) -> None:
     sql_retire_car = "update Vehicles set IsActive = %s where CarID = %s"
     value = (0, car_id)
     
     mycursor.execute(sql_retire_car, value)
     mydb.commit()
-    
+
+"""
 # Function: insert_report(uDamages, uGasAmount, uCarID, uReservation)
 # Input: uDamages, a string
 #        uGasAmount, an integer
@@ -156,8 +165,8 @@ def deactivate_car(car_id):
 # Output: an integer
 # Description: inserts a new row into database in table Reports and 
 #               returns the assigned report_id by database
-
-def insert_report(uDamages, uGasAmount, uCarID, uReservation):
+"""
+def insert_report(uDamages: str, uGasAmount: int, uCarID: int, uReservation: int) -> int:
     sql_insert_report = "insert into Reports (Damages, GasAmount, Vehicle, ReservationID) \
                             values (%s, %s, %s, %s)"
     report_values = (uDamages, uGasAmount, uCarID, uReservation)
@@ -170,15 +179,16 @@ def insert_report(uDamages, uGasAmount, uCarID, uReservation):
     myresult = mycursor.fetchone()
     
     return myresult[0]
-    
+
+"""
 # def get_reports(self, car_id):
 
 # update an existing reservation by ReservationID
 # Input: ReservationID, an integer - ID of the reservation to update
 #        StartDate, EndDate, Insurance, CustomerID, Vehicle, optional values to update
 # Output: None        
-
-def update_reservation(uReservationID, uStartDate=None, uEndDate=None, uInsurance=None, uCustomerID=None, uVehicle=None):
+"""
+def update_reservation(uReservationID: int, uStartDate=None, uEndDate=None, uInsurance=None, uCustomerID=None, uVehicle=None) -> None:
     update_query = "UPDATE Reservation SET "
     update_values = []
     if uStartDate:
@@ -206,12 +216,12 @@ def update_reservation(uReservationID, uStartDate=None, uEndDate=None, uInsuranc
     # For testing purposes
     print(f"Reservation {ReservationID} updated.")
     
-    
+"""
 # remove an existing reservation
 # Input: ReservationID, an integer - ID of the reservation to remove
 # Output: None        
-
-def remove_reservation(uReservation):
+"""
+def remove_reservation(uReservation: int) -> None:
     delete_query = "DELETE FROM Reservations WHERE ReservationID = %s"
     mycursor.execute(delete_query, (uReservationID,))
     mydb.commit()
@@ -219,12 +229,13 @@ def remove_reservation(uReservation):
     # For testing purposes
     print(f"Reservation {uReservationID} has been removed.")
 
+"""
 # update an existing report by ReportID
 # Input: ReportID, an integer - ID of the report to update
 #        Damages, GasAmount, Vehicle, Customer, optional values to update
 # Output: None
-
-def update_report(uReportID, uDamage=None, uGasAmount=None, uVehicle=None, uReservationID=None):
+"""
+def update_report(uReportID: int, uDamage=None, uGasAmount=None, uVehicle=None, uReservationID=None) -> None:
     update_query = "UPDATE Reports SET "
     update_values = []
     
@@ -250,24 +261,26 @@ def update_report(uReportID, uDamage=None, uGasAmount=None, uVehicle=None, uRese
     # For testing
     print(f"Report {uReportID} updated.")
 
+"""
 # remove an existing report
 # Input: ReportID, an integer - ID of the report to remove
 # Output: None
-
-def remove_report(uReportID):
+"""
+def remove_report(uReportID: int) -> None:
     delete_query = "DELETE FROM Reports WHERE ReportID = %s"
     mycursor.execute(delete_query, (uReportID,))
     mydb.commit()
     
     # For testing
     print(f"Report {uReportID} has been removed.")
-
+    
+"""
 #update an existing customer by CustomerID
 # Input: CustomerID, an integer - ID of the customer to update
 #        FullName, DOB, Email, optional values to update
 # Output: None
-
-def update_customer(uCustomerID, uFullName=None, uDOB=None, uEmail=None):
+"""
+def update_customer(uCustomerID: int, uFullName=None, uDOB=None, uEmail=None) -> None:
     update_query = "UPDATE Customers SET "
     update_values = []
     
@@ -289,12 +302,13 @@ def update_customer(uCustomerID, uFullName=None, uDOB=None, uEmail=None):
     
     # For testing
     print(f"Customer {uCustomerID} updated.")
-    
+
+"""
 # Remove an existing customer
 # Input: CustomerID, an integer - ID of the customer to remove
 # Output: None
-
-def remove_customer(uCustomerID):
+"""
+def remove_customer(uCustomerID: int) -> None:
     # Delete the customer from the Customers table
     delete_customer_query = "DELETE FROM Customers WHERE CustomerID = %s"
     mycursor.execute(delete_customer_query, (uCustomerID,))
@@ -304,7 +318,8 @@ def remove_customer(uCustomerID):
 
     # Print confirmation
     print(f"Customer {uCustomerID} has been removed along with their reservations.")
-
+    
+"""
 # Function: search(startDate, endDate)
 # Input: startDate, a date with format yyyy-mm-dd
 #        endDate, a date with format yyyy-mm-dd
@@ -312,8 +327,8 @@ def remove_customer(uCustomerID):
 # Description: returns a list that contains tuples. Tuples
 # in the list contains the information about cars that are available
 # during the desired reservation period
-
-def search_database(start_date, end_date):
+"""
+def search_database(start_date: str, end_date: str) -> list[tuple]:
     inventory = []
     sql_select_search = "select * from Vehicles where CarID not in \
                         (select Vehicle from Reservations where \
@@ -327,6 +342,17 @@ def search_database(start_date, end_date):
         inventory.append(car)
         
     return inventory
+
+def get_vins():
+    inventory = []
+    sql_select_vins = "select VIN from Vehicles"
+    mycursor.execute(sql_select_vins)
+    myresult = mycursor.fetchall()
+    
+    for x in myresult:
+        inventory.append(x[0])
+
+    return inventory 
 
 
 
