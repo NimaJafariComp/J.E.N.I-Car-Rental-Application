@@ -1,4 +1,5 @@
 import database_utility_class as dbu
+import report_class as rc
 
 class car:
     
@@ -30,8 +31,10 @@ class car:
                 Make: {} \n \
                 Model: {} \n \
                 Color: {} \n \
-                Car Type: {} \n'.format(self.car_id, self.vin, self.mileage, self.mpg, self.price,
-                self.license_plate, self.car_year, self.make, self.model, self.color, self.car_type)
+                Car Type: {} \n \
+                Reports: {}'.format(self.car_id, self.vin, self.mileage, self.mpg, self.price,
+                self.license_plate, self.car_year, self.make, self.model, self.color, 
+                self.car_type, self.reports)
     
     def set_car_id(self, car_id):
         self.car_id = car_id
@@ -39,8 +42,18 @@ class car:
     def get_car_id(self):
         return self.car_id
     
-    def add_report(self, report_id):
-        self.reports.append(report_id)
+    def initialize_reports(self):
+        for report in dbu.get_reports(self.car_id):
+            report_object = rc.report(report[1], report[2], report[3], report[4])
+            report_object.set_report_id(report[0])
+            self.reports.append(report_object)
+    
+    def add_report(self, damages, gas_amount, car_id, reservation_id):
+        report_object = rc.report(damages, gas_amount, car_id, reservation_id)
+        report_object.set_report_id(dbu.insert_report(damages, gas_amount, car_id, reservation_id))
+        
+        self.reports.append(repr(report_object))
+        
         
     def add_reservation(self, reservation_id):
         self.reservation.append(reservation_id)
@@ -54,3 +67,6 @@ class car:
         
         self.mileage = new_mileage
         dbu.change_mileage(self.car_id, new_mileage)
+
+    def retire_car(self):
+        dbu.deactivate_car(self.car_id)

@@ -172,7 +172,7 @@ def insert_report(uDamages: str, uGasAmount: int, uCarID: int, uReservation: int
     report_values = (uDamages, uGasAmount, uCarID, uReservation)
     
     mycursor.execute(sql_insert_report, report_values)
-    mydb.cursor()
+    mydb.commit()
     
     mycursor.execute("select last_insert_id()")
     
@@ -180,9 +180,19 @@ def insert_report(uDamages: str, uGasAmount: int, uCarID: int, uReservation: int
     
     return myresult[0]
 
-"""
-# def get_reports(self, car_id):
 
+def get_reports(car_id):
+    reports = []
+    sql_select_reports = "select * from Reports where Vehicle = %s"
+    mycursor.execute(sql_select_reports, [car_id])
+    
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        reports.append(x)
+        
+    return reports
+
+"""
 # update an existing reservation by ReservationID
 # Input: ReservationID, an integer - ID of the reservation to update
 #        StartDate, EndDate, Insurance, CustomerID, Vehicle, optional values to update

@@ -18,6 +18,9 @@ class inventory:
     def get_inventory(self):
         return self.inventory
     
+    def get_car_from_inventory(self, index):
+        return self.inventory[index]
+    
     """
     # Function: add_car(uVin, uMileage, uMPG, uPrice, uLicensePlate)
     # Input: uVin, a string
@@ -53,8 +56,8 @@ class inventory:
         # inserts the car object into the inventory
         self.inventory.append(car_object)
         
-        index = len(self.inventory)
-        repr(self.inventory[index - 1])
+        # index = len(self.inventory)
+        # repr(self.inventory[index - 1])
 
 
     """
@@ -79,13 +82,38 @@ class inventory:
             # provided by the database
             car_object.set_car_id(car[0])
             
+            car_object.initialize_reports()
+            
             # adds each car object to the array self.whole_inventory
             self.inventory.append(car_object)
         
         # For testing purposes    
-        for x in self.inventory:
-            repr(x)
+        # for x in self.inventory:
+            # repr(x)
+
+    def search_car(self, car_id):
+        low, high, mid = 0, len(self.inventory) - 1, 0
         
+        while low <= high:
+            mid = (high + low) // 2
+            
+            if self.inventory[mid].get_car_id() < car_id:
+                low = mid + 1
+                
+            elif self.inventory[mid].get_car_id() > car_id:
+                high = mid - 1
+                
+            else:
+                return mid
+                
+        return -1
+    
+    def initialize_search_inventory(self, start_date, end_date):
+        self.inventory = []
+        for car in dbu.search_database(start_date, end_date):
+            car_object = car_class.car(car[1], car[2], car[3], car[4], car[5], car[6], car[7], car[8], car[9], car[10])
+            car_object.set_car_id(car[0])
+            self.inventory.append(car_object)
     
     """
     # Function: get_available_inventory()
