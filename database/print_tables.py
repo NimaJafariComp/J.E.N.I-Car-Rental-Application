@@ -15,12 +15,6 @@ def print_tables(my_username, my_password):
 
     for x in myresult:
         print(x)
-
-    mycursor.execute("select * from VehicleType")
-    myresult = mycursor.fetchall()
-
-    for x in myresult:
-        print(x)
         
     mycursor.execute("select * from Administrator")
     myresult = mycursor.fetchall()
@@ -45,6 +39,3 @@ def print_tables(my_username, my_password):
 
     for x in myresult:
         print(x)
-
-
-print("\n")

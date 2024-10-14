@@ -11,6 +11,7 @@ def create_tables(my_username, my_password):
     # creates an instance of cursor class 
     mycursor = mydb.cursor()
 
+    """
     # creates Vehicles tables with the following data fields:
     # CarID: Automatic assignment, increments by 1 per insert of car. 
     #        Used as reference key by other tables: VehicleType, Reservation, Reports
@@ -20,49 +21,46 @@ def create_tables(my_username, my_password):
     # Price: Decimal/Float input from user.
     # IsActive: Boolean input. False = 0, True = any other number other than 0.
     # LicensePlate: A string input from user. Limited to 7 characters
-    # Data fields with "not null" must have an input from the user
-    mycursor.execute("create table Vehicles("+
-                        "CarID int auto_increment primary key," +
-                        "VIN varchar(255) unique not null," +
-                        "Mileage bigint not null," +
-                        "MPG int not null," +
-                        "Price decimal(7, 2) not null," +
-                        "IsActive bool default(1)," +
-                        "LicensePlate char(7) unique not null)")
-
-    # creates VehicleType tables with the following data fields:
     # CarYear: A year input. Input must be 4 characters. 
     # Model: A string input from user
     # Make: A string input from user
     # CarType: A string input from user
-    # CarID: Integer input from user. A foreign key with reference to Vehicle
-    mycursor.execute("create table VehicleType("+
-                         "CarYear year not null,"+
-                         "Model varchar(255) not null,"+
-                         "Make varchar(255) not null,"+
-                         "Color varchar(255) not null,"+
-                         "CarType varchar(255),"+
-                         "CarID int unique not null,"+
-                         "constraint FK_VehicleType foreign key (CarID) references Vehicles(CarID) ON DELETE CASCADE)")
-    
+    # Data fields with "not null" must have an input from the user
+    """
+    mycursor.execute("create table Vehicles( \
+                        CarID int auto_increment primary key, \
+                        VIN varchar(255) unique not null, \
+                        Mileage bigint not null, \
+                        MPG int not null, \
+                        Price decimal(7, 2) not null, \
+                        IsActive bool default(1), \
+                        LicensePlate char(7) unique not null, \
+                        CarYear year not null, \
+                        Model varchar(255) not null, \
+                        Make varchar(255) not null, \
+                        Color varchar(255) not null, \
+                        CarType varchar(255))")
+    """
     # Create Administrator table with the following data fields:
     # AdminID: Automatic assignment. Increments by 1 per data insert.
     #           Primary key for identifying administrators uniquely.
     # User: A string input from user. Represents the username for the administrator.
     # Email: A string input from user. Represents the email address of the administrator.
     # Password: A string input from user.
+    """
     mycursor.execute("CREATE TABLE Administrator(" +
                          "AdminID INT AUTO_INCREMENT PRIMARY KEY, " +
                          "`User` VARCHAR(255) NOT NULL, " +
                          "Email VARCHAR(255) NOT NULL, " +
                          "`Password` VARCHAR(255) NOT NULL)")
-    
+    """
     # create Customers tables with the following data fields:
     # CustomerID: Automatic assignment. Increments by 1 per data insert.
     #             Reference key for Reports and Reservations
     # FullName: A string input from user
     # DOB: A date input from user. Format is: yyyy-mm-dd
     # Email: A string input from user
+    """
     mycursor.execute("create table Customers(" +
                         "CustomerID int auto_increment primary key," +
                         "FullName varchar(255) not null," +
@@ -88,24 +86,15 @@ def create_tables(my_username, my_password):
                         "constraint FK_VehicleReport foreign key (Vehicle) references Vehicles(CarID)ON DELETE CASCADE," +
                         "constraint FK_ReservationReport foreign key (ReservationID) references Reservations(ReservationID)ON DELETE SET NULL)") #if reservation is deleted set resID to null but keep it
 
-    sql_insert_vehicles = "insert into Vehicles (VIN, Mileage, MPG, Price, LicensePlate) values (%s, %s, %s, %s, %s)"
+    sql_insert_vehicles = "insert into Vehicles (VIN, Mileage, MPG, Price, LicensePlate, CarYear, Model, Make, Color, CarType) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     vehicle_values = [
-            ('1FTWW31P95EB34134', 600, 35, 150.0, '7KJV105'),
-            ('5TDKK3DC9BS182760', 532, 25, 70.0, '6IPZ437'),
-            ('JHLRE3H57AC023983', 234, 40, 80.0, '5YGW550'),
-            ('JTKDE167060163343', 124, 42, 160.0, '8CMH868'),
-            ('1GNUKKE34AR110094', 942, 50, 180.0, '2LHU996')
+            ('1FTWW31P95EB34134', 600, 35, 150.0, '7KJV105', '2016', 'Camaro', 'Chevrolet', 'Red', 'Pony Car'),
+            ('5TDKK3DC9BS182760', 532, 25, 70.0, '6IPZ437', '2013', 'Sentra', 'Nissan', 'Grey', 'Compact Car'),
+            ('JHLRE3H57AC023983', 234, 40, 80.0, '5YGW550', '2019', 'Sorento', 'Kia', 'Black', 'SUV'),
+            ('JTKDE167060163343', 124, 42, 160.0, '8CMH868', '2017', '911 Carrera 4 GTS', 'Porsche', 'White', 'Coupe'),
+            ('1GNUKKE34AR110094', 942, 50, 180.0, '2LHU996', '2019', 'R8', 'Audi', 'Grey', 'Sports Car')
     ]
-
-    sql_insert_vehicle_types = "insert into VehicleType (CarYear, Model, Make, Color, CarType, CarID) values (%s, %s, %s, %s, %s, %s)"
-    vehicle_type_values = [
-        ('2016', 'Camaro', 'Chevrolet', 'Red', 'Pony Car', 1),
-        ('2013', 'Sentra', 'Nissan', 'Grey', 'Compact Car', 2),
-        ('2019', 'Sorento', 'Kia', 'Black', 'SUV',  3),
-        ('2017', '911 Carrera 4 GTS', 'Porsche', 'White', 'Coupe', 4),
-        ('2019', 'R8', 'Audi', 'Grey', 'Sports Car', 5)
-    ]
-    
+  
     sql_insert_admin = "insert into Administrator (`User`, Email, `Password`) VALUES (%s, %s, %s)"
     admin_values = [
           ('Admin', 'adminJeni@gmail.com', 'Admin1234')
@@ -138,7 +127,6 @@ def create_tables(my_username, my_password):
     ]
 
     mycursor.executemany(sql_insert_vehicles, vehicle_values)
-    mycursor.executemany(sql_insert_vehicle_types, vehicle_type_values)
     mycursor.executemany(sql_insert_customers, customer_values)
     mycursor.executemany(sql_insert_admin, admin_values)
     mycursor.executemany(sql_insert_reservations, reservation_values)

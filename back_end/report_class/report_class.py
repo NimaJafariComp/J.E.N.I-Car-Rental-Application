@@ -4,7 +4,7 @@ class report:
         self.damages = damage
         self.gas_amount = gas_amount
         self.car_id = car_id
-        self.reservation_id = reservation_id
+        self.reservation_id = reservation_id 
         
     def get_car_id(self):
        return self.car_id

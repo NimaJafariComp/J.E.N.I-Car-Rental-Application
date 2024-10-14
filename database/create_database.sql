@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS CarAppProject;
-create database CarAppProject;
+DROP DATABASE IF EXISTS Diagram;
+create database Diagram;
 
-use carappproject;
+use Diagram;
 
 create table Vehicles(
 	CarID int auto_increment primary key,
@@ -10,7 +10,12 @@ create table Vehicles(
     MPG int not null,
     Price decimal(7, 2) not null,
     IsActive bool,
-    LicensePlate char(7) unique not null
+    LicensePlate char(7) unique not null,
+    CarYear year not null,
+    Model varchar(255) not null,
+    Make varchar(255) not null,
+    Color varchar(255) not null,
+    CarType varchar(255) not null
 );
 
 create table Administrator(
@@ -45,21 +50,31 @@ create table Reports(
     Damage varchar(255),
     GasAmount int not null,
     Vehicle int not null,
-    Customer int not null,
+    ReservationID int not null,
     constraint FK_VehicleReport foreign key (Vehicle)
     references Vehicles(CarID),
-    constraint FK_CustomerReport foreign key (Customer)
+    constraint FK_ReservationReport foreign key (ReservationID)
+    references Reservations(ReservationID)
+);
+
+create table Payments(
+	PaymentID int auto_increment primary key,
+    CardNumber varchar(255) not null,
+    CustomerID int not null,
+    ReservationID int not null,
+    constraint FK_ReservationPayment foreign key (ReservationID)
+    references Reservations(ReservationID),
+    constraint FK_CustomerPayment foreign key (CustomerID)
     references Customers(CustomerID)
 );
 
-
-insert into Vehicles (VIN, Mileage, MPG, Price, IsActive, LicensePlate)
+insert into Vehicles (VIN, Mileage, MPG, Price, IsActive, LicensePlate, CarYear, Model, Make, Color, CarType)
 values
-	('1FTWW31P95EB34134', 600, 35, 150.0, 1, '7KJV105'),
-	('5TDKK3DC9BS182760', 532, 25, 70.0, 1, '6IPZ437'),
-	('JHLRE3H57AC023983', 234, 40, 80.0, 1, '5YGW550'),
-	('JTKDE167060163343', 124, 42, 160.0, 1, '8CMH868'),
-	('1GNUKKE34AR110094', 942, 50, 180.0, 1, '2LHU996');
+	('1FTWW31P95EB34134', 600, 35, 150.0, 1, '7KJV105', '2016', 'Camaro', 'Chevrolet', 'Red', 'Pony Car'),
+	('5TDKK3DC9BS182760', 532, 25, 70.0, 1, '6IPZ437', '2013', 'Sentra', 'Nissan', 'Grey', 'Compact Car'),
+	('JHLRE3H57AC023983', 234, 40, 80.0, 1, '5YGW550', '2019', 'Sorento', 'Kia', 'Black', 'SUV'),
+	('JTKDE167060163343', 124, 42, 160.0, 1, '8CMH868','2017', '911 Carrera 4 GTS', 'Porsche', 'White', 'Coupe'),
+	('1GNUKKE34AR110094', 942, 50, 180.0, 1, '2LHU996','2019', 'R8', 'Audi', 'Grey', 'Sports Car');
     
 insert into Administrator (`User`, Email, `Password`)
 values
@@ -81,7 +96,7 @@ values
 	('2024-12-24', '2024-12-29', 1, 3, 5),
 	('2024-12-28', '2024-12-30', 0, 4, 1);
 
-insert into Reports (Damage, GasAmount, Vehicle, Customer)
+insert into Reports (Damage, GasAmount, Vehicle, ReservationID)
 values
 	('Scratch on hood', 10, 1, 1),
 	('Engine rattling', 11, 1, 2),
@@ -89,11 +104,16 @@ values
 	('AC not working', 9, 5, 3),
 	('Flat tire', 12, 2, 4);
     
+insert into Payments(CardNumber, CustomerID, ReservationID)
+values
+	('123512313', 1, 2),
+    ('123512341', 2, 3);
+
 select * from Vehicles;
 select * from Administrator;
 select * from Customers;
 select * from Reservations;
 select * from Reports;
-    
+select * from Payments;
     
     
