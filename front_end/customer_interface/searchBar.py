@@ -9,9 +9,11 @@ class search_bar(QWidget):
         self.main_layout = QHBoxLayout(self)
         self.setFixedSize(800, 100)
 
-        self.date = date_picker()
+        self.start_date = date_picker()
+        self.end_date = date_picker()
 
-        self.main_layout.addWidget(self.date)
+        self.main_layout.addWidget(self.start_date)
+        self.main_layout.addWidget(self.end_date)
     
 class date_picker(QWidget):
     def __init__(self):
@@ -26,17 +28,6 @@ class date_picker(QWidget):
 
         # Add the date edit to the layout
         self.date_layout.addWidget(self.date_edit)
-
-        # Create a label to display the selected date
-        self.date_label = QLabel("Selected Date: ", self)
-        self.date_layout.addWidget(self.date_label)
-
-        # Create a button to save and display the selected date
-        self.save_button = QPushButton("Save Date", self)
-        self.save_button.clicked.connect(self.save_date)
-
-        # Add the save button to the layout
-        self.date_layout.addWidget(self.save_button)
 
         # Set the layout for the main window
         self.setLayout(self.date_layout)
