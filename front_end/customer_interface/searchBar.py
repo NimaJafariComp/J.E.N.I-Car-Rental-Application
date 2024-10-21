@@ -9,12 +9,28 @@ class search_bar(QWidget):
         self.main_layout = QHBoxLayout(self)
         self.setFixedSize(800, 100)
 
+        # setup font
+        self.set_font = font()
+        self.font = QFont(self.set_font.font_family, 16)
+
         self.start_date = date_picker()
         self.end_date = date_picker()
 
         self.main_layout.addWidget(self.start_date)
         self.main_layout.addWidget(self.end_date)
+
+        self.search_button = QPushButton("Search", self)
+        self.setup_button()
+
+        self.main_layout.addWidget(self.search_button)
     
+    def setup_button(self):
+        self.search_button.setFixedWidth(100)
+        self.search_button.setFixedHeight(30)
+        self.search_button.setFont(self.font)
+        self.search_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
+
+
 class date_picker(QWidget):
     def __init__(self):
         super().__init__()
