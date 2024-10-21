@@ -1,9 +1,10 @@
+import os
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-from font import font
+from ..config.font import font
 
-class car_tile(QWidget):
+class car_tile(QWidget): 
     def __init__(self):
         super().__init__()
         # variables that need imput
@@ -12,12 +13,13 @@ class car_tile(QWidget):
         self.mpg = 29
         self.year = 2020
         self.type = "sedan"
+        self.img_path = os.path.join(os.path.dirname(__file__), "car_img/corolla.jpg")
 
         self.setFixedSize(600,200)
         self.car_tile_layout = QHBoxLayout(self)
        
         self.img = QLabel(self)
-        self.pixmap = QPixmap("logo/corolla.jpg")
+        self.pixmap = QPixmap(self.img_path)
         self.middle = QFrame(self)
         self.middle_layout = QVBoxLayout(self.middle)
         self.right = QFrame(self)

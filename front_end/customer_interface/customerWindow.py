@@ -1,8 +1,9 @@
+import os
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-from font import font
-from carTile import car_tile
+from ..config.font import font
+from .carTile import car_tile
 
 
 class customer_window(QWidget):
@@ -24,7 +25,9 @@ class customer_window(QWidget):
 
         # setup logo
         self.logo = QLabel(self)
-        self.pixmap = QPixmap("logo/HalfLogo.png")
+        self.current_dir = os.path.dirname(__file__)
+        self.logo_dir = os.path.join(os.path.dirname(self.current_dir), "logo/HalfLogo.png")
+        self.pixmap = QPixmap(self.logo_dir)
 
         # setup font
         self.set_font = font()
@@ -137,7 +140,7 @@ class customer_window(QWidget):
 
 if __name__ == "__main__":
     import sys
-    from screenConfig import screen_config
+    from ..config.screenConfig import screen_config
     screen_config = screen_config()
     app = QApplication(sys.argv)
     window = customer_window()

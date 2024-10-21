@@ -1,7 +1,8 @@
+import os
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-from font import font
+from .config.font import font
 
 class login(QWidget):
     def __init__(self):
@@ -15,7 +16,9 @@ class login(QWidget):
 
         #set up logo img
         self.logo = QLabel(self)
-        self.pixmap = QPixmap("logo/FullLogo.png")
+        self.logo_dir = os.path.join(os.path.dirname(__file__), "logo/HalfLogo.png")
+        self.pixmap = QPixmap(self.logo_dir)
+
 
         # Set up the font
         self.set_font = font()
@@ -102,7 +105,7 @@ class login(QWidget):
 
 if __name__ == "__main__":
     import sys
-    from screenConfig import screen_config
+    from .config.screenConfig import screen_config
     screen_config = screen_config()
     app = QApplication(sys.argv)
     window = login()

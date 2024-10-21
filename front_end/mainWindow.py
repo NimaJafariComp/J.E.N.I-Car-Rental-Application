@@ -2,9 +2,9 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-from customerWindow import customer_window
-from adminWindow import admin_window
-from login import login
+from .customer_interface.customerWindow import customer_window
+from .admin_interface.adminWindow import admin_window
+from .login import login
 
 
 class main_window(QMainWindow):
@@ -73,7 +73,7 @@ class main_window(QMainWindow):
 
 if __name__ == "__main__":
     import sys
-    from screenConfig import screen_config
+    from .config.screenConfig import screen_config
     screen_config = screen_config()
     app = QApplication(sys.argv)
     window = main_window()
