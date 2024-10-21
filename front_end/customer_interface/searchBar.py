@@ -9,11 +9,16 @@ class search_bar(QWidget):
         self.main_layout = QHBoxLayout(self)
         self.setFixedSize(800, 100)
 
-        self.dateedit = QDateEdit(calendarPopup=True)
-        self.menuBar().setCornerWidget(self.dateedit, Qt.TopLeftCorner)
-        self.dateedit.setDateTime(QDateTime.currentDateTime())
+        self.date = date_picker()
+
+        self.main_layout.addWidget(self.date)
     
-class date_picker():
+class date_picker(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.dateedit = QDateEdit(calendarPopup=True)
+        #self.menuBar().setCornerWidget(self.dateedit, Qt.TopLeftCorner)
+        self.dateedit.setDateTime(QDateTime.currentDateTime())
 
 if __name__ == "__main__":
     import sys
