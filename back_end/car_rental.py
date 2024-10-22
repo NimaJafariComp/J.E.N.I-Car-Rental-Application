@@ -34,7 +34,8 @@ class CarRentalService:
         self.inv_obj.get_inventory()[index].add_report(uDamages, uGasAmount, uCarID, uReservationID)
 
     def customer_search(self, uStartDate: str, uEndDate: str, uCarType: str) -> list[tuple]:
-        self.inv_obj.initialize_search_inventory(uStartDate, uEndDate, uCarType)
+        # self.inv_obj.initialize_search_inventory(uStartDate, uEndDate, uCarType)
+        return dbu.search_database(uStartDate, uEndDate, uCarType)
         
         
     def make_reservation(self, start_date, end_date, insurance, customer_id, car_id):

@@ -110,14 +110,14 @@ class inventory:
                 return mid
                 
         return -1
-    
+    """
     def initialize_search_inventory(self, start_date, end_date, car_type):
         self.inventory = []
         for car in search_database(start_date, end_date, car_type):
             car_object = car_class(car[1], car[2], car[3], car[4], car[5], car[6], car[7], car[8], car[9], car[10])
             car_object.set_car_id(car[0])
             self.inventory.append(car_object)
-    
+    """
     """
     # Function: get_available_inventory()
     # Input: None

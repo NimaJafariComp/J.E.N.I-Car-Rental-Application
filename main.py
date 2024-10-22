@@ -1,19 +1,35 @@
 from back_end.car_rental import CarRentalService as cr
 
 def main():
-    # username = input("Enter username: ")
-    # password = input("Enter password: ")
+    # Need username and password at the beginning
+    username = input("Enter username: ")
+    password = input("Enter password: ")
     
-    global car_rental_obj
-    car_rental_obj = cr("root", "Mililani3-")
+    # Needs to happen every single time, this is how the connection
+    # to MySQL is initiated
+    car_rental_obj = cr(username, password)
     car_rental_obj.connect_to_mysql()
     
-    
+    # Example of adding a car
     car_rental_obj.add_car('1FTPW14554KC36033', 500, 45, 100, '5XDI128',
-                        '2012', 'Land Cruiser', 'Toyota', 'Gray', 'SUV')
+                        # '2012', 'Land Cruiser', 'Toyota', 'Gray', 'SUV')
+    car_rental_obj.add_car('1FTPW14554KC36032', 500, 45, 100, '5XDI127',
+                        # '2012', 'Land Cruiser', 'Toyota', 'Gray', 'Sedan')
+    
+    # Example of "deleting" a car
+    car_rental_obj.delete_car(1)
+    
+    # Example of "deleting" multiple cars
     car_rental_obj.delete_multiple_cars([2, 3, 4, 5])
+    
+    # Example of adding a report
     car_rental_obj.add_report(1, "None", 10, 3)
+    
+    # Example of a search, customer_search returns a list.
+    # print function is to just show what the output is and its format
     print(car_rental_obj.customer_search("2024-02-10", "2024-02-12", "Sedan"))
+    
+    # Example of making a reservation
     car_rental_obj.make_reservation("2024-02-10", "2024-02-12", 1, 2, 7)
-
+    
 main()
