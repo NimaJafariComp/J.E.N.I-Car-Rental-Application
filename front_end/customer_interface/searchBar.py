@@ -37,6 +37,8 @@ class date_picker(QWidget):
         # Set up the window layout
         self.date_layout = QVBoxLayout()
 
+        # make a date variable 
+
         # Create a QDateEdit widget
         self.date_edit = QDateEdit(self)
         self.date_edit.setCalendarPopup(True)  # Enable the dropdown calendar
@@ -51,10 +53,10 @@ class date_picker(QWidget):
 
     def save_date(self):
         # Get the selected date
-        selected_date = self.date_edit.date()
+        self.date = self.date_edit.date()
 
         # Convert the date to a string
-        date_str = selected_date.toString("yyyy-MM-dd")
+        date_str = self.date.toString("yyyy-MM-dd")
 
         # Display the selected date in the label
         self.date_label.setText(f"Selected Date: {date_str}")

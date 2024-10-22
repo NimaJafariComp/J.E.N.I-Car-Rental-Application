@@ -4,6 +4,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from ..config.font import font
 from .carTile import car_tile
+from .searchBar import search_bar
 
 
 class customer_window(QWidget):
@@ -19,6 +20,12 @@ class customer_window(QWidget):
         #set up scrollable bottom frame
         self.bottom_frame = QFrame(self)
         self.scroll_area = QScrollArea(self)
+
+        # setup search bar
+        self.search_bar = QFrame(self) 
+
+        # setup tile window
+        self.tile_window = QFrame(self)
 
         # setup sub widgets
         self.admin_button = QPushButton("Admin",self.top_frame)
@@ -36,6 +43,8 @@ class customer_window(QWidget):
         self.setup_logo()
         self.setup_topframe()
         self.setup_bottomframe()
+        self.setup_search()
+        self.setup_tiles()
         self.setup_button()
         self.setup_widget()
 
@@ -62,9 +71,20 @@ class customer_window(QWidget):
     def setup_bottomframe(self):
         self.bottom_frame.setFrameShape(QFrame.StyledPanel)
         self.bottom_frame.setFrameShadow(QFrame.Raised)
-        self.bottom_layout = QVBoxLayout(self.bottom_frame)
+        self.bottom_layout = QStackedLayout(self.bottom_frame)
+        self.bottom_layout.addWidget(self.search_bar)
+        self.bottom_layout.addWidget(self.scroll_area)
+        self.bottom_layout.setCurrentIndex(0)
+
+    def setup_search(self):
+        self.search_layout = QVBoxLayout()
+        self.search = search_bar()
+        self.search_layout.addWidget(self.search, alignment=Qt.AlignCenter)
+
+    def setup_tiles(self):
+        self.tile_layout = QVBoxLayout(self.tile_window)
         self.scroll_area.setWidgetResizable(True)
-        self.scroll_area.setWidget(self.bottom_frame)
+        self.scroll_area.setWidget(self.tile_window)
         self.scroll_area.setStyleSheet("""
             QScrollBar:vertical {
                 border: none;
@@ -120,23 +140,27 @@ class customer_window(QWidget):
         self.tile7 = car_tile()
         self.tile8 = car_tile()
         self.tile9 = car_tile()
-        self.bottom_layout.addWidget(self.tile, alignment=Qt.AlignCenter)
-        self.bottom_layout.addWidget(self.tile1, alignment=Qt.AlignCenter)
-        self.bottom_layout.addWidget(self.tile2, alignment=Qt.AlignCenter)
-        self.bottom_layout.addWidget(self.tile3, alignment=Qt.AlignCenter)
-        self.bottom_layout.addWidget(self.tile4, alignment=Qt.AlignCenter)
-        self.bottom_layout.addWidget(self.tile5, alignment=Qt.AlignCenter)
-        self.bottom_layout.addWidget(self.tile6, alignment=Qt.AlignCenter)
-        self.bottom_layout.addWidget(self.tile7, alignment=Qt.AlignCenter)
-        self.bottom_layout.addWidget(self.tile8, alignment=Qt.AlignCenter)
-        self.bottom_layout.addWidget(self.tile9, alignment=Qt.AlignCenter)
+        self.tile_layout.addWidget(self.tile, alignment=Qt.AlignCenter)
+        self.tile_layout.addWidget(self.tile1, alignment=Qt.AlignCenter)
+        self.tile_layout.addWidget(self.tile2, alignment=Qt.AlignCenter)
+        self.tile_layout.addWidget(self.tile3, alignment=Qt.AlignCenter)
+        self.tile_layout.addWidget(self.tile4, alignment=Qt.AlignCenter)
+        self.tile_layout.addWidget(self.tile5, alignment=Qt.AlignCenter)
+        self.tile_layout.addWidget(self.tile6, alignment=Qt.AlignCenter)
+        self.tile_layout.addWidget(self.tile7, alignment=Qt.AlignCenter)
+        self.tile_layout.addWidget(self.tile8, alignment=Qt.AlignCenter)
+        self.tile_layout.addWidget(self.tile9, alignment=Qt.AlignCenter)
+
+       
+
+
  
     def setup_widget(self):
         self.customer_layout.setContentsMargins(0, 0, 0, 0)
         self.customer_layout.setSpacing(0)
         self.top_frame_layout.addWidget(self.admin_button)
         self.customer_layout.addWidget(self.top_frame)
-        self.customer_layout.addWidget(self.scroll_area)
+        self.customer_layout.addWidget(self.bottom_frame)
 
 if __name__ == "__main__":
     import sys
