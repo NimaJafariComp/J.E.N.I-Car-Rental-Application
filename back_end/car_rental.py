@@ -9,6 +9,7 @@ class CarRentalService:
     
     def connect_to_mysql(self):
         dbu.initialize_connection(self.username, self.password)
+        self.inv_obj.initialize_inventory()
 
     def add_car(self, uVin: str, uMileage: int, uMPG: int, uPrice: float, uLicensePlate: str, 
                 uCarYear: str, uModel: str, uMake: str, uColor: str , uCarType: str) -> None:
@@ -22,8 +23,7 @@ class CarRentalService:
         index = self.inv_obj.search_car(uCarID)
         if index == -1:
             return
-        
-        self.inv_obj.get_inventory()[index].retire_car()
+        self.inv_obj.get_car_from_inventory(index).retire_car()
 
     def add_report(self, uCarID: int, uDamages: str, uGasAmount: int,
                     uReservationID: int):
