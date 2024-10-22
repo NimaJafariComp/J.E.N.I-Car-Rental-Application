@@ -1,5 +1,5 @@
-import database_utility_class as dbu
-import car_class
+from .car_class import car as car_class
+from .database_utility_class import get_vins, add_car, get_car_id, search_database, get_inventory
 
 class inventory:
     """
@@ -34,21 +34,21 @@ class inventory:
     """
     def add_car(self, uVin: str, uMileage: int, uMPG: int, uPrice: float, uLicensePlate: str, 
                 uCarYear: str, uModel: str, uMake: str, uColor: str , uCarType: str) -> None:
-        current_vins = dbu.get_vins()
+        current_vins = get_vins()
         
         if uVin in current_vins:
             print("VIN is a duplicate")
             return
         
         # use database module to insert car in database 
-        dbu.add_car(uVin, uMileage, uMPG, uPrice, uLicensePlate, uCarYear, uModel, uMake, uColor, uCarType)
+        database_utility_class.add_car(uVin, uMileage, uMPG, uPrice, uLicensePlate, uCarYear, uModel, uMake, uColor, uCarType)
         
         # initializes a car object for the new car with the provided information
         car_object = car_class.car(uVin, uMileage, uMPG, uPrice, uLicensePlate,
                                     uCarYear, uModel, uMake, uColor, uCarType)
         
         # retrieves the assigned CarID by the database
-        carID = dbu.get_car_id(uVin)
+        carID =  get_car_id(uVin)
         
         # sets the CarID for the car object
         car_object.car_id = carID
@@ -72,11 +72,11 @@ class inventory:
         
         # calls the function get_inventory() from the database class
         # it returns an array of tuples with all the information about the car
-        for car in dbu.get_inventory():
+        for car in get_inventory():
             
             # creates an instance of the car class and initializes it
             # with the values returned by the database class 
-            car_object = car_class.car(car[1], car[2], car[3], car[4], car[5], car[6], car[7], car[8], car[9], car[10])
+            car_object = car_class(car[1], car[2], car[3], car[4], car[5], car[6], car[7], car[8], car[9], car[10])
             
             # sets the car_id field of the car objects with the car_id
             # provided by the database
@@ -110,8 +110,8 @@ class inventory:
     
     def initialize_search_inventory(self, start_date, end_date):
         self.inventory = []
-        for car in dbu.search_database(start_date, end_date):
-            car_object = car_class.car(car[1], car[2], car[3], car[4], car[5], car[6], car[7], car[8], car[9], car[10])
+        for car in search_database(start_date, end_date):
+            car_object = car_class(car[1], car[2], car[3], car[4], car[5], car[6], car[7], car[8], car[9], car[10])
             car_object.set_car_id(car[0])
             self.inventory.append(car_object)
     

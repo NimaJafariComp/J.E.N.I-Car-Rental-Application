@@ -1,5 +1,5 @@
-import database_utility_class as dbu
-import report_class as rc
+from .report_class import report as rc
+from .database_utility_class import get_reports, change_mileage, deactivate_car, insert_report
 
 class car:
     
@@ -43,14 +43,14 @@ class car:
         return self.car_id
     
     def initialize_reports(self):
-        for report in dbu.get_reports(self.car_id):
-            report_object = rc.report(report[1], report[2], report[3], report[4])
+        for report in get_reports(self.car_id):
+            report_object = rc(report[1], report[2], report[3], report[4])
             report_object.set_report_id(report[0])
             self.reports.append(report_object)
     
     def add_report(self, damages, gas_amount, car_id, reservation_id):
-        report_object = rc.report(damages, gas_amount, car_id, reservation_id)
-        report_object.set_report_id(dbu.insert_report(damages, gas_amount, car_id, reservation_id))
+        report_object = rc(damages, gas_amount, car_id, reservation_id)
+        report_object.set_report_id(insert_report(damages, gas_amount, car_id, reservation_id))
         
         self.reports.append(repr(report_object))
         
@@ -66,7 +66,7 @@ class car:
             return
         
         self.mileage = new_mileage
-        dbu.change_mileage(self.car_id, new_mileage)
+        change_mileage(self.car_id, new_mileage)
 
     def retire_car(self):
-        dbu.deactivate_car(self.car_id)
+        deactivate_car(self.car_id)
