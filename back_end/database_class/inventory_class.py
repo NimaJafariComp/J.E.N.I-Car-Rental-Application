@@ -1,5 +1,5 @@
 from .car_class import car as car_class
-from .database_utility_class import get_vins, add_car, get_car_id, search_database, get_inventory
+from .database_utility_class import get_vins, add_car, get_car_id, get_inventory, get_active_inventory, search_database
 
 class inventory:
     """
@@ -41,10 +41,10 @@ class inventory:
             return
         
         # use database module to insert car in database 
-        database_utility_class.add_car(uVin, uMileage, uMPG, uPrice, uLicensePlate, uCarYear, uModel, uMake, uColor, uCarType)
+        add_car(uVin, uMileage, uMPG, uPrice, uLicensePlate, uCarYear, uModel, uMake, uColor, uCarType)
         
         # initializes a car object for the new car with the provided information
-        car_object = car_class.car(uVin, uMileage, uMPG, uPrice, uLicensePlate,
+        car_object = car_class(uVin, uMileage, uMPG, uPrice, uLicensePlate,
                                     uCarYear, uModel, uMake, uColor, uCarType)
         
         # retrieves the assigned CarID by the database
@@ -91,6 +91,9 @@ class inventory:
         # for x in self.inventory:
             # repr(x)
 
+    def delete_car(self, uCarID:int) -> None:
+        pass
+
     def search_car(self, car_id):
         low, high, mid = 0, len(self.inventory) - 1, 0
         
@@ -108,9 +111,9 @@ class inventory:
                 
         return -1
     
-    def initialize_search_inventory(self, start_date, end_date):
+    def initialize_search_inventory(self, start_date, end_date, car_type):
         self.inventory = []
-        for car in search_database(start_date, end_date):
+        for car in search_database(start_date, end_date, car_type):
             car_object = car_class(car[1], car[2], car[3], car[4], car[5], car[6], car[7], car[8], car[9], car[10])
             car_object.set_car_id(car[0])
             self.inventory.append(car_object)
@@ -125,8 +128,9 @@ class inventory:
     # And then, stores all the car_objects in an array
     # Does the same thing as get_inventory() 
     """
+    """
     def get_available_inventory(self):
-        for x in self.database_object.get_active_inventory():
+        for x in self get_active_inventory():
             car_object = car_class.car(x[1], x[2], x[3], x[4], x[5])
             car_object.set_car_id(x[0])
             self.available_inventory.append(car_object)
@@ -141,3 +145,4 @@ class inventory:
             
         # for car in self.inventory_with_details:
             # print(car)
+    """

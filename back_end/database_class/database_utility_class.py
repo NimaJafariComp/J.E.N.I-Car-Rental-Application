@@ -10,9 +10,9 @@ import mysql.connector
 # Description: initializes the connection to database, must be called
 #               in application startup. 
 """
-def initialize_connection() -> None:
-    username = input("Enter your MySQL Username: ")
-    upassword = input("Enter your MySQL Password: ")
+def initialize_connection(username: str, upassword: str) -> None:
+    # username = input("Enter your MySQL Username: ")
+    # upassword = input("Enter your MySQL Password: ")
 
     # Creates global variables mydb and mycursor
     # for other functions to use
@@ -338,12 +338,15 @@ def remove_customer(uCustomerID: int) -> None:
 # in the list contains the information about cars that are available
 # during the desired reservation period
 """
-def search_database(start_date: str, end_date: str) -> list[tuple]:
+def search_database(start_date: str, end_date: str, car_type: str) -> list[tuple]:
     inventory = []
-    sql_select_search = "select * from Vehicles where CarID not in \
-                        (select Vehicle from Reservations where \
-                        %s < EndDate and %s > StartDate)"
-    date_values = (start_date, end_date)
+    sql_select_search = "select * from Vehicles \
+                        where CarType = %s and \
+                        CarId not in \
+                        (select Vehicle from Reservations \
+                        where %s < EndDate and \
+                        %s > StartDate)"
+    date_values = (car_type, start_date, end_date)
     
     mycursor.execute(sql_select_search, date_values)
     myresult = mycursor.fetchall()
@@ -364,6 +367,31 @@ def get_vins():
 
     return inventory 
 
+def insert_reservation(start_date: str, end_date: str, insurance: int, customer_id: int, car_id: int) -> int:
+    sql_insert_reservation = "insert into Reservations (StartDate, EndDate, Insurance, CustomerID, Vehicle) \
+                            values (%s, %s, %s, %s, %s)"
+    reservation_values = (start_date, end_date, insurance, customer_id, car_id)
+    
+    mycursor.execute(sql_insert_reservation, reservation_values)
+    mydb.commit()
+    
+    mycursor.execute("select last_insert_id()")
+    
+    myresult = mycursor.fetchone()
+    
+    return myresult[0]
+
+
+def get_reports(car_id):
+    reports = []
+    sql_select_reports = "select * from Reports where Vehicle = %s"
+    mycursor.execute(sql_select_reports, [car_id])
+    
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        reports.append(x)
+        
+    return reports
 
 
 

@@ -1,5 +1,6 @@
 from .report_class import report as rc
-from .database_utility_class import get_reports, change_mileage, deactivate_car, insert_report
+from .database_utility_class import get_reports, change_mileage, deactivate_car, insert_report, insert_reservation, get_reports
+from .reservation_class import reservation as rsvp
 
 class car:
     
@@ -54,9 +55,11 @@ class car:
         
         self.reports.append(repr(report_object))
         
+    def add_reservation(self, start_date, end_date, insurance, customer_id, car_id):
+        rsvp_obj = rsvp(start_date, end_date, insurance, customer_id, car_id)
+        rsvp_obj.set_reservation_id(insert_reservation(start_date, end_date, insurance, customer_id, car_id))
         
-    def add_reservation(self, reservation_id):
-        self.reservation.append(reservation_id)
+        self.reservations.append(repr(rsvp_obj))
         
     def update_mileage(self, new_mileage):   
         # Error check
