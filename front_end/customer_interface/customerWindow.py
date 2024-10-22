@@ -22,7 +22,10 @@ class customer_window(QWidget):
         self.scroll_area = QScrollArea(self)
 
         # setup search bar
-        self.search_bar = QFrame(self) 
+        self.search_bar = QWidget()
+        self.search_layout = QHBoxLayout(self.search_bar)
+        self.search = search_bar()
+        self.search_layout.addWidget(self.search, alignment=Qt.AlignCenter)
 
         # setup tile window
         self.tile_window = QFrame(self)
@@ -43,7 +46,6 @@ class customer_window(QWidget):
         self.setup_logo()
         self.setup_topframe()
         self.setup_bottomframe()
-        self.setup_search()
         self.setup_tiles()
         self.setup_button()
         self.setup_widget()
@@ -74,12 +76,8 @@ class customer_window(QWidget):
         self.bottom_layout = QStackedLayout(self.bottom_frame)
         self.bottom_layout.addWidget(self.search_bar)
         self.bottom_layout.addWidget(self.scroll_area)
-        self.bottom_layout.setCurrentIndex(0)
+        self.bottom_layout.setCurrentIndex(1)
 
-    def setup_search(self):
-        self.search_layout = QVBoxLayout()
-        self.search = search_bar()
-        self.search_layout.addWidget(self.search, alignment=Qt.AlignCenter)
 
     def setup_tiles(self):
         self.tile_layout = QVBoxLayout(self.tile_window)
@@ -130,28 +128,12 @@ class customer_window(QWidget):
                 background: none;
             }
         """)
-        self.tile = car_tile()
-        self.tile1 = car_tile()
-        self.tile2 = car_tile()
-        self.tile3 = car_tile()
-        self.tile4 = car_tile()
-        self.tile5 = car_tile()
-        self.tile6 = car_tile()
-        self.tile7 = car_tile()
-        self.tile8 = car_tile()
-        self.tile9 = car_tile()
-        self.tile_layout.addWidget(self.tile, alignment=Qt.AlignCenter)
-        self.tile_layout.addWidget(self.tile1, alignment=Qt.AlignCenter)
-        self.tile_layout.addWidget(self.tile2, alignment=Qt.AlignCenter)
-        self.tile_layout.addWidget(self.tile3, alignment=Qt.AlignCenter)
-        self.tile_layout.addWidget(self.tile4, alignment=Qt.AlignCenter)
-        self.tile_layout.addWidget(self.tile5, alignment=Qt.AlignCenter)
-        self.tile_layout.addWidget(self.tile6, alignment=Qt.AlignCenter)
-        self.tile_layout.addWidget(self.tile7, alignment=Qt.AlignCenter)
-        self.tile_layout.addWidget(self.tile8, alignment=Qt.AlignCenter)
-        self.tile_layout.addWidget(self.tile9, alignment=Qt.AlignCenter)
+        self.list = []
+        
+        for i in range(9):
+            self.list.append(car_tile())
+            self.tile_layout.addWidget(self.list[i], alignment=Qt.AlignCenter) 
 
-       
 
 
  
