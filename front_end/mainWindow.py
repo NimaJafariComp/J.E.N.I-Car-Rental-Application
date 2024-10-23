@@ -10,7 +10,7 @@ from .login import login
 class main_window(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.central_widget = QWidget(self)
+        self.central_widget = QWidget()
         self.stacked_widget = QStackedLayout(self.central_widget)
         self.c_window = customer_window()
         self.a_window = admin_window()

@@ -18,11 +18,11 @@ class car_tile(QWidget):
         self.setFixedSize(600,200)
         self.car_tile_layout = QHBoxLayout(self)
        
-        self.img = QLabel(self)
+        self.img = QLabel()
         self.pixmap = QPixmap(self.img_path)
-        self.middle = QFrame(self)
+        self.middle = QFrame()
         self.middle_layout = QVBoxLayout(self.middle)
-        self.right = QFrame(self)
+        self.right = QFrame()
         self.right_layout = QVBoxLayout(self.right)
 
         self.middle_setup()
@@ -34,13 +34,13 @@ class car_tile(QWidget):
     def middle_setup(self):
         self.middle.setFixedSize(250, 200)
         self.middle.setStyleSheet("border : 1px solid lightgrey;")
-        self.name_label = QLabel(self.name, self)
+        self.name_label = QLabel(self.name)
         self.name_label.setStyleSheet("border: none; font-size: 20pt; font-weight: bold;")
-        self.year_label = QLabel("year: "+str(self.year), self)
+        self.year_label = QLabel("year: "+str(self.year))
         self.year_label.setStyleSheet("border: none;")
-        self.mpg_label = QLabel("MPG: "+str(self.mpg), self)
+        self.mpg_label = QLabel("MPG: "+str(self.mpg))
         self.mpg_label.setStyleSheet("border: none;")
-        self.type_label = QLabel("Type: "+self.type, self)
+        self.type_label = QLabel("Type: "+self.type)
         self.type_label.setStyleSheet("border: none;")
         self.middle_layout.addWidget(self.name_label)
         self.middle_layout.addWidget(self.year_label)
@@ -50,17 +50,6 @@ class car_tile(QWidget):
     def right_setup(self):
         self.right.setFixedSize(150, 200)
         self.right.setStyleSheet("border : 1px solid lightgrey; border-bottom-right-radius: 15px; border-top-right-radius: 15px")
-
-
-#    def img_setup(self):
-#
-#        self.img.setPixmap(self.pixmap)
-#        self.img.resize(self.pixmap.width(), self.pixmap.height())
-#        self.scaled_pixmap = self.pixmap.scaled(self.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation)   # width, height
-#        self.img.setPixmap(self.scaled_pixmap)
-#        self.img.setStyleSheet("border : 1px solid lightgrey; border-bottom-left-radius: 15px; border-top-left-radius: 15px;")   
-#        self.img.setFixedSize(200, 200)
-#        self.img.setAlignment(Qt.AlignCenter)
 
     def tile_setup(self):
         self.car_tile_layout.setContentsMargins(0, 0, 0, 0)

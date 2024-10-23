@@ -14,32 +14,32 @@ class customer_window(QWidget):
         self.customer_layout = QVBoxLayout(self)
 
         # setup Qframes
-        self.top_frame = QFrame(self)
+        self.top_frame = QFrame()
         self.top_frame_layout = QHBoxLayout(self.top_frame)
 
         #set up scrollable bottom frame
-        self.bottom_frame = QFrame(self)
-        self.scroll_area = QScrollArea(self)
+        self.bottom_frame = QFrame()
+        self.scroll_area = QScrollArea()
 
         # setup tile layout
-        self.tile_widget = QFrame(self)
+        self.tile_widget = QFrame()
         self.tile_layout = QVBoxLayout(self.tile_widget)
 
         # setup search bar
-        self.search_bar = QWidget(self)
+        self.search_bar = QWidget()
         self.search_layout = QHBoxLayout(self.search_bar)
         self.search = search_bar()
         self.search_layout.addWidget(self.search, alignment=Qt.AlignCenter)
 
         # setup tile window
-        self.tile_window = QFrame(self)
+        self.tile_window = QFrame()
         self.scroll_layout = QVBoxLayout(self.tile_window)
 
         # setup sub widgets
-        self.admin_button = QPushButton("Admin",self.top_frame)
+        self.admin_button = QPushButton("Admin")
 
         # setup logo
-        self.logo = QLabel(self)
+        self.logo = QLabel()
         self.current_dir = os.path.dirname(__file__)
         self.logo_dir = os.path.join(os.path.dirname(self.current_dir), "logo/HalfLogo.png")
         self.pixmap = QPixmap(self.logo_dir)

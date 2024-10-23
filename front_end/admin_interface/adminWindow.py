@@ -11,15 +11,15 @@ class admin_window(QWidget):
         self.admin_layout = QVBoxLayout(self)
 
         # setup diffrent Qframes
-        self.top_frame = QFrame(self)
+        self.top_frame = QFrame()
         self.top_frame_layout = QHBoxLayout(self.top_frame)
-        self.bottom_frame = QFrame(self)
+        self.bottom_frame = QFrame()
 
         # setup other sub widgets
-        self.customer_button = QPushButton("Customer", self.top_frame)
+        self.customer_button = QPushButton("Customer")
 
         # set up logo
-        self.logo = QLabel(self)
+        self.logo = QLabel()
         self.current_dir = os.path.dirname(__file__)
         self.logo_dir = os.path.join(os.path.dirname(self.current_dir), "logo/HalfLogo.png")
         self.pixmap = QPixmap(self.logo_dir)

@@ -11,11 +11,11 @@ class login(QWidget):
 
         # Set up the main layout and inner login window
         self.login_layout = QVBoxLayout(self)
-        self.login_window = QWidget(self)
+        self.login_window = QWidget()
         self.login_window_layout = QVBoxLayout(self.login_window)
 
         #set up logo img
-        self.logo = QLabel(self)
+        self.logo = QLabel()
         self.logo_dir = os.path.join(os.path.dirname(__file__), "logo/HalfLogo.png")
         self.pixmap = QPixmap(self.logo_dir)
 
@@ -26,13 +26,13 @@ class login(QWidget):
         #self.font.setBold(True)
 
         # Create label and set font
-        self.admin_label = QLabel("ADMIN", self)
+        self.admin_label = QLabel("ADMIN")
 
         # Password box
-        self.pw_box = QLineEdit(self)
+        self.pw_box = QLineEdit()
         
         # Login button
-        self.login_button = QPushButton("Login", self)
+        self.login_button = QPushButton("Login")
 
         # function calls
         self.setup_layout()

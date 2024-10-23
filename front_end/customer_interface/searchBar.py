@@ -6,6 +6,7 @@ from ..config.font import font
 class search_bar(QWidget):
     def __init__(self):
         super().__init__()
+        # setup main layout
         self.main_layout = QHBoxLayout(self)
         self.setFixedSize(800, 100)
 
@@ -13,16 +14,19 @@ class search_bar(QWidget):
         self.set_font = font()
         self.font = QFont(self.set_font.font_family, 16)
 
+        # setup start and end date boxes
         self.start_date = date_picker()
         self.end_date = date_picker()
 
-        self.main_layout.addWidget(self.start_date)
-        self.main_layout.addWidget(self.end_date)
+        # setup the type box
+        self.type_box = QComboBox()
 
-        self.search_button = QPushButton("Search", self)
-        self.setup_button()
+        # setup search button
+        self.search_button = QPushButton("Search")
 
-        self.main_layout.addWidget(self.search_button)
+        # call setup for the widget
+        self.setup_search()
+
     
     def setup_button(self):
         self.search_button.setFixedWidth(100)
@@ -30,6 +34,17 @@ class search_bar(QWidget):
         self.search_button.setFont(self.font)
         self.search_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
 
+    def setup_typebox(self):
+        self.type_box.addItems(['Sedan', 'Truck', 'Coupe', 'SUV'])
+
+    def setup_search(self):
+        self.setup_button()
+        self.setup_typebox()
+
+        self.main_layout.addWidget(self.start_date)
+        self.main_layout.addWidget(self.end_date)
+        self.main_layout.addWidget(self.type_box)
+        self.main_layout.addWidget(self.search_button)
 
 class date_picker(QWidget):
     def __init__(self):
@@ -40,7 +55,7 @@ class date_picker(QWidget):
         # make a date variable 
 
         # Create a QDateEdit widget
-        self.date_edit = QDateEdit(self)
+        self.date_edit = QDateEdit()
         self.date_edit.setCalendarPopup(True)  # Enable the dropdown calendar
         self.date_edit.setDate(QDate.currentDate())  # Set default date to today
 
