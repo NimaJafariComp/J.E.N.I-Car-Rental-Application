@@ -21,14 +21,19 @@ class customer_window(QWidget):
         self.bottom_frame = QFrame(self)
         self.scroll_area = QScrollArea(self)
 
+        # setup tile layout
+        self.tile_widget = QFrame(self)
+        self.tile_layout = QVBoxLayout(self.tile_widget)
+
         # setup search bar
-        self.search_bar = QWidget()
+        self.search_bar = QWidget(self)
         self.search_layout = QHBoxLayout(self.search_bar)
         self.search = search_bar()
         self.search_layout.addWidget(self.search, alignment=Qt.AlignCenter)
 
         # setup tile window
         self.tile_window = QFrame(self)
+        self.scroll_layout = QVBoxLayout(self.tile_window)
 
         # setup sub widgets
         self.admin_button = QPushButton("Admin",self.top_frame)
@@ -75,15 +80,20 @@ class customer_window(QWidget):
         self.bottom_frame.setFrameShadow(QFrame.Raised)
         self.bottom_layout = QStackedLayout(self.bottom_frame)
         self.bottom_layout.addWidget(self.search_bar)
-        self.bottom_layout.addWidget(self.scroll_area)
+        self.bottom_layout.addWidget(self.tile_widget)
         self.bottom_layout.setCurrentIndex(1)
 
 
     def setup_tiles(self):
-        self.tile_layout = QVBoxLayout(self.tile_window)
+        self.tile_search = search_bar()
         self.scroll_area.setWidgetResizable(True)
         self.scroll_area.setWidget(self.tile_window)
+        self.tile_layout.addWidget(self.tile_search, alignment=Qt.AlignCenter)
+        self.tile_layout.addWidget(self.scroll_area)
         self.scroll_area.setStyleSheet("""
+            QScrollArea {
+                border: none;
+            }
             QScrollBar:vertical {
                 border: none;
                 background: #f0f0f0;
@@ -132,9 +142,7 @@ class customer_window(QWidget):
         
         for i in range(9):
             self.list.append(car_tile())
-            self.tile_layout.addWidget(self.list[i], alignment=Qt.AlignCenter) 
-
-
+            self.scroll_layout.addWidget(self.list[i], alignment=Qt.AlignCenter) 
 
  
     def setup_widget(self):
