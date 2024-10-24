@@ -30,6 +30,7 @@ class customer_window(QWidget):
         self.search_layout = QHBoxLayout(self.search_bar)
         self.search = search_bar()
         self.search_layout.addWidget(self.search, alignment=Qt.AlignCenter)
+        self.search.search_button.clicked.connect(self.click_search)
 
         # setup tile window
         self.tile_window = QFrame()
@@ -81,7 +82,7 @@ class customer_window(QWidget):
         self.bottom_layout = QStackedLayout(self.bottom_frame)
         self.bottom_layout.addWidget(self.search_bar)
         self.bottom_layout.addWidget(self.tile_widget)
-        self.bottom_layout.setCurrentIndex(1)
+        self.bottom_layout.setCurrentIndex(0)
 
 
     def setup_tiles(self):
@@ -151,6 +152,9 @@ class customer_window(QWidget):
         self.top_frame_layout.addWidget(self.admin_button)
         self.customer_layout.addWidget(self.top_frame)
         self.customer_layout.addWidget(self.bottom_frame)
+
+    def click_search(self):
+        self.bottom_layout.setCurrentIndex(1)
 
 if __name__ == "__main__":
     import sys
