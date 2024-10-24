@@ -21,7 +21,7 @@ def initialize_connection(username: str, upassword: str) -> None:
         host = "localhost",
         user = username,
         password = upassword,
-        database = "CarAppProject"
+        database = "carappproject"
     )
 
     mycursor = mydb.cursor()
