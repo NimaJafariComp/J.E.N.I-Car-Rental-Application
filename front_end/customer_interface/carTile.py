@@ -13,7 +13,7 @@ class car_tile(QWidget):
         self.mpg = 29
         self.year = 2020
         self.type = "sedan"
-        self.img_path = os.path.join(os.path.dirname(__file__), "car_img/corolla.jpg")
+        self.img_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "car_img/corolla.jpg")
 
         self.setFixedSize(600,200)
         self.car_tile_layout = QHBoxLayout(self)
@@ -118,7 +118,7 @@ class car_tile(QWidget):
 
 if __name__ == "__main__":
     import sys
-    from screenConfig import screen_config
+    from ..config.screenConfig import screen_config
     screen_config = screen_config()
     app = QApplication(sys.argv)
     window = car_tile()
