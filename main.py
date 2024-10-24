@@ -3,10 +3,8 @@ from database.main_database import initialize_database
 
 def main():
     # Need username and password at the beginning
-    # username = input("Enter username: ")
-    # password = input("Enter password: ")
-    username = "root"
-    password = "Mililani3-"
+    username = input("Enter username: ")
+    password = input("Enter password: ")
     
     # Needs to happen every single time, this is how the connection
     # to MySQL is initiated
