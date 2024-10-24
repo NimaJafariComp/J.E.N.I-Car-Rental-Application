@@ -15,8 +15,7 @@ class search_bar(QWidget):
         self.font = QFont(self.set_font.font_family, 16)
 
         # setup start and end date boxes
-        self.start_date = date_picker()
-        self.end_date = date_picker()
+        self.date_range = date_picker()
 
         # setup the type box
         self.type_box = QComboBox()
@@ -41,40 +40,39 @@ class search_bar(QWidget):
         self.setup_button()
         self.setup_typebox()
 
-        self.main_layout.addWidget(self.start_date)
-        self.main_layout.addWidget(self.end_date)
+        self.main_layout.addWidget(self.date_range)
         self.main_layout.addWidget(self.type_box)
         self.main_layout.addWidget(self.search_button)
 
 class date_picker(QWidget):
     def __init__(self):
         super().__init__()
-        # Set up the window layout
-        self.date_layout = QVBoxLayout()
+        # Set up the layout
+        layout = QHBoxLayout()
+        
+        # Start Date QDateEdit
+        self.start_date_edit = QDateEdit()
+        self.start_date_edit.setCalendarPopup(True)  # Enable dropdown calendar
+        self.start_date_edit.setDate(QDate.currentDate())
+        self.start_date_edit.dateChanged.connect(self.update_end_date_minimum)  # Connect to update function
+        layout.addWidget(self.start_date_edit)
+        
+        # End Date QDateEdit
+        self.end_date_edit = QDateEdit(self)
+        self.end_date_edit.setCalendarPopup(True)  # Enable dropdown calendar
+        self.end_date_edit.setDate(QDate.currentDate())
+        layout.addWidget(self.end_date_edit)
+        
+        # Set initial minimum date for end date
+        self.update_end_date_minimum()
+        
+        # Set layout
+        self.setLayout(layout)
 
-        # make a date variable 
-
-        # Create a QDateEdit widget
-        self.date_edit = QDateEdit()
-        self.date_edit.setCalendarPopup(True)  # Enable the dropdown calendar
-        self.date_edit.setDate(QDate.currentDate())  # Set default date to today
-
-        # Add the date edit to the layout
-        self.date_layout.addWidget(self.date_edit)
-
-        # Set the layout for the main window
-        self.setLayout(self.date_layout)
-
-
-    def save_date(self):
-        # Get the selected date
-        self.date = self.date_edit.date()
-
-        # Convert the date to a string
-        date_str = self.date.toString("yyyy-MM-dd")
-
-        # Display the selected date in the label
-        self.date_label.setText(f"Selected Date: {date_str}")
+    def update_end_date_minimum(self):
+        """Update the minimum date of the end date selector."""
+        start_date = self.start_date_edit.date()
+        self.end_date_edit.setMinimumDate(start_date)
          
 
 if __name__ == "__main__":
