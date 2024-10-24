@@ -5,7 +5,7 @@ def create_tables(my_username, my_password):
         host = "localhost",
         user = my_username,
         password = my_password,
-        database = "carappproject"
+        database = "CARAPP"
     )
 
     # creates an instance of cursor class 

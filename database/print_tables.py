@@ -5,7 +5,7 @@ def print_tables(my_username, my_password):
         host = "localhost",
         user = my_username,
         password = my_password,
-        database = "carappproject"
+        database = "CARAPP"
     )
 
     mycursor = mydb.cursor()

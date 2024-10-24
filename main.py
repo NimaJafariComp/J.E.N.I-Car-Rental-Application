@@ -1,12 +1,17 @@
 from back_end.car_rental import CarRentalService as cr
+from database.main_database import initialize_database
 
 def main():
     # Need username and password at the beginning
-    username = input("Enter username: ")
-    password = input("Enter password: ")
+    # username = input("Enter username: ")
+    # password = input("Enter password: ")
+    username = "root"
+    password = "Mililani3-"
     
     # Needs to happen every single time, this is how the connection
     # to MySQL is initiated
+    
+    initialize_database(username, password)
     car_rental_obj = cr(username, password)
     car_rental_obj.connect_to_mysql()
     
@@ -86,5 +91,6 @@ def main():
     # Output: None
     """
     car_rental_obj.make_reservation("2024-02-10", "2024-02-12", 1, 2, 7)
+    
     
 main()

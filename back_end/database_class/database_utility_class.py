@@ -21,7 +21,7 @@ def initialize_connection(username: str, upassword: str) -> None:
         host = "localhost",
         user = username,
         password = upassword,
-        database = "carappproject"
+        database = "CARAPP"
     )
 
     mycursor = mydb.cursor()
@@ -29,19 +29,19 @@ def initialize_connection(username: str, upassword: str) -> None:
 """
 # Description: function to add a singular car to MySQL.
 #               prints out the CarID number assigned to it by MySQL     
-# Input: uVIN, a string - Car's VIN number
-#        uMileage, an integer - Car's Mileage
-#        uMPG, an integer - Car's miles/gallon
-#        uPrice, a decimal/float - Car's price per day
+# Input: vin, a string - Car's VIN number
+#        mileage, an integer - Car's Mileage
+#        mpg, an integer - Car's miles/gallon
+#        price, a decimal/float - Car's price per day
 #        uIsActive, 0 or 1 - If car is retired or not
-#        uLicensePlate, a string - Car's license plate
+#        license_plate, a string - Car's license plate
 # Output: None
 """
-def add_car(uVIN: str, uMileage: int, uMPG: int, uPrice: float, uLicensePlate: str,
-            uCarYear: str, uModel: str, uMake: str, uColor: str, uCarType: str)-> None:
+def add_car(vin: str, mileage: int, mpg: int, price: float, license_plate: str,
+            car_year: str, car_model: str, car_make: str, car_color: str, car_type: str)-> None:
     sql_insert_vehicle = "insert into Vehicles (VIN, Mileage, MPG, Price, LicensePlate, CarYear, Model, Make, Color, CarType) \
                             values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    vehicle_value = (uVIN, uMileage, uMPG, uPrice, uLicensePlate, uCarYear, uModel, uMake, uColor, uCarType)
+    vehicle_value = (vin, mileage, mpg, price, license_plate, car_year, car_model, car_make, car_color, car_type)
     
     mycursor.execute(sql_insert_vehicle, vehicle_value)
     mydb.commit()
@@ -50,12 +50,12 @@ def add_car(uVIN: str, uMileage: int, uMPG: int, uPrice: float, uLicensePlate: s
 
 """
 # Description: function to get assigned CarID number by MySQL
-# Input: uVIN, a string - Car's VIN
+# Input: vin, a string - Car's VIN
 # Output: carID, an integer
 """
-def get_car_id(uVIN: str) -> int:
+def get_car_id(vin: str) -> int:
     select_prompt = "select CarID from Vehicles where VIN = %s"
-    mycursor.execute(select_prompt, [uVIN])
+    mycursor.execute(select_prompt, [vin])
     result = mycursor.fetchone()
     
     if result:
@@ -157,19 +157,19 @@ def deactivate_car(car_id: int) -> None:
     mydb.commit()
 
 """
-# Function: insert_report(uDamages, uGasAmount, uCarID, uReservation)
-# Input: uDamages, a string
-#        uGasAmount, an integer
-#        uCarID, an integer
-#        uReservation, an integer
+# Function: insert_report(damages, gas_amount, car_id, reservation_id)
+# Input: damages, a string
+#        gas_amount, an integer
+#        car_id, an integer
+#        reservation_id, an integer
 # Output: an integer
 # Description: inserts a new row into database in table Reports and 
 #               returns the assigned report_id by database
 """
-def insert_report(uDamages: str, uGasAmount: int, uCarID: int, uReservation: int) -> int:
+def insert_report(damages: str, gas_amount: int, car_id: int, reservation_id: int) -> int:
     sql_insert_report = "insert into Reports (Damages, GasAmount, Vehicle, ReservationID) \
                             values (%s, %s, %s, %s)"
-    report_values = (uDamages, uGasAmount, uCarID, uReservation)
+    report_values = (damages, gas_amount, car_id, reservation_id)
     
     mycursor.execute(sql_insert_report, report_values)
     mydb.commit()
@@ -198,46 +198,46 @@ def get_reports(car_id):
 #        StartDate, EndDate, Insurance, CustomerID, Vehicle, optional values to update
 # Output: None        
 """
-def update_reservation(uReservationID: int, uStartDate=None, uEndDate=None, uInsurance=None, uCustomerID=None, uVehicle=None) -> None:
-    update_query = "UPDATE Reservation SET "
+def update_reservation(reservation_id: int, start_date=None, end_date=None, insurance=None, customer_id=None, uVehicle=None) -> None:
+    update_query = "UPDATE Reservations SET "
     update_values = []
-    if uStartDate:
+    if start_date:
         update_query += "StartDate = %s, "
-        update_values.apped(uStartDate)
-    if uEndDate:
-        update_query += "EndDate = %s. "
-        update_values.append(uEndDate)
-    if uInsurance:
+        update_values.append(start_date)
+    if end_date:
+        update_query += "EndDate = %s, "
+        update_values.append(end_date)
+    if insurance:
         update_query += "Insurance = %s, "
-        update_values.append(uInsurance)
-    if uCustomerID:
+        update_values.append(insurance)
+    if customer_id:
         update_query += "CustomerID = %s, "
-        update_values.append(uCustomerID)
+        update_values.append(customer_id)
     if uVehicle:
         update_query += "Vehicle = %s, "
         update_values.append(uVehicle)
         
-    update_query = update.query.rstrip(', ') + " WHERE ReservationID = %s"
-    update_values.append(uReservationID)
+    update_query = update_query.rstrip(', ') + " WHERE ReservationID = %s"
+    update_values.append(reservation_id)
     
     mycursor.execute(update_query, tuple(update_values))
     mydb.commit()
     
     # For testing purposes
-    print(f"Reservation {ReservationID} updated.")
+    print(f"Reservation {reservation_id} updated.")
     
 """
 # remove an existing reservation
 # Input: ReservationID, an integer - ID of the reservation to remove
 # Output: None        
 """
-def remove_reservation(uReservation: int) -> None:
+def remove_reservation(reservation_id: int) -> None:
     delete_query = "DELETE FROM Reservations WHERE ReservationID = %s"
-    mycursor.execute(delete_query, (uReservationID,))
+    mycursor.execute(delete_query, (reservation_id,))
     mydb.commit()
     
     # For testing purposes
-    print(f"Reservation {uReservationID} has been removed.")
+    print(f"Reservation {reservation_id} has been removed.")
 
 """
 # update an existing report by ReportID
@@ -245,44 +245,44 @@ def remove_reservation(uReservation: int) -> None:
 #        Damages, GasAmount, Vehicle, Customer, optional values to update
 # Output: None
 """
-def update_report(uReportID: int, uDamage=None, uGasAmount=None, uVehicle=None, uReservationID=None) -> None:
+def update_report(report_id: int, damages=None, gas_amount=None, car_id=None, reservation_id=None) -> None:
     update_query = "UPDATE Reports SET "
     update_values = []
     
-    if uDamages:
+    if damages:
         update_query += "Damages = %s, "
-        update_values.append(uDamages)
-    if uGasAmount:
+        update_values.append(damages)
+    if gas_amount:
         update_query += "GasAmount = %s, "
-        update_values.append(uGasAmount)
-    if uVehicle:
+        update_values.append(gas_amount)
+    if car_id:
         update_query += "Vehicle = %s, "
-        update_values.append(uVehicles)
-    if uReservationID:
-        update_query += "Customer = %s, "
-        update_values.append(uReservationID)
+        update_values.append(car_id)
+    if reservation_id:
+        update_query += "ReservationID = %s, "
+        update_values.append(reservation_id)
         
     update_query = update_query.rstrip(', ') + " WHERE ReportID = %s"
-    update_values.append(uReportID)
+    update_values.append(report_id)
     
     mycursor.execute(update_query, tuple(update_values))
     mydb.commit()
     
     # For testing
-    print(f"Report {uReportID} updated.")
+    print(f"Report {report_id} updated.")
 
 """
 # remove an existing report
 # Input: ReportID, an integer - ID of the report to remove
 # Output: None
 """
-def remove_report(uReportID: int) -> None:
+def remove_report(report_id: int) -> None:
     delete_query = "DELETE FROM Reports WHERE ReportID = %s"
-    mycursor.execute(delete_query, (uReportID,))
+    mycursor.execute(delete_query, (report_id,))
     mydb.commit()
     
     # For testing
-    print(f"Report {uReportID} has been removed.")
+    print(f"Report {report_id} has been removed.")
     
 """
 #update an existing customer by CustomerID
@@ -290,44 +290,44 @@ def remove_report(uReportID: int) -> None:
 #        FullName, DOB, Email, optional values to update
 # Output: None
 """
-def update_customer(uCustomerID: int, uFullName=None, uDOB=None, uEmail=None) -> None:
+def update_customer(customer_id: int, full_name=None, dob=None, email=None) -> None:
     update_query = "UPDATE Customers SET "
     update_values = []
     
-    if uFullName:
+    if full_name:
         update_query += "FullName = %s, "
-        update_values.append(uFullName)
-    if uDOB:
+        update_values.append(full_name)
+    if dob:
         update_query += "DOB = %s, "
-        update_values.append(uDOB)
-    if uEmail:
+        update_values.append(dob)
+    if email:
         update_query += "Email = %s, "
-        update_values.append(uEmail)
+        update_values.append(email)
         
     update_query = update_query.rstrip(', ') + " WHERE CustomerID = %s"
-    update_values.append(uCustomerID)
+    update_values.append(customer_id)
     
     mycursor.execute(update_query, tuple(update_values))
     mydb.commit()
     
     # For testing
-    print(f"Customer {uCustomerID} updated.")
+    print(f"Customer {customer_id} updated.")
 
 """
 # Remove an existing customer
 # Input: CustomerID, an integer - ID of the customer to remove
 # Output: None
 """
-def remove_customer(uCustomerID: int) -> None:
+def remove_customer(customer_id: int) -> None:
     # Delete the customer from the Customers table
     delete_customer_query = "DELETE FROM Customers WHERE CustomerID = %s"
-    mycursor.execute(delete_customer_query, (uCustomerID,))
+    mycursor.execute(delete_customer_query, (customer_id,))
     
     # Commit all the changes
     mydb.commit()
 
     # Print confirmation
-    print(f"Customer {uCustomerID} has been removed along with their reservations.")
+    print(f"Customer {customer_id} has been removed along with their reservations.")
     
 """
 # Function: search(startDate, endDate)
@@ -392,14 +392,3 @@ def get_reports(car_id):
         reports.append(x)
         
     return reports
-
-
-
-
-
-
-
-
-
-
-
