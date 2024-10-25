@@ -18,8 +18,8 @@ def create_database(my_host, my_port, my_username, my_password):
     mycursor.execute("create database CARAPP")
      
     # getting a list of databases in localhost
-    mycursor.execute("show databases")
+    # mycursor.execute("show databases")
      
     # prints all values in the list mycursor
-    for x in mycursor:
-       print(x)
+    # for x in mycursor:
+       # print(x)

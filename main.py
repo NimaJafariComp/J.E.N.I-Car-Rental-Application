@@ -80,7 +80,7 @@ def main():
     # Index 7: Car Color
     # Index 8: Car Type
     """
-    print(car_rental_obj.customer_search("2024-02-10", "2024-02-12", "Sedan"))
+    # print(car_rental_obj.customer_search("2024-02-10", "2024-02-12", "Sedan"))
     
     """
     # Example of making a reservation
