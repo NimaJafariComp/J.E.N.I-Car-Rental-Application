@@ -33,6 +33,9 @@ def main():
                         '2012', 'Land Cruiser', 'Toyota', 'Gray', 'SUV')
     car_rental_obj.add_car('1FTPW14554KC36032', 500, 45, 100, '5XDI127',
                         '2012', 'Land Cruiser', 'Toyota', 'Gray', 'Sedan')
+    car_rental_obj.add_car('1FTPW14554KC36032', 500, 45, 100, '5XDI127',
+                        '2022', 'Sienna', 'Toyota', 'white', 'SUV')
+ 
     """
     # Example of "deleting" a car
     # Input: Car ID 

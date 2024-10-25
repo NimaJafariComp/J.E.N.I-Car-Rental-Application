@@ -6,11 +6,15 @@ from ..config.font import font
 from .carTile import car_tile
 from .searchBar import search_bar
 from .test import searchCar
+from ..api import api
 
 
 class customer_window(QWidget):
     def __init__(self):
         super().__init__()
+        # setup api call obj
+        self.api = api()
+
         # setup customer window layout
         self.customer_layout = QVBoxLayout(self)
 
@@ -154,8 +158,8 @@ class customer_window(QWidget):
 
     def click_search(self):
         self.bottom_layout.setCurrentIndex(1)
-        self.carList = searchCar()
-        
+        print(self.search.date_range.start_date_edit.date().toString('yyyy-MM-dd') + " " + self.search.date_range.end_date_edit.date().toString('yyyy-MM-dd') + " " + self.search.type_box.currentText())
+        self.carList = self.api.car_rental_obj.customer_search(self.search.date_range.start_date_edit.date().toString('yyyy-MM-dd'), self.search.date_range.end_date_edit.date().toString('yyyy-MM-dd'), self.search.type_box.currentText())
         for i in range(len(self.carList)):
             self.list.append(car_tile(self.carList[i]))
             self.scroll_layout.addWidget(self.list[i], alignment=Qt.AlignCenter) 
@@ -164,10 +168,12 @@ class customer_window(QWidget):
         self.bottom_layout.setCurrentIndex(1)
         self.list.clear()
         self.carList.clear()
-        self.carList = searchCar()
+        self.carList = self.api.car_rental_obj.customer_search(self.tile_search.date_range.start_date_edit.date().toString('yyyy-MM-dd'), self.tile_search.date_range.end_date_edit.date().toString('yyyy-MM-dd'), self.tile_search.type_box.currentText())
+        print(self.carList)
+        print(self.tile_search.date_range.start_date_edit.date().toString('yyyy-MM-dd') + " " + self.tile_search.date_range.end_date_edit.date().toString('yyyy-MM-dd') + " " + self.tile_search.type_box.currentText())
         self.clear_layout(self.scroll_layout)
         
-        for i in range(len(self.carList)-2):
+        for i in range(len(self.carList)):
             self.list.append(car_tile(self.carList[i]))
             self.scroll_layout.addWidget(self.list[i], alignment=Qt.AlignCenter) 
  

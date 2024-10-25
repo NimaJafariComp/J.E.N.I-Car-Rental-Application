@@ -89,11 +89,11 @@ def create_tables(my_host, my_port, my_username, my_password):
 
     sql_insert_vehicles = "insert into Vehicles (VIN, Mileage, MPG, Price, LicensePlate, CarYear, Model, Make, Color, CarType) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     vehicle_values = [
-            ('1FTWW31P95EB34134', 600, 35, 150.0, '7KJV105', '2016', 'Camaro', 'Chevrolet', 'Red', 'Pony Car'),
-            ('5TDKK3DC9BS182760', 532, 25, 70.0, '6IPZ437', '2013', 'Sentra', 'Nissan', 'Grey', 'Compact Car'),
+            ('1FTWW31P95EB34134', 600, 35, 150.0, '7KJV105', '2016', 'Camaro', 'Chevrolet', 'Red', 'Sedan'),
+            ('5TDKK3DC9BS182760', 532, 25, 70.0, '6IPZ437', '2013', 'Sentra', 'Nissan', 'Grey', 'Sedan'),
             ('JHLRE3H57AC023983', 234, 40, 80.0, '5YGW550', '2019', 'Sorento', 'Kia', 'Black', 'SUV'),
-            ('JTKDE167060163343', 124, 42, 160.0, '8CMH868', '2017', '911 Carrera 4 GTS', 'Porsche', 'White', 'Coupe'),
-            ('1GNUKKE34AR110094', 942, 50, 180.0, '2LHU996', '2019', 'R8', 'Audi', 'Grey', 'Sports Car')
+            ('JTKDE167060163343', 124, 42, 160.0, '8CMH868', '2017', '911 Carrera 4 GTS', 'Porsche', 'White', 'Sedan'),
+            ('1GNUKKE34AR110094', 942, 50, 180.0, '2LHU996', '2019', 'R8', 'Audi', 'Grey', 'Sedan')
     ]
   
     sql_insert_admin = "insert into Administrator (`User`, Email, `Password`) VALUES (%s, %s, %s)"
