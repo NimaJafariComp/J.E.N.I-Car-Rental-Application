@@ -5,6 +5,7 @@ from PyQt5.QtGui import *
 from ..config.font import font
 from .carTile import car_tile
 from .searchBar import search_bar
+from .test import searchCar
 
 
 class customer_window(QWidget):
@@ -49,6 +50,10 @@ class customer_window(QWidget):
         self.set_font = font()
         self.font = QFont(self.set_font.font_family, 16)
 
+        # setup carlist and tile list
+        self.list = []
+        self.carList = []
+
         self.setup_logo()
         self.setup_topframe()
         self.setup_bottomframe()
@@ -84,13 +89,13 @@ class customer_window(QWidget):
         self.bottom_layout.addWidget(self.tile_widget)
         self.bottom_layout.setCurrentIndex(0)
 
-
     def setup_tiles(self):
         self.tile_search = search_bar()
         self.scroll_area.setWidgetResizable(True)
         self.scroll_area.setWidget(self.tile_window)
         self.tile_layout.addWidget(self.tile_search, alignment=Qt.AlignCenter)
         self.tile_layout.addWidget(self.scroll_area)
+        self.tile_search.search_button.clicked.connect(self.click_research)
         self.scroll_area.setStyleSheet("""
             QScrollArea {
                 border: none;
@@ -139,12 +144,6 @@ class customer_window(QWidget):
                 background: none;
             }
         """)
-        self.list = []
-        
-        for i in range(9):
-            self.list.append(car_tile())
-            self.scroll_layout.addWidget(self.list[i], alignment=Qt.AlignCenter) 
-
  
     def setup_widget(self):
         self.customer_layout.setContentsMargins(0, 0, 0, 0)
@@ -155,6 +154,37 @@ class customer_window(QWidget):
 
     def click_search(self):
         self.bottom_layout.setCurrentIndex(1)
+        self.carList = searchCar()
+        
+        for i in range(len(self.carList)):
+            self.list.append(car_tile(self.carList[i]))
+            self.scroll_layout.addWidget(self.list[i], alignment=Qt.AlignCenter) 
+
+    def click_research(self):
+        self.bottom_layout.setCurrentIndex(1)
+        self.list.clear()
+        self.carList.clear()
+        self.carList = searchCar()
+        self.clear_layout(self.scroll_layout)
+        
+        for i in range(len(self.carList)-2):
+            self.list.append(car_tile(self.carList[i]))
+            self.scroll_layout.addWidget(self.list[i], alignment=Qt.AlignCenter) 
+ 
+    def clear_layout(self, layout):
+        """
+        Remove all widgets from a given layout.
+        """
+        while layout.count() > 0:
+            # Get the widget at index 0
+            item = layout.takeAt(0)
+
+            # If the item is a widget, delete it
+            if item.widget():
+                item.widget().deleteLater()
+
+
+
 
 if __name__ == "__main__":
     import sys

@@ -5,14 +5,14 @@ from PyQt5.QtGui import *
 from ..config.font import font
 
 class car_tile(QWidget): 
-    def __init__(self):
+    def __init__(self, car):
         super().__init__()
         # variables that need imput
-        self.price = 300
-        self.name = "Toyota Corolla"
-        self.mpg = 29
-        self.year = 2020
-        self.type = "sedan"
+        self.price = car[3]
+        self.name = car[6] + " " + car[5]
+        self.mpg = car[2]
+        self.year = car[4]
+        self.type = car[8]
         self.img_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "car_img/corolla.jpg")
 
         self.setFixedSize(600,200)
@@ -121,6 +121,7 @@ if __name__ == "__main__":
     from ..config.screenConfig import screen_config
     screen_config = screen_config()
     app = QApplication(sys.argv)
-    window = car_tile()
+    list = []
+    window = car_tile(list)
     window.show()
     sys.exit(app.exec_())
