@@ -3,14 +3,15 @@ from database.main_database import initialize_database
 
 def main():
     # Need username and password at the beginning
-    username = input("Enter username: ")
-    password = input("Enter password: ")
-    
+    username = 'admin'
+    password = 'jenipassword'
+    host = 'jeni.cfeouw8igyj4.us-west-1.rds.amazonaws.com' 
+    port = 3306
     # Needs to happen every single time, this is how the connection
     # to MySQL is initiated
     
-    initialize_database(username, password)
-    car_rental_obj = cr(username, password)
+    initialize_database(host, port, username, password)
+    car_rental_obj = cr(host, port, username, password)
     car_rental_obj.connect_to_mysql()
     
     """

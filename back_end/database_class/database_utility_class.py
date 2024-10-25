@@ -10,7 +10,7 @@ import mysql.connector
 # Description: initializes the connection to database, must be called
 #               in application startup. 
 """
-def initialize_connection(username: str, upassword: str) -> None:
+def initialize_connection(my_host: str, my_port: str, username: str, upassword: str) -> None:
     # username = input("Enter your MySQL Username: ")
     # upassword = input("Enter your MySQL Password: ")
 
@@ -18,9 +18,10 @@ def initialize_connection(username: str, upassword: str) -> None:
     # for other functions to use
     global mydb, mycursor
     mydb = mysql.connector.connect(
-        host = "localhost",
+        host = my_host,
         user = username,
         password = upassword,
+        port = my_port,
         database = "CARAPP"
     )
 

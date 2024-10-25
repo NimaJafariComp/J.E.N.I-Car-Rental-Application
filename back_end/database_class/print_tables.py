@@ -1,10 +1,11 @@
 import mysql.connector
 
-def print_tables(my_username, my_password):
+def print_tables(my_host, my_port, my_username, my_password):
     mydb = mysql.connector.connect(
-        host = "localhost",
+        host = my_host,
         user = my_username,
         password = my_password,
+        port = my_port,
         database = "carappproject"
     )
 

@@ -2,13 +2,15 @@ from .database_class import database_utility_class as dbu
 from .database_class.inventory_class import inventory as inv
 
 class CarRentalService:
-    def __init__(self, username, password):
+    def __init__(self, my_host, my_port, username, password):
         self.username = username
         self.password = password
+        self.host = my_host
+        self.port = my_port
         self.inv_obj = inv()
     
     def connect_to_mysql(self):
-        dbu.initialize_connection(self.username, self.password)
+        dbu.initialize_connection(self.host, self.port, self.username, self.password)
         self.inv_obj.initialize_inventory()
 
     def add_car(self, uVin: str, uMileage: int, uMPG: int, uPrice: float, uLicensePlate: str, 

@@ -6,9 +6,11 @@ class test:
     # Input: my_username, a string
     #        my_password, a string
     # Output: None
-    def __init__(self, my_username, my_password):
+    def __init__(self,my_host, my_port, my_username, my_password):
         self.username = my_username
         self.password = my_password
+        self.host = my_host
+        self.port = my_port
         self.mydb = None
     
     # Description: function to connect to MySQL
@@ -16,9 +18,10 @@ class test:
     # Output: None
     def connect_to_mysql(self):
         self.mydb = mysql.connector.connect(
-            host = "localhost",
+            host = self.host,
             user = self.username,
             password = self.password,
+            port = self.port,
             database = "carappproject"
         )
         
