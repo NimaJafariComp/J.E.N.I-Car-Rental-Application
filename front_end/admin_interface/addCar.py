@@ -8,7 +8,12 @@ class add_car(QWidget):
         super().__init__()
 
         #Main Layout for the Widget
-        #self.layout() = QVBoxLayout()
+        self.setFixedSize(500,400)
+        self.main_layout = QVBoxLayout()
+
+        # setup font
+        self.set_font = font()
+        self.font = QFont(self.set_font.font_family, 20)
 
         #From layout to handle car details
         self.form_layout = QFormLayout()
@@ -52,13 +57,16 @@ class add_car(QWidget):
         #Create a button to submit the new car
         self.add_button = QPushButton("Add Car")
         self.add_button.clicked.connect(self.add_car_to_inventory)
+        self.add_button.setFixedSize(150,50)
+        self.add_button.setFont(self.font)
+        self.add_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
 
         #Add the form and button to the main layout
-        self.layout.addLayout(self.form_layout)
-        self.layout.addWidget(self.add_button)
+        self.main_layout.addLayout(self.form_layout)
+        self.main_layout.addWidget(self.add_button, alignment=Qt.AlignCenter)
 
         #Set the layout for the widget
-        self.setLayout(self.layout)
+        self.setLayout(self.main_layout)
 
     def add_car_to_inventory(self):
         #Retrieve input date from fields
