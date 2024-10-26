@@ -3,17 +3,30 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from ..config.font import font
+from .rentWindow import rent_window
 
 class car_tile(QWidget): 
-    def __init__(self, car):
+    def __init__(self, car, window, num_days, start_date, end_date):
         super().__init__()
+        # knows customer window
+        self.customer_window = window
+        self.num_days = num_days
+        self.start_date = start_date
+        self.end_date = end_date
+
         # variables that need imput
+        self.car = []
+        self.car = car
         self.price = car[3]
         self.name = car[6] + " " + car[5]
         self.mpg = car[2]
         self.year = car[4]
         self.type = car[8]
         self.img_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "car_img/corolla.jpg")
+
+        # setup font
+        self.set_font = font()
+        self.font = QFont(self.set_font.font_family, 16)
 
         self.setFixedSize(600,200)
         self.car_tile_layout = QHBoxLayout(self)
@@ -35,7 +48,7 @@ class car_tile(QWidget):
         self.middle.setFixedSize(250, 200)
         self.middle.setStyleSheet("border : 1px solid lightgrey;")
         self.name_label = QLabel(self.name)
-        self.name_label.setStyleSheet("border: none; font-size: 20pt; font-weight: bold;")
+        self.name_label.setStyleSheet("border: none; font-size: 10pt; font-weight: bold;")
         self.year_label = QLabel("year: "+str(self.year))
         self.year_label.setStyleSheet("border: none;")
         self.mpg_label = QLabel("MPG: "+str(self.mpg))
@@ -50,6 +63,14 @@ class car_tile(QWidget):
     def right_setup(self):
         self.right.setFixedSize(150, 200)
         self.right.setStyleSheet("border : 1px solid lightgrey; border-bottom-right-radius: 15px; border-top-right-radius: 15px")
+        self.rent_button = QPushButton('Rent')
+        self.rent_button.setFont(self.font)
+        self.rent_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
+        self.price_label = QLabel("Price: "+str(self.price)+"/per day")
+        self.price_label.setStyleSheet("border: none;")
+        self.right_layout.addWidget(self.price_label)
+        self.right_layout.addWidget(self.rent_button)
+        self.rent_button.clicked.connect(self.rent_clicked)
 
     def tile_setup(self):
         self.car_tile_layout.setContentsMargins(0, 0, 0, 0)
@@ -57,6 +78,13 @@ class car_tile(QWidget):
         self.car_tile_layout.addWidget(self.img)
         self.car_tile_layout.addWidget(self.middle)
         self.car_tile_layout.addWidget(self.right)
+        
+    def rent_clicked(self):
+        self.rent_window = rent_window(self.customer_window, self.car, self.num_days, self.start_date, self.end_date)
+        self.customer_window.bottom_layout.removeWidget(self.customer_window.bottom_layout.widget(3)) 
+        self.customer_window.bottom_layout.insertWidget(3, self.rent_window)
+        self.customer_window.bottom_layout.setCurrentIndex(3)
+    
 
     def img_setup(self):
         # Set the size of the QLabel to match the QFrame
