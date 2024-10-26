@@ -68,6 +68,11 @@ class invoice_window(QWidget):
         self.form_layout.addRow(self.Car_Type )
         self.form_layout.addRow(self.check_insurance)
         self.form_layout.addRow(self.home_button)
+        self.home_button.clicked.connect(self.clicked_home)
+
+    def clicked_home(self):
+        self.customer_window.bottom_layout.setCurrentIndex(0)
+ 
 
     def setup_main(self):
         self.setup_form()

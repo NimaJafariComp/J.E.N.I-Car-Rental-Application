@@ -11,6 +11,6 @@ class api():
         # Needs to happen every single time, this is how the connection
         # to MySQL is initiated
         
-        initialize_database(self.host, self.port, self.username, self.password)
+        # initialize_database(self.host, self.port, self.username, self.password)
         self.car_rental_obj = cr(self.host, self.port, self.username, self.password)
         self.car_rental_obj.connect_to_mysql()

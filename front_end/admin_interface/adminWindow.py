@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from ..config.font import font
+from .selectionWindow import selection_window
 
 class admin_window(QWidget):
     def __init__(self):
@@ -50,16 +51,23 @@ class admin_window(QWidget):
         self.top_frame_layout.addStretch()
         self.top_frame_layout.addWidget(self.customer_button)
         
-    def setup_bottom(self):
+    def setup_button(self):
         self.customer_button.setFixedWidth(100)
         self.customer_button.setFixedHeight(40)
         self.customer_button.setFont(self.font)
         self.customer_button.setStyleSheet("color: white; background: #efbe25; border-radius: 5px;")
 
 
-    def setup_button(self):
+    def setup_bottom(self):
         self.bottom_frame.setFrameShape(QFrame.StyledPanel)
         self.bottom_frame.setFrameShadow(QFrame.Raised)
+        self.bottom_layout = QStackedLayout(self.bottom_frame)
+        self.selection = selection_window(self)
+        self.selection_frame = QFrame()
+        self.sframe_layout = QVBoxLayout(self.selection_frame)
+        self.sframe_layout.addWidget(self.selection, alignment=Qt.AlignCenter)
+        self.bottom_layout.addWidget(self.selection_frame)
+        self.bottom_layout.setCurrentIndex(0)
 
     def setup_widget(self):
         self.admin_layout.setContentsMargins(0, 0, 0, 0)
