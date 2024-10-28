@@ -106,7 +106,7 @@ def create_tables(my_host, my_port, my_username, my_password):
             ('Elijah Sagaran', '2000-10-2', 'elijahsagaran@gmail.com'),
             ('Johnny Aguilar', '2000-11-3', 'johnnyaguilar@gmail.com'),
             ('Irma Alicon', '2000-12-4', 'irmaalicon@gmail.com'),
-            ('Nima Jafari', '2000-9-1', 'nimajafari@gmail.com')
+            ('Nima Jafari', '2000-9-1', 'nima.jafari.614@my.csun.edu')
     ]
 
     sql_insert_reservations = "insert into Reservations (StartDate, EndDate, Insurance, CustomerID, Vehicle) values (%s, %s, %s, %s, %s)"

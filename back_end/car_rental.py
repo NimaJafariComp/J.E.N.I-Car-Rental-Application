@@ -1,5 +1,6 @@
 from .database_class import database_utility_class as dbu
 from .database_class.inventory_class import inventory as inv
+from .invoice_class.invoice_class import InvoiceSender
 
 class CarRentalService:
     def __init__(self, my_host, my_port, username, password):
@@ -46,3 +47,42 @@ class CarRentalService:
             return
             
         self.inv_obj.get_inventory()[index].add_reservation(start_date, end_date, insurance, customer_id, car_id)
+        
+        self.send_invoice(customer_id, car_id, start_date, insurance, end_date) #send invoice after reservation is done, so we dont have to search database for reservations and then send em
+
+    def send_invoice(self, customer_id: int, car_id: int, start_date: str, insurance: bool, end_date: str) -> None:
+        customer = dbu.get_customer_info(customer_id)
+        car = dbu.get_car_info(car_id)
+
+        if not customer or not car:
+            print("Error: Unable to fetch customer or vehicle information.")
+            return
+
+        
+        daily_price = car[4]
+        print(daily_price)
+        total_days = dbu.calculate_days(start_date, end_date)
+        total_price = daily_price * total_days
+
+        invoice_body = f"""
+        --- Car Rental Invoice ---
+        Customer: {customer['FullName']}
+        Email: {customer['Email']}
+        Car: {car[9]} {car[8]} ({car[7]})
+        Rental Period: from {start_date} 
+                       to {end_date} 
+                       ({total_days} days)
+        Daily Price: ${daily_price:.2f}
+        Total Price: ${total_price:.2f}
+        Insurance: {'Yes' if insurance else 'No'}
+        """
+
+        print(invoice_body)
+        
+        invoice_sender = InvoiceSender()
+
+        try:
+            invoice_sender.send_email(customer['Email'], "Your Car Rental Invoice", invoice_body)
+            print("Invoice sent successfully.")
+        except Exception as e:
+            print(f"Error sending invoice: {e}")

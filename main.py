@@ -1,5 +1,6 @@
 from back_end.car_rental import CarRentalService as cr
 from database.main_database import initialize_database
+from database.main_database import print_only
 
 def main():
     # Need username and password at the beginning
@@ -92,7 +93,9 @@ def main():
     #       Fifth: Car ID
     # Output: None
     """
-    car_rental_obj.make_reservation("2024-02-10", "2024-02-12", 1, 2, 7)
+    car_rental_obj.make_reservation("2024-02-10", "2024-02-12", 1, 4, 7)
+    
+    print_only(host, port, username, password)
     
     
 main()
