@@ -55,9 +55,9 @@ class car:
         
         self.reports.append(repr(report_object))
         
-    def add_reservation(self, start_date, end_date, insurance, customer_id, car_id):
-        rsvp_obj = rsvp(start_date, end_date, insurance, customer_id, car_id)
-        rsvp_obj.set_reservation_id(insert_reservation(start_date, end_date, insurance, customer_id, car_id))
+    def add_reservation(self, start_date, end_date, insurance, customer_email, car_id):
+        rsvp_obj = rsvp(start_date, end_date, insurance, customer_email, car_id)
+        rsvp_obj.set_reservation_id(insert_reservation(start_date, end_date, insurance, customer_email, car_id))
         
         self.reservations.append(repr(rsvp_obj))
         

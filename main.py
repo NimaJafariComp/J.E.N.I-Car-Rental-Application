@@ -89,13 +89,25 @@ def main():
     #       First: Start Date
     #       Second: End Date
     #       Third: Insurance, a boolean vaule. 0 or 1
-    #       Fourth: Customer ID, should be hardcoded for first Sprint.
+    #       Fourth: CustomerEmail
     #       Fifth: Car ID
     # Output: None
     """
-    car_rental_obj.make_reservation("2024-02-10", "2024-02-12", 1, 4, 7)
+    car_rental_obj.make_reservation("2024-02-10", "2024-02-12", 1, "elijah@somisomi.com", 7)
     
     print_only(host, port, username, password)
     
+    """
+    # Example of getting all reservations
+    # Input: None
+    # Output: List of Reservations
+    #   Index 1: Reservation Id
+    #   Index 2: Start Date
+    #   Index 3: End Date
+    #   Index 4: Insurance
+    #   Index 5: CustomerEmail
+    #   Index 6: Car ID
+    """
+    print(car_rental_obj.get_reservations())
     
 main()

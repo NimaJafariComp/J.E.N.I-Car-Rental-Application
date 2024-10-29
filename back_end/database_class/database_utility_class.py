@@ -369,10 +369,10 @@ def get_vins():
 
     return inventory 
 
-def insert_reservation(start_date: str, end_date: str, insurance: bool, customer_id: int, car_id: int) -> int:
-    sql_insert_reservation = "insert into Reservations (StartDate, EndDate, Insurance, CustomerID, Vehicle) \
+def insert_reservation(start_date: str, end_date: str, insurance: bool, customer_email: str, car_id: int) -> int:
+    sql_insert_reservation = "insert into Reservations (StartDate, EndDate, Insurance, CustomerEmail, Vehicle) \
                             values (%s, %s, %s, %s, %s)"
-    reservation_values = (start_date, end_date, insurance, customer_id, car_id)
+    reservation_values = (start_date, end_date, insurance, customer_email, car_id)
     
     mycursor.execute(sql_insert_reservation, reservation_values)
     mydb.commit()
@@ -444,3 +444,14 @@ def get_customer_info(customer_id: int) -> dict:
         return customer_info
     else:
         return None
+
+def get_reservations():
+    reservations = []
+    sql_select_reservations = "select * from Reservations"
+    mycursor.execute(sql_select_reservations)
+    
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        reservations.append(x)
+    
+    return reservations

@@ -1,77 +1,87 @@
 import database_utility_class as dbu
 
-dbu.initialize_connection("root", "Mililani3-")
+username = 'admin'
+password = 'jenipassword'
+host = 'jeni.cfeouw8igyj4.us-west-1.rds.amazonaws.com' 
+port = 3306
 
-dbu.add_car('4T1BF1FK3EU338253', 100, 50, 250.00, '7IVQ651', '1999', 'E-Class', 'Mercedes-Benz', 'Black', 'Sedan')
-print("Car Added")
+dbu.initialize_connection(host, port, username, password)
 
-car_id = dbu.get_car_id('4T1BF1FK3EU338253')
-print("Car ID: ", car_id)
+reservations = dbu.get_reservations()
 
-car_info = dbu.get_car_info(car_id)
-print("Car Info: ", car_info)
+for x in reservations:
+    print(x)
 
-dbu.change_mileage(1, 20000)
-print("Car 1's mileage updated to 20000")
+# dbu.add_car('4T1BF1FK3EU338253', 100, 50, 250.00, '7IVQ651', '1999', 'E-Class', 'Mercedes-Benz', 'Black', 'Sedan')
+# print("Car Added")
 
-inventory = dbu.get_inventory()
-print("Current Inventory:")
-for car in inventory:
-    print(car)
+# car_id = dbu.get_car_id('4T1BF1FK3EU338253')
+# print("Car ID: ", car_id)
 
-inventory = dbu.get_active_inventory()
-print("Active Inventory:")
-for car in inventory:
-    print(car)
+# car_info = dbu.get_car_info(car_id)
+# print("Car Info: ", car_info)
 
-dbu.deactivate_car(1)
-print("Car 1 deactivated")
+# dbu.change_mileage(1, 20000)
+# print("Car 1's mileage updated to 20000")
 
-report_id = dbu.insert_report("None", 10, 1, 2)
-print("Report Inserted with Report ID: ", report_id)
+# inventory = dbu.get_inventory()
+# print("Current Inventory:")
+# for car in inventory:
+    # print(car)
 
-reports = dbu.get_reports(1)
-print("Reports for Car 1")
-for report in reports:
-    print(report)
+# inventory = dbu.get_active_inventory()
+# print("Active Inventory:")
+# for car in inventory:
+    # print(car)
 
-# Original values: 1, '2024-01-19', '2024-02-19', 1, 1, 2
-dbu.update_reservation(1, '2020-01-01', '2020-02-01', 0, 2, 3)
-print("Reservation updated")
+# dbu.deactivate_car(1)
+# print("Car 1 deactivated")
 
-dbu.remove_reservation(6)
-print("Reservation 6 removed")
+# report_id = dbu.insert_report("None", 10, 1, 2)
+# print("Report Inserted with Report ID: ", report_id)
 
-# Original values: 1, 'Scratch on hood', 10, 1, 1s
-dbu.update_report(1, "None", 8, 2, 3)
-print("Reservation 1 updated")
+# reports = dbu.get_reports(1)
+# print("Reports for Car 1")
+# for report in reports:
+    # print(report)
 
-dbu.remove_report(6)
-print("Report 6 deleted")
+# # Original values: 1, '2024-01-19', '2024-02-19', 1, 1, 2
+# dbu.update_reservation(1, '2020-01-01', '2020-02-01', 0, 2, 3)
+# print("Reservation updated")
 
-dbu.update_customer(1, 'Abhishek Verma', '1999-01-01', 'verma@csun.edu')
-print("Customer 1 updated")
+# dbu.remove_reservation(6)
+# print("Reservation 6 removed")
 
-dbu.remove_customer(3)
-print("Customer 3 removed")
+# # Original values: 1, 'Scratch on hood', 10, 1, 1s
+# dbu.update_report(1, "None", 8, 2, 3)
+# print("Reservation 1 updated")
 
-search_inventory = dbu.search_database('2024-02-10', '2024-02-12', 'Sedan')
-print("Search Results:")
-for car in search_inventory:
-    print(car)
+# dbu.remove_report(6)
+# print("Report 6 deleted")
 
-vins = dbu.get_vins()
-print("VINs in Database:")
-for vin in vins:
-    print(vin)
+# dbu.update_customer(1, 'Abhishek Verma', '1999-01-01', 'verma@csun.edu')
+# print("Customer 1 updated")
 
-dbu.insert_reservation('2024-02-10', '2024-02-12', 1, 1, car_id)
-print("Reservation Made")
+# dbu.remove_customer(3)
+# print("Customer 3 removed")
 
-reports = dbu.get_reports(1)
-print("Reports for Car 1")
-for report in reports:
-    print(report)
+# search_inventory = dbu.search_database('2024-02-10', '2024-02-12', 'Sedan')
+# print("Search Results:")
+# for car in search_inventory:
+    # print(car)
+
+# vins = dbu.get_vins()
+# print("VINs in Database:")
+# for vin in vins:
+    # print(vin)
+
+# dbu.insert_reservation('2024-02-10', '2024-02-12', 1, 1, car_id)
+# print("Reservation Made")
+
+# reports = dbu.get_reports(1)
+# print("Reports for Car 1")
+# for report in reports:
+    # print(report)
 
 # dbu.add_car('1FTWW31P95EB34131', 600, 35, 150.00, '7KJV101', '2014', '200', 'Chrysler', 'Black', 'Sedan')
 # dbu.add_car('4T1BF1FK3EU338251', 100, 50, 250.00, '7IVQ653', '2011', 'Juke', 'Nissan', 'Red', 'Hatchback')

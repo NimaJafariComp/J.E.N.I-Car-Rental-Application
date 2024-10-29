@@ -4,7 +4,7 @@ import pyodbc
 # Instead of this class handling it
 
 """
-# Function: initialize_connectio(
+# Function: initialize_connectio(username, upassword)
 # Input: None
 # Output: None
 # Description: initializes the connection to database, must be called
@@ -22,7 +22,6 @@ def initialize_connection(username: str, upassword: str) -> None:
     db_name = "Jenni-Database"  # Ensure the name matches what you want to create
     port = 1433
     
-
     connection_string = (
         f'DRIVER={{ODBC Driver 17 for SQL Server}};'
         f'SERVER={rds_endpoint},{port};'
@@ -406,6 +405,16 @@ def get_reports(car_id):
         
     return reports
 
+def get_reservations():
+    reservations = []
+    sql_select_reservations = "select * from Reservations"
+    mycursor.execute(sql_select_reports)
+    
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        reservations.append(x)
+        
+    return reservations
 
 
 

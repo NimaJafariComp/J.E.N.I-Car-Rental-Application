@@ -1,9 +1,9 @@
 class reservation:
-    def __init__(self, start_date, end_date, insurance, customer_id, vehicle):
+    def __init__(self, start_date, end_date, insurance, customer_email, vehicle):
         self.start_date = start_date
         self.end_date = end_date
         self.insurance = insurance
-        self.customer_id = customer_id
+        self.customer_email = customer_email
         self.vehicle = vehicle
         self.reservation_id = None
 

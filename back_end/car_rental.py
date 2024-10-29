@@ -41,20 +41,20 @@ class CarRentalService:
         return dbu.search_database(uStartDate, uEndDate, uCarType)
         
         
-    def make_reservation(self, start_date, end_date, insurance, customer_id, car_id):
+    def make_reservation(self, start_date, end_date, insurance, customer_email, car_id):
         index = self.inv_obj.search_car(car_id)
         if index == -1:
             return
             
-        self.inv_obj.get_inventory()[index].add_reservation(start_date, end_date, insurance, customer_id, car_id)
+        self.inv_obj.get_inventory()[index].add_reservation(start_date, end_date, insurance, customer_email, car_id)
         
-        self.send_invoice(customer_id, car_id, start_date, insurance, end_date) #send invoice after reservation is done, so we dont have to search database for reservations and then send em
+        self.send_invoice(customer_email, car_id, start_date, insurance, end_date) #send invoice after reservation is done, so we dont have to search database for reservations and then send em
 
-    def send_invoice(self, customer_id: int, car_id: int, start_date: str, insurance: bool, end_date: str) -> None:
-        customer = dbu.get_customer_info(customer_id)
+    def send_invoice(self, customer_email: str, car_id: int, start_date: str, insurance: bool, end_date: str) -> None:
+        # customer = dbu.get_customer_info(customer_id)
         car = dbu.get_car_info(car_id)
 
-        if not customer or not car:
+        if not car: #not customer or not car:
             print("Error: Unable to fetch customer or vehicle information.")
             return
 
@@ -64,8 +64,8 @@ class CarRentalService:
 
         # Prepare dynamic data for the template
         dynamic_data = {
-            "customer_name": customer['FullName'],
-            "customer_email": customer['Email'],
+            # "customer_name": customer['FullName'],
+            "customer_email": customer_email,
             "car_model": car[9],
             "car_brand": car[8],
             "car_year": car[7],
@@ -80,7 +80,10 @@ class CarRentalService:
         invoice_sender = InvoiceSender()
 
         try:
-            invoice_sender.send_email(customer['Email'], "Your Car Rental Invoice", dynamic_data)
+            invoice_sender.send_email(customer_email, "Your Car Rental Invoice", dynamic_data)
             print("Invoice sent successfully.")
         except Exception as e:
             print(f"Error sending invoice: {e}")
+
+    def get_reservations(self):
+        return dbu.get_reservations()

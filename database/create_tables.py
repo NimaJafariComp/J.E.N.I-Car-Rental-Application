@@ -73,7 +73,8 @@ def create_tables(my_host, my_port, my_username, my_password):
                         "StartDate date not null," +
                         "EndDate date not null," +
                         "Insurance boolean not null," +
-                        "CustomerID int not null," +
+                        "CustomerID int," +
+                        "CustomerEmail varchar(255)," +
                         "Vehicle int not null," +
                         "constraint FK_CustomerReservation foreign key (CustomerID) references Customers(CustomerID)ON DELETE CASCADE," +
                         "constraint FK_VehicleReservation foreign key (Vehicle) references Vehicles(CarID)ON DELETE CASCADE)")
@@ -109,13 +110,13 @@ def create_tables(my_host, my_port, my_username, my_password):
             ('Nima Jafari', '2000-9-1', 'nima.jafari.614@my.csun.edu')
     ]
 
-    sql_insert_reservations = "insert into Reservations (StartDate, EndDate, Insurance, CustomerID, Vehicle) values (%s, %s, %s, %s, %s)"
+    sql_insert_reservations = "insert into Reservations (StartDate, EndDate, Insurance, CustomerID, CustomerEmail, Vehicle) values (%s, %s, %s, %s, %s, %s)"
     reservation_values = [
-            ('2024-01-19', '2024-02-19', 1, 1, 2),
-            ('2024-10-17', '2024-10-20', 0, 2, 2),
-            ('2024-12-09', '2024-12-29', 1, 1, 4),
-            ('2024-12-24', '2024-12-29', 1, 3, 5),
-            ('2024-12-28', '2024-12-30', 0, 4, 1)
+            ('2024-01-19', '2024-02-19', 1, 1, "elijah91011@gmail.com", 2),
+            ('2024-10-17', '2024-10-20', 0, 2, "elijah91011@gmail.com", 2),
+            ('2024-12-09', '2024-12-29', 1, 1, "elijah91011@gmail.com", 4),
+            ('2024-12-24', '2024-12-29', 1, 3, "elijah91011@gmail.com", 5),
+            ('2024-12-28', '2024-12-30', 0, 4, "elijah91011@gmail.com", 1)
     ]
 
     sql_insert_reports = "insert into Reports (Damages, GasAmount, Vehicle, ReservationID) values (%s, %s, %s, %s)"
