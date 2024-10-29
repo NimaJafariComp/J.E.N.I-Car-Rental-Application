@@ -58,31 +58,29 @@ class CarRentalService:
             print("Error: Unable to fetch customer or vehicle information.")
             return
 
-        
         daily_price = car[4]
-        print(daily_price)
         total_days = dbu.calculate_days(start_date, end_date)
         total_price = daily_price * total_days
 
-        invoice_body = f"""
-        --- Car Rental Invoice ---
-        Customer: {customer['FullName']}
-        Email: {customer['Email']}
-        Car: {car[9]} {car[8]} ({car[7]})
-        Rental Period: from {start_date} 
-                       to {end_date} 
-                       ({total_days} days)
-        Daily Price: ${daily_price:.2f}
-        Total Price: ${total_price:.2f}
-        Insurance: {'Yes' if insurance else 'No'}
-        """
+        # Prepare dynamic data for the template
+        dynamic_data = {
+            "customer_name": customer['FullName'],
+            "customer_email": customer['Email'],
+            "car_model": car[9],
+            "car_brand": car[8],
+            "car_year": car[7],
+            "daily_price": f"{daily_price:.2f}",
+            "start_date": start_date,
+            "end_date": end_date,
+            "total_days": total_days,
+            "total_price": f"{total_price:.2f}",
+            "insurance_status": "Yes" if insurance else "No"
+        }
 
-        print(invoice_body)
-        
         invoice_sender = InvoiceSender()
 
         try:
-            invoice_sender.send_email(customer['Email'], "Your Car Rental Invoice", invoice_body)
+            invoice_sender.send_email(customer['Email'], "Your Car Rental Invoice", dynamic_data)
             print("Invoice sent successfully.")
         except Exception as e:
             print(f"Error sending invoice: {e}")
