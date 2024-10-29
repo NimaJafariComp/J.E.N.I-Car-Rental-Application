@@ -3,6 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from ..config.font import font
 from .addCar import add_car
+from .transitionWindow import transition
 
 class selection_window(QWidget):
     def __init__(self, admin_window):
@@ -10,7 +11,7 @@ class selection_window(QWidget):
         # setup main window layout
         self.admin_window = admin_window
         self.main_layout = QGridLayout(self)
-        self.setFixedSize(1000,1000) 
+        self.setFixedSize(1920,1080) 
 
         # setup font
         self.set_font = font()
@@ -26,7 +27,7 @@ class selection_window(QWidget):
         self.add_button.setFont(self.font)
         self.add_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
         self.main_layout.addWidget(self.add_button, 0, 0)
-        self.add_button.clicked.connect(self.clicked_reservation)
+        self.add_button.clicked.connect(self.clicked_add)
 
         # delete button
         self.delete_button = QPushButton("Delete Car")
@@ -42,10 +43,11 @@ class selection_window(QWidget):
         self.reservations_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
         self.main_layout.addWidget(self.reservations_button, 0, 2)
 
-    def clicked_reservation(self):
+    def clicked_add(self):
         self.add_car = add_car()
-        self.admin_window.bottom_layout.removeWidget(self.customer_window.bottom_layout.widget(1)) 
-        self.admin_window.bottom_layout.insertWidget(1, self.add_car)
+        self.addcar_window = transition(self.admin_window, self.add_car)
+        self.admin_window.bottom_layout.removeWidget(self.admin_window.bottom_layout.widget(1)) 
+        self.admin_window.bottom_layout.insertWidget(1, self.addcar_window)
         self.admin_window.bottom_layout.setCurrentIndex(1)
  
  
