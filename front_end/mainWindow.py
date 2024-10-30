@@ -45,6 +45,7 @@ class main_window(QMainWindow):
     def on_click_admin(self):
         self.stacked_widget.setCurrentIndex(2)
         self.log_window.login_button.clicked.connect(self.switch_to_admin)
+        self.log_window.back_button.clicked.connect(self.login_back)
 
     def switch_to_admin(self):
         self.pw = "password"
@@ -54,6 +55,9 @@ class main_window(QMainWindow):
             self.log_window.pw_box.clear()
 
     def on_click_customer(self):
+        self.stacked_widget.setCurrentIndex(0)
+        
+    def login_back(self):
         self.stacked_widget.setCurrentIndex(0)
 
     # Method to center the window on the screen
