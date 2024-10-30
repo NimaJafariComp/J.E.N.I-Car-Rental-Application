@@ -87,3 +87,6 @@ class CarRentalService:
 
     def get_reservations(self):
         return dbu.get_reservations()
+
+    def get_inventory_admin(self):
+        return dbu.get_active_inventory()

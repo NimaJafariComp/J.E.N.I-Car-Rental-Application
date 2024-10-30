@@ -110,4 +110,23 @@ def main():
     """
     print(car_rental_obj.get_reservations())
     
+    """
+    # Example of getting all active cars for admins
+    # Input: None
+    # Output: List of lists. Each list is a car 
+    #   Index 1: Car ID
+    #   Index 2: VIN
+    #   Index 3: Mileage
+    #   Index 4: MPG
+    #   Index 5: Price
+    #   Index 6: IsActive (does not matter in your case)
+    #   Index 7: License Plate
+    #   Index 8: Car Year
+    #   Index 9: Car Model
+    #   Index 10: Car Make
+    #   Index 11: Car Color
+    #   Index 12: Car Type
+    """
+    print(car_rental_obj.get_inventory_admin())
+    
 main()
