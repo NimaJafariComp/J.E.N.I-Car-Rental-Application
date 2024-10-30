@@ -120,15 +120,15 @@ class customer_window(QWidget):
 
     def click_research(self):
         self.bottom_layout.setCurrentIndex(1)
-        start_date = self.search.date_range.start_date_edit.date()
-        end_date = self.search.date_range.end_date_edit.date()
+        start_date = self.tile_search.date_range.start_date_edit.date()
+        end_date = self.tile_search.date_range.end_date_edit.date()
         num_days = start_date.daysTo(end_date) 
         self.list.clear()
         self.carList.clear()
         self.carList = self.api.car_rental_obj.customer_search(start_date.toString('yyyy-MM-dd'), end_date.toString('yyyy-MM-dd'), self.tile_search.type_box.currentText())
         print(self.carList)
         print(self.tile_search.date_range.start_date_edit.date().toString('yyyy-MM-dd') + " " + self.tile_search.date_range.end_date_edit.date().toString('yyyy-MM-dd') + " " + self.tile_search.type_box.currentText())
-        self.clear_layout(self.scroll_layout)
+        self.clear_layout(self.scroll_area.scroll_frameLayout)
         
         for i in range(len(self.carList)):
             self.list.append(car_tile(self.carList[i], self, num_days, start_date, end_date))
