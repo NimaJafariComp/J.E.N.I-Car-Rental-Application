@@ -7,7 +7,7 @@ from .carTile import car_tile
 from .searchBar import search_bar
 from .test import searchCar
 from ..api import api
-from .carTileScroll import carTile_scroll
+from ..config.carTileScroll import carTile_scroll
 
 
 class customer_window(QWidget):
