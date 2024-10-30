@@ -7,6 +7,7 @@ from .carTile import car_tile
 from .searchBar import search_bar
 from .test import searchCar
 from ..api import api
+from .carTileScroll import carTile_scroll
 
 
 class customer_window(QWidget):
@@ -24,7 +25,7 @@ class customer_window(QWidget):
 
         #set up scrollable bottom frame
         self.bottom_frame = QFrame()
-        self.scroll_area = QScrollArea()
+        self.scroll_area = carTile_scroll()
 
         # setup tile layout
         self.tile_widget = QFrame()
@@ -95,60 +96,10 @@ class customer_window(QWidget):
 
     def setup_tiles(self):
         self.tile_search = search_bar()
-        self.scroll_area.setWidgetResizable(True)
-        self.scroll_area.setWidget(self.tile_window)
         self.tile_layout.addWidget(self.tile_search, alignment=Qt.AlignCenter)
         self.tile_layout.addWidget(self.scroll_area)
         self.tile_search.search_button.clicked.connect(self.click_research)
-        self.scroll_area.setStyleSheet("""
-            QScrollArea {
-                border: none;
-            }
-            QScrollBar:vertical {
-                border: none;
-                background: #f0f0f0;
-                width: 8px;
-                margin: 0px 0px 0px 0px;
-            }
-            QScrollBar::handle:vertical {
-                background-color: #bfbfbf;
-                min-height: 20px;
-                border-radius: 4px;
-            }
-            QScrollBar::handle:vertical:hover {
-                background-color: #999999;
-            }
-            QScrollBar::handle:vertical:pressed {
-                background-color: #787878;
-            }
-            QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
-                border: none;
-                background: none;
-            }
         
-            QScrollBar:horizontal {
-                border: none;
-                background: #f0f0f0;
-                height: 8px;
-                margin: 0px 0px 0px 0px;
-            }
-            QScrollBar::handle:horizontal {
-                background-color: #bfbfbf;
-                min-width: 20px;
-                border-radius: 4px;
-            }
-            QScrollBar::handle:horizontal:hover {
-                background-color: #999999;
-            }
-            QScrollBar::handle:horizontal:pressed {
-                background-color: #787878;
-            }
-            QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
-                border: none;
-                background: none;
-            }
-        """)
- 
     def setup_widget(self):
         self.customer_layout.setContentsMargins(0, 0, 0, 0)
         self.customer_layout.setSpacing(0)
@@ -165,7 +116,7 @@ class customer_window(QWidget):
         self.carList = self.api.car_rental_obj.customer_search(start_date.toString('yyyy-MM-dd'), end_date.toString('yyyy-MM-dd'), self.search.type_box.currentText())
         for i in range(len(self.carList)):
             self.list.append(car_tile(self.carList[i], self, num_days, start_date, end_date))
-            self.scroll_layout.addWidget(self.list[i], alignment=Qt.AlignCenter) 
+            self.scroll_area.scroll_frameLayout.addWidget(self.list[i], alignment=Qt.AlignCenter) 
 
     def click_research(self):
         self.bottom_layout.setCurrentIndex(1)
@@ -181,7 +132,7 @@ class customer_window(QWidget):
         
         for i in range(len(self.carList)):
             self.list.append(car_tile(self.carList[i], self, num_days, start_date, end_date))
-            self.scroll_layout.addWidget(self.list[i], alignment=Qt.AlignCenter) 
+            self.scroll_area.scroll_frameLayout.addWidget(self.list[i], alignment=Qt.AlignCenter) 
  
     def clear_layout(self, layout):
         """
