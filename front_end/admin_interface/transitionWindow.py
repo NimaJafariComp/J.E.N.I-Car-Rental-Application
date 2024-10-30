@@ -4,13 +4,14 @@ from PyQt5.QtGui import *
 from ..config.font import font
 
 class transition(QWidget):
-    def __init__(self, admin_window, central_widget):
+    def __init__(self, admin_window, central_widget, center):
         super().__init__()
 
         # Main Layout for the Widget
         self.main_layout = QVBoxLayout(self)
         self.admin_window = admin_window
         self.central_widget = central_widget
+        self.center = center
 
         # setup font
         self.set_font = font()
@@ -34,8 +35,13 @@ class transition(QWidget):
 
     def setup_central(self):
         self.central = QFrame()
+
+        self.central.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.central_layout = QVBoxLayout(self.central)
-        self.central_layout.addWidget(self.central_widget, alignment=Qt.AlignCenter)
+        if self.center == 1:
+            self.central_layout.addWidget(self.central_widget, alignment=Qt.AlignCenter)
+        else:
+            self.central_layout.addWidget(self.central_widget)
 
     def setup_main(self):
         self.main_layout.addWidget(self.central)

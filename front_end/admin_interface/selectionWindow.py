@@ -3,6 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from ..config.font import font
 from .addCar import add_car
+from .reservations import reservations
 from .transitionWindow import transition
 
 class selection_window(QWidget):
@@ -42,17 +43,21 @@ class selection_window(QWidget):
         self.reservations_button.setFont(self.font)
         self.reservations_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
         self.main_layout.addWidget(self.reservations_button, 0, 2)
+        self.reservations_button.clicked.connect(self.clicked_reservation)
 
     def clicked_add(self):
         self.add_car = add_car()
-        self.addcar_window = transition(self.admin_window, self.add_car)
+        self.addcar_window = transition(self.admin_window, self.add_car, 1)
         self.admin_window.bottom_layout.removeWidget(self.admin_window.bottom_layout.widget(1)) 
         self.admin_window.bottom_layout.insertWidget(1, self.addcar_window)
         self.admin_window.bottom_layout.setCurrentIndex(1)
- 
- 
 
-
+    def clicked_reservation(self):
+        self.reservation = reservations()
+        self.reservation_window = transition(self.admin_window, self.reservation, 0)
+        self.admin_window.bottom_layout.removeWidget(self.admin_window.bottom_layout.widget(2)) 
+        self.admin_window.bottom_layout.insertWidget(2, self.reservation_window)
+        self.admin_window.bottom_layout.setCurrentIndex(2)
 
 if __name__ == "__main__":
     import sys
