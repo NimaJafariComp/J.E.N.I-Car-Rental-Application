@@ -21,21 +21,20 @@ class reservations(QWidget):
         self.setup_table()
 
     def setup_table(self):
-        self.table.setRowCount(len(self.reservations))
+        self.table.setRowCount(len(self.reservations)+1)
         self.table.setColumnCount(6)
 
         # Set the column headers
-        self.table.setHorizontalHeaderLabels(['Reservation Id', 'Start Date', 'End Date', 'IDK', 'Insurance', 'CustomerEmail', 'Car ID'])
+        self.table.setHorizontalHeaderLabels(['Reservation Id', 'Start Date', 'End Date', 'Insurance', 'CustomerEmail', 'Car ID'])
         self.table.verticalHeader().setVisible(False)
 
         for row, (reservations, start, end, idk, insurance, customerEmail, carID) in enumerate(self.reservations):
             self.table.setItem(row, 0, QTableWidgetItem(str(reservations)))
             self.table.setItem(row, 1, QTableWidgetItem(str(start.strftime("%Y-%m-%d"))))
             self.table.setItem(row, 2, QTableWidgetItem(str(end.strftime("%Y-%m-%d"))))
-            self.table.setItem(row, 3, QTableWidgetItem(str(insurance)))
-            self.table.setItem(row, 4, QTableWidgetItem(str(idk)))
-            self.table.setItem(row, 5, QTableWidgetItem(customerEmail))
-            self.table.setItem(row, 6, QTableWidgetItem(str(carID)))
+            self.table.setItem(row, 3, QTableWidgetItem(str(idk)))
+            self.table.setItem(row, 4, QTableWidgetItem(customerEmail))
+            self.table.setItem(row, 5, QTableWidgetItem(str(carID)))
 
         self.main_layout.addWidget(self.table)
 
