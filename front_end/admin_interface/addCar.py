@@ -2,10 +2,13 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from ..config.font import font
+from ..api import api
 
 class add_car(QWidget):
     def __init__(self):
         super().__init__()
+        # setup api to backend
+        self.api = api()
 
         #Main Layout for the Widget
         self.setFixedSize(500,400)
@@ -28,7 +31,7 @@ class add_car(QWidget):
         self.model_input = QLineEdit()
         self.make_input = QLineEdit()
         self.color_input = QLineEdit()
-        self.car_type_input = QLineEdit()
+        self.car_type_input = QComboBox()
 
         #Add placeholders to guide user input
         self.vin_input.setPlaceholderText("VIN")
@@ -40,7 +43,7 @@ class add_car(QWidget):
         self.model_input.setPlaceholderText("Model")
         self.make_input.setPlaceholderText("Make")
         self.color_input.setPlaceholderText("Color")
-        self.car_type_input.setPlaceholderText("Car Type")
+        self.car_type_input.addItems(['Sedan', 'Truck', 'Coupe', 'SUV'])
 
         #Add rows of labels and input fields to the form layout
         self.form_layout.addRow("VIN:", self.vin_input)
@@ -75,18 +78,14 @@ class add_car(QWidget):
         mpg = int(self.mpg_input.text())
         price = float(self.price_input.text())
         license_plate = self.license_plate_input.text()
-        car_year = int(self.car_year_input.text())
+        car_year = self.car_year_input.text()
         model = self.model_input.text()
         make = self.make_input.text()
         color = self.color_input.text()
-        car_type = self.car_type_input.text()
+        car_type = self.car_type_input.currentText()
 
         #Create a new Car object using the input data
-        new_car = car(vin, mileage, mpg, price, license_plate, car_year, model, make, color, car_type)
-
-        #Log car details
-        print("New car added:")
-        print(new_car)
+        self.api.car_rental_obj.add_car(vin, mileage, mpg, price, license_plate, car_year, model, make, color, car_type)
 
         #Optionally, reset input fields after adding the car
         self.clear_input_fields()
