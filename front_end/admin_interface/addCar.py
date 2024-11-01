@@ -39,7 +39,7 @@ class add_car(QWidget):
         self.mpg_input.setPlaceholderText("MPG")
         self.price_input.setPlaceholderText("Price")
         self.license_plate_input.setPlaceholderText("License Plate")
-        self.car_type_input.setPlaceholderText("Car Year")
+        self.car_year_input.setPlaceholderText("Car Year")
         self.model_input.setPlaceholderText("Model")
         self.make_input.setPlaceholderText("Make")
         self.color_input.setPlaceholderText("Color")

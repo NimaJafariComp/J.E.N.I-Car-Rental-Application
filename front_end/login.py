@@ -32,7 +32,11 @@ class login(QWidget):
         self.pw_box = QLineEdit()
         
         # Login button
+        self.buttons = QFrame()
+        self.buttons_layout = QHBoxLayout(self.buttons)
         self.login_button = QPushButton("Login")
+        self.back_button = QPushButton("Back")
+        self.buttons.setStyleSheet("border: none;")
 
         # function calls
         self.setup_layout()
@@ -70,7 +74,7 @@ class login(QWidget):
         self.login_window_layout.addStretch()
         self.login_window_layout.addWidget(self.admin_label, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.pw_box, alignment=Qt.AlignCenter)
-        self.login_window_layout.addWidget(self.login_button, alignment=Qt.AlignCenter)
+        self.login_window_layout.addWidget(self.buttons, alignment=Qt.AlignCenter)
         self.login_window_layout.addStretch()
 
         # Add the login window to the main layout, centering it
@@ -95,13 +99,24 @@ class login(QWidget):
 
     def setup_login_button(self):
         self.login_button.setFont(self.font)
+        self.back_button.setFont(self.font)
         self.login_button.setFixedWidth(125)
         self.login_button.setFixedHeight(40)
+        self.back_button.setFixedWidth(125)
+        self.back_button.setFixedHeight(40)
         self.login_button.setStyleSheet(
             "background-color: #efbe25; color: white;"
             "border: none;"
             "border-radius : 5px;"
         )
+        self.back_button.setStyleSheet(
+            "background-color: #efbe25; color: white;"
+            "border: none;"
+            "border-radius : 5px;"
+        )
+        self.buttons_layout.addWidget(self.back_button)
+        self.buttons_layout.addWidget(self.login_button)
+
 
 if __name__ == "__main__":
     import sys

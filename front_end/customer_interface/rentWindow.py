@@ -4,6 +4,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from ..config.font import font
 from .invoiceWindow import invoice_window
+from ..api import api
     # Index 0: Car ID 
     # Index 1: Mileage
     # Index 2: MPG
@@ -16,6 +17,7 @@ from .invoiceWindow import invoice_window
 class rent_window(QWidget):
     def __init__(self, customer_window, car, num_days, start_date, end_date):
         super().__init__()
+        self.api = api()
         # setup main layout 
         self.customer_window = customer_window
         self.main_layout = QVBoxLayout(self)
@@ -44,6 +46,8 @@ class rent_window(QWidget):
         self.Car_Make  = QLabel("Car Make: " + str(self.car[6]))
         self.Car_Color = QLabel("Car Color: " + str(self.car[7]))
         self.Car_Type  = QLabel("Car Type: " + str(self.car[8]))
+        self.email = QLineEdit()
+        self.email.setPlaceholderText("Email")
         self.check_insurance = QCheckBox("Include Insurance")
         self.make_button = QPushButton("Make Reservation")
         self.make_button.setFixedSize(200,50)
@@ -59,6 +63,7 @@ class rent_window(QWidget):
         self.form_layout.addRow(self.Car_Make )
         self.form_layout.addRow(self.Car_Color)
         self.form_layout.addRow(self.Car_Type )
+        self.form_layout.addRow(self.email)
         self.form_layout.addRow(self.check_insurance)
         self.form_layout.addRow(self.make_button)
         self.make_button.clicked.connect(self.make_clicked)
@@ -72,6 +77,7 @@ class rent_window(QWidget):
         self.customer_window.bottom_layout.removeWidget(self.customer_window.bottom_layout.widget(4)) 
         self.customer_window.bottom_layout.insertWidget(4, self.rent_window)
         self.customer_window.bottom_layout.setCurrentIndex(4)
+        self.api.car_rental_obj.make_reservation(self.start_date.toString('yyyy-MM-dd'), self.end_date.toString('yyyy-MM-dd'), self.check_insurance.isChecked(), self.email.text(), self.car[0])
  
 if __name__ == "__main__":
     import sys
