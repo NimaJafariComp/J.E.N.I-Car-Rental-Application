@@ -3,44 +3,87 @@ from .database_class.inventory_class import inventory as inv
 from .invoice_class.invoice_class import InvoiceSender
 
 class CarRentalService:
+    
+    """
+    Function: Class Object Initialization
+    Input: 
+        my_host, string
+        my_port, string
+        username, string
+        password, string
+    """
     def __init__(self, my_host, my_port, username, password):
         self.username = username
         self.password = password
         self.host = my_host
         self.port = my_port
         self.inv_obj = inv()
-    
+
+    """
+    Function: connect_to_mysql()
+    Input: None
+    Output: None
+    Description: initializes the connection to database for 
+                future queries
+    """
     def connect_to_mysql(self):
         dbu.initialize_connection(self.host, self.port, self.username, self.password)
         self.inv_obj.initialize_inventory()
 
-    def add_car(self, uVin: str, uMileage: int, uMPG: int, uPrice: float, uLicensePlate: str, 
-                uCarYear: str, uModel: str, uMake: str, uColor: str , uCarType: str) -> None:
-        self.inv_obj.add_car(uVin, uMileage, uMPG, uPrice, uLicensePlate, uCarYear, uModel, uMake, uColor, uCarType)
+    """
+    Function: add_car(vin, mileage, mpg, price, license_plate, car_year, model, make, color, car_type)
+    Description: calls the function of inventory class to add car to current inventory
+    """
+    def add_car(self, vin: str, mileage: int, mpg: int, price: float, license_plate: str, 
+                car_year: str, model: str, make: str, color: str , car_type: str) -> None:
+        self.inv_obj.add_car(vin, mileage, mpg, price, license_plate, car_year, model, make, color, car_type)
 
+    """
+    Function: delete_multiple_cars(car_ids)
+    Description: basically a loop function for delete_car function 
+    to be able to delete multiple cars
+    """
     def delete_multiple_cars(self, car_ids: list[int]) -> None:
         for car_id in car_ids:
             self.delete_car(car_id)
 
-    def delete_car(self, uCarID: int) -> None:
-        index = self.inv_obj.search_car(uCarID)
+    """
+    Function: delete_car(car_id)
+    Description: calls retire_car from car class to deactive the car
+    """
+    def delete_car(self, car_id: int) -> None:
+        index = self.inv_obj.search_car(car_id)
+        
+        # Error Check: Is car_id a valid id
         if index == -1:
             return
+            
+        # call to car class' retire_car() method
         self.inv_obj.get_car_from_inventory(index).retire_car()
 
-    def add_report(self, uCarID: int, uDamages: str, uGasAmount: int,
-                    uReservationID: int):
-        index = self.inv_obj.search_car(uCarID)
+    """
+    Function: add_report(car_id, damages, gas_amount, reservation_id)
+    Description: calls add_report from car class to assign a report to a car
+    """
+    def add_report(self, car_id: int, damages: str, gas_amount: int,
+                    reservation_id: int):
+        index = self.inv_obj.search_car(car_id)
+        
+        # Error Check: Is car_id a valid id 
         if index == -1:
             return
         
-        self.inv_obj.get_inventory()[index].add_report(uDamages, uGasAmount, uCarID, uReservationID)
+        # call to car class add_report() method
+        self.inv_obj.get_inventory()[index].add_report(damages, gas_amount, car_id, reservation_id)
 
-    def customer_search(self, uStartDate: str, uEndDate: str, uCarType: str) -> list[tuple]:
-        # self.inv_obj.initialize_search_inventory(uStartDate, uEndDate, uCarType)
-        return dbu.search_database(uStartDate, uEndDate, uCarType)
-        
-        
+    """
+    Function: customer_search(start_date, end_date, car_type)
+    Description: calls the search_database() method from database utility class
+    """
+    def customer_search(self, start_date: str, end_date: str, car_type: str) -> list[tuple]:
+        # self.inv_obj.initialize_search_inventory(start_date, end_date, car_type)
+        return dbu.search_database(start_date, end_date, car_type)
+
     def make_reservation(self, start_date, end_date, insurance, customer_email, car_id):
         index = self.inv_obj.search_car(car_id)
         if index == -1:
