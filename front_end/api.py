@@ -6,8 +6,8 @@ class api():
         # Need username and password at the beginning
         self.username = 'admin'
         self.password = 'jenipassword'
-        self.host = 'jeni.cfeouw8igyj4.us-west-1.rds.amazonaws.com' 
-        self.port = 3306
+        self.host = '127.0.0.1' 
+        self.port = 3307
         # Needs to happen every single time, this is how the connection
         # to MySQL is initiated
         
