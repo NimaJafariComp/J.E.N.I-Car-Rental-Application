@@ -49,10 +49,7 @@ class rent_window(QWidget):
         self.email = QLineEdit()
         self.email.setPlaceholderText("Email")
         self.check_insurance = QCheckBox("Include Insurance")
-        self.make_button = QPushButton("Make Reservation")
-        self.make_button.setFixedSize(200,50)
-        self.make_button.setFont(self.font)
-        self.make_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
+        self.button_frame()
         self.form_layout.addRow(self.start)
         self.form_layout.addRow(self.end)
         self.form_layout.addRow(self.Mileage)
@@ -65,8 +62,27 @@ class rent_window(QWidget):
         self.form_layout.addRow(self.Car_Type )
         self.form_layout.addRow(self.email)
         self.form_layout.addRow(self.check_insurance)
-        self.form_layout.addRow(self.make_button)
+        self.form_layout.addRow(self.button_Qframe)
         self.make_button.clicked.connect(self.make_clicked)
+        self.back_button.clicked.connect(self.back_clicked)
+    
+
+    def button_frame(self):
+        self.button_Qframe = QFrame();
+        self.button_layout = QHBoxLayout(self.button_Qframe)
+        self.back_button = QPushButton("Back")
+        self.back_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
+        self.back_button.setFont(self.font)
+        self.back_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
+        self.back_button.setFixedSize(200,50)
+
+        self.make_button = QPushButton("Make Reservation")
+        self.make_button.setFixedSize(200,50)
+        self.make_button.setFont(self.font)
+        self.make_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
+        self.button_layout.addWidget(self.back_button, alignment=Qt.AlignCenter)
+        self.button_layout.addWidget(self.make_button, alignment=Qt.AlignCenter)
+
 
     def setup_main(self):
         self.setup_form()
@@ -78,6 +94,10 @@ class rent_window(QWidget):
         self.customer_window.bottom_layout.insertWidget(4, self.rent_window)
         self.customer_window.bottom_layout.setCurrentIndex(4)
         self.api.car_rental_obj.make_reservation(self.start_date.toString('yyyy-MM-dd'), self.end_date.toString('yyyy-MM-dd'), self.check_insurance.isChecked(), self.email.text(), self.car[0])
+
+    def back_clicked(self):
+        self.customer_window.bottom_layout.setCurrentIndex(1)
+
  
 if __name__ == "__main__":
     import sys

@@ -52,6 +52,7 @@ class main_window(QMainWindow):
         self.entered_pw = self.log_window.pw_box.text()
         if self.pw == self.entered_pw: 
             self.stacked_widget.setCurrentIndex(1)
+            self.a_window.bottom_layout.setCurrentIndex(0)
             self.log_window.pw_box.clear()
 
     def on_click_customer(self):

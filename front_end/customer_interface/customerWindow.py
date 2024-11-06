@@ -112,6 +112,8 @@ class customer_window(QWidget):
         start_date = self.search.date_range.start_date_edit.date()
         end_date = self.search.date_range.end_date_edit.date()
         num_days = start_date.daysTo(end_date) 
+        self.list.clear()
+        self.carList.clear()
         print(self.search.date_range.start_date_edit.date().toString('yyyy-MM-dd') + " " + self.search.date_range.end_date_edit.date().toString('yyyy-MM-dd') + " " + self.search.type_box.currentText())
         self.carList = self.api.car_rental_obj.customer_search(start_date.toString('yyyy-MM-dd'), end_date.toString('yyyy-MM-dd'), self.search.type_box.currentText())
         for i in range(len(self.carList)):
