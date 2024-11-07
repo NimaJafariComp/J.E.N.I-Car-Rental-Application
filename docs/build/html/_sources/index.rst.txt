@@ -10,9 +10,11 @@ Welcome to J.E.N.I Car Rental App's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-invoice_class
-
-report_class
+   back_end
+   database_class
+   modules
+   report_class
+   invoice_class
 
 Indices and tables
 ==================
