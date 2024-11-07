@@ -2,6 +2,10 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath(r"C:\Users\nimam\J.E.N.I-Car-Rental-Application\back_end\invoice_class"))
 sys.path.insert(0, os.path.abspath(r"C:\Users\nimam\J.E.N.I-Car-Rental-Application\back_end\report_class"))
+sys.path.insert(0, os.path.abspath(r"C:\Users\nimam\J.E.N.I-Car-Rental-Application\back_end"))
+sys.path.insert(0, os.path.abspath(r"C:\Users\nimam\J.E.N.I-Car-Rental-Application\back_end\database_class"))
+sys.path.insert(0, os.path.abspath('../../'))
+
 
 
 # Configuration file for the Sphinx documentation builder.
@@ -22,7 +26,10 @@ author = 'Nima Jafari'
 extensions = ['sphinx.ext.autodoc']
 
 templates_path = ['_templates']
-exclude_patterns = []
+exclude_patterns = ['back_end\backend_test.py']
+
+suppress_warnings = ['autodoc.importer', 'autodoc']
+
 
 
 
