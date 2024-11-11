@@ -1,6 +1,6 @@
-# from .database_class import database_utility_class as dbu
-# from .database_class.inventory_class import inventory as inv
-# from .invoice_class.invoice_class import InvoiceSender
+from .database_class import database_utility_class as dbu
+from .database_class.inventory_class import inventory as inv
+from .invoice_class.invoice_class import InvoiceSender
 
 class CarRentalService:
     
@@ -113,6 +113,9 @@ class CarRentalService:
         -------
         None
         
+        Exception
+        ---------
+        Does nothing if the car_id passed is not valid
         """
         index = self.inv_obj.search_car(car_id)
         
@@ -143,6 +146,10 @@ class CarRentalService:
         -------
         None
         
+        Exception
+        ---------
+        Does nothing if the car_id passed is not valid
+        
         """
         index = self.inv_obj.search_car(car_id)
         
@@ -152,6 +159,8 @@ class CarRentalService:
         
         # call to car class add_report() method
         self.inv_obj.get_inventory()[index].add_report(damages, gas_amount, car_id, reservation_id)
+        
+        # need to call the update_mileage in this function? could be called in the add_report function in car class too
 
     def customer_search(self, start_date: str, end_date: str, car_type: str) -> list[tuple]:
         """
@@ -175,15 +184,30 @@ class CarRentalService:
         # self.inv_obj.initialize_search_inventory(start_date, end_date, car_type)
         return dbu.search_database(start_date, end_date, car_type)
 
-    def make_reservation(self, start_date, end_date, insurance, customer_email, car_id):
+    def make_reservation(self, start_date: str, end_date: str, insurance: int, customer_email: str, car_id: int) -> None:
         """
-        Description
+        Calls add_reservation from car class to assign a reservation to a car
         
         Parameters
         ----------
+        start_date: str
+            The start date of the reservation
+        end_date: str
+            The end date of the reservation
+        insurance: int
+            Values 0 or 1, boolean value. Indicates if customer wants to include insurance
+        customer_email: str
+            Email of the customer for the invoice/confirmation email
+        car_id: int
+            The car ID of the desired car
         
         Returns
         -------
+        None
+        
+        Exception
+        ---------
+        Does nothing if the car_id passed is not valid
         
         """
         index = self.inv_obj.search_car(car_id)
@@ -195,6 +219,31 @@ class CarRentalService:
         self.send_invoice(customer_email, car_id, start_date, insurance, end_date) #send invoice after reservation is done, so we dont have to search database for reservations and then send em
 
     def send_invoice(self, customer_email: str, car_id: int, start_date: str, insurance: bool, end_date: str) -> None:
+        """
+        Sends the invoice to customer's email after they reserve a car
+
+        Parameters
+        ----------
+        customer_email: str
+            Email of the customer that will receive the invoice/confirmation
+        car_id: int
+            Car ID of the vehicle that is being reserved
+        start_date: str
+            The start date of the reservation
+        insurance: bool
+            Indicates if customer wants to include insurance for the reservation
+        end_date: str
+            The end date of the reservation
+        
+        Returns
+        -------
+        None
+
+        Exception
+        ---------
+        Invoice cannot be sent to the customer
+        """
+        
         # customer = dbu.get_customer_info(customer_id)
         car = dbu.get_car_info(car_id)
 
@@ -229,8 +278,34 @@ class CarRentalService:
         except Exception as e:
             print(f"Error sending invoice: {e}")
 
-    def get_reservations(self):
+    def get_reservations(self) -> list[tuple]:
+        """
+        Gets all the reservation that is in the database
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        list[tuple]
+            Each tuple in the list contains all the information about the reservation
+
+        """
         return dbu.get_reservations()
 
-    def get_inventory_admin(self):
+    def get_inventory_admin(self) -> list[tuple]:
+        """
+        Gets all the active vehicle in the database 
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        list[tuple]
+            Each tuple in the list contains all the information about the car
+
+        """
         return dbu.get_active_inventory()

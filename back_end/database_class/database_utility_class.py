@@ -4,19 +4,27 @@ from datetime import datetime
 # Error Checks might be better handled by the calling class
 # Instead of this class handling it
 
-"""
-# Function: initialize_connectio(
-# Input: None
-# Output: None
-# Description: initializes the connection to database, must be called
-#               in application startup. 
-"""
 def initialize_connection(my_host: str, my_port: str, username: str, upassword: str) -> None:
-    # username = input("Enter your MySQL Username: ")
-    # upassword = input("Enter your MySQL Password: ")
+	"""
+	Initializes the connetion to database, must be called in application startup
 
-    # Creates global variables mydb and mycursor
-    # for other functions to use
+	Parameters
+	----------
+    my_host: str
+        The hosting server for the AWS database
+    my_port: int
+        Port being used to connect MySQL and AWS
+    username: str
+        AWS Account username
+    password: str
+        AWS Account password    
+
+	Returns
+	-------
+    None
+
+	"""
+
     global mydb, mycursor
     mydb = mysql.connector.connect(
         host = my_host,
@@ -28,34 +36,62 @@ def initialize_connection(my_host: str, my_port: str, username: str, upassword: 
 
     mycursor = mydb.cursor()
 
-"""
-# Description: function to add a singular car to MySQL.
-#               prints out the CarID number assigned to it by MySQL     
-# Input: vin, a string - Car's VIN number
-#        mileage, an integer - Car's Mileage
-#        mpg, an integer - Car's miles/gallon
-#        price, a decimal/float - Car's price per day
-#        uIsActive, 0 or 1 - If car is retired or not
-#        license_plate, a string - Car's license plate
-# Output: None
-"""
 def add_car(vin: str, mileage: int, mpg: int, price: float, license_plate: str,
             car_year: str, car_model: str, car_make: str, car_color: str, car_type: str)-> None:
+	"""
+    Function to add a singular car to database
+
+    Parameters
+    ----------
+    vin: str
+        The unique VIN number of the vehicle to be added.
+    mileage: int
+        The current mileage of the car.
+    mpg: int
+        The current miles per gallon of the car.
+    price: double
+        The price that is assigned for the car. Unit is $/day.
+    license_plate: str
+        The unique license plate of the vehicle to be added 
+    car_year: str
+        The year of the model of the vehicle
+    car_model: str
+        The model of the car. i.e. Corolla, Civic, and Prius
+    car_make: str
+        The brand of the car. i.e. Toyota and Honda 
+    car_color: str
+        The color of the car. i.e. Red, Blue, and Yellow
+    car_type: str
+        The classification of the car. i.e. Sedan, SUV, and Truck
+    
+    Returns
+    -------
+    None
+	"""
+
     sql_insert_vehicle = "insert into Vehicles (VIN, Mileage, MPG, Price, LicensePlate, CarYear, Model, Make, Color, CarType) \
                             values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     vehicle_value = (vin, mileage, mpg, price, license_plate, car_year, car_model, car_make, car_color, car_type)
     
     mycursor.execute(sql_insert_vehicle, vehicle_value)
     mydb.commit()
-    
-    """ do error checks in the inventory_class itself? """
 
-"""
-# Description: function to get assigned CarID number by MySQL
-# Input: vin, a string - Car's VIN
-# Output: carID, an integer
-"""
+
 def get_car_id(vin: str) -> int:
+	"""
+	Function to get assigned CarID number by database
+
+	Parameters
+	----------
+    vin: str
+        The unique VIN number of the vehicle
+
+	Returns
+	-------
+    int
+        The car ID assigned by the database
+
+	"""
     select_prompt = "select CarID from Vehicles where VIN = %s"
     mycursor.execute(select_prompt, [vin])
     result = mycursor.fetchone()
@@ -73,6 +109,18 @@ def get_car_id(vin: str) -> int:
 #           CarID, VIN, Mileage, MPG, Price, IsActive, LicensePlate    
 """
 def get_car_info(car_id: int) -> tuple:
+    """
+    Function to get a car's information from database through car ID
+    
+	Parameters
+	----------
+    car_id: int
+        The 
+
+	Returns
+	-------
+
+	"""
     select_prompt = "select * from Vehicles where CarID = %s"
     mycursor.execute(select_prompt, [car_id])
     result = mycursor.fetchone()
