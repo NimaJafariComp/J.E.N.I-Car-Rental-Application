@@ -5,11 +5,12 @@ from datetime import datetime
 # Instead of this class handling it
 
 def initialize_connection(my_host: str, my_port: str, username: str, upassword: str) -> None:
-	"""
-	Initializes the connetion to database, must be called in application startup
-
-	Parameters
-	----------
+    
+    """
+    Initializes the connetion to database, must be called in application startup
+    
+    Parameters
+    ----------
     my_host: str
         The hosting server for the AWS database
     my_port: int
@@ -18,13 +19,12 @@ def initialize_connection(my_host: str, my_port: str, username: str, upassword: 
         AWS Account username
     password: str
         AWS Account password    
-
-	Returns
-	-------
+    
+    Returns
+    -------
     None
-
-	"""
-
+    
+    """
     global mydb, mycursor
     mydb = mysql.connector.connect(
         host = my_host,
@@ -33,14 +33,18 @@ def initialize_connection(my_host: str, my_port: str, username: str, upassword: 
         port = my_port,
         database = "CARAPP"
     )
-
+    
     mycursor = mydb.cursor()
 
-def add_car(vin: str, mileage: int, mpg: int, price: float, license_plate: str,
-            car_year: str, car_model: str, car_make: str, car_color: str, car_type: str)-> None:
-	"""
-    Function to add a singular car to database
 
+def add_car(vin: str, mileage: int, mpg: int, price: float, license_plate: str, car_year: str, car_model: str, car_make: str, car_color: str, car_type: str)-> None:
+    sql_insert_vehicle = "insert into Vehicles (VIN, Mileage, MPG, Price, LicensePlate, CarYear, Model, Make, Color, CarType) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    vehicle_value = (vin, mileage, mpg, price, license_plate, car_year, car_model, car_make, car_color, car_type)
+    mycursor.execute(sql_insert_vehicle, vehicle_value)
+    mydb.commit()
+    """
+    Function to add a singular car to database
+    
     Parameters
     ----------
     vin: str
@@ -67,31 +71,10 @@ def add_car(vin: str, mileage: int, mpg: int, price: float, license_plate: str,
     Returns
     -------
     None
-	"""
-
-    sql_insert_vehicle = "insert into Vehicles (VIN, Mileage, MPG, Price, LicensePlate, CarYear, Model, Make, Color, CarType) \
-                            values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    vehicle_value = (vin, mileage, mpg, price, license_plate, car_year, car_model, car_make, car_color, car_type)
-    
-    mycursor.execute(sql_insert_vehicle, vehicle_value)
-    mydb.commit()
+    """
 
 
 def get_car_id(vin: str) -> int:
-	"""
-	Function to get assigned CarID number by database
-
-	Parameters
-	----------
-    vin: str
-        The unique VIN number of the vehicle
-
-	Returns
-	-------
-    int
-        The car ID assigned by the database
-
-	"""
     select_prompt = "select CarID from Vehicles where VIN = %s"
     mycursor.execute(select_prompt, [vin])
     result = mycursor.fetchone()
@@ -100,6 +83,20 @@ def get_car_id(vin: str) -> int:
         return result[0]
     else:
         return None
+    """
+    Function to get assigned CarID number by database
+    
+    Parameters
+    ----------
+    vin: str
+        The unique VIN number of the vehicle
+    
+    Returns
+    -------
+    int
+        The car ID assigned by the database
+    
+    """
 
 """
 # might not be needed???
@@ -112,15 +109,14 @@ def get_car_info(car_id: int) -> tuple:
     """
     Function to get a car's information from database through car ID
     
-	Parameters
-	----------
+    Parameters
+    ----------
     car_id: int
-        The 
-
-	Returns
-	-------
-
-	"""
+        The car ID of the car
+    
+    Returns
+    -------
+    """
     select_prompt = "select * from Vehicles where CarID = %s"
     mycursor.execute(select_prompt, [car_id])
     result = mycursor.fetchone()
@@ -443,7 +439,6 @@ def get_reports(car_id):
         
     return reports
 
-
 def calculate_days(start_date: str, end_date: str) -> int:
     
     """
@@ -473,9 +468,7 @@ def calculate_days(start_date: str, end_date: str) -> int:
     except ValueError as e:
         print(f"Invalid date format: {e}")
         return -1
-    
-    
-    
+
 def get_customer_info(customer_id: int) -> dict:
     select_prompt = "SELECT CustomerID, FullName, DOB, Email FROM Customers WHERE CustomerID = %s"
     mycursor.execute(select_prompt, (customer_id,))
@@ -503,3 +496,15 @@ def get_reservations():
         reservations.append(x)
     
     return reservations
+
+
+def get_hashed_password(login_id: int, person_type: str) -> str:
+    if(person_type.lower() == "customer"):
+        sql_select_password = "select Password from Customers where CustomerID = %s"
+    elif(person_type.lower() == "admin"):
+        sql_select_password = "select Password from Administrator where AdminID = %s"
+    
+    mycursor.execute(sql_select_password, [login_id])
+    result = mycursor.fetchone()
+    
+    return result

@@ -221,7 +221,7 @@ class CarRentalService:
     def send_invoice(self, customer_email: str, car_id: int, start_date: str, insurance: bool, end_date: str) -> None:
         """
         Sends the invoice to customer's email after they reserve a car
-
+        
         Parameters
         ----------
         customer_email: str
@@ -238,7 +238,7 @@ class CarRentalService:
         Returns
         -------
         None
-
+        
         Exception
         ---------
         Invoice cannot be sent to the customer
@@ -246,15 +246,15 @@ class CarRentalService:
         
         # customer = dbu.get_customer_info(customer_id)
         car = dbu.get_car_info(car_id)
-
+        
         if not car: #not customer or not car:
             print("Error: Unable to fetch customer or vehicle information.")
             return
-
+            
         daily_price = car[4]
         total_days = dbu.calculate_days(start_date, end_date)
         total_price = daily_price * total_days
-
+        
         # Prepare dynamic data for the template
         dynamic_data = {
             # "customer_name": customer['FullName'],
@@ -269,9 +269,9 @@ class CarRentalService:
             "total_price": f"{total_price:.2f}",
             "insurance_status": "Yes" if insurance else "No"
         }
-
+        
         invoice_sender = InvoiceSender()
-
+        
         try:
             invoice_sender.send_email(customer_email, "Your Car Rental Invoice", dynamic_data)
             print("Invoice sent successfully.")
@@ -281,31 +281,31 @@ class CarRentalService:
     def get_reservations(self) -> list[tuple]:
         """
         Gets all the reservation that is in the database
-
+        
         Parameters
         ----------
         None
-
+        
         Returns
         -------
         list[tuple]
             Each tuple in the list contains all the information about the reservation
-
+        
         """
         return dbu.get_reservations()
 
     def get_inventory_admin(self) -> list[tuple]:
         """
         Gets all the active vehicle in the database 
-
+        
         Parameters
         ----------
         None
-
+        
         Returns
         -------
         list[tuple]
             Each tuple in the list contains all the information about the car
-
+        
         """
         return dbu.get_active_inventory()

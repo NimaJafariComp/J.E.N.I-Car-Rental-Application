@@ -34,35 +34,35 @@ class car:
         """
         Initializes car object wit the passed parameters
         """
-        self.vin = uVin
-        self.mileage = uMileage
-        self.mpg = uMPG
-        self.price = uPrice
-        self.license_plate = uLicensePlate
-        self.car_year = uCarYear
-        self.model = uModel
-        self.make = uMake
-        self.color = uColor
-        self.car_type = uCarType
+        self.vin = vin
+        self.mileage = mileage
+        self.mpg = mpg
+        self.price = price
+        self.license_plate = license_plate
+        self.car_year = car_year
+        self.model = model
+        self.make = make
+        self.color = color
+        self.car_type = car_type
         self.reports = []
         self.reservations = []
         self.car_id = None
-        
+
 
     def __repr__(self) -> str:
-		"""
-		repr Dunder method for Car object 
-
-		Parameters
-		----------
+        """
+        repr Dunder method for Car object 
+        
+        Parameters
+        ----------
         None
-
-		Returns
-		-------
+        
+        Returns
+        -------
         str
             Formatted string for printing attributes of car object
-
-		"""
+        
+        """
         return 'Car Info:\n \
                 Car ID: {} \n \
                 VIN: {} \n \
@@ -78,63 +78,63 @@ class car:
                 Reports: {}'.format(self.car_id, self.vin, self.mileage, self.mpg, self.price,
                 self.license_plate, self.car_year, self.make, self.model, self.color, 
                 self.car_type, self.reports)
-    
-    def set_car_id(self, car_id: int) -> None:
-		"""
-		Setter function for the car_id attribute
 
-		Parameters
-		----------
+    def set_car_id(self, car_id: int) -> None:
+        """
+        Setter function for the car_id attribute
+        
+        Parameters
+        ----------
         car_id: int
             The car ID value that the databse assigns to newly added cars
-
-		Returns
-		-------
+        
+        Returns
+        -------
         None
         
         """
         self.car_id = car_id
-    
+
     def get_car_id(self) -> int:
-		"""
-		Getter function for the car_id attribute
-
-		Parameters
-		----------
+        """
+        Getter function for the car_id attribute
+        
+        Parameters
+        ----------
         None
-
-		Returns
-		-------
+        
+        Returns
+        -------
         int
             The car_id of the car object
-
-		"""
+        
+        """
         return self.car_id
-    
+
     def initialize_reports(self) -> None:
-		"""
-		Assigns all the reports that is associated with the car, from the database
-
-		Parameters
-		----------
+        """
+        Assigns all the reports that is associated with the car, from the database
+        
+        Parameters
+        ----------
         None
-
-		Returns
-		-------
+        
+        Returns
+        -------
         None
-
-		"""
+        
+        """
         for report in get_reports(self.car_id):
             report_object = rc(report[1], report[2], report[3], report[4])
             report_object.set_report_id(report[0])
             self.reports.append(report_object)
-    
-    def add_report(self, damages: str, gas_amount: int, car_id: int, reservation_id: int) -> None:
-		"""
-		Creates an object of type report with the passed parameters, and then adds it to the current list of reports for the car
 
-		Parameters
-		----------
+    def add_report(self, damages: str, gas_amount: int, car_id: int, reservation_id: int) -> None:
+        """
+        Creates an object of type report with the passed parameters, and then adds it to the current list of reports for the car
+        
+        Parameters
+        ----------
         damages: str
             The description for all the damages the car has when returned by the customer
         gas_amount: int
@@ -143,23 +143,21 @@ class car:
             The car ID of which the report needs to be associated with
         reservation_id: int
             The reservation ID of which the report needs to be associated with
-
-		Returns
-		-------
+        Returns
+        -------
         None 
-
-		"""
+        """
         report_object = rc(damages, gas_amount, car_id, reservation_id)
         report_object.set_report_id(insert_report(damages, gas_amount, car_id, reservation_id))
         
         self.reports.append(repr(report_object))
-        
-    def add_reservation(self, start_date: str, end_date: str, insurance: int, customer_email: str, car_id: int) -> None:
-		"""
-		Creates an object of the reservation type, and then adds it to the current list of reservations for the car
 
-		Parameters
-		----------
+    def add_reservation(self, start_date: str, end_date: str, insurance: int, customer_email: str, car_id: int) -> None:
+        """
+        Creates an object of the reservation type, and then adds it to the current list of reservations for the car
+        
+        Parameters
+        ----------
         start_date: str
             The start date of the reservation
         end_date: str
@@ -171,30 +169,30 @@ class car:
         car_id: int
             The car ID of the desired car
         
-		Returns
-		-------
+        Returns
+        -------
         None
-
-		"""
+        
+        """
         rsvp_obj = rsvp(start_date, end_date, insurance, customer_email, car_id)
         rsvp_obj.set_reservation_id(insert_reservation(start_date, end_date, insurance, customer_email, car_id))
         
         self.reservations.append(repr(rsvp_obj))
-        
-    def update_mileage(self, new_mileage: int) -> None:
-		"""
-        Calls the change_mileage function of the database_utility_class
 
-		Parameters
-		----------
+    def update_mileage(self, new_mileage: int) -> None:
+        """
+        Calls the change_mileage function of the database_utility_class
+        
+        Parameters
+        ----------
         new_mileage: int
             The current mileage of the vehicle
-
-		Returns
-		-------
+        
+        Returns
+        -------
         None
-
-		"""
+        
+        """
         # Error check
         
         if(new_mileage < self.mileage):
@@ -205,16 +203,16 @@ class car:
         change_mileage(self.car_id, new_mileage)
 
     def retire_car(self) -> None:
-		"""
-		Calls the deactive_car function of the database_utility_class
-
-		Parameters
-		----------
+        """
+        Calls the deactive_car function of the database_utility_class
+        
+        Parameters
+        ----------
         None
         
-		Returns
-		-------
+        Returns
+        -------
         None
-
-		"""
+        
+        """
         deactivate_car(self.car_id)
