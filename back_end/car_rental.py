@@ -1,6 +1,7 @@
 from .database_class import database_utility_class as dbu
 from .database_class.inventory_class import inventory as inv
 from .invoice_class.invoice_class import InvoiceSender
+import bcrypt
 
 class CarRentalService:
     
@@ -28,7 +29,7 @@ class CarRentalService:
         self.host = my_host
         self.port = my_port
         self.inv_obj = inv()
-
+    
     def connect_to_mysql(self):
         """
         Initializes the connection to databse for future queries
@@ -43,7 +44,7 @@ class CarRentalService:
         """
         dbu.initialize_connection(self.host, self.port, self.username, self.password)
         self.inv_obj.initialize_inventory()
-
+    
     """
     Function: add_car(vin, mileage, mpg, price, license_plate, car_year, model, make, color, car_type)
     Description: calls the function of inventory class to add car to current inventory
@@ -82,7 +83,7 @@ class CarRentalService:
         
         """
         self.inv_obj.add_car(vin, mileage, mpg, price, license_plate, car_year, model, make, color, car_type)
-
+    
     def delete_multiple_cars(self, car_ids: list[int]) -> None:
         """
         A loop function for delete_car to be able to delete multiple cars
@@ -99,7 +100,7 @@ class CarRentalService:
         """
         for car_id in car_ids:
             self.delete_car(car_id)
-
+    
     def delete_car(self, car_id: int) -> None:
         """
         Calls retire_car from car class to delete the car
@@ -125,7 +126,7 @@ class CarRentalService:
             
         # call to car class' retire_car() method
         self.inv_obj.get_car_from_inventory(index).retire_car()
-
+    
     def add_report(self, car_id: int, damages: str, gas_amount: int,
                     reservation_id: int) -> None:
         """
@@ -161,7 +162,7 @@ class CarRentalService:
         self.inv_obj.get_inventory()[index].add_report(damages, gas_amount, car_id, reservation_id)
         
         # need to call the update_mileage in this function? could be called in the add_report function in car class too
-
+    
     def customer_search(self, start_date: str, end_date: str, car_type: str) -> list[tuple]:
         """
         Calls the search_database() method from database utility class
@@ -183,7 +184,7 @@ class CarRentalService:
         """
         # self.inv_obj.initialize_search_inventory(start_date, end_date, car_type)
         return dbu.search_database(start_date, end_date, car_type)
-
+    
     def make_reservation(self, start_date: str, end_date: str, insurance: int, customer_email: str, car_id: int) -> None:
         """
         Calls add_reservation from car class to assign a reservation to a car
@@ -217,7 +218,7 @@ class CarRentalService:
         self.inv_obj.get_inventory()[index].add_reservation(start_date, end_date, insurance, customer_email, car_id)
         
         self.send_invoice(customer_email, car_id, start_date, insurance, end_date) #send invoice after reservation is done, so we dont have to search database for reservations and then send em
-
+    
     def send_invoice(self, customer_email: str, car_id: int, start_date: str, insurance: bool, end_date: str) -> None:
         """
         Sends the invoice to customer's email after they reserve a car
@@ -277,7 +278,7 @@ class CarRentalService:
             print("Invoice sent successfully.")
         except Exception as e:
             print(f"Error sending invoice: {e}")
-
+    
     def get_reservations(self) -> list[tuple]:
         """
         Gets all the reservation that is in the database
@@ -293,7 +294,7 @@ class CarRentalService:
         
         """
         return dbu.get_reservations()
-
+    
     def get_inventory_admin(self) -> list[tuple]:
         """
         Gets all the active vehicle in the database 
@@ -309,3 +310,8 @@ class CarRentalService:
         
         """
         return dbu.get_active_inventory()
+    
+    def check_password(hashed_password: str, input_password: str) -> bool:
+        return bcrypt.checkpw(input_password.encode(), hashed_password)
+    
+    

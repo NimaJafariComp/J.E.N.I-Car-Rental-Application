@@ -508,3 +508,10 @@ def get_hashed_password(login_id: int, person_type: str) -> str:
     result = mycursor.fetchone()
     
     return result
+
+def admin_sign_up(name: str, email: str, password: str) -> None:
+    sql_insert_admin = "insert into Administrator (User, Email, Password) values (%s, %s, %s)"
+    admin_values = (name, email, password)
+    
+    mycursor.execute(sql_insert_admin, admin_values)
+    mydb.commit()

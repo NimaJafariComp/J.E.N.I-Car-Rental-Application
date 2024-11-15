@@ -45,3 +45,4 @@ port = 3307
 dbu.initialize_connection(host, port, username, password)
 hashed_password = dbu.get_hashed_password(1, "Admin")
 print(hashed_password[0])
+
