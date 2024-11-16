@@ -311,7 +311,8 @@ class CarRentalService:
         """
         return dbu.get_active_inventory()
     
-    def check_password(self, hashed_password: str, input_password: str) -> bool:
+    def check_password_admin(self, input_username: str, input_password: str) -> bool:
+        hashed_password = dbu.get_hashed_password(input_username, "Admin").encode('utf-8')
         return bcrypt.checkpw(input_password.encode(), hashed_password)
     
     def hash_password(self, input_password: str) -> str:
@@ -319,4 +320,9 @@ class CarRentalService:
     
     def create_admin(self, name: str, input_username: str, email: str, input_password: str):
         hashed_password = self.hash_password(input_password)
-        dbu.admin_sign_up(name, input_username, email, input_password)
+        print(type(hashed_password))
+        dbu.admin_sign_up(name, input_username, email, hashed_password)
+    
+    def update_password_admin(self, input_username: str, input_password: str) -> None:
+        hashed_password = self.hash_password(input_password)
+        dbu.change_password(input_username, hashed_password, "admin")

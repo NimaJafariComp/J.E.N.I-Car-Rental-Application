@@ -516,3 +516,12 @@ def admin_sign_up(name: str, signup_username: str, email: str, password: str) ->
     mycursor.execute(sql_insert_admin, admin_values)
     mydb.commit()
 
+def change_password(input_username: str, input_password: str, person_type: str) -> None:
+    if(person_type.lower() == "customer"):
+        sql_update = "update Customers set Password = %s where Username = %s"
+    elif(person_type.lower() == "admin"):
+        sql_update = "update Administrator set Password = %s where Username = %s"
+    
+    values = (input_password, input_username)
+    mycursor.execute(sql_update, values)
+    mydb.commit()
