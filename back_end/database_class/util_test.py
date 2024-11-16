@@ -2,15 +2,24 @@ import database_utility_class as dbu
 
 username = 'admin'
 password = 'jenipassword'
-host = 'jeni.cfeouw8igyj4.us-west-1.rds.amazonaws.com' 
-port = 3306
+host = '127.0.0.1' 
+port = 3307
 
 dbu.initialize_connection(host, port, username, password)
 
-reservations = dbu.get_reservations()
+# dbu.admin_sign_up("Elijah", "elijah@gmail.com", "b'$2b$12$G.2H5LGAYmWCtR0eA0wzsOLmDHV8oMgjKt/LJSqx4AG0gJNLqS0NO
+dbu.admin_sign_up("Verma", "admin_verma", "verma@gmail.com", "b'$2b$12$HFa7nOY3qWi1mf9AyxZ.w.BcwJgUigE3DZEcAWGvpW.rgMqKXI4P2'")
 
-for x in reservations:
-    print(x)
+hashed_password = dbu.get_hashed_password("admin_elijah", "Admin")
+print(hashed_password)
+
+hashed_password_2 = dbu.get_hashed_password("admin_verma", "Admin")
+print(hashed_password_2)
+
+# reservations = dbu.get_reservations()
+
+# for x in reservations:
+    # print(x)
 
 # dbu.add_car('4T1BF1FK3EU338253', 100, 50, 250.00, '7IVQ651', '1999', 'E-Class', 'Mercedes-Benz', 'Black', 'Sedan')
 # print("Car Added")

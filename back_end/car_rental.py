@@ -311,7 +311,12 @@ class CarRentalService:
         """
         return dbu.get_active_inventory()
     
-    def check_password(hashed_password: str, input_password: str) -> bool:
+    def check_password(self, hashed_password: str, input_password: str) -> bool:
         return bcrypt.checkpw(input_password.encode(), hashed_password)
     
+    def hash_password(self, input_password: str) -> str:
+        return bcrypt.hashpw(input_password.encode(), bcrypt.gensalt())
     
+    def create_admin(self, name: str, input_username: str, email: str, input_password: str):
+        hashed_password = self.hash_password(input_password)
+        dbu.admin_sign_up(name, input_username, email, input_password)

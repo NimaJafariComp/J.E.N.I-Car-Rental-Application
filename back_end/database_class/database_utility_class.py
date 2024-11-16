@@ -1,6 +1,6 @@
 import mysql.connector
 from datetime import datetime
-    
+
 # Error Checks might be better handled by the calling class
 # Instead of this class handling it
 
@@ -498,20 +498,21 @@ def get_reservations():
     return reservations
 
 
-def get_hashed_password(login_id: int, person_type: str) -> str:
+def get_hashed_password(login_username: int, person_type: str) -> str:
     if(person_type.lower() == "customer"):
         sql_select_password = "select Password from Customers where CustomerID = %s"
     elif(person_type.lower() == "admin"):
-        sql_select_password = "select Password from Administrator where AdminID = %s"
+        sql_select_password = "select Password from Administrator where Username = %s"
     
-    mycursor.execute(sql_select_password, [login_id])
+    mycursor.execute(sql_select_password, [login_username])
     result = mycursor.fetchone()
     
-    return result
+    return result[0]
 
-def admin_sign_up(name: str, email: str, password: str) -> None:
-    sql_insert_admin = "insert into Administrator (User, Email, Password) values (%s, %s, %s)"
-    admin_values = (name, email, password)
+def admin_sign_up(name: str, signup_username: str, email: str, password: str) -> None:
+    sql_insert_admin = "insert into Administrator (User, Email, Password, Username) values (%s, %s, %s, %s)"
+    admin_values = (name, email, password, signup_username)
     
     mycursor.execute(sql_insert_admin, admin_values)
     mydb.commit()
+
