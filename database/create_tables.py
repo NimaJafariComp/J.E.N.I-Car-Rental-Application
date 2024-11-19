@@ -62,10 +62,13 @@ def create_tables(my_host, my_port, my_username, my_password):
     # DOB: A date input from user. Format is: yyyy-mm-dd
     # Email: A string input from user
     """
+    #added username and password columns, customenrs also cant have same username, left them DEFAULT null for now but chnage it TO NOT NULL LATER
     mycursor.execute("create table Customers(" +
                         "CustomerID int auto_increment primary key," +
                         "FullName varchar(255) not null," +
                         "DOB date not null," +
+                        "Username VARCHAR(255) UNIQUE DEFAULT NULL,"+
+                        "Password VARCHAR(255) DEFAULT NULL,"+
                         "Email varchar(255))")
 
     mycursor.execute("create table Reservations(" +
@@ -76,6 +79,7 @@ def create_tables(my_host, my_port, my_username, my_password):
                         "CustomerID int," +
                         "CustomerEmail varchar(255)," +
                         "Vehicle int not null," +
+                        "Canceled BOOLEAN NOT NULL DEFAULT FALSE,"+
                         "constraint FK_CustomerReservation foreign key (CustomerID) references Customers(CustomerID)ON DELETE CASCADE," +
                         "constraint FK_VehicleReservation foreign key (Vehicle) references Vehicles(CarID)ON DELETE CASCADE)")
 
