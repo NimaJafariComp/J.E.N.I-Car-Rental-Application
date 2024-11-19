@@ -55,7 +55,8 @@ class selection_window(QWidget):
     def clicked_reservation(self):
         self.reservation = reservations()
         self.reservation_window = transition(self.admin_window, self.reservation, 0)
-        self.admin_window.bottom_layout.removeWidget(self.admin_window.bottom_layout.widget(2)) 
+        if self.admin_window.bottom_layout.widget(2) is not None:
+            self.admin_window.bottom_layout.removeWidget(self.admin_window.bottom_layout.widget(2)) 
         self.admin_window.bottom_layout.insertWidget(2, self.reservation_window)
         self.admin_window.bottom_layout.setCurrentIndex(2)
 
