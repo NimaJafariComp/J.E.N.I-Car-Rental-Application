@@ -244,7 +244,7 @@ def get_reports(car_id):
 #        StartDate, EndDate, Insurance, CustomerID, Vehicle, optional values to update
 # Output: None        
 """
-def update_reservation(reservation_id: int, start_date=None, end_date=None, insurance=None, customer_id=None, uVehicle=None) -> None:
+def update_reservation(reservation_id: int, start_date=None, end_date=None, insurance=None, customer_id=None, uVehicle=None, canceled=None) -> None:
     update_query = "UPDATE Reservations SET "
     update_values = []
     if start_date:
@@ -262,6 +262,9 @@ def update_reservation(reservation_id: int, start_date=None, end_date=None, insu
     if uVehicle:
         update_query += "Vehicle = %s, "
         update_values.append(uVehicle)
+    if canceled:
+        update_query += "Canceled = %s, "
+        update_values.append(canceled)
         
     update_query = update_query.rstrip(', ') + " WHERE ReservationID = %s"
     update_values.append(reservation_id)
@@ -413,10 +416,10 @@ def get_vins():
 
     return inventory 
 
-def insert_reservation(start_date: str, end_date: str, insurance: bool, customer_email: str, car_id: int) -> int:
-    sql_insert_reservation = "insert into Reservations (StartDate, EndDate, Insurance, CustomerEmail, Vehicle) \
-                            values (%s, %s, %s, %s, %s)"
-    reservation_values = (start_date, end_date, insurance, customer_email, car_id)
+def insert_reservation(start_date: str, end_date: str, insurance: bool, customer_email: str, car_id: int, canceled: bool) -> int:
+    sql_insert_reservation = "insert into Reservations (StartDate, EndDate, Insurance, CustomerEmail, Vehicle, Canceled) \
+                            values (%s, %s, %s, %s, %s,%s)"
+    reservation_values = (start_date, end_date, insurance, customer_email, car_id, canceled)
     
     mycursor.execute(sql_insert_reservation, reservation_values)
     mydb.commit()
