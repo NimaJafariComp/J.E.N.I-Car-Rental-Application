@@ -23,7 +23,8 @@ class car_tile(QWidget):
         self.year = car[4]
         self.type = car[8]
         self.vin = car[9]
-        self.img_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "car_img/"+self.vin+".jpg")
+        self.img_path = fileName(self.vin)
+        
 
         # setup font
         self.set_font = font()
@@ -143,7 +144,16 @@ class car_tile(QWidget):
         painter.end()
         return rounded_pixmap
 
+def fileName(vin):
+    # Folder path
+    folder_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "car_img/")
+    file_name = vin + ".jpg"
 
+    # Check if the file exists
+    if file_name in os.listdir(folder_path):
+        return os.path.join(os.path.dirname(os.path.dirname(__file__)), "car_img/"+vin+".jpg")
+    else:
+        return os.path.join(os.path.dirname(os.path.dirname(__file__)), "car_img/"+"vehicle-image-notavailable"+".jpg")
 
 if __name__ == "__main__":
     import sys
