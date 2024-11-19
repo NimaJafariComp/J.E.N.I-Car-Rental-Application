@@ -45,6 +45,7 @@ class main_window(QMainWindow):
     def on_click_admin(self):
         self.stacked_widget.setCurrentIndex(2)
         self.log_window.login_button.clicked.connect(self.switch_to_admin)
+        self.log_window.pw_box.returnPressed.connect(self.switch_to_admin)
         self.log_window.back_button.clicked.connect(self.login_back)
 
     def switch_to_admin(self):
