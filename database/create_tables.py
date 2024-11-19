@@ -106,12 +106,12 @@ def create_tables(my_host, my_port, my_username, my_password):
           ('Admin', 'adminJeni@gmail.com', 'Admin1234')
     ]
     
-    sql_insert_customers = "insert into Customers (FullName, DOB, Email) values (%s, %s, %s)"
+    sql_insert_customers = "insert into Customers (FullName, DOB, Email, Username, Password) values (%s, %s, %s)"
     customer_values = [
             ('Elijah Sagaran', '2000-10-2', 'elijahsagaran@gmail.com'),
             ('Johnny Aguilar', '2000-11-3', 'johnnyaguilar@gmail.com'),
             ('Irma Alicon', '2000-12-4', 'irmaalicon@gmail.com'),
-            ('Nima Jafari', '2000-9-1', 'nima.jafari.614@my.csun.edu')
+            ('Nima Jafari', '2000-9-1', 'nima.jafari.614@my.csun.edu', 'mj830916')
     ]
 
     sql_insert_reservations = "insert into Reservations (StartDate, EndDate, Insurance, CustomerID, CustomerEmail, Vehicle) values (%s, %s, %s, %s, %s, %s)"
