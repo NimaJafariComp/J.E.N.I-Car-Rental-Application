@@ -22,8 +22,8 @@ class car_tile(QWidget):
         self.mpg = car[2]
         self.year = car[4]
         self.type = car[8]
-        # self.vin = car[]
-        self.img_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "car_img/"+".jpg")
+        self.vin = car[9]
+        self.img_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "car_img/"+self.vin+".jpg")
 
         # setup font
         self.set_font = font()

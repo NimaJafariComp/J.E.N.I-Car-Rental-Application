@@ -1,7 +1,7 @@
 import sys
 import os
 from sshtunnel import SSHTunnelForwarder
-
+import threading
 
 def tunnel(function):
     # SSH and Database Configurations
@@ -23,6 +23,7 @@ def tunnel(function):
         
         try:
             while True:
+                #input("Press Enter to close the tunnel...")
                 function()  # Run your application logic here
         except KeyboardInterrupt:
             print("\nTerminating the tunnel...")
@@ -30,3 +31,6 @@ def tunnel(function):
            tunnel.stop()  # Manually stop the tunnel
            print("Tunnel closed")   
 
+def start_tunnel():
+    ssh_thread = threading.Thread(target=tunnel, daemon=True)
+    ssh_thread.start()
