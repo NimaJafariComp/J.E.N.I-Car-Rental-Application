@@ -389,7 +389,7 @@ def remove_customer(customer_id: int) -> None:
 """
 def search_database(start_date: str, end_date: str, car_type: str) -> list[tuple]:
     inventory = []
-    sql_select_search = "select CarID, Mileage, MPG, Price, CarYear, Model, Make, Color, CarType from Vehicles \
+    sql_select_search = "select CarID, Mileage, MPG, Price, CarYear, Model, Make, Color, CarType, VIN from Vehicles \
                         where CarType = %s and \
                         CarId not in \
                         (select Vehicle from Reservations \
