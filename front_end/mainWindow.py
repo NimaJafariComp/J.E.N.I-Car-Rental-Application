@@ -49,9 +49,12 @@ class main_window(QMainWindow):
         self.log_window.back_button.clicked.connect(self.login_back)
 
     def switch_to_admin(self):
+        self.user = "admin"
         self.pw = "password"
+        self.entered_user = self.log_window.user_box.text()
         self.entered_pw = self.log_window.pw_box.text()
-        if self.pw == self.entered_pw: 
+
+        if self.pw == self.entered_pw and self.user == self.entered_user: 
             self.stacked_widget.setCurrentIndex(1)
             self.a_window.bottom_layout.setCurrentIndex(0)
             self.log_window.pw_box.clear()
