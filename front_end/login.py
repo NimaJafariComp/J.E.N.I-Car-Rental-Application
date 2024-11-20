@@ -28,6 +28,9 @@ class login(QWidget):
         # Create label and set font
         self.admin_label = QLabel("ADMIN")
 
+        # username box
+        self.user_box = QLineEdit()
+
         # Password box
         self.pw_box = QLineEdit()
         
@@ -42,6 +45,7 @@ class login(QWidget):
         self.setup_layout()
         self.setup_logo()
         self.setup_admin_label()
+        self.setup_user_box()
         self.setup_pw_box()
         self.setup_login_button() 
 
@@ -73,6 +77,7 @@ class login(QWidget):
         self.login_window_layout.addWidget(self.logo, alignment=Qt.AlignCenter)
         self.login_window_layout.addStretch()
         self.login_window_layout.addWidget(self.admin_label, alignment=Qt.AlignCenter)
+        self.login_window_layout.addWidget(self.user_box, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.pw_box, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.buttons, alignment=Qt.AlignCenter)
         self.login_window_layout.addStretch()
@@ -85,6 +90,16 @@ class login(QWidget):
     def setup_admin_label(self):
         self.admin_label.setFont(self.font)
         self.admin_label.setStyleSheet("color: #efbe25; border: none;")
+
+    def setup_user_box(self):
+        self.user_box.setPlaceholderText("Enter Username")
+        self.user_box.setFixedWidth(300)
+        self.user_box.setFixedHeight(40)
+        self.user_box.setStyleSheet(
+            "background-color:white;"
+            "border : 1px solid lightgrey;"
+            "border-radius : 5px;"
+        )
 
     def setup_pw_box(self):
         self.pw_box.setPlaceholderText("Enter Password")
