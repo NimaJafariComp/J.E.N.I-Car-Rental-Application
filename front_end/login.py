@@ -5,7 +5,13 @@ from PyQt5.QtGui import *
 from .config.font import font
 
 class login(QWidget):
+    '''
+    Widget to make the login window.
+    '''
     def __init__(self):
+        '''
+        Initializes the login window.
+        '''
         super().__init__()
         # Set the background color of the main window to dark grey
 
@@ -50,6 +56,9 @@ class login(QWidget):
         self.setup_login_button() 
 
     def setup_logo(self):
+        '''
+        
+        '''
         self.logo.setPixmap(self.pixmap)
         self.logo.resize(self.pixmap.width(), self.pixmap.height())
         self.scaled_pixmap = self.pixmap.scaled(300, 300, aspectRatioMode=1)  # width, height
