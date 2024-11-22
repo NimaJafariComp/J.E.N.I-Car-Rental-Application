@@ -2,13 +2,12 @@ from .database_class import database_utility_class as dbu
 from .database_class.inventory_class import inventory as inv
 from .invoice_class.invoice_class import InvoiceSender
 import bcrypt
-"""
-Date of Creation: October 22, 2024
-Author: Elijah Sagaran and Nima Jafari
-"""
+
 class CarRentalService:
-    
     """
+    Date of Creation: October 22, 2024
+    Author: Elijah Sagaran and Nima Jafari
+    
     Overarching class for the backend. Contains the API calls that front end needs to call for integration.
     
     Attributes:

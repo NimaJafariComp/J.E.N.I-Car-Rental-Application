@@ -24,7 +24,7 @@ def main():
     """
     Test for password check
     """
-    # print(car_rental_obj.check_password_admin("admin_jeni", "computer123"))
+    # print(car_rental_obj.check_password_admin("admin_jeni", "computer123")) 
     
     """
     Test for changing passwords

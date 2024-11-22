@@ -1,10 +1,3 @@
-"""
-Date of Creation: 10/22
-Author: Elijah Sagaran and Nima Jafari
-Updates:
-    Elijah, 10/29
-    Nima, 11/18
-"""
 class reservation:
     """
     Class to hold data for each reservation for a car
@@ -23,6 +16,12 @@ class reservation:
         The car ID of the desired car
     cancelled: int
         0, if not cancelled. 1, if it is 
+        
+    Date of Creation: 10/22
+    Author: Elijah Sagaran and Nima Jafari
+    Updates:
+        Elijah, 10/29
+        Nima, 11/18
     """
     def __init__(self, start_date, end_date, insurance, customer_email, vehicle, canceled):
         self.start_date = start_date

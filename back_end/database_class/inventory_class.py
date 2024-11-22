@@ -1,14 +1,6 @@
 from .car_class import car as car_class
 from .database_utility_class import get_vins, add_car, get_car_id, get_inventory, get_active_inventory, search_database
-"""
-Date of Creation: 10/13
-Author: Elijah Sagaran
-Updates:
-    Elijah, 10/13
-    Elijah, 10/22
-    Elijah, 10/22
-    Elijah, 10/22
-"""
+
 class inventory:
     """
     Class where all car objects are stored
@@ -18,6 +10,13 @@ class inventory:
     inventory: Car
         The list of car objects that are in the database
     
+    Date of Creation: 10/13
+    Author: Elijah Sagaran
+    Updates:
+        Elijah, 10/13
+        Elijah, 10/22
+        Elijah, 10/22
+        Elijah, 10/22
     """
     def __init__(self):
         self.inventory = []

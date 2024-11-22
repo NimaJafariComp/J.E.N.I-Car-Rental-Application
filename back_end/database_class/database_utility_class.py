@@ -3,9 +3,6 @@ from datetime import datetime
 """
 Date of Creation: October 1, 2024
 Author: Elijah Sagaran and Nima Jafari
-Date of Updates and Updater:
-1. 
-
 """
 def initialize_connection(my_host: str, my_port: str, username: str, upassword: str) -> None:
     
