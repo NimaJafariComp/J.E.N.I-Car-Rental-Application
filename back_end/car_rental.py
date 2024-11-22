@@ -2,7 +2,10 @@ from .database_class import database_utility_class as dbu
 from .database_class.inventory_class import inventory as inv
 from .invoice_class.invoice_class import InvoiceSender
 import bcrypt
-
+"""
+Date of Creation: October 22, 2024
+Author: Elijah Sagaran and Nima Jafari
+"""
 class CarRentalService:
     
     """
@@ -41,14 +44,17 @@ class CarRentalService:
         Returns
         -------
         None
+        
+        Author: Elijah Sagaran, 10/22
+        Updates: 
+            Elijah, 10/22
+            Johnny, 10/24
+            Elijah, 10/31
+            Elijah, 11/7
         """
         dbu.initialize_connection(self.host, self.port, self.username, self.password)
         self.inv_obj.initialize_inventory()
     
-    """
-    Function: add_car(vin, mileage, mpg, price, license_plate, car_year, model, make, color, car_type)
-    Description: calls the function of inventory class to add car to current inventory
-    """
     def add_car(self, vin: str, mileage: int, mpg: int, price: float, license_plate: str, 
                 car_year: str, model: str, make: str, color: str , car_type: str) -> None:
         """
@@ -81,6 +87,10 @@ class CarRentalService:
         -------
         None
         
+        Author: Elijah Sagaran, 10/22
+        Updates: 
+            Elijah, 10/31
+            Elijah, 11/7
         """
         self.inv_obj.add_car(vin, mileage, mpg, price, license_plate, car_year, model, make, color, car_type)
     
@@ -97,6 +107,9 @@ class CarRentalService:
         -------
         None
         
+        Author: Elijah Sagaran, 10/22
+        Updates:
+            Elijah, 11/7
         """
         for car_id in car_ids:
             self.delete_car(car_id)
@@ -117,6 +130,12 @@ class CarRentalService:
         Exception
         ---------
         Does nothing if the car_id passed is not valid
+        
+        Author: Elijah Sagaran, 10/22
+        Updates: 
+            Elijah, 10/22
+            Elijah, 10/31
+            Elijah, 11/7
         """
         index = self.inv_obj.search_car(car_id)
         
@@ -151,6 +170,10 @@ class CarRentalService:
         ---------
         Does nothing if the car_id passed is not valid
         
+        Author: Elijah Sagaran, 10/22
+        Updates:
+            Elijah, 10/31
+            Elijah, 11/7
         """
         index = self.inv_obj.search_car(car_id)
         
@@ -181,8 +204,12 @@ class CarRentalService:
         list[tuple]
             Each tuple in the list has all the information about the car
         
+        Author: Elijah Sagaran, 10/22
+        Updates: 
+            Elijah, 10/22
+            Elijah, 10/31
+            Elijah, 11/7
         """
-        # self.inv_obj.initialize_search_inventory(start_date, end_date, car_type)
         return dbu.search_database(start_date, end_date, car_type)
     
     def make_reservation(self, start_date: str, end_date: str, insurance: int, customer_email: str, car_id: int) -> None:
@@ -210,6 +237,11 @@ class CarRentalService:
         ---------
         Does nothing if the car_id passed is not valid
         
+        Author: Elijah Sagaran, 10/22
+        Updates:
+            Elijah, 10/29
+            Elijah, 11/7
+            ELijah, 11/10
         """
         index = self.inv_obj.search_car(car_id)
         if index == -1:
@@ -243,6 +275,12 @@ class CarRentalService:
         Exception
         ---------
         Invoice cannot be sent to the customer
+        
+        Author: Nima Jafari, 10/28
+        Updates:
+            Nima, 10/28
+            Elijah, 10/29
+            Elijah, 11/10
         """
         
         # customer = dbu.get_customer_info(customer_id)
@@ -292,6 +330,9 @@ class CarRentalService:
         list[tuple]
             Each tuple in the list contains all the information about the reservation
         
+        Author: Elijah Sagaran, 10/29
+        Updates:
+            Elijah, 11/10
         """
         return dbu.get_reservations()
     
@@ -308,21 +349,97 @@ class CarRentalService:
         list[tuple]
             Each tuple in the list contains all the information about the car
         
+        Author: Elijah Sagaran, 10/30
+        Updates:
+            Elijah, 11/10
         """
         return dbu.get_active_inventory()
     
     def check_password_admin(self, input_username: str, input_password: str) -> bool:
+        """
+        Checks if the input password matches with the password stored in the database for the input username
+        
+        Parameters
+        ----------
+        input_username: str
+            The username of the person
+        input_password: str
+            The password of the person
+        
+        Return
+        ------
+        bool
+            Retuns true, if input password matches with stored password
+            Returns false, if input password does not match with stored password
+        
+        Author: Elijah Sagaran, 11/14
+        Updates:
+            Elijah, 11/16
+        """
         hashed_password = dbu.get_hashed_password(input_username, "Admin").encode('utf-8')
         return bcrypt.checkpw(input_password.encode(), hashed_password)
     
     def hash_password(self, input_password: str) -> str:
+        """
+        Hashes the input password from siging up
+        
+        Parameters
+        ----------
+        input_password: str
+            The password that needs to be hashed
+        
+        Return
+        ------
+        str
+            Hashed password
+        
+        Author: Elijah Sagaran, 11/16
+        Updates:
+        """
         return bcrypt.hashpw(input_password.encode(), bcrypt.gensalt())
     
-    def create_admin(self, name: str, input_username: str, email: str, input_password: str):
+    def create_admin(self, name: str, input_username: str, email: str, input_password: str) -> None:
+        """
+        Takes in input from user and stores values in database by calling admin_sign_up function
+        
+        Parameters
+        ----------
+        name: str
+            Name of the user
+        input_username: str
+            Chosen username of the user
+        email: str
+            email of the user
+        input_password: str
+        
+        Return
+        ------
+        None
+        
+        Author: Elijah Sagaran, 11/16
+        Updates:
+        """
         hashed_password = self.hash_password(input_password)
         print(type(hashed_password))
         dbu.admin_sign_up(name, input_username, email, hashed_password)
     
     def update_password_admin(self, input_username: str, input_password: str) -> None:
+        """
+        Function to update the stored password in the database
+        
+        Parameters
+        ----------
+        input_username: str
+            The username of the user that wants to change their password
+        input_password: str
+            The new desired password of the user
+        
+        Return
+        ------
+        None
+        
+        Author: Elijah Sagaran, 11/16
+        Updates:
+        """
         hashed_password = self.hash_password(input_password)
         dbu.change_password(input_username, hashed_password, "admin")
