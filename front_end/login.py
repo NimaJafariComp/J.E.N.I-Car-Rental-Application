@@ -57,7 +57,7 @@ class login(QWidget):
 
     def setup_logo(self):
         '''
-        
+        function to set parameters for the image logo for the login window.        
         '''
         self.logo.setPixmap(self.pixmap)
         self.logo.resize(self.pixmap.width(), self.pixmap.height())
@@ -66,6 +66,9 @@ class login(QWidget):
         self.logo.setStyleSheet("border: none;")
 
     def setup_layout(self):
+        '''
+        function to setup the main layou for the login window.
+        '''
         self.setStyleSheet("background-color:darkgrey;")
         self.login_layout.setContentsMargins(0, 0, 0, 0)
         self.login_layout.setSpacing(0)
@@ -97,10 +100,16 @@ class login(QWidget):
 
 
     def setup_admin_label(self):
+        '''
+        funtion to set up the parameters for the admin label.
+        '''
         self.admin_label.setFont(self.font)
         self.admin_label.setStyleSheet("color: #efbe25; border: none;")
 
     def setup_user_box(self):
+        '''
+        function to set the parameters for the user name text box.
+        '''
         self.user_box.setPlaceholderText("Enter Username")
         self.user_box.setFixedWidth(300)
         self.user_box.setFixedHeight(40)
@@ -111,6 +120,9 @@ class login(QWidget):
         )
 
     def setup_pw_box(self):
+        '''
+        function to set up the parameters for the Password text box.
+        '''
         self.pw_box.setPlaceholderText("Enter Password")
         self.pw_box.setFixedWidth(300)
         self.pw_box.setFixedHeight(40)
@@ -122,6 +134,9 @@ class login(QWidget):
         )
 
     def setup_login_button(self):
+        '''
+        function to set up the parameters for the login button.
+        '''
         self.login_button.setFont(self.font)
         self.back_button.setFont(self.font)
         self.login_button.setFixedWidth(125)
