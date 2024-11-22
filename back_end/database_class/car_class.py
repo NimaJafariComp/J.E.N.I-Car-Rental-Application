@@ -1,7 +1,19 @@
 from .report_class import report as rc
 from .database_utility_class import get_reports, change_mileage, deactivate_car, insert_report, insert_reservation, get_reports
 from .reservation_class import reservation as rsvp
-
+"""
+Date of Creation: 10/12
+Author: Elijah Sagaran
+Updates: 
+    Elijah, 10/12
+    Elijah, 10/13
+    Elijah, 10/13
+    Elijah, 10/22
+    Elijah, 10/22
+    Elijah, 10/29
+    Elijah, 11/10
+    
+"""
 class car:
     """
     Class that lets users control car information. This includes adding, deleting, and modifying attributes that the car has.

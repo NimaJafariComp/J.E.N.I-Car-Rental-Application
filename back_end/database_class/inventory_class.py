@@ -1,19 +1,26 @@
 from .car_class import car as car_class
 from .database_utility_class import get_vins, add_car, get_car_id, get_inventory, get_active_inventory, search_database
-
+"""
+Date of Creation: 10/13
+Author: Elijah Sagaran
+Updates:
+    Elijah, 10/13
+    Elijah, 10/22
+    Elijah, 10/22
+    Elijah, 10/22
+"""
 class inventory:
     """
-    # initializes the inventory object
-    # Input: username, a string
-    #        password, a string
-    # self.whole_inventory an array of car objects 
-    # self.available_inventory an array of car objects where IsActive = 1
-    # self.database_object is the database class object needed to access
-    # the database
+    Class where all car objects are stored
+    
+    Attributes
+    ----------
+    inventory: Car
+        The list of car objects that are in the database
+    
     """
     def __init__(self):
         self.inventory = []
-        self.search_inventory = []
 
     def get_inventory(self):
         return self.inventory
@@ -21,19 +28,38 @@ class inventory:
     def get_car_from_inventory(self, index):
         return self.inventory[index]
     
-    """
-    # Function: add_car(uVin, uMileage, uMPG, uPrice, uLicensePlate)
-    # Input: uVin, a string
-    #        uMileage, an integer
-    #        uMPG, an integer
-    #        uPrice, a float
-    #        uLicensePlate, a string
-    # Output: None
-    # For testing purposes, it prints out the self.whole_inventory
-    # Description: adds a car to the inventory
-    """
-    def add_car(self, uVin: str, uMileage: int, uMPG: int, uPrice: float, uLicensePlate: str, 
-                uCarYear: str, uModel: str, uMake: str, uColor: str , uCarType: str) -> None:
+    def add_car(self, vin: str, mileage: int, mpg: int, price: float, license_plate: str, 
+                car_year: str, model: str, make: str, color: str , car_type: str) -> None:
+        """
+        Creates a car object with the passed parameters, appends it to the array, and calls add_car function in database utility class
+        
+        Parameters
+        ----------
+        vin: str
+            The unique VIN number of the vehicle to be added.
+        mileage: int
+            The current mileage of the car.
+        mpg: int
+            The current miles per gallon of the car.
+        price: double
+            The price that is assigned for the car. Unit is $/day.
+        license_plate: str
+            The unique license plate of the vehicle to be added 
+        car_year: str
+            The year of the model of the vehicle
+        model: str
+            The model of the car. i.e. Corolla, Civic, and Prius
+        make: str
+            The brand of the car. i.e. Toyota and Honda 
+        color: str
+            The color of the car. i.e. Red, Blue, and Yellow
+        car_type: str
+            The classification of the car. i.e. Sedan, SUV, and Truck
+        
+        Returns
+        -------
+        None
+        """
         current_vins = get_vins()
         
         if uVin in current_vins:
@@ -58,18 +84,19 @@ class inventory:
         
         # index = len(self.inventory)
         # repr(self.inventory[index - 1])
-
-
-    """
-    # Function: get_inventory()
-    # Input: None
-    # Output: None
-    # For testing purposes, prints out all the CarID of the car objects in whole_inventory
-    # Description: gets all the information of each car from the database and stores it
-    # in a car_object. And then, stores all the car_objects in an array
-    """
-    def initialize_inventory(self):
+    
+    def initialize_inventory(self) -> None:
+        """
+        Gets all the information of each car from the database and stores it in a car object, then stores car objects in an array
         
+        Parameters
+        ----------
+        None
+        
+        Return
+        ------
+        None
+        """
         # calls the function get_inventory() from the database class
         # it returns an array of tuples with all the information about the car
         for car in get_inventory():
@@ -90,11 +117,27 @@ class inventory:
         # For testing purposes    
         # for x in self.inventory:
             # repr(x)
-
+    
     def delete_car(self, uCarID:int) -> None:
         pass
-
-    def search_car(self, car_id):
+    
+    def search_car(self, car_id: int) -> int:
+        """
+        Binary search to see if car_id is in current inventory
+        
+        Parameter
+        ---------
+        car_id: int
+            The car ID that needs to be checked
+            
+        Return
+        ------
+        int:
+            Returns car ID if it is present in the current inventory
+            Returns -1 if not
+        
+        
+        """
         low, high, mid = 0, len(self.inventory) - 1, 0
         
         while low <= high:
@@ -110,6 +153,7 @@ class inventory:
                 return mid
                 
         return -1
+    
     """
     def initialize_search_inventory(self, start_date, end_date, car_type):
         self.inventory = []
