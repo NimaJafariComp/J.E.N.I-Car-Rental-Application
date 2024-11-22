@@ -5,11 +5,15 @@ from PyQt5.QtGui import QGuiApplication
 
 class screen_config:
     def __init__(self):
-        """Initialize screen scaling settings."""
+        """
+        Initialize screen scaling settings.
+        """
         self._configure_scaling()
 
     def _configure_scaling(self):
-        """Apply platform-specific screen scaling fixes."""
+        """
+        Apply platform-specific screen scaling fixes.
+        """
         # Enable high DPI scaling attribute (for scaling widgets)
         QGuiApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
         
@@ -31,6 +35,8 @@ class screen_config:
             print("macOS detected, auto DPI scaling in effect.")
 
     def apply(self):
-        """Apply scaling configuration (for any external application if needed)."""
+        """
+        Apply scaling configuration (for any external application if needed).
+        """
         self._configure_scaling()
 
