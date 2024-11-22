@@ -4,6 +4,9 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QGuiApplication
 
 class screen_config:
+    '''
+    A class to set up the screen configuration so the app window works on all devices.
+    '''
     def __init__(self):
         """
         Initialize screen scaling settings.

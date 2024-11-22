@@ -2,11 +2,20 @@ import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QScrollArea, QLabel
 
 class carTile_scroll(QWidget):
+    '''
+    A class to make a scrollable are to put widgets in.
+    '''
     def __init__(self):
+        '''
+        Initialize the class.
+        '''
         super().__init__()
         self.initUI()
 
     def initUI(self):
+        '''
+        function to set up the parameters for the scrollable area.
+        '''
         # Setup scroll frame and layout
         self.scroll_frame = QWidget()
         self.scroll_frameLayout = QVBoxLayout(self.scroll_frame)

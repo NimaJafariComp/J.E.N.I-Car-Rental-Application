@@ -2,7 +2,13 @@ import os
 from PyQt5.QtGui import QFontDatabase, QFont
 
 class font:
+    '''
+    A class to set up the font for the gui.
+    '''
     def __init__(self):
+        '''
+        Initializes the font from the tff file.
+        '''
         # Construct the absolute path to the font file
         font_path = os.path.join(os.path.dirname(__file__), "fonts/Staatliches-Regular.ttf")
         

@@ -6,7 +6,13 @@ from ..config.font import font
 from .rentWindow import rent_window
 
 class car_tile(QWidget): 
+    '''
+    A class to make a tile object that shows the car img and car info to user and have the ablility to rent the car.
+    '''
     def __init__(self, car, window, num_days, start_date, end_date):
+        '''
+        Initializes the car tile class.
+        '''
         super().__init__()
         # knows customer window
         self.customer_window = window
@@ -32,7 +38,6 @@ class car_tile(QWidget):
 
         self.setFixedSize(600,200)
         self.car_tile_layout = QHBoxLayout(self)
-       
         self.img = QLabel()
         self.pixmap = QPixmap(self.img_path)
         self.middle = QFrame()
@@ -47,6 +52,9 @@ class car_tile(QWidget):
        
 
     def middle_setup(self):
+        '''
+        function to setup the middle part of the tile that shows the car info.
+        '''
         self.middle.setFixedSize(250, 200)
         self.middle.setStyleSheet("border : 1px solid lightgrey;")
         self.name_label = QLabel(self.name)
@@ -63,6 +71,9 @@ class car_tile(QWidget):
         self.middle_layout.addWidget(self.type_label)
 
     def right_setup(self):
+        '''
+        function to setup the right side of the tile which has the price and reservation button.
+        '''
         self.right.setFixedSize(150, 200)
         self.right.setStyleSheet("border : 1px solid lightgrey; border-bottom-right-radius: 15px; border-top-right-radius: 15px")
         self.rent_button = QPushButton('Rent')
@@ -75,6 +86,9 @@ class car_tile(QWidget):
         self.rent_button.clicked.connect(self.rent_clicked)
 
     def tile_setup(self):
+        '''
+        function to setup the layout for the whole tile.
+        '''
         self.car_tile_layout.setContentsMargins(0, 0, 0, 0)
         self.car_tile_layout.setSpacing(0)
         self.car_tile_layout.addWidget(self.img)
@@ -82,6 +96,9 @@ class car_tile(QWidget):
         self.car_tile_layout.addWidget(self.right)
         
     def rent_clicked(self):
+        '''
+        function that when rent is clicked it makes a rent window and displays it.
+        '''
         self.rent_window = rent_window(self.customer_window, self.car, self.num_days, self.start_date, self.end_date)
         self.customer_window.bottom_layout.removeWidget(self.customer_window.bottom_layout.widget(3)) 
         self.customer_window.bottom_layout.insertWidget(3, self.rent_window)
@@ -89,6 +106,9 @@ class car_tile(QWidget):
     
 
     def img_setup(self):
+        '''
+        funtion to setup the img that is on the left side of the tile.
+        '''
         # Set the size of the QLabel to match the QFrame
         self.img.setFixedSize(200, 200)
     
@@ -104,7 +124,9 @@ class car_tile(QWidget):
         self.img.setAlignment(Qt.AlignCenter)
     
     def apply_rounded_mask(self, pixmap, size, radius):
-        """Applies a mask with rounded corners only on the left side and ensures the image fills the QLabel."""
+        """
+        Applies a mask with rounded corners only on the left side and ensures the image fills the QLabel.
+        """
         # Create a new transparent QPixmap with the same size as QLabel
         rounded_pixmap = QPixmap(size)
         rounded_pixmap.fill(Qt.transparent)
@@ -145,6 +167,9 @@ class car_tile(QWidget):
         return rounded_pixmap
 
 def fileName(vin):
+    '''
+    funtion to get the path to the img of the car.
+    '''
     # Folder path
     folder_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "car_img/")
     file_name = vin + ".jpg"

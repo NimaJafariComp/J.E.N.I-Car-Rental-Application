@@ -13,7 +13,13 @@ from ..config.font import font
     # Index 7: Car Color
     # Index 8: Car Type
 class invoice_window(QWidget):
+    '''
+    A class that makes a invoice window to show the information for the reservation that was made when make was pressed.
+    '''
     def __init__(self, customer_window, car, num_days, start_date, end_date, ins):
+        '''
+        Initalizes the invoice class window.
+        '''
         super().__init__()
         # setup main layout 
         self.customer_window = customer_window
@@ -32,6 +38,9 @@ class invoice_window(QWidget):
         self.setup_main()
 
     def setup_form(self):
+        '''
+        function to set up parameters for the form, makes the widgets, and adds them to the form.
+        '''
         self.form = QWidget()
         self.form_layout = QFormLayout(self.form)
         self.start     = QLabel("Pick Up Date: " + self.start_date.toString('yyyy-MM-dd'))
@@ -71,10 +80,16 @@ class invoice_window(QWidget):
         self.home_button.clicked.connect(self.clicked_home)
 
     def clicked_home(self):
+        '''
+        function for when home button is clicked to go back to the start window.
+        '''
         self.customer_window.bottom_layout.setCurrentIndex(0)
  
 
     def setup_main(self):
+        '''
+        fucntion to set up the main layout.
+        '''
         self.setup_form()
         self.main_layout.addWidget(self.form, alignment=Qt.AlignCenter)
         

@@ -4,7 +4,13 @@ from PyQt5.QtGui import *
 from ..config.font import font
 
 class transition(QWidget):
+    '''
+    A class to make a widget that allows you to go back to the selection window.
+    '''
     def __init__(self, admin_window, central_widget, center):
+        '''
+        Initilizes class.
+        '''
         super().__init__()
 
         # Main Layout for the Widget
@@ -22,6 +28,9 @@ class transition(QWidget):
         self.setup_main()
 
     def setup_bottom(self):
+        '''
+        function to set up the bottom frame that that hold the back button.
+        '''
         self.bottom_frame = QFrame()
         self.bottom_frame.setFixedHeight(75)
         self.bottom_layout = QHBoxLayout(self.bottom_frame)
@@ -34,6 +43,9 @@ class transition(QWidget):
         self.bottom_layout.addWidget(self.back_button)
 
     def setup_central(self):
+        '''
+        function to set up the main window that will have the widget to be used.
+        '''
         self.central = QFrame()
 
         self.central.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
@@ -44,10 +56,16 @@ class transition(QWidget):
             self.central_layout.addWidget(self.central_widget)
 
     def setup_main(self):
+        '''
+        function to setup main layout
+        '''
         self.main_layout.addWidget(self.central)
         self.main_layout.addWidget(self.bottom_frame)
 
     def clicked_back(self):
+        '''
+        function to go back to previous window when back button is clicked.
+        '''
         self.admin_window.bottom_layout.setCurrentIndex(0)
 
 

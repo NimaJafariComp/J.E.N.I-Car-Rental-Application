@@ -15,7 +15,13 @@ from ..api import api
     # Index 7: Car Color
     # Index 8: Car Type
 class rent_window(QWidget):
+    '''
+    A Class to make the rent window after selecting a car.
+    '''
     def __init__(self, customer_window, car, num_days, start_date, end_date):
+        '''
+        initalizes the rent window class.
+        '''
         super().__init__()
         self.api = api()
         # setup main layout 
@@ -34,6 +40,9 @@ class rent_window(QWidget):
         self.setup_main()
 
     def setup_form(self):
+        '''
+        funtion to set up the parameters of the form widget, makes the widgets to go in the form, and adds them to the form.
+        '''
         self.form = QWidget()
         self.form_layout = QFormLayout(self.form)
         self.start     = QLabel("Pick Up Date: " + self.start_date.toString('yyyy-MM-dd'))
@@ -68,6 +77,9 @@ class rent_window(QWidget):
     
 
     def button_frame(self):
+        '''
+        function to setup the parameters for the back and make button.
+        '''
         self.button_Qframe = QFrame();
         self.button_layout = QHBoxLayout(self.button_Qframe)
         self.back_button = QPushButton("Back")
@@ -85,10 +97,16 @@ class rent_window(QWidget):
 
 
     def setup_main(self):
+        '''
+        function to setup a main the main layout.
+        '''
         self.setup_form()
         self.main_layout.addWidget(self.form, alignment=Qt.AlignCenter)
 
     def make_clicked(self):
+        '''
+        function for when make button is clicked then sends the request to the backend and makes a Reservation then goes to the invoice window.
+        '''
         self.rent_window = invoice_window(self.customer_window, self.car, self.num_days, self.start_date, self.end_date, self.check_insurance.isChecked())
         self.customer_window.bottom_layout.removeWidget(self.customer_window.bottom_layout.widget(4)) 
         self.customer_window.bottom_layout.insertWidget(4, self.rent_window)
@@ -96,6 +114,9 @@ class rent_window(QWidget):
         self.api.car_rental_obj.make_reservation(self.start_date.toString('yyyy-MM-dd'), self.end_date.toString('yyyy-MM-dd'), self.check_insurance.isChecked(), self.email.text(), self.car[0])
 
     def back_clicked(self):
+        '''
+        function for when the back button is clicked to got back.
+        '''
         self.customer_window.bottom_layout.setCurrentIndex(1)
 
  

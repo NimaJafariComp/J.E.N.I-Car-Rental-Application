@@ -4,7 +4,13 @@ from PyQt5.QtGui import *
 from ..config.font import font
 
 class search_bar(QWidget):
+    '''
+    A class that makes a search widget to search the data base for a list of cars from a spescific date range and type.
+    '''
     def __init__(self):
+        '''
+        initializes the search bar class on make.
+        '''
         super().__init__()
         # setup main layout
         self.main_layout = QHBoxLayout(self)
@@ -28,15 +34,24 @@ class search_bar(QWidget):
 
     
     def setup_button(self):
+        '''
+        function to set the parameters for the search button.
+        '''
         self.search_button.setFixedWidth(100)
         self.search_button.setFixedHeight(30)
         self.search_button.setFont(self.font)
         self.search_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
 
     def setup_typebox(self):
+        '''
+        function to set up the parameters for type combo box.
+        '''
         self.type_box.addItems(['Sedan', 'Truck', 'Coupe', 'SUV'])
 
     def setup_search(self):
+        '''
+        function to call all setup functions and add widgets to layout.
+        '''
         self.setup_button()
         self.setup_typebox()
 
@@ -45,6 +60,9 @@ class search_bar(QWidget):
         self.main_layout.addWidget(self.search_button)
 
 class date_picker(QWidget):
+    '''
+    A class to make the dropdown calendar to pick the dates.
+    '''
     def __init__(self):
         super().__init__()
         # Set up the layout
@@ -70,7 +88,9 @@ class date_picker(QWidget):
         self.setLayout(layout)
 
     def update_end_date_minimum(self):
-        """Update the minimum date of the end date selector."""
+        """
+        Update the minimum date of the end date selector.
+        """
         start_date = self.start_date_edit.date()
         self.end_date_edit.setMinimumDate(start_date)
          
