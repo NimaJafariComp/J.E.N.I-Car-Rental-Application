@@ -187,7 +187,7 @@ class car:
         
         """
         rsvp_obj = rsvp(start_date, end_date, insurance, customer_email, car_id)
-        rsvp_obj.set_reservation_id(insert_reservation(start_date, end_date, insurance, customer_email, car_id))
+        rsvp_obj.set_reservation_id(insert_reservation(start_date, end_date, insurance, customer_email, car_id, 0))
         
         self.reservations.append(repr(rsvp_obj))
 
