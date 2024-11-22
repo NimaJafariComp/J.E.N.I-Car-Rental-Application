@@ -1,9 +1,12 @@
 import mysql.connector
 from datetime import datetime
+"""
+Date of Creation: October 1, 2024
+Author: Elijah Sagaran and Nima Jafari
+Date of Updates and Updater:
+1. 
 
-# Error Checks might be better handled by the calling class
-# Instead of this class handling it
-
+"""
 def initialize_connection(my_host: str, my_port: str, username: str, upassword: str) -> None:
     
     """
@@ -24,6 +27,8 @@ def initialize_connection(my_host: str, my_port: str, username: str, upassword: 
     -------
     None
     
+    Author: Elijah Sagaran, 10/1
+    Updates:
     """
     global mydb, mycursor
     mydb = mysql.connector.connect(
@@ -71,6 +76,11 @@ def add_car(vin: str, mileage: int, mpg: int, price: float, license_plate: str, 
     Returns
     -------
     None
+    
+    Author: Elijah Sagaran, 10/1
+    Updates:
+        Nima Jafari, 10/2
+        
     """
 
 
@@ -96,15 +106,11 @@ def get_car_id(vin: str) -> int:
     int
         The car ID assigned by the database
     
+    Author: Elijah Sagaran, 10/1
+    Updates:
+        Nima Jafari, 10/2
     """
 
-"""
-# might not be needed???
-# Description: function to get a car's info from MySQL through CarID
-# Input: CarID, an integer
-# Output: tuple of the following values:
-#           CarID, VIN, Mileage, MPG, Price, IsActive, LicensePlate    
-"""
 def get_car_info(car_id: int) -> tuple:
     """
     Function to get a car's information from database through car ID
@@ -116,6 +122,11 @@ def get_car_info(car_id: int) -> tuple:
     
     Returns
     -------
+    tuple:
+        contains the car's information
+    
+    Author: Elijah Sagaran, 10/1
+    Updates:
     """
     select_prompt = "select * from Vehicles where CarID = %s"
     mycursor.execute(select_prompt, [car_id])
@@ -123,14 +134,26 @@ def get_car_info(car_id: int) -> tuple:
     
     return result
 
-"""
-# Description: function to change Mileage
-# Input: CarID, an integer
-#        Mileage, an integer
-# Output: None    
-"""
 def change_mileage(car_id: int, new_mileage: int) -> None:
-    # need error check in the higher level function
+    """
+    Function to change the value at column Mileage for the car with id car_id
+    
+    Parameters
+    ----------
+    car_id: int
+        The car ID of the car
+    new_mileage: int
+        The new value of mileage
+    
+    Returns
+    -------
+    None
+    
+    Author: Elijah Sagaran, 10/2
+    Updates:
+        Nima Jafari, 10/2
+        Elijah Sagaran, 10/7
+    """
     sql_update_mileage = "update Vehicles set Mileage = %s \
                         where CarId = %s"
     update_value = (new_mileage, car_id)
@@ -138,22 +161,24 @@ def change_mileage(car_id: int, new_mileage: int) -> None:
     mycursor.execute(sql_update_mileage, update_value)
     mydb.commit()
 
-"""
-# add_vehicle_type and get_vehicle_type removed
-# needs to change database table Vehicle to contain Vehicle Type
 
-# Function: get_inventory()
-# Input: None
-# Output: list of tuples, each tuple consists of different fields
-#           CarID, integer
-#           VIN, string
-#           Mileage, integer
-#           MPG, integer
-#           Price, float/decimal
-#           LicensePlate, stiring
-# Description: queries all rows from Vehicles table in database
-"""
 def get_inventory() -> list[tuple]:
+    """
+    Queries all rows from Vehicles table in database
+    
+    Parameters
+    ----------
+    None
+    
+    Returns
+    -------
+    list[tuple]:
+        each tuple contains all the information about a car that is stored in the database
+    
+    Author: Elijah Sagaran, 10/7
+    Updates:
+        
+    """
     inventory = []
     
     sql_select_car = "select CarID, VIN, Mileage, MPG, Price, LicensePlate, CarYear, Model, Make, \
@@ -166,20 +191,23 @@ def get_inventory() -> list[tuple]:
         
     return inventory
 
-"""
-# Function: get_active_inventory()
-# Input: None
-# Output: list of tuples, each tuple consists of different fields
-#           CarID, integer
-#           VIN, string
-#           Mileage, integer
-#           MPG, integer
-#           Price, float/decimal
-#           LicensePlate, stiring
-# Description: queries all rows from Vehicles table in database
-#               where IsActive == 1
-"""
 def get_active_inventory() -> list[tuple]:
+    """
+    Queries all rows that is not retired from Vehicles table in database
+    
+    Parameters
+    ----------
+    None
+    
+    Returns
+    -------
+    list[tuple]:
+        each tuple contains all the information about a car that is stored in the database
+    
+    Author: Elijah Sagaran, 10/7
+    Updates:
+        
+    """
     inventory = []
     mycursor.execute("select * from Vehicles where IsActive = 1")
     myresult = mycursor.fetchall()
@@ -189,13 +217,23 @@ def get_active_inventory() -> list[tuple]:
         
     return inventory
 
-"""
-# Function: deactivate_car()
-# Input: car_id, integer 
-# Output: None 
-# Description: sets the IsActive field in database to 0, making it not active
-"""
 def deactivate_car(car_id: int) -> None:
+    """
+    Sets the IsActive field in databse to 0, making the car inactive
+    
+    Parameters
+    ----------
+    car_id: int
+        The ID of the car
+    
+    Returns
+    -------
+    None
+    
+    Author: Elijah Sagaran, 10/7
+    Updates:
+        
+    """
     sql_retire_car = "update Vehicles set IsActive = %s where CarID = %s"
     value = (0, car_id)
     

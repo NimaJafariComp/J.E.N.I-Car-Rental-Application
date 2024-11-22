@@ -139,7 +139,7 @@ class CarRentalService:
         damages: str
             Description of damages that the vehicle has
         gas_amount: int
-            Current gas amount of vehicle after customer returned it 
+            Current gas amount of vehicle after customer returned it
         reservation_id: int
             Reservation ID that is associated with the car and return date
         
