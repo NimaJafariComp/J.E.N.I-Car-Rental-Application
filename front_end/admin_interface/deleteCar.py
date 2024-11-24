@@ -2,57 +2,80 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from ..config.font import font
+from ..api import api
 
 class delete_car(QWidget):
     def __init__(self):
         super().__init__()
+        #Setup API to backend
+        self.api = api()
+        #Main layout for the widget
+        self.setFixedSize(800, 400)
+        self.main_layout = QVBoxLayout(self)
 
-        # Main Layout for the Widget
-        # self.layout() = QVBoxLayout()
+        #Setup font
+        self.set_font = font()
+        #self.font() == QFont(self.set_font.font_family, 16)
+        self.font = QFont(self.set_font.font_family, 16)
 
-        #Form Layout for input fields
-        self.form_layout = QFormLayout()
+        #Table to display cars with checkboxes
+        self.car_table = QTableWidget()
+        self.car_table.setColumnCount(6) #Example: VIN, Model, Make, Year, Color, Select
+        self.car_table.setHorizontalHeaderLabels(["VIN", "Model", "Make", "Year", "Color","Select"])
+        self.car_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.car_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.car_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
-        #Input field for VIN to delete a car (simple ex)
-        self.vin_input = QLineEdit()
-        self.vin_input.setPlaceholderText("Enter VIN of the car to delete")
+        #Load car data into the table
+        self.load_car_data()
 
-        #Add the input field to the form layout
-        self.form_layout.addRow("VIN", self.vin_input)
+        #Delete button
+        self.delete_button = QPushButton("Delete Selected")
+        self.delete_button.clicked.connect(self.delete_selected_cars)
+        self.delete_button.setFixedSize(200, 50)
+        self.delete_button.setFont(self.font)
+        self.delete_button.setStyleSheet("color: white; background:#ef4c25; border-radius: 5px;")
 
-        #Create a button to submit the deletion request
-        self.delete_button = QPushButton("Delete car")
-        self.delete_button.clicked.connect(self.delete_car_from_inventory)
+        #Add widgets to the main layout
+        self.main_layout.addWidget(self.car_table)
+        self.main_layout.addWidget(self.delete_button, alignment=Qt.AlignCenter)
 
-        #Add the form and button to the main layout
-        self.layout.addLayout(self.form_layout)
-        self.layout.addWidget(self.delete_button)
+    def load_car_data(self):
+        """Loads car data into the table with checkboxes"""
+        cars = self.api.car_rental_obj.get_all_cars() #Retrieve all cars from API
+        self.car_table.setRowCount(len(cars))
 
-        #Set the layout for the widget
-        self.setLayout(self.layout)
+        for row, car in enumerate(cars):
+            self.car_table.setItem(row, 0, QTableWidgetItem(car["vin"]))
+            self.car_table.setItem(row, 1, QTableWidgetItem(car["model"]))
+            self.car_table.setItem(row, 2, QTableWidgetItem(car["make"]))
+            self.car_table.setItem(row, 3, QTableWidgetItem(car["year"]))
+            self.car_table.setItem(row, 4, QTableWidgetItem(car["color"]))
 
-    def delete_car_from_inventory(self):
-        #Retrieve the VIN from the input field
-        vin = self.vin_input.text()
+            #Add a checkbox for selection
+            checkbox = QCheckBox()
+            checkbox_widget = QWidget()
+            checkbox_layout = QHBoxLayout(checkbox_widget)
+            checkbox_layout.addWidget(checkbox)
+            checkbox_layout.setAlignment(Qt.AlignCenter)
+            checkbox_layout.setContentsMargins(0, 0, 0, 0)
+            self.car_table.setCellWidget(row, 5, checkbox_widget)
 
-        #Error handling if VIN is empty
-        if not vin:
-            print("VIN field is empty. Please enter a valid VIN.")
-            return
-        #Simulate deletion logic(since no actual database or car list is provided)
-        print(f"Simulated deletion of car with VIN {vin}.")
+    def delete_selected_cars(self):
+        """Delete selected cars based on checked checkboxes"""
+        for row in range(self.car_table.rowCount()):
+            checkbox_widget = self.car_table.cellWidget(row, 5)
+            checkbox = checkbox_widget.findChild(QCheckBox)
 
-        #Optionally, clear the infield after deletion
-        self.clear_input_field()
+            if checkbox.isChecked():
+                vin = self.car_table.item(row, 0).text() #Get VIN from the table
+                self.api.car_rental_obj.delete_car(vin) #call delete function
 
-    def clear_input_field(self):
-        """CLear the VIN field after the car is deleted."""
-        self.vin_input_clear()
-        
+            #Refresh the table after delete function
+            self.load_car_data()
+
 if __name__ == "__main__":
     import sys
-    from ..config.screenConfig import screen_config
-    screen_config = screen_config()
     app = QApplication(sys.argv)
     window = delete_car()
     window.show()
