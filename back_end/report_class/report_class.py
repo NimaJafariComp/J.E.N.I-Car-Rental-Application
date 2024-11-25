@@ -72,3 +72,7 @@ class report:
             The unique identifier to assign to this report.
         """
         self.report_id = report_id
+    
+    
+    def __repr__(self):
+        return 'Report ID: {}'.format(self.report_id)

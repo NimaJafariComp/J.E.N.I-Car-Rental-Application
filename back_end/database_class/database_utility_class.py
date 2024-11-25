@@ -441,6 +441,11 @@ def search_database(start_date: str, end_date: str, car_type: str) -> list[tuple
     return inventory
 
 def get_vins():
+    """
+    Retrieve a list of all Vehicle Identification Numbers (VINs) from the database.
+
+    @return list - A list of VINs.
+    """
     inventory = []
     sql_select_vins = "select VIN from Vehicles"
     mycursor.execute(sql_select_vins)
@@ -452,6 +457,17 @@ def get_vins():
     return inventory 
 
 def insert_reservation(start_date: str, end_date: str, insurance: bool, customer_email: str, car_id: int, canceled: bool) -> int:
+    """
+    Insert a new reservation into the database.
+
+    @param start_date: str - Reservation start date in 'YYYY-MM-DD' format.
+    @param end_date: str - Reservation end date in 'YYYY-MM-DD' format.
+    @param insurance: bool - Indicates if insurance is included.
+    @param customer_email: str - Customer's email address.
+    @param car_id: int - ID of the reserved car.
+    @param canceled: bool - Indicates if the reservation is canceled.
+    @return int - The ID of the newly created reservation.
+    """
     sql_insert_reservation = "insert into Reservations (StartDate, EndDate, Insurance, CustomerEmail, Vehicle, Canceled) \
                             values (%s, %s, %s, %s, %s,%s)"
     reservation_values = (start_date, end_date, insurance, customer_email, car_id, canceled)
@@ -467,6 +483,12 @@ def insert_reservation(start_date: str, end_date: str, insurance: bool, customer
 
 
 def get_reports(car_id):
+    """
+    Retrieve all reports for a specific vehicle.
+
+    @param car_id: int - ID of the vehicle.
+    @return list: A list of reports associated with the vehicle.
+    """
     reports = []
     sql_select_reports = "select * from Reports where Vehicle = %s"
     mycursor.execute(sql_select_reports, [car_id])
@@ -508,6 +530,12 @@ def calculate_days(start_date: str, end_date: str) -> int:
         return -1
 
 def get_customer_info(customer_id: int) -> dict:
+    """
+    Retrieve customer information by their ID.
+
+    @param customer_id: int - ID of the customer.
+    @return dict: A dictionary containing the customer's information, or None if not found.
+    """
     select_prompt = "SELECT CustomerID, FullName, DOB, Email FROM Customers WHERE CustomerID = %s"
     mycursor.execute(select_prompt, (customer_id,))
     result = mycursor.fetchone()
@@ -525,6 +553,11 @@ def get_customer_info(customer_id: int) -> dict:
         return None
 
 def get_reservations():
+    """
+    Retrieve all reservations from the database.
+
+    @return list: A list of all reservations.
+    """
     reservations = []
     sql_select_reservations = "select * from Reservations"
     mycursor.execute(sql_select_reservations)
@@ -537,6 +570,13 @@ def get_reservations():
 
 
 def get_hashed_password(login_username: int, person_type: str) -> str:
+    """
+    Retrieve the hashed password for a user.
+
+    @param login_username: int - The username or ID of the user.
+    @param person_type: str - The type of user ('customer' or 'admin').
+    @return str: The hashed password of the user.
+    """
     if(person_type.lower() == "customer"):
         sql_select_password = "select Password from Customers where CustomerID = %s"
     elif(person_type.lower() == "admin"):
@@ -548,6 +588,16 @@ def get_hashed_password(login_username: int, person_type: str) -> str:
     return result[0]
 
 def admin_sign_up(name: str, signup_username: str, email: str, password: str) -> None:
+    """
+    Register a new admin user.
+
+    @param name: str - Name of the admin.
+    @param signup_username: str - Username for the admin.
+    @param email: str - Email address of the admin.
+    @param password: str - Password for the admin account.
+    @return None
+    """
+
     sql_insert_admin = "insert into Administrator (User, Email, Password, Username) values (%s, %s, %s, %s)"
     admin_values = (name, email, password, signup_username)
     
@@ -555,6 +605,14 @@ def admin_sign_up(name: str, signup_username: str, email: str, password: str) ->
     mydb.commit()
 
 def change_password(input_username: str, input_password: str, person_type: str) -> None:
+    """
+    Change the password for a user.
+
+    @param input_username: str - Username of the user.
+    @param input_password: str - New password for the user.
+    @param person_type: str - The type of user ('customer' or 'admin').
+    @return None
+    """
     if(person_type.lower() == "customer"):
         sql_update = "update Customers set Password = %s where Username = %s"
     elif(person_type.lower() == "admin"):

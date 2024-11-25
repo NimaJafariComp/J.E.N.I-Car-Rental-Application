@@ -1,12 +1,23 @@
 import mysql.connector
 
 class test:
-    
+    """
+    A class to handle interactions with a MySQL database for a car rental application.
+    """
     # Description: initilization function
     # Input: my_username, a string
     #        my_password, a string
     # Output: None
     def __init__(self,my_host, my_port, my_username, my_password):
+        """
+        Initializes the Test class with MySQL connection details.
+
+        Parameters:
+        my_host (str): Hostname or IP address of the MySQL server.
+        my_port (int): Port number for the MySQL server.
+        my_username (str): Username for MySQL authentication.
+        my_password (str): Password for MySQL authentication.
+        """
         self.username = my_username
         self.password = my_password
         self.host = my_host
@@ -17,6 +28,7 @@ class test:
     # Input: None
     # Output: None
     def connect_to_mysql(self):
+        
         self.mydb = mysql.connector.connect(
             host = self.host,
             user = self.username,
@@ -35,6 +47,20 @@ class test:
     #        uLicensePlate, a string - Car's license plate
     # Output: None
     def add_car(self, uVIN, uMileage, uMPG, uPrice, uIsActive, uLicensePlate):
+        """
+        Adds a new car to the MySQL database.
+
+        Parameters:
+        uVIN (str): Vehicle Identification Number of the car.
+        uMileage (int): Mileage of the car.
+        uMPG (int): Miles per gallon of the car.
+        uPrice (float): Price per day for renting the car.
+        uIsActive (int): Indicates if the car is active (1) or retired (0).
+        uLicensePlate (str): License plate of the car.
+
+        Output:
+        Prints the CarID of the newly added car or a message if the car already exists.
+        """
         
         existing_car_id = self.get_car_id(uVIN) #checking if car exists already
         if existing_car_id is not None: 
@@ -61,6 +87,15 @@ class test:
     # Input: uVIN, a string - Car's VIN
     # Output: carID, an integer 
     def get_car_id(self, uVIN):
+        """
+        Retrieves the CarID associated with the given VIN.
+
+        Parameters:
+        uVIN (str): Vehicle Identification Number.
+
+        Returns:
+        int: CarID if found, otherwise None.
+        """
         self.connect_to_mysql()
         mycursor = self.mydb.cursor()
         
@@ -86,6 +121,15 @@ class test:
     # Output: list of the following values:
     #           CarID, VIN, Mileage, MPG, Price, IsActive, LicensePlate
     def get_car_info(self, CarID):
+        """
+        Retrieves information about a car based on its CarID.
+
+        Parameters:
+        CarID (int): CarID of the vehicle.
+
+        Returns:
+        None. Prints the car details.
+        """
         self.connect_to_mysql()
         mycursor = self.mydb.cursor()
         select_prompt = "select * from Vehicles where CarID = %s"
@@ -103,6 +147,16 @@ class test:
     #        Mileage, an integer
     # Output: None
     def update_mileage(self, CarID, updated_mileage):
+        """
+        Updates the mileage of a car in the database.
+
+        Parameters:
+        CarID (int): CarID of the vehicle.
+        updated_mileage (int): New mileage to update.
+
+        Returns:
+        None.
+        """
         self.connect_to_mysql()
         mycursor = self.mydb.cursor()
         
@@ -118,6 +172,20 @@ class test:
     #        StartDate, EndDate, Insurance, CustomerID, Vehicle, optional values to update
     # Output: None
     def update_reservation(self, ReservationID, StartDate=None, EndDate=None, Insurance=None, CustomerID=None, Vehicle=None):
+        """
+        Updates an existing reservation in the database.
+
+        Parameters:
+        ReservationID (int): ID of the reservation to update.
+        StartDate (str, optional): New start date for the reservation.
+        EndDate (str, optional): New end date for the reservation.
+        Insurance (bool, optional): Updated insurance status.
+        CustomerID (int, optional): Updated CustomerID.
+        Vehicle (int, optional): Updated Vehicle ID.
+
+        Returns:
+        None.
+        """
         self.connect_to_mysql()
         mycursor = self.mydb.cursor()
         
@@ -152,6 +220,12 @@ class test:
     # Input: ReservationID, an integer - ID of the reservation to remove
     # Output: None
     def remove_reservation(self, ReservationID):
+        """
+        Remove an existing reservation from the database.
+
+        @param ReservationID: int - ID of the reservation to remove.
+        @return None
+        """
         self.connect_to_mysql()
         mycursor = self.mydb.cursor()
         
@@ -167,6 +241,16 @@ class test:
     #        Damages, GasAmount, Vehicle, Customer, optional values to update
     # Output: None
     def update_report(self, ReportID, Damages=None, GasAmount=None, Vehicle=None, ReservationID=None):
+        """
+        Update an existing report by its ReportID.
+
+        @param ReportID: int - ID of the report to update.
+        @param Damages: str, optional - Updated damages information.
+        @param GasAmount: float, optional - Updated gas amount.
+        @param Vehicle: str, optional - Updated vehicle information.
+        @param ReservationID: int, optional - Updated reservation ID.
+        @return None
+        """
         self.connect_to_mysql()
         mycursor = self.mydb.cursor()
         
@@ -197,6 +281,12 @@ class test:
     # Input: ReportID, an integer - ID of the report to remove
     # Output: None
     def remove_report(self, ReportID):
+        """
+        Remove an existing report from the database.
+
+        @param ReportID: int - ID of the report to remove.
+        @return None
+        """
         self.connect_to_mysql()
         mycursor = self.mydb.cursor()
         
@@ -212,6 +302,15 @@ class test:
     #        FullName, DOB, Email, optional values to update
     # Output: None
     def update_customer(self, CustomerID, FullName=None, DOB=None, Email=None):
+        """
+        Update an existing customer's details by their CustomerID.
+
+        @param CustomerID: int - ID of the customer to update.
+        @param FullName: str, optional - Updated full name of the customer.
+        @param DOB: str, optional - Updated date of birth of the customer.
+        @param Email: str, optional - Updated email of the customer.
+        @return None
+        """
         self.connect_to_mysql()
         mycursor = self.mydb.cursor()
         
@@ -239,6 +338,12 @@ class test:
     # Input: CustomerID, an integer - ID of the customer to remove
     # Output: None
     def remove_customer(self, CustomerID):
+        """
+        Remove an existing customer and their associated reservations.
+
+        @param CustomerID: int - ID of the customer to remove.
+        @return None
+        """
         self.connect_to_mysql()
         mycursor = self.mydb.cursor()
 
