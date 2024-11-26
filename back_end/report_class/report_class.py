@@ -1,7 +1,7 @@
 class report:
     """
     A class to represent a report for a car rental, detailing damages, gas amount, 
-    and associated car and reservation IDs.
+    and associated car and reservation IDs random stuf AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA.
 
     Attributes
     ----------
