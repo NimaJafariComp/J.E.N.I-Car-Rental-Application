@@ -17,7 +17,7 @@ class admin_window(QWidget):
         self.bottom_frame = QFrame()
 
         # setup other sub widgets
-        self.customer_button = QPushButton("Customer")
+        self.signout_button = QPushButton("Sign Out")
 
         # set up logo
         self.logo = QLabel()
@@ -49,13 +49,13 @@ class admin_window(QWidget):
         self.top_frame.setStyleSheet("background:white;")
         self.top_frame_layout.addWidget(self.logo)
         self.top_frame_layout.addStretch()
-        self.top_frame_layout.addWidget(self.customer_button)
+        self.top_frame_layout.addWidget(self.signout_button)
         
     def setup_button(self):
-        self.customer_button.setFixedWidth(100)
-        self.customer_button.setFixedHeight(40)
-        self.customer_button.setFont(self.font)
-        self.customer_button.setStyleSheet("color: white; background: #efbe25; border-radius: 5px;")
+        self.signout_button.setFixedWidth(100)
+        self.signout_button.setFixedHeight(40)
+        self.signout_button.setFont(self.font)
+        self.signout_button.setStyleSheet("color: white; background: #efbe25; border-radius: 5px;")
 
 
     def setup_bottom(self):

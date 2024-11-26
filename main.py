@@ -2,11 +2,9 @@ import sys
 from PyQt5.QtWidgets import *
 from front_end.config.screenConfig import screen_config
 from front_end.mainWindow import main_window
-from tunnel import start_tunnel
-from tunnel import tunnel
 
 def main():
-    tunnel(run)
+    run()
 
 def run():
     screenConfig = screen_config()

@@ -59,8 +59,8 @@ class main_window(QMainWindow):
         self.stacked_widget.addWidget(self.a_window)
         self.stacked_widget.setCurrentIndex(0) 
 
-        self.c_window.admin_button.clicked.connect(self.on_click_admin)
-        self.a_window.customer_button.clicked.connect(self.on_click_customer)
+        self.c_window.signout_button.clicked.connect(self.on_click_admin)
+        self.a_window.signout_button.clicked.connect(self.on_click_customer)
 
     def on_click_admin(self):
         '''

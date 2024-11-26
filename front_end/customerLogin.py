@@ -172,7 +172,11 @@ class customer_login(QWidget):
         if pw == entered_pw and user == entered_user: 
             self.main_window.stacked_widget.setCurrentIndex(4)
             self.main_window.a_window.bottom_layout.setCurrentIndex(0)
+            self.user_box.clear()
             self.pw_box.clear()
 
     def click_back(self):
         self.main_window.stacked_widget.setCurrentIndex(0)
+        self.user_box.clear()
+        self.pw_box.clear()
+

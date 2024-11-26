@@ -49,7 +49,7 @@ class customer_window(QWidget):
         self.scroll_layout = QVBoxLayout(self.tile_window)
 
         # setup sub widgets
-        self.admin_button = QPushButton("Admin")
+        self.signout_button = QPushButton("Sign Out")
 
         # setup logo
         self.logo = QLabel()
@@ -84,7 +84,7 @@ class customer_window(QWidget):
 
     def setup_topframe(self):
         '''
-        function to setup the parameter for the top frame of the customer window that has the admin button and the logo.
+        function to setup the parameter for the top frame of the customer window that has the sign out button and the logo.
         '''
         self.top_frame.setFrameShape(QFrame.StyledPanel)
         self.top_frame.setFixedHeight(int(100))
@@ -94,12 +94,12 @@ class customer_window(QWidget):
 
     def setup_button(self):
         '''
-        function to set up the parameters for the admin button.
+        function to set up the parameters for the sign out button.
         '''
-        self.admin_button.setFixedWidth(100)
-        self.admin_button.setFixedHeight(40)
-        self.admin_button.setFont(self.font)
-        self.admin_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
+        self.signout_button.setFixedWidth(100)
+        self.signout_button.setFixedHeight(40)
+        self.signout_button.setFont(self.font)
+        self.signout_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
 
     def setup_bottomframe(self):
         '''
@@ -127,7 +127,7 @@ class customer_window(QWidget):
         '''
         self.customer_layout.setContentsMargins(0, 0, 0, 0)
         self.customer_layout.setSpacing(0)
-        self.top_frame_layout.addWidget(self.admin_button)
+        self.top_frame_layout.addWidget(self.signout_button)
         self.customer_layout.addWidget(self.top_frame)
         self.customer_layout.addWidget(self.bottom_frame)
 
