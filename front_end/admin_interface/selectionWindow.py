@@ -5,6 +5,7 @@ from ..config.font import font
 from .addCar import add_car
 from .reservations import reservations
 from .transitionWindow import transition
+from .deleteCar import delete_car
 
 class selection_window(QWidget):
     def __init__(self, admin_window):
@@ -36,6 +37,7 @@ class selection_window(QWidget):
         self.delete_button.setFont(self.font)
         self.delete_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
         self.main_layout.addWidget(self.delete_button, 0, 1)
+        self.delete_button.clicked.connect(self.clicked_delete)
 
         # reservations button
         self.reservations_button = QPushButton("reservations")
@@ -59,6 +61,16 @@ class selection_window(QWidget):
             self.admin_window.bottom_layout.removeWidget(self.admin_window.bottom_layout.widget(2)) 
         self.admin_window.bottom_layout.insertWidget(2, self.reservation_window)
         self.admin_window.bottom_layout.setCurrentIndex(2)
+
+    def clicked_delete(self):
+        self.delete = delete_car()
+        self.delete_window = transition(self.admin_window, self.delete, 0)
+        if self.admin_window.bottom_layout.widget(5) is not None:
+            self.admin_window.bottom_layout.removeWidget(self.admin_window.bottom_layout.widget(5)) 
+        self.admin_window.bottom_layout.insertWidget(5, self.reservation_window)
+        self.admin_window.bottom_layout.setCurrentIndex(5)
+
+
 
 if __name__ == "__main__":
     import sys

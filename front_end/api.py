@@ -19,4 +19,5 @@ class api():
         
         # initialize_database(self.host, self.port, self.username, self.password)
         self.car_rental_obj = cr(self.host, self.port, self.username, self.password)
+        
         self.car_rental_obj.connect_to_mysql()
