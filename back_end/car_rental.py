@@ -1,7 +1,12 @@
 from .database_class import database_utility_class as dbu
 from .database_class.inventory_class import inventory as inv
 from .invoice_class.invoice_class import InvoiceSender
+<<<<<<< HEAD
 from .revenue_class import revenue
+=======
+from .database_class.admin_class import Administrator as admin
+from .database_class.customer_class import Customer as cust
+>>>>>>> a0e39799d42596915144bae10626b45b866f45b7
 import bcrypt
 
 class CarRentalService:
@@ -355,7 +360,7 @@ class CarRentalService:
         """
         return dbu.get_active_inventory()
     
-    def check_password_admin(self, input_username: str, input_password: str) -> bool:
+    def check_password_admin(self, input_username: str, input_password: str, person_type: str) -> bool:
         """
         Checks if the input password matches with the password stored in the database for the input username
         
@@ -365,6 +370,8 @@ class CarRentalService:
             The username of the person
         input_password: str
             The password of the person
+        person_type: str
+            admin or customer, indicates which table we need to query the password from
         
         Return
         ------
@@ -376,7 +383,10 @@ class CarRentalService:
         Updates:
             Elijah, 11/16
         """
-        hashed_password = dbu.get_hashed_password(input_username, "Admin").encode('utf-8')
+        if person_type.lower() != "customer" or person_type.lower() != "admin":
+            return false
+        
+        hashed_password = dbu.get_hashed_password(input_username, person_type).encode('utf-8')
         return bcrypt.checkpw(input_password.encode(), hashed_password)
     
     def hash_password(self, input_password: str) -> str:
