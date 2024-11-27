@@ -1,6 +1,7 @@
 from .database_class import database_utility_class as dbu
 from .database_class.inventory_class import inventory as inv
 from .invoice_class.invoice_class import InvoiceSender
+from .revenue_class import revenue
 import bcrypt
 
 class CarRentalService:
@@ -442,3 +443,16 @@ class CarRentalService:
         """
         hashed_password = self.hash_password(input_password)
         dbu.change_password(input_username, hashed_password, "admin")
+        
+    def revenue(self) -> dict:
+        """
+        Calculate weekly, monthly, and yearly revenue from reservations.
+
+        Returns
+        -------
+        dict
+            A dictionary containing weekly, monthly, and yearly revenue.
+        """
+        reservations = self.get_reservations()
+        return revenue(reservations)
+        
