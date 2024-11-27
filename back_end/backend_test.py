@@ -1,6 +1,6 @@
 from database_class import database_utility_class as dbu
 from database_class.inventory_class import inventory as inv
-
+import car_rental
 """
 # dbu.initialize_connection()
 # inv_object = inv()
@@ -43,6 +43,11 @@ host = '127.0.0.1'
 port = 3307
 
 dbu.initialize_connection(host, port, username, password)
-hashed_password = dbu.get_hashed_password(1, "Admin")
-print(hashed_password[0])
+
+car_rental_service = car_rental.CarRentalService(my_host=host, my_port=port, username=username, password=password)
+print(car_rental_service.get_reservations())
+
+car_rental_service.make_reservation("2025-05-10", "2025-05-12", 0,"AYOOOOOOOOOOOOOOOOOOO",7)
+print(car_rental_service.get_reservations())
+
 

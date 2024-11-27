@@ -1,12 +1,9 @@
 from .database_class import database_utility_class as dbu
 from .database_class.inventory_class import inventory as inv
 from .invoice_class.invoice_class import InvoiceSender
-<<<<<<< HEAD
-from .revenue_class import revenue
-=======
+from .revenue_class.revenue import Revenue
 from .database_class.admin_class import Administrator as admin
 from .database_class.customer_class import Customer as cust
->>>>>>> a0e39799d42596915144bae10626b45b866f45b7
 import bcrypt
 
 class CarRentalService:
@@ -233,6 +230,8 @@ class CarRentalService:
             Email of the customer for the invoice/confirmation email
         car_id: int
             The car ID of the desired car
+        total_price: float
+            The total reservation price, initially 0 calculated for invoice
         
         Returns
         -------
@@ -250,13 +249,28 @@ class CarRentalService:
         """
         index = self.inv_obj.search_car(car_id)
         if index == -1:
+            print("index -1")
+            return
+        
+        car = dbu.get_car_info(car_id)
+        
+        if not car: #not customer or not car:
+            print("Error: Unable to fetch customer or vehicle information.")
             return
             
-        self.inv_obj.get_inventory()[index].add_reservation(start_date, end_date, insurance, customer_email, car_id)
+        daily_price = car[4]
         
-        self.send_invoice(customer_email, car_id, start_date, insurance, end_date) #send invoice after reservation is done, so we dont have to search database for reservations and then send em
+        total_days = dbu.calculate_days(start_date, end_date)
+        
+        total_price = daily_price * total_days
+        
+        #print(total_price)
+            
+        self.inv_obj.get_inventory()[index].add_reservation(start_date, end_date, insurance, customer_email, car_id, total_price)
+        
+        self.send_invoice(customer_email, car_id, start_date, insurance, end_date, total_price, total_days, daily_price) #send invoice after reservation is done, so we dont have to search database for reservations and then send em
     
-    def send_invoice(self, customer_email: str, car_id: int, start_date: str, insurance: bool, end_date: str) -> None:
+    def send_invoice(self, customer_email: str, car_id: int, start_date: str, insurance: bool, end_date: str, total_price:float, total_days:float, daily_price:float) -> None:
         """
         Sends the invoice to customer's email after they reserve a car
         
@@ -272,6 +286,12 @@ class CarRentalService:
             Indicates if customer wants to include insurance for the reservation
         end_date: str
             The end date of the reservation
+        total_price: float
+            The total price of the reservation.
+        total_days: float
+            The total number of rental days.
+        daily_price: float
+            The price per day for the car rental.
         
         Returns
         -------
@@ -286,6 +306,7 @@ class CarRentalService:
             Nima, 10/28
             Elijah, 10/29
             Elijah, 11/10
+            Nima, 11/27
         """
         
         # customer = dbu.get_customer_info(customer_id)
@@ -294,10 +315,10 @@ class CarRentalService:
         if not car: #not customer or not car:
             print("Error: Unable to fetch customer or vehicle information.")
             return
-            
-        daily_price = car[4]
-        total_days = dbu.calculate_days(start_date, end_date)
-        total_price = daily_price * total_days
+        
+        print(daily_price)
+        print(total_days)
+        print(total_price)
         
         # Prepare dynamic data for the template
         dynamic_data = {
@@ -306,11 +327,11 @@ class CarRentalService:
             "car_model": car[9],
             "car_brand": car[8],
             "car_year": car[7],
-            "daily_price": f"{daily_price:.2f}",
+            "daily_price": f"{(daily_price):.2f}",
             "start_date": start_date,
             "end_date": end_date,
-            "total_days": total_days,
-            "total_price": f"{total_price:.2f}",
+            "total_days": (total_days),
+            "total_price": f"{(total_price):.2f}",
             "insurance_status": "Yes" if insurance else "No"
         }
         
@@ -384,7 +405,7 @@ class CarRentalService:
             Elijah, 11/16
         """
         if person_type.lower() != "customer" or person_type.lower() != "admin":
-            return false
+            return False
         
         hashed_password = dbu.get_hashed_password(input_username, person_type).encode('utf-8')
         return bcrypt.checkpw(input_password.encode(), hashed_password)
@@ -464,5 +485,7 @@ class CarRentalService:
             A dictionary containing weekly, monthly, and yearly revenue.
         """
         reservations = self.get_reservations()
-        return revenue(reservations)
+        revenue_instance = Revenue()
+        calculated_revenue = revenue_instance.revenue(reservations=reservations)
+        print(calculated_revenue)
         

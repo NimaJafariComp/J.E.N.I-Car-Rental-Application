@@ -24,11 +24,19 @@ def main():
     """
     Test for password check
     """
-    # print(car_rental_obj.check_password_admin("admin_jeni", "computer123")) 
+    #print(car_rental_obj.check_password_admin("admin_jeni", "computer123","admin")) 
     
     """
     Test for changing passwords
     """
     # car_rental_obj.update_password_admin("admin_jeni", "computer123")
-
+    
+    
+    #car_rental_obj.make_reservation("2025-05-10", "2025-05-12", 0,"AYOOOOOOOOOOOOOOOOOOO",7)
+    #car_rental_obj.make_reservation("2024-05-04", "2024-05-08", 0,"nima.mona82@gmail.com",3)
+    print(car_rental_obj.get_reservations())
+    print("\n")
+    car_rental_obj.revenue()
+    car_rental_obj.make_reservation("2024-05-04", "2024-05-08", 0, "nima.mona82@gmail.com",5)
+    car_rental_obj.make_reservation("2024-06-04", "2024-06-08", 0, "nima.jafari.614@my.csun,edu",2)
 main()

@@ -279,7 +279,7 @@ def get_reports(car_id):
 #        StartDate, EndDate, Insurance, CustomerID, Vehicle, optional values to update
 # Output: None        
 """
-def update_reservation(reservation_id: int, start_date=None, end_date=None, insurance=None, customer_id=None, uVehicle=None, canceled=None) -> None:
+def update_reservation(reservation_id: int, start_date=None, end_date=None, insurance=None, customer_id=None, uVehicle=None, canceled=None, total_price=None) -> None:
     update_query = "UPDATE Reservations SET "
     update_values = []
     if start_date:
@@ -300,6 +300,9 @@ def update_reservation(reservation_id: int, start_date=None, end_date=None, insu
     if canceled:
         update_query += "Canceled = %s, "
         update_values.append(canceled)
+    if total_price:
+        update_query += "TotalPrice = %s, "
+        update_values.append(total_price)
         
     update_query = update_query.rstrip(', ') + " WHERE ReservationID = %s"
     update_values.append(reservation_id)
@@ -456,7 +459,7 @@ def get_vins():
 
     return inventory 
 
-def insert_reservation(start_date: str, end_date: str, insurance: bool, customer_email: str, car_id: int, canceled: bool) -> int:
+def insert_reservation(start_date: str, end_date: str, insurance: bool, customer_email: str, car_id: int, canceled: bool, total_price: float) -> int:
     """
     Insert a new reservation into the database.
 
@@ -466,11 +469,13 @@ def insert_reservation(start_date: str, end_date: str, insurance: bool, customer
     @param customer_email: str - Customer's email address.
     @param car_id: int - ID of the reserved car.
     @param canceled: bool - Indicates if the reservation is canceled.
+    @param total_price: float - total price for reservation, initially 0 to be calculated
     @return int - The ID of the newly created reservation.
     """
-    sql_insert_reservation = "insert into Reservations (StartDate, EndDate, Insurance, CustomerEmail, Vehicle, Canceled) \
-                            values (%s, %s, %s, %s, %s,%s)"
-    reservation_values = (start_date, end_date, insurance, customer_email, car_id, canceled)
+
+    sql_insert_reservation = "insert into Reservations (StartDate, EndDate, Insurance, CustomerEmail, Vehicle, Canceled, TotalPrice) \
+                            values (%s, %s, %s, %s, %s,%s,%s)"
+    reservation_values = (start_date, end_date, insurance, customer_email, car_id, canceled, total_price)
     
     mycursor.execute(sql_insert_reservation, reservation_values)
     mydb.commit()

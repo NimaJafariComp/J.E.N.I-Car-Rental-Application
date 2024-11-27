@@ -3,45 +3,49 @@ from collections import defaultdict
 
 class Revenue:
     def __init__(self):
-        # Initialize any necessary attributes
         pass
 
     def revenue(self, reservations: list[tuple]) -> dict:
         """
-        Calculates the weekly, monthly, and yearly revenue from the reservations.
+        Calculates weekly, monthly, and yearly revenue from reservations. Partiotioned Based on starting day(pay day) 
 
         Parameters
         ----------
         reservations : list[tuple]
             A list of reservations where each tuple contains reservation information.
-        
+            Tuple format: (id, start_date, end_date, ..., total_price)
+
         Returns
         -------
         dict
-            A dictionary with keys for weekly, monthly, and yearly revenue.
+            A dictionary with keys for weekly, monthly, and yearly revenue. 
         """
+        # Initialize revenue containers
         weekly_revenue = defaultdict(float)
         monthly_revenue = defaultdict(float)
         yearly_revenue = defaultdict(float)
 
-        # Loop through the reservations and calculate revenue
         for reservation in reservations:
-            start_date = reservation[1]  # Assuming the start date is in the second column
-            amount = reservation[2]  # Assuming the revenue amount is in the third column
-            
-            # Get the week, month, and year from the start_date
-            week = start_date.strftime("%Y-%U")  # Format as Year-Week
-            month = start_date.strftime("%Y-%m")  # Format as Year-Month
-            year = start_date.year  # Get the year
+            # Extract necessary fields from each reservation
+            start_date = reservation[1]
+            total_price = reservation[-1]  # Assuming total_price is the last field
 
-            # Add the amount to each of the categories
-            weekly_revenue[week] += amount
-            monthly_revenue[month] += amount
-            yearly_revenue[year] += amount
+            if not isinstance(start_date, datetime.date):
+                continue  # Skip invalid data
 
-        # Return the revenue data as a dictionary
+            # Calculate year, month, and ISO week
+            year = start_date.year
+            month = start_date.month
+            week = start_date.isocalendar()[1]
+
+            # Accumulate revenues
+            weekly_revenue[f"{year}-{week:02}"] += total_price
+            monthly_revenue[f"{year}-{month:02}"] += total_price
+            yearly_revenue[year] += total_price
+
+        # Convert defaultdict to regular dict for cleaner output
         return {
-            'weekly': dict(weekly_revenue),
-            'monthly': dict(monthly_revenue),
-            'yearly': dict(yearly_revenue)
+            "weekly": dict(weekly_revenue),
+            "monthly": dict(monthly_revenue),
+            "yearly": dict(yearly_revenue),
         }
