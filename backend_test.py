@@ -34,8 +34,8 @@ def main():
     
     #car_rental_obj.make_reservation("2025-05-10", "2025-05-12", 0,"AYOOOOOOOOOOOOOOOOOOO",7)
     #car_rental_obj.make_reservation("2024-05-04", "2024-05-08", 0,"nima.mona82@gmail.com",3)
-    car_rental_obj.reservation_cancel_setter(62)
-    car_rental_obj.reservation_confirm_setter(62)
+    car_rental_obj.reservation_cancel_setter(61)
+    car_rental_obj.reservation_confirm_setter(61)
     print(car_rental_obj.get_reservations())
     print("\n")
     car_rental_obj.revenue()

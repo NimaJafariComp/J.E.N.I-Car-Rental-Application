@@ -648,10 +648,26 @@ def cancel_reservation(reservation_id: int) -> None:
 def confirm_reservation(reservation_id: int) -> None:
     """
     Confirm a reservation by updating its status to confirmed.
+    A reservation cannot be confirmed if it is already marked as canceled.
 
     @param reservation_id: int - The ID of the reservation to be confirmed.
     @return None
     """
+
+    # Check if the reservation is already canceled
+    check_canceled_query = "SELECT Canceled FROM Reservations WHERE ReservationId = %s"
+    mycursor.execute(check_canceled_query, (reservation_id,))
+    result = mycursor.fetchone()
+
+    if result is None:
+        print(f"No reservation found with ID {reservation_id}.")
+        return
+
+    if result[0] == 1:
+        print(f"Reservation {reservation_id} is canceled and cannot be confirmed.")
+        return
+    
+    
     # Update the Canceled column in the Reservations table
     set_confirmed_to_one = "UPDATE Reservations SET Confirmed = 1 WHERE ReservationId = %s"
     mycursor.execute(set_confirmed_to_one, (reservation_id,))
