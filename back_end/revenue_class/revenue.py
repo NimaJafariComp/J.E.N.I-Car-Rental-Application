@@ -7,7 +7,7 @@ class Revenue:
 
     def revenue(self, reservations: list[tuple]) -> dict:
         """
-        Calculates weekly, monthly, and yearly revenue from reservations. Partiotioned Based on starting day(pay day) 
+        Calculates weekly, monthly, and yearly revenue from reservations. Partitioned based on starting day (pay day).
 
         Parameters
         ----------
@@ -38,8 +38,15 @@ class Revenue:
             month = start_date.month
             week = start_date.isocalendar()[1]
 
+            # Calculate the start and end dates for the week
+            start_of_week = start_date - datetime.timedelta(days=start_date.weekday())
+            end_of_week = start_of_week + datetime.timedelta(days=6)
+
+            # Format the week range
+            week_range = f"{start_of_week.strftime('%Y-%m-%d')} to {end_of_week.strftime('%Y-%m-%d')}"
+
             # Accumulate revenues
-            weekly_revenue[f"{year}-{week:02}"] += total_price
+            weekly_revenue[f"{year}-{week:02}: {week_range}"] += total_price
             monthly_revenue[f"{year}-{month:02}"] += total_price
             yearly_revenue[year] += total_price
 
