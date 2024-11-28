@@ -246,6 +246,8 @@ class CarRentalService:
             Elijah, 10/29
             Elijah, 11/7
             ELijah, 11/10
+            Nima jafari, 11/26
+            Nima jafari, 11/27
         """
         index = self.inv_obj.search_car(car_id)
         if index == -1:
@@ -306,6 +308,7 @@ class CarRentalService:
             Nima, 10/28
             Elijah, 10/29
             Elijah, 11/10
+            Nima, 11/26
             Nima, 11/27
         """
         
@@ -483,9 +486,49 @@ class CarRentalService:
         -------
         dict
             A dictionary containing weekly, monthly, and yearly revenue.
+        
+        Author: [Nima jafari], [11/27]
         """
         reservations = self.get_reservations()
         revenue_instance = Revenue()
         calculated_revenue = revenue_instance.revenue(reservations=reservations)
         print(calculated_revenue)
+        
+    def reservation_cancel_setter(self, reservation_id: int) -> None:
+        """
+        Function to mark a reservation as canceled in the database.
+
+        Parameters
+        ----------
+        reservation_id: int
+            The ID of the reservation to be canceled.
+
+        Return
+        ------
+        None
+        
+        Author: [Nima jafari], [11/27]
+        Updates:
+        """
+        dbu.cancel_reservation(reservation_id)
+    
+    def reservation_confirm_setter(self, reservation_id: int) -> None:
+        """
+        Function to mark a reservation as confirmed in the database.
+
+        Parameters
+        ----------
+        reservation_id: int
+            The ID of the reservation to be confirmed.
+
+        Return
+        ------
+        None
+        
+        Author: [Nima jafari], [11/27]
+        Updates:
+        """
+        dbu.confirm_reservation(reservation_id)
+        
+        
         
