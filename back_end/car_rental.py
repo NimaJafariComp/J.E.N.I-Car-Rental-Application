@@ -385,7 +385,7 @@ class CarRentalService:
         """
         return dbu.get_active_inventory()
     
-    def check_password_admin(self, input_username: str, input_password: str, person_type: str) -> bool:
+    def check_password(self, input_username: str, input_password: str, person_type: str) -> bool:
         """
         Checks if the input password matches with the password stored in the database for the input username
         
@@ -408,8 +408,6 @@ class CarRentalService:
         Updates:
             Elijah, 11/16
         """
-        if person_type.lower() != "customer" or person_type.lower() != "admin":
-            return False
         
         hashed_password = dbu.get_hashed_password(input_username, person_type).encode('utf-8')
         return bcrypt.checkpw(input_password.encode(), hashed_password)
@@ -433,7 +431,7 @@ class CarRentalService:
         """
         return bcrypt.hashpw(input_password.encode(), bcrypt.gensalt())
     
-    def create_admin(self, name: str, input_username: str, email: str, input_password: str) -> None:
+    def create_admin(self, name: str, input_username: str, email: str, input_password: str, dob: str) -> None:
         """
         Takes in input from user and stores values in database by calling admin_sign_up function
         
@@ -455,30 +453,12 @@ class CarRentalService:
         Updates:
         """
         hashed_password = self.hash_password(input_password)
-        print(type(hashed_password))
-        dbu.admin_sign_up(name, input_username, email, hashed_password)
+        dbu.admin_sign_up(name, input_username, email, hashed_password, dob)
     
-    def update_password_admin(self, input_username: str, input_password: str) -> None:
-        """
-        Function to update the stored password in the database
-        
-        Parameters
-        ----------
-        input_username: str
-            The username of the user that wants to change their password
-        input_password: str
-            The new desired password of the user
-        
-        Return
-        ------
-        None
-        
-        Author: Elijah Sagaran, 11/16
-        Updates:
-        """
+    def create_customer(self, name: str, input_username: str, email: str, input_password: str, dob: str) -> None:
         hashed_password = self.hash_password(input_password)
-        dbu.change_password(input_username, hashed_password, "admin")
-        
+        dbu.customer_sign_up(name, input_username, email, hashed_password, dob)
+    
     def revenue(self) -> dict:
         """
         Calculate weekly, monthly, and yearly revenue from reservations.
@@ -537,17 +517,26 @@ class CarRentalService:
         elif person_type.lower() == "admin":
             return admin_login(input_username, input_password)
     
-    def user_signup(self, name: str, input_username: str, email: str, input_password: str, dob: str) -> None:
+    def user_signup(self, name: str, input_username: str, email: str, input_password: str, dob: str, person_type: str) -> None:
         if person_type.lower() == "customer":
-            create_signup(name, input_username, email, input_password, dob)
+            create_customer(name, input_username, email, input_password, dob)
         elif person_type.lower() == "admin":
             create_admin(name, input_username, email, input_password, dob)
     
-    def user_update_password(self, input_username: str, input_password: str) -> None:
+    def user_update_password(self, input_username: str, input_password: str, person_type: str) -> None:
+        hashed_password = self.hash_password(input_password)
         if person_type.lower() == "customer":
-            update_password_admin(self, input_username, input_password)
+            dbu.change_password(input_username, hashed_password, person_type)
         elif person_type.lower() == "admin":
-            update_password_admin(self, input_username, input_password)
+            dbu.change_password(input_username, hashed_password, person_type)
     
-    def 
+    def admin_login(self, input_username: str, input_password: str) -> admin:
+        if not self.check_password(input_username, input_password, "admin"):
+            return False
+        
+        info = dbu.get_admin_info(input_username)
+        admin_obj = admin(info[0], info[1], info[2], info[4], info[3], info[5])
+        print(admin_obj)
+        
+        return admin_obj
 

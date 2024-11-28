@@ -607,6 +607,13 @@ def admin_sign_up(name: str, signup_username: str, email: str, password: str, do
     mycursor.execute(sql_insert_admin, admin_values)
     mydb.commit()
 
+def customer_sign_up(name: str, signup_username: str, email: str, password: str, dob: str) -> None:
+    sql_insert_customer = "insert into Customers (FullName, DOB, Email, Username, Password) values (%s, %s, %s, %s, %s)"
+    customer_values = (name, dob, email, signup_username, password)
+    
+    mycursor.execute(sql_insert_customer, customer_values)
+    mydb.commit()
+
 def change_password(input_username: str, input_password: str, person_type: str) -> None:
     """
     Change the password for a user.

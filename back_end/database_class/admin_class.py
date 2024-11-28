@@ -20,7 +20,7 @@ class Administrator:
     dob: str
         date of birth of the user, used for authentication of resetting password
     """
-    def __init__(self, admin_id: int, user: str, email: str, username: str, user_password: str) -> None:
+    def __init__(self, admin_id: int, user: str, email: str, username: str, user_password: str, dob: str) -> None:
         self.admin_id = admin_id
         self.user = user
         self.email = email
@@ -28,4 +28,11 @@ class Administrator:
         self.password = user_password
         self.dob = dob
     
-    
+    def __repr__(self) -> str:
+        return 'Admin Info: \n \
+                Admin ID: {} \n \
+                User: {} \n \
+                Email: {} \n \
+                Username: {} \n \
+                Password: {} \n \
+                DOB: {}'.format(self.admin_id, self.user, self.email, self.username, self.password, self.dob)
