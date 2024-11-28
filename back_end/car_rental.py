@@ -364,6 +364,7 @@ class CarRentalService:
             Elijah, 11/10
         """
         return dbu.get_reservations()
+        
     
     def get_inventory_admin(self) -> list[tuple]:
         """
@@ -547,4 +548,6 @@ class CarRentalService:
             update_password_admin(self, input_username, input_password)
         elif person_type.lower() == "admin":
             update_password_admin(self, input_username, input_password)
+    
+    def 
 

@@ -486,7 +486,6 @@ def insert_reservation(start_date: str, end_date: str, insurance: bool, customer
     
     return myresult[0]
 
-
 def get_reports(car_id):
     """
     Retrieve all reports for a specific vehicle.
@@ -573,7 +572,6 @@ def get_reservations():
     
     return reservations
 
-
 def get_hashed_password(login_username: int, person_type: str) -> str:
     """
     Retrieve the hashed password for a user.
@@ -592,7 +590,7 @@ def get_hashed_password(login_username: int, person_type: str) -> str:
     
     return result[0]
 
-def admin_sign_up(name: str, signup_username: str, email: str, password: str) -> None:
+def admin_sign_up(name: str, signup_username: str, email: str, password: str, dob: str) -> None:
     """
     Register a new admin user.
 
@@ -603,8 +601,8 @@ def admin_sign_up(name: str, signup_username: str, email: str, password: str) ->
     @return None
     """
 
-    sql_insert_admin = "insert into Administrator (User, Email, Password, Username) values (%s, %s, %s, %s)"
-    admin_values = (name, email, password, signup_username)
+    sql_insert_admin = "insert into Administrator (User, Email, Password, Username, DOB) values (%s, %s, %s, %s, %s)"
+    admin_values = (name, email, password, signup_username, dob)
     
     mycursor.execute(sql_insert_admin, admin_values)
     mydb.commit()
@@ -644,7 +642,6 @@ def cancel_reservation(reservation_id: int) -> None:
     # Print confirmation
     print(f"Reservation {reservation_id} has been canceled.")
 
-
 def confirm_reservation(reservation_id: int) -> None:
     """
     Confirm a reservation by updating its status to confirmed.
@@ -679,7 +676,14 @@ def confirm_reservation(reservation_id: int) -> None:
     print(f"Reservation {reservation_id} has been confirmed.")
 
 def get_admin_info(input_username):
-    sql_select_select = "select * from Administrator where Username = %s"
+    sql_select = "select * from Administrator where Username = %s"
+    mycursor.execute(sql_select, [input_username])
+    result = mycursor.fetchone()
+    
+    return result
+
+def get_customer_info(input_username):
+    sql_select = "select * from Customers where Username = %s"
     mycursor.execute(sql_select, [input_username])
     result = mycursor.fetchone()
     
