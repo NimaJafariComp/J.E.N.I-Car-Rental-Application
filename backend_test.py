@@ -8,6 +8,9 @@ def main():
     car_rental_obj = cr(host, port, username, password)
     car_rental_obj.connect_to_mysql()
     
+    car_rental_obj.add_car("4VG7DARF4XN766527", "72", "13", "240", "7JMC420", "2007", "Vectra C", "Opel", "Grey", "Sedan")
+    
+    
     """
     Test for hash_password function
     """

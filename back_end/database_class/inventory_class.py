@@ -61,19 +61,18 @@ class inventory:
         """
         current_vins = get_vins()
         
-        if uVin in current_vins:
+        if vin in current_vins:
             print("VIN is a duplicate")
             return
         
         # use database module to insert car in database 
-        add_car(uVin, uMileage, uMPG, uPrice, uLicensePlate, uCarYear, uModel, uMake, uColor, uCarType)
+        add_car(vin, mileage, mpg, price, license_plate, car_year, model, make, color, car_type)
         
         # initializes a car object for the new car with the provided information
-        car_object = car_class(uVin, uMileage, uMPG, uPrice, uLicensePlate,
-                                    uCarYear, uModel, uMake, uColor, uCarType)
+        car_object = car_class(vin, mileage, mpg, price, license_plate, car_year, model, make, color, car_type)
         
         # retrieves the assigned CarID by the database
-        carID =  get_car_id(uVin)
+        carID =  get_car_id(vin)
         
         # sets the CarID for the car object
         car_object.car_id = carID
