@@ -515,12 +515,12 @@ class CarRentalService:
     def reservation_confirm_setter(self, reservation_id: int) -> None:
         """
         Function to mark a reservation as confirmed in the database.
-
+        
         Parameters
         ----------
         reservation_id: int
             The ID of the reservation to be confirmed.
-
+            
         Return
         ------
         None
@@ -529,6 +529,22 @@ class CarRentalService:
         Updates:
         """
         dbu.confirm_reservation(reservation_id)
-        
-        
-        
+    
+    def user_login(self, input_username, input_password, person_type):
+        if person_type.lower() == "customer":
+            return customer_login(input_username, input_password)
+        elif person_type.lower() == "admin":
+            return admin_login(input_username, input_password)
+    
+    def user_signup(self, name: str, input_username: str, email: str, input_password: str, dob: str) -> None:
+        if person_type.lower() == "customer":
+            create_signup(name, input_username, email, input_password, dob)
+        elif person_type.lower() == "admin":
+            create_admin(name, input_username, email, input_password, dob)
+    
+    def user_update_password(self, input_username: str, input_password: str) -> None:
+        if person_type.lower() == "customer":
+            update_password_admin(self, input_username, input_password)
+        elif person_type.lower() == "admin":
+            update_password_admin(self, input_username, input_password)
+

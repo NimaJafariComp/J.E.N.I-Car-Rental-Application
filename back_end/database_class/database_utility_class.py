@@ -677,3 +677,10 @@ def confirm_reservation(reservation_id: int) -> None:
 
     # Print confirmation
     print(f"Reservation {reservation_id} has been confirmed.")
+
+def get_admin_info(input_username):
+    sql_select_select = "select * from Administrator where Username = %s"
+    mycursor.execute(sql_select, [input_username])
+    result = mycursor.fetchone()
+    
+    return result
