@@ -7,11 +7,13 @@ port = 3307
 
 dbu.initialize_connection(host, port, username, password)
 
-info = dbu.get_admin_info("admin_jeni")
-print(info)
+password = dbu.get_hashed_password("cust_elijah", "customer")
+print(password)
+# info = dbu.get_admin_info("admin_jeni")
+# print(info)
 
-info = dbu.get_customer_info("cust_elijah")
-print(info)
+# info = dbu.get_customer_info("cust_elijah")
+# print(info)
 
 # dbu.admin_sign_up("Elijah", "elijah@gmail.com", "b'$2b$12$G.2H5LGAYmWCtR0eA0wzsOLmDHV8oMgjKt/LJSqx4AG0gJNLqS0NO
 # dbu.admin_sign_up("Verma", "admin_verma", "verma@gmail.com", "b'$2b$12$HFa7nOY3qWi1mf9AyxZ.w.BcwJgUigE3DZEcAWGvpW.rgMqKXI4P2'")

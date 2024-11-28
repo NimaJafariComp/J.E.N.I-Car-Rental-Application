@@ -539,4 +539,14 @@ class CarRentalService:
         print(admin_obj)
         
         return admin_obj
+    
+    def customer_login(self, input_username: str, input_password: str) -> cust:
+        if not self.check_password(input_username, input_password, "customer"):
+            return False
+        
+        info = dbu.get_customer_info(input_username)
+        customer_obj = cust(info[0], info[1], info[3], info[4], info[5], info[2])
+        print(customer_obj)
+        
+        return customer_obj
 

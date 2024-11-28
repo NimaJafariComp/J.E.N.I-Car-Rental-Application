@@ -29,4 +29,11 @@ class Customer:
         self.password = user_password
         self.dob = dob
     
-    
+    def __repr__(self) -> str:
+        return 'Customer Info: \n \
+                Customer ID: {} \n \
+                User: {} \n \
+                Email: {} \n \
+                Username: {} \n \
+                Password: {} \n \
+                DOB: {}'.format(self.cust_id, self.user, self.email, self.username, self.password, self.dob)

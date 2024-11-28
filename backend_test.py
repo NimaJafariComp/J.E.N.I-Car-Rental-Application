@@ -42,6 +42,11 @@ def main():
     #car_rental_obj.make_reservation("2024-05-04", "2024-05-08", 0, "nima.mona82@gmail.com",5)
     #car_rental_obj.make_reservation("2024-06-04", "2024-06-08", 0, "nima.jafari.614@my.csun,edu",2)
     
-    admin = car_rental_obj.admin_login("admin_elijah", "jenipassword")
+    # admin = car_rental_obj.admin_login("admin_elijah", "jenipassword")
     
+    #car_rental_obj.user_update_password("cust_elijah", "password123", "customer")
+    
+    # customer = car_rental_obj.customer_login("cust_elijah", "password123")
+    
+    # print(car_rental_obj.check_password("cust_elijah", "password123", "customer"))
 main()

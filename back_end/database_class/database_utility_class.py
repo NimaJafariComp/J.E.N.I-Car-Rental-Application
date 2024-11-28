@@ -581,7 +581,7 @@ def get_hashed_password(login_username: int, person_type: str) -> str:
     @return str: The hashed password of the user.
     """
     if(person_type.lower() == "customer"):
-        sql_select_password = "select Password from Customers where CustomerID = %s"
+        sql_select_password = "select Password from Customers where Username = %s"
     elif(person_type.lower() == "admin"):
         sql_select_password = "select Password from Administrator where Username = %s"
     
