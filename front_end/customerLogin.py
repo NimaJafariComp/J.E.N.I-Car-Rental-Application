@@ -158,6 +158,10 @@ class customer_login(QWidget):
         self.buttons_layout.addWidget(self.login_button)
         self.login_button.clicked.connect(self.click_login)
         self.back_button.clicked.connect(self.click_back)
+        self.pw_box.returnPressed.connect(self.click_login)
+        self.user_box.returnPressed.connect(self.click_login)
+
+
         
 
     def click_login(self):
