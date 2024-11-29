@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from .config.font import font
+from .api import api
+from .currentUser import CurrentUser
 
 class admin_signup(QWidget):
     '''
@@ -14,6 +16,7 @@ class admin_signup(QWidget):
         '''
         super().__init__()
         self.main_window = main_window
+        self.api = api()
 
         # Set up the main layout and inner login window
         self.login_layout = QVBoxLayout(self)
@@ -34,11 +37,16 @@ class admin_signup(QWidget):
         # Create label and set font 
         self.label_style = "background-color:white; border : 1px solid lightgrey; border-radius : 5px;" 
         self.admin_label = QLabel("Admin Sign Up")
+        self.pw_not_same = QLabel("Passwords do not match try again.")
+        self.pw_not_same.setStyleSheet("border : none; color : red;")
+        self.pw_not_same.hide()
         self.first_name_box = QLineEdit()
         self.last_name_box = QLineEdit()
+        self.dob_box = QDateEdit()
         self.user_box = QLineEdit()
         self.email = QLineEdit()
         self.pw_box = QLineEdit()
+        self.pw_confirm_box = QLineEdit()
         
         # Login button
         self.buttons = QFrame()
@@ -89,11 +97,14 @@ class admin_signup(QWidget):
         self.login_window_layout.addWidget(self.logo, alignment=Qt.AlignCenter)
         self.login_window_layout.addStretch()
         self.login_window_layout.addWidget(self.admin_label, alignment=Qt.AlignCenter)
+        self.login_window_layout.addWidget(self.pw_not_same, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.first_name_box, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.last_name_box, alignment=Qt.AlignCenter)
+        self.login_window_layout.addWidget(self.dob_box, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.user_box, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.email, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.pw_box, alignment=Qt.AlignCenter)
+        self.login_window_layout.addWidget(self.pw_confirm_box, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.buttons, alignment=Qt.AlignCenter)
         self.login_window_layout.addStretch()
 
@@ -128,6 +139,12 @@ class admin_signup(QWidget):
         self.email.setFixedHeight(40)
         self.email.setStyleSheet(self.label_style)
 
+        self.dob_box.setFixedWidth(300)
+        self.dob_box.setFixedHeight(40)
+        self.dob_box.setDisplayFormat("MM/dd/yyyy")
+        self.dob_box.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.dob_box.setStyleSheet(self.label_style)
+
         self.user_box.setPlaceholderText("Enter Username")
         self.user_box.setFixedWidth(300)
         self.user_box.setFixedHeight(40)
@@ -138,6 +155,12 @@ class admin_signup(QWidget):
         self.pw_box.setFixedHeight(40)
         self.pw_box.setEchoMode(QLineEdit.Password)
         self.pw_box.setStyleSheet(self.label_style)
+
+        self.pw_confirm_box.setPlaceholderText("Re-Enter Password")
+        self.pw_confirm_box.setFixedWidth(300)
+        self.pw_confirm_box.setFixedHeight(40)
+        self.pw_confirm_box.setEchoMode(QLineEdit.Password)
+        self.pw_confirm_box.setStyleSheet(self.label_style)
 
     def setup_login_button(self):
         '''
@@ -155,16 +178,28 @@ class admin_signup(QWidget):
 
         self.buttons_layout.addWidget(self.back_button)
         self.buttons_layout.addWidget(self.login_button)
-        self.login_button.clicked.connect(self.click_login)
+        self.login_button.clicked.connect(self.click_signup)
         self.back_button.clicked.connect(self.click_back)
         
 
-    def click_login(self):
+    def click_signup(self):
         '''
         funtion to check login information and login to admin side when login button in login window is pressed.
         '''
-        self.main_window.stacked_widget.setCurrentIndex(0)
+        if self.pw_box.text() == self.pw_confirm_box.text():
+            name = self.first_name_box.text() + " " + self.last_name_box.text()
+            username = self.user_box.text()
+            email = self.email.text()
+            pw = self.pw_box.text()
+            dob = self.dob_box.date() 
+            self.api.car_rental_obj.user_signup(name, username, email, pw, dob.toString("MM/dd/yyyy"), "admin")
+            self.main_window.stacked_widget.setCurrentIndex(0)
+        else:
+            self.pw_not_same.show()
+            return
+
         self.pw_box.clear()
+        self.pw_confirm_box.clear()
 
     def click_back(self):
         self.main_window.stacked_widget.setCurrentIndex(2)

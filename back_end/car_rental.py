@@ -513,15 +513,15 @@ class CarRentalService:
     
     def user_login(self, input_username, input_password, person_type):
         if person_type.lower() == "customer":
-            return customer_login(input_username, input_password)
+            return self.customer_login(input_username, input_password)
         elif person_type.lower() == "admin":
-            return admin_login(input_username, input_password)
+            return self.admin_login(input_username, input_password)
     
     def user_signup(self, name: str, input_username: str, email: str, input_password: str, dob: str, person_type: str) -> None:
         if person_type.lower() == "customer":
-            create_customer(name, input_username, email, input_password, dob)
+            self.create_customer(name, input_username, email, input_password, dob)
         elif person_type.lower() == "admin":
-            create_admin(name, input_username, email, input_password, dob)
+            self.create_admin(name, input_username, email, input_password, dob)
     
     def user_update_password(self, input_username: str, input_password: str, person_type: str) -> None:
         hashed_password = self.hash_password(input_password)
