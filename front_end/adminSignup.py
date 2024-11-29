@@ -4,7 +4,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from .config.font import font
 
-class signup(QWidget):
+class admin_signup(QWidget):
     '''
     Widget to make the login window.
     '''
@@ -33,7 +33,7 @@ class signup(QWidget):
 
         # Create label and set font 
         self.label_style = "background-color:white; border : 1px solid lightgrey; border-radius : 5px;" 
-        self.admin_label = QLabel("Sign Up")
+        self.admin_label = QLabel("Admin Sign Up")
         self.first_name_box = QLineEdit()
         self.last_name_box = QLineEdit()
         self.user_box = QLineEdit()
@@ -167,4 +167,4 @@ class signup(QWidget):
         self.pw_box.clear()
 
     def click_back(self):
-        self.main_window.stacked_widget.setCurrentIndex(0)
+        self.main_window.stacked_widget.setCurrentIndex(2)

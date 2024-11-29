@@ -3,9 +3,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from .config.font import font
-from .adminLogin import admin_login
 
-class customer_login(QWidget):
+class customer_signup(QWidget):
     '''
     Widget to make the login window.
     '''
@@ -32,35 +31,28 @@ class customer_login(QWidget):
         self.font = QFont(self.set_font.font_family, 16)
         #self.font.setBold(True)
 
-        # Create label and set font
-        self.admin_label = QLabel("Customer Login")
-
-        # username box
+        # Create label and set font 
+        self.label_style = "background-color:white; border : 1px solid lightgrey; border-radius : 5px;" 
+        self.admin_label = QLabel("Customer Sign Up")
+        self.first_name_box = QLineEdit()
+        self.last_name_box = QLineEdit()
         self.user_box = QLineEdit()
-
-        # Password box
+        self.email = QLineEdit()
         self.pw_box = QLineEdit()
         
         # Login button
         self.buttons = QFrame()
         self.buttons_layout = QHBoxLayout(self.buttons)
-        self.login_button = QPushButton("Login")
+        self.login_button = QPushButton("Sign Up")
         self.back_button = QPushButton("Back")
+        self.button_style = "background-color: #efbe25; color: white; border: none; border-radius : 5px;"
         self.buttons.setStyleSheet("border: none;")
-        
-        # setup a clickeable sign up label
-        self.signup_label = QLabel('<a href="https://example.com">Sign Up Here</a>')
-        self.signup_label.setOpenExternalLinks(False)  # Disable opening the link in a browser
-        self.signup_label.linkActivated.connect(self.on_label_click)  # Connect to your custom function
-        self.signup_label.setStyleSheet("border : none;")
-        self.signup_label.setCursor(Qt.PointingHandCursor)
 
         # function calls
         self.setup_layout()
         self.setup_logo()
         self.setup_admin_label()
-        self.setup_user_box()
-        self.setup_pw_box()
+        self.text_box()
         self.setup_login_button() 
 
     def setup_logo(self):
@@ -83,7 +75,7 @@ class customer_login(QWidget):
 
         # Create the inner login window
         self.login_window.setFixedWidth(400)
-        self.login_window.setFixedHeight(600)
+        self.login_window.setFixedHeight(800)
 
         # Style for the login window
         self.login_window.setStyleSheet(
@@ -97,10 +89,12 @@ class customer_login(QWidget):
         self.login_window_layout.addWidget(self.logo, alignment=Qt.AlignCenter)
         self.login_window_layout.addStretch()
         self.login_window_layout.addWidget(self.admin_label, alignment=Qt.AlignCenter)
+        self.login_window_layout.addWidget(self.first_name_box, alignment=Qt.AlignCenter)
+        self.login_window_layout.addWidget(self.last_name_box, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.user_box, alignment=Qt.AlignCenter)
+        self.login_window_layout.addWidget(self.email, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.pw_box, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.buttons, alignment=Qt.AlignCenter)
-        self.login_window_layout.addWidget(self.signup_label, alignment=Qt.AlignCenter)
         self.login_window_layout.addStretch()
 
         # Add the login window to the main layout, centering it
@@ -115,83 +109,62 @@ class customer_login(QWidget):
         self.admin_label.setFont(self.font)
         self.admin_label.setStyleSheet("color: #efbe25; border: none;")
 
-    def setup_user_box(self):
+    def text_box(self):
         '''
         function to set the parameters for the user name text box.
         '''
+        self.first_name_box.setPlaceholderText("First Name")
+        self.first_name_box.setFixedWidth(300)
+        self.first_name_box.setFixedHeight(40)
+        self.first_name_box.setStyleSheet(self.label_style)
+
+        self.last_name_box.setPlaceholderText("Last Name")
+        self.last_name_box.setFixedWidth(300)
+        self.last_name_box.setFixedHeight(40)
+        self.last_name_box.setStyleSheet(self.label_style)
+
+        self.email.setPlaceholderText("Email")
+        self.email.setFixedWidth(300)
+        self.email.setFixedHeight(40)
+        self.email.setStyleSheet(self.label_style)
+
         self.user_box.setPlaceholderText("Enter Username")
         self.user_box.setFixedWidth(300)
         self.user_box.setFixedHeight(40)
-        self.user_box.setStyleSheet(
-            "background-color:white;"
-            "border : 1px solid lightgrey;"
-            "border-radius : 5px;"
-        )
+        self.user_box.setStyleSheet(self.label_style)
 
-    def setup_pw_box(self):
-        '''
-        function to set up the parameters for the Password text box.
-        '''
         self.pw_box.setPlaceholderText("Enter Password")
         self.pw_box.setFixedWidth(300)
         self.pw_box.setFixedHeight(40)
         self.pw_box.setEchoMode(QLineEdit.Password)
-        self.pw_box.setStyleSheet(
-            "background-color:white;"
-            "border : 1px solid lightgrey;"
-            "border-radius : 5px;"
-        )
+        self.pw_box.setStyleSheet(self.label_style)
 
     def setup_login_button(self):
         '''
         function to set up the parameters for the login button.
         '''
         self.login_button.setFont(self.font)
-        self.back_button.setFont(self.font)
         self.login_button.setFixedWidth(125)
         self.login_button.setFixedHeight(40)
+        self.login_button.setStyleSheet(self.button_style)
+
+        self.back_button.setFont(self.font)
         self.back_button.setFixedWidth(125)
         self.back_button.setFixedHeight(40)
-        self.login_button.setStyleSheet(
-            "background-color: #efbe25; color: white;"
-            "border: none;"
-            "border-radius : 5px;"
-        )
-        self.back_button.setStyleSheet(
-            "background-color: #efbe25; color: white;"
-            "border: none;"
-            "border-radius : 5px;"
-        )
+        self.back_button.setStyleSheet(self.button_style)
+
         self.buttons_layout.addWidget(self.back_button)
         self.buttons_layout.addWidget(self.login_button)
         self.login_button.clicked.connect(self.click_login)
         self.back_button.clicked.connect(self.click_back)
-        self.pw_box.returnPressed.connect(self.click_login)
-        self.user_box.returnPressed.connect(self.click_login)
-
-
         
 
     def click_login(self):
         '''
         funtion to check login information and login to admin side when login button in login window is pressed.
         '''
-        user = "customer"
-        pw = "password"
-        entered_user = self.user_box.text()
-        entered_pw = self.pw_box.text()
-
-        if pw == entered_pw and user == entered_user: 
-            self.main_window.stacked_widget.setCurrentIndex(5)
-            self.main_window.a_window.bottom_layout.setCurrentIndex(0)
-            self.user_box.clear()
-            self.pw_box.clear()
-
-    def on_label_click(self):
-        self.main_window.stacked_widget.setCurrentIndex(3)
-
-    def click_back(self):
         self.main_window.stacked_widget.setCurrentIndex(0)
-        self.user_box.clear()
         self.pw_box.clear()
 
+    def click_back(self):
+        self.main_window.stacked_widget.setCurrentIndex(2)

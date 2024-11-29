@@ -40,7 +40,6 @@ class login(QWidget):
         # Login button
         self.customer_login_button = QPushButton("Customer Login")
         self.admin_login_button = QPushButton("Admin Login")
-        self.signup_button = QPushButton("Sign up")
 
         # function calls
         self.setup_layout()
@@ -84,7 +83,6 @@ class login(QWidget):
         self.login_window_layout.addWidget(self.login_label, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.customer_login_button, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.admin_login_button, alignment=Qt.AlignCenter)
-        self.login_window_layout.addWidget(self.signup_button, alignment=Qt.AlignCenter)
         self.login_window_layout.addStretch()
 
         # Add the login window to the main layout, centering it
@@ -105,13 +103,10 @@ class login(QWidget):
         '''
         self.customer_login_button.setFont(self.font)
         self.admin_login_button.setFont(self.font)
-        self.signup_button.setFont(self.font)
         self.customer_login_button.setFixedWidth(150)
         self.customer_login_button.setFixedHeight(40)
         self.admin_login_button.setFixedWidth(150)
         self.admin_login_button.setFixedHeight(40)
-        self.signup_button.setFixedWidth(150)
-        self.signup_button.setFixedHeight(40)
         self.customer_login_button.setStyleSheet(
             "background-color: #efbe25; color: white;"
             "border: none;"
@@ -122,14 +117,8 @@ class login(QWidget):
             "border: none;"
             "border-radius : 5px;"
         )
-        self.signup_button.setStyleSheet(
-            "background-color: #efbe25; color: white;"
-            "border: none;"
-            "border-radius : 5px;"
-        )
         self.admin_login_button.clicked.connect(self.click_admin_button)
         self.customer_login_button.clicked.connect(self.click_customer_button)
-        self.signup_button.clicked.connect(self.click_signup_button)
 
     def click_admin_button(self):
         self.main_window.stacked_widget.setCurrentIndex(2)
@@ -137,8 +126,6 @@ class login(QWidget):
     def click_customer_button(self):
         self.main_window.stacked_widget.setCurrentIndex(1)
 
-    def click_signup_button(self):
-        self.main_window.stacked_widget.setCurrentIndex(3)
 
 if __name__ == "__main__":
     import sys

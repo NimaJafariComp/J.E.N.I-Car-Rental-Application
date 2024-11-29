@@ -48,6 +48,14 @@ class admin_login(QWidget):
         self.back_button = QPushButton("Back")
         self.buttons.setStyleSheet("border: none;")
 
+        # setup clickable sign up label
+        self.signup_label = QLabel('<a href="https://example.com">Sign Up Here</a>')
+        self.signup_label.setOpenExternalLinks(False)  # Disable opening the link in a browser
+        self.signup_label.linkActivated.connect(self.on_label_click)  # Connect to your custom function
+        self.signup_label.setStyleSheet("border : none;")
+        self.signup_label.setCursor(Qt.PointingHandCursor)
+
+
         # function calls
         self.setup_layout()
         self.setup_logo()
@@ -93,6 +101,7 @@ class admin_login(QWidget):
         self.login_window_layout.addWidget(self.user_box, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.pw_box, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.buttons, alignment=Qt.AlignCenter)
+        self.login_window_layout.addWidget(self.signup_label, alignment=Qt.AlignCenter)
         self.login_window_layout.addStretch()
 
         # Add the login window to the main layout, centering it
@@ -171,10 +180,13 @@ class admin_login(QWidget):
         entered_pw = self.pw_box.text()
 
         if pw == entered_pw and user == entered_user: 
-            self.main_window.stacked_widget.setCurrentIndex(5)
+            self.main_window.stacked_widget.setCurrentIndex(6)
             self.main_window.a_window.bottom_layout.setCurrentIndex(0)
             self.user_box.clear()
             self.pw_box.clear()
+
+    def on_label_click(self):
+        self.main_window.stacked_widget.setCurrentIndex(4)
 
     def click_back(self):
         self.main_window.stacked_widget.setCurrentIndex(0)

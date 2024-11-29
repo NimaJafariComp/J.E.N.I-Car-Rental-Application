@@ -7,7 +7,8 @@ from .admin_interface.adminWindow import admin_window
 from .login import login
 from .adminLogin import admin_login
 from .customerLogin import customer_login
-from .signup import signup
+from .customerSignup import customer_signup
+from .adminSignup import admin_signup
 
 class main_window(QMainWindow):
     '''
@@ -23,7 +24,8 @@ class main_window(QMainWindow):
         self.log_window = login(self)
         self.admin_login = admin_login(self) 
         self.customer_login = customer_login(self)
-        self.signup = signup(self)
+        self.admin_signup = admin_signup(self)
+        self.customer_signup = customer_signup(self)
         self.c_window = customer_window()
         self.a_window = admin_window()
 
@@ -54,7 +56,8 @@ class main_window(QMainWindow):
         self.stacked_widget.addWidget(self.log_window)
         self.stacked_widget.addWidget(self.customer_login)
         self.stacked_widget.addWidget(self.admin_login)
-        self.stacked_widget.addWidget(self.signup)
+        self.stacked_widget.addWidget(self.customer_signup)
+        self.stacked_widget.addWidget(self.admin_signup)
         self.stacked_widget.addWidget(self.c_window)
         self.stacked_widget.addWidget(self.a_window)
         self.stacked_widget.setCurrentIndex(0) 
