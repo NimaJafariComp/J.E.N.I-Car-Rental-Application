@@ -68,11 +68,19 @@ class delete_car(QWidget):
             checkbox = checkbox_widget.findChild(QCheckBox)
 
             if checkbox.isChecked():
-                vin = self.car_table.item(row, 0).text() #Get VIN from the table
-                self.api.car_rental_obj.delete_car(vin) #call delete function
+                vin = self.car_table.item(row, 0).text()  # Get VIN from the table
 
-            #Refresh the table after delete function
+                try:
+                    # Assuming the API has a delete method that takes VIN as a parameter.
+                    self.api.car_rental_obj.delete_car(vin)  # Make sure this method is correct
+                except AttributeError:
+                    print(f"Error: The method 'delete_car' does not exist on the API object.")
+                except Exception as e:
+                    print(f"An error occurred while deleting the car with VIN {vin}: {e}")
+
+                # Refresh the table after deletion
             self.load_car_data()
+
 
 if __name__ == "__main__":
     import sys
