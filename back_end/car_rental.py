@@ -512,18 +512,83 @@ class CarRentalService:
         dbu.confirm_reservation(reservation_id)
     
     def user_login(self, input_username, input_password, person_type):
+        """
+        Function to handle user login based on their role (customer or admin).
+        
+        Parameters
+        ----------
+        input_username: str
+            The username of the user attempting to log in.
+        input_password: str
+            The password of the user attempting to log in.
+        person_type: str
+            The role of the user, either 'customer' or 'admin'.
+        
+        Returns
+        -------
+        admin or cust or bool
+            If successful, returns the corresponding user object (admin or customer).
+            If unsuccessful, returns False.
+        
+        Author: Elijah
+        Updates:
+        """
         if person_type.lower() == "customer":
             return self.customer_login(input_username, input_password)
         elif person_type.lower() == "admin":
             return self.admin_login(input_username, input_password)
     
     def user_signup(self, name: str, input_username: str, email: str, input_password: str, dob: str, person_type: str) -> None:
+        """
+        Function to handle user registration based on their role (customer or admin).
+        
+        Parameters
+        ----------
+        name: str
+            The full name of the user.
+        input_username: str
+            The username chosen by the user.
+        email: str
+            The email address of the user.
+        input_password: str
+            The password chosen by the user.
+        dob: str
+            The date of birth of the user.
+        person_type: str
+            The role of the user, either 'customer' or 'admin'.
+        
+        Returns
+        -------
+        None
+        
+        Author: Elijah
+        Updates:
+        """
         if person_type.lower() == "customer":
             self.create_customer(name, input_username, email, input_password, dob)
         elif person_type.lower() == "admin":
             self.create_admin(name, input_username, email, input_password, dob)
     
     def user_update_password(self, input_username: str, input_password: str, person_type: str) -> None:
+        """
+        Function to update the password of a user (customer or admin).
+        
+        Parameters
+        ----------
+        input_username: str
+            The username of the user whose password needs to be updated.
+        input_password: str
+            The new password for the user.
+        person_type: str
+            The role of the user, either 'customer' or 'admin'.
+        
+        Returns
+        -------
+        None
+        
+        Author: Elijah
+        Updates:
+        """
         hashed_password = self.hash_password(input_password)
         if person_type.lower() == "customer":
             dbu.change_password(input_username, hashed_password, person_type)
@@ -531,6 +596,25 @@ class CarRentalService:
             dbu.change_password(input_username, hashed_password, person_type)
     
     def admin_login(self, input_username: str, input_password: str) -> admin:
+        """
+        Function to authenticate an admin and retrieve their details.
+        
+        Parameters
+        ----------
+        input_username: str
+            The username of the admin attempting to log in.
+        input_password: str
+            The password of the admin attempting to log in.
+        
+        Returns
+        -------
+        admin
+            The admin object containing the admin's information if authentication is successful.
+            Returns False if authentication fails.
+        
+        Author: Elijah
+        Updates:
+        """
         if not self.check_password(input_username, input_password, "admin"):
             return False
         
@@ -541,6 +625,25 @@ class CarRentalService:
         return admin_obj
     
     def customer_login(self, input_username: str, input_password: str) -> cust:
+        """
+        Function to authenticate a customer and retrieve their details.
+        
+        Parameters
+        ----------
+        input_username: str
+            The username of the customer attempting to log in.
+        input_password: str
+            The password of the customer attempting to log in.
+        
+        Returns
+        -------
+        cust
+            The customer object containing the customer's information if authentication is successful.
+            Returns False if authentication fails.
+        
+        Author: Elijah
+        Updates:
+        """
         if not self.check_password(input_username, input_password, "customer"):
             return False
         
@@ -549,4 +652,24 @@ class CarRentalService:
         print(customer_obj)
         
         return customer_obj
+    
+    def resevation_history(self, customer_email: str) -> list[tuple]:
+        """
+        Function to retrieve the reservation history of a customer based on their email.
+        
+        Parameters
+        ----------
+        customer_email: str
+            The email of the customer whose reservation history is to be retrieved.
+        
+        Returns
+        -------
+        list[tuple]
+            A list of tuples, where each tuple contains details of a reservation made by the customer.
+        
+        Author: [Nima jafari], [12/01]
+        Updates:
+        """
+        customer_history = dbu.get_reservations_history(customer_email=customer_email)
+        print(customer_history)
 

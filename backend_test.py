@@ -1,14 +1,20 @@
-from back_end.car_rental import CarRentalService as cr
+from back_end.car_rental import CarRentalService
+from back_end import car_rental
 
 def main():
     username = 'admin'
     password = 'jenipassword'
     host = '127.0.0.1' 
     port = 3307
-    car_rental_obj = cr(host, port, username, password)
+    car_rental_obj = car_rental.CarRentalService(host, port, username, password)
     car_rental_obj.connect_to_mysql()
     
-    car_rental_obj.add_car("4VG7DARF4XN766527", "72", "13", "240", "7JMC420", "2007", "Vectra C", "Opel", "Grey", "Sedan")
+    #car_rental_obj.add_car("4VG7DARF4XN766527", "72", "13", "240", "7JMC420", "2007", "Vectra C", "Opel", "Grey", "Sedan")
+    print(car_rental_obj.get_reservations())
+    print("\n")
+    car_rental_obj.resevation_history("nima.mona82@gmail.com")
+    
+    
     
     
     """

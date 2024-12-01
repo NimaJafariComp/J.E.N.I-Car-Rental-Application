@@ -47,7 +47,7 @@ dbu.initialize_connection(host, port, username, password)
 car_rental_service = car_rental.CarRentalService(my_host=host, my_port=port, username=username, password=password)
 print(car_rental_service.get_reservations())
 
-car_rental_service.make_reservation("2025-05-10", "2025-05-12", 0,"AYOOOOOOOOOOOOOOOOOOO",7)
-print(car_rental_service.get_reservations())
+#car_rental_service.make_reservation("2025-05-10", "2025-05-12", 0,"AYOOOOOOOOOOOOOOOOOOO",7)
+#print(car_rental_service.get_reservations())
 
 
