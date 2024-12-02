@@ -672,4 +672,6 @@ class CarRentalService:
         """
         customer_history = dbu.get_reservations_history(customer_email=customer_email)
         print(customer_history)
+    
+    
 

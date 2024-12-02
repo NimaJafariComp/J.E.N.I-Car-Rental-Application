@@ -723,3 +723,28 @@ def get_reservations_history(customer_email: str) -> list[tuple]:
     
     return reservations
 
+def get_admin_usernames():
+    """
+    Retrieves all admin username
+    
+    Parameters
+    ----------
+    None
+    
+    Returns
+    -------
+    
+    Author: Elijah Sagaran
+    Updates
+    """
+    usernames = []
+    sql_select_usernames = "select Username from Administrator"
+    mycursor.execute(sql_select_usernames)
+    myresult = mycursor.fetchall()
+    
+    for username in myresult:
+        usernames.append(username)
+    
+    usernames.sort()
+    
+    return usernames
