@@ -561,7 +561,7 @@ class CarRentalService:
         -------
         None
         
-        Author: Elijah
+        Author: Elijah 
         Updates:
         """
         if person_type.lower() == "customer":
@@ -615,6 +615,11 @@ class CarRentalService:
         Author: Elijah
         Updates:
         """
+        usernames = dbu.get_admin_usernames()
+        
+        if self.search(input_username, usernames) == -1:
+            return False
+        
         if not self.check_password(input_username, input_password, "admin"):
             return False
         
@@ -673,5 +678,18 @@ class CarRentalService:
         customer_history = dbu.get_reservations_history(customer_email=customer_email)
         print(customer_history)
     
-    
+    def search(self, username: str, username_list: list) -> int:
+        low, high, mid = 0, len(username_list) - 1, 0
+        
+        while low <= high:
+            mid = (high + low) // 2
+            
+            if username_list[mid] < username:
+                low = mid + 1
+            elif username_list[mid] > username:
+                high = mid - 1
+            else
+                return mid
+        
+        return -1
 
