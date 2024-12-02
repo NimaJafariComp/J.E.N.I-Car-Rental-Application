@@ -9,10 +9,12 @@ def main():
     car_rental_obj = car_rental.CarRentalService(host, port, username, password)
     car_rental_obj.connect_to_mysql()
     
+    print(car_rental_obj.admin_login("johnnyaguilar", "password"))
+    
     #car_rental_obj.add_car("4VG7DARF4XN766527", "72", "13", "240", "7JMC420", "2007", "Vectra C", "Opel", "Grey", "Sedan")
-    print(car_rental_obj.get_reservations())
-    print("\n")
-    car_rental_obj.resevation_history("nima.mona82@gmail.com")
+    # print(car_rental_obj.get_reservations())
+    # print("\n")
+    # car_rental_obj.resevation_history("nima.mona82@gmail.com")
     
     
     

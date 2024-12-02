@@ -684,11 +684,11 @@ class CarRentalService:
         while low <= high:
             mid = (high + low) // 2
             
-            if username_list[mid] < username:
+            if username_list[mid][0] < username:
                 low = mid + 1
-            elif username_list[mid] > username:
+            elif username_list[mid][0] > username:
                 high = mid - 1
-            else
+            else:
                 return mid
         
         return -1
