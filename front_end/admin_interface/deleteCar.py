@@ -42,7 +42,7 @@ class delete_car(QWidget):
 
     def load_car_data(self):
         """Loads car data into the table with checkboxes."""
-        # Retrieve all cars from the API
+        ## Retrieve all cars from the API
         try:
             cars = self.api.car_rental_obj.get_all_cars()
         except AttributeError:
