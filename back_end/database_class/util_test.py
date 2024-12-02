@@ -7,8 +7,10 @@ port = 3307
 
 dbu.initialize_connection(host, port, username, password)
 
-password = dbu.get_hashed_password("cust_elijah", "customer")
-print(password)
+print(dbu.get_admin_usernames())
+
+# password = dbu.get_hashed_password("cust_elijah", "customer")
+# print(password)
 # info = dbu.get_admin_info("admin_jeni")
 # print(info)
 
