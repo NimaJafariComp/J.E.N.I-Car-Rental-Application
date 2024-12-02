@@ -41,46 +41,41 @@ class delete_car(QWidget):
         self.main_layout.addWidget(self.delete_button, alignment=Qt.AlignCenter)
 
     def load_car_data(self):
-        """Loads car data into the table with checkboxes"""
-        cars = self.api.car_rental_obj.get_all_cars() #Retrieve all cars from API
-        self.car_table.setRowCount(len(cars))
+        """Loads car data into the table with checkboxes."""
+        # Retrieve all cars from the API
+        try:
+            cars = self.api.car_rental_obj.get_all_cars()
+        except AttributeError:
+            print("get_all_cars method not found. Cannot load car data.")
+            return  # Exit if no data can be loaded
 
+        self.car_table.setRowCount(len(cars))
         for row, car in enumerate(cars):
+            # Add items to the table cells
             self.car_table.setItem(row, 0, QTableWidgetItem(car["vin"]))
             self.car_table.setItem(row, 1, QTableWidgetItem(car["model"]))
             self.car_table.setItem(row, 2, QTableWidgetItem(car["make"]))
             self.car_table.setItem(row, 3, QTableWidgetItem(car["year"]))
             self.car_table.setItem(row, 4, QTableWidgetItem(car["color"]))
 
-            #Add a checkbox for selection
+            # Create a checkbox and add it to the "Select" column
             checkbox = QCheckBox()
-            checkbox_widget = QWidget()
-            checkbox_layout = QHBoxLayout(checkbox_widget)
-            checkbox_layout.addWidget(checkbox)
-            checkbox_layout.setAlignment(Qt.AlignCenter)
-            checkbox_layout.setContentsMargins(0, 0, 0, 0)
-            self.car_table.setCellWidget(row, 5, checkbox_widget)
+            self.car_table.setCellWidget(row, 5, checkbox)
 
     def delete_selected_cars(self):
-        """Delete selected cars based on checked checkboxes"""
+        """Delete selected cars based on checked checkboxes."""
         for row in range(self.car_table.rowCount()):
-            checkbox_widget = self.car_table.cellWidget(row, 5)
-            checkbox = checkbox_widget.findChild(QCheckBox)
-
-            if checkbox.isChecked():
+            checkbox = self.car_table.cellWidget(row, 5)
+            if checkbox and checkbox.isChecked():
                 vin = self.car_table.item(row, 0).text()  # Get VIN from the table
+                # Call the delete function if it exists
+                if hasattr(self.api.car_rental_obj, 'delete_car'):
+                    self.api.car_rental_obj.delete_car(vin)
+                else:
+                    print(f"delete_car method not found. Cannot delete car with VIN {vin}")
 
-                try:
-                    # Assuming the API has a delete method that takes VIN as a parameter.
-                    self.api.car_rental_obj.delete_car(vin)  # Make sure this method is correct
-                except AttributeError:
-                    print(f"Error: The method 'delete_car' does not exist on the API object.")
-                except Exception as e:
-                    print(f"An error occurred while deleting the car with VIN {vin}: {e}")
-
-                # Refresh the table after deletion
-            self.load_car_data()
-
+        # Refresh the table after deletion
+        self.load_car_data()
 
 if __name__ == "__main__":
     import sys
