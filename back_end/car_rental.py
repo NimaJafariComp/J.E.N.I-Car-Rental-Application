@@ -615,19 +615,23 @@ class CarRentalService:
         Author: Elijah
         Updates:
         """
+        is_valid_login = True
         usernames = dbu.get_admin_usernames()
         
         if self.search(input_username, usernames) == -1:
-            return False
+            is_valid_login = False
         
         if not self.check_password(input_username, input_password, "admin"):
-            return False
+            is_valid_login = False
         
         info = dbu.get_admin_info(input_username)
         admin_obj = admin(info[0], info[1], info[2], info[4], info[3], info[5])
         print(admin_obj)
         
-        return admin_obj
+        if is_valid_login == True:
+            return admin_obj
+        else:
+            return None
     
     def customer_login(self, input_username: str, input_password: str) -> cust:
         """
@@ -649,19 +653,23 @@ class CarRentalService:
         Author: Elijah
         Updates:
         """
+        is_valid_login = True
         usernames = dbu.get_customer_usernames()
         
         if self.search(input_username, usernames) == -1:
-            return False
+            is_valid_login = False
         
         if not self.check_password(input_username, input_password, "customer"):
-            return False
+            is_valid_login = False
         
         info = dbu.get_customer_info(input_username)
         customer_obj = cust(info[0], info[1], info[3], info[4], info[5], info[2])
         print(customer_obj)
         
-        return customer_obj
+        if is_valid_login == True:
+            return customer_obj
+        else:
+            return None
     
     def resevation_history(self, customer_email: str) -> list[tuple]:
         """
