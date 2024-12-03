@@ -16,9 +16,6 @@ class report:
     reservation_id : int
         The ID of the reservation associated with this report.
 
-    Methods
-    -------
-
     """
 
     def __init__(self, damages, gas_amount, car_id, reservation_id):
