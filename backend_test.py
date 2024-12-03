@@ -12,7 +12,7 @@ def main():
     #print(car_rental_obj.admin_login("johnnyaguilar", "password"))
     
     #car_rental_obj.add_car("4VG7DARF4XN766527", "72", "13", "240", "7JMC420", "2007", "Vectra C", "Opel", "Grey", "Sedan")
-    print(car_rental_obj.get_reservations())
+    #print(car_rental_obj.get_reservations())
     # print("\n")
     # car_rental_obj.resevation_history("nima.mona82@gmail.com")
     
@@ -57,7 +57,8 @@ def main():
     
     #car_rental_obj.user_update_password("cust_elijah", "password123", "customer")
     
-    # customer = car_rental_obj.customer_login("cust_elijah", "password123")
+    customer = car_rental_obj.customer_login("cust_elija", "password123")
     
-    # print(car_rental_obj.check_password("cust_elijah", "password123", "customer"))
+    print(customer)
+    print(car_rental_obj.check_password("cust_elijah", "password123", "customer"))
 main()

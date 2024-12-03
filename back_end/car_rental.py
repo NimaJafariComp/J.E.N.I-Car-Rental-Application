@@ -624,11 +624,11 @@ class CarRentalService:
         if not self.check_password(input_username, input_password, "admin"):
             is_valid_login = False
         
-        info = dbu.get_admin_info(input_username)
-        admin_obj = admin(info[0], info[1], info[2], info[4], info[3], info[5])
-        print(admin_obj)
         
         if is_valid_login == True:
+            info = dbu.get_admin_info(input_username)
+            admin_obj = admin(info[0], info[1], info[2], info[4], info[3], info[5])
+            print(admin_obj)
             return admin_obj
         else:
             return None
@@ -662,11 +662,11 @@ class CarRentalService:
         if not self.check_password(input_username, input_password, "customer"):
             is_valid_login = False
         
-        info = dbu.get_customer_info(input_username)
-        customer_obj = cust(info[0], info[1], info[3], info[4], info[5], info[2])
-        print(customer_obj)
         
         if is_valid_login == True:
+            info = dbu.get_customer_info(input_username)
+            customer_obj = cust(info[0], info[1], info[3], info[4], info[5], info[2])
+            print(customer_obj)
             return customer_obj
         else:
             return None
