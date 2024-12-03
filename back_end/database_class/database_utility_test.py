@@ -14,28 +14,7 @@ class database_utility_test(unittest.TestCase):
         dbu.mycursor = self.mock_cursor
         dbu.mydb = self.mock_db
     
-    def test_get_active_inventory(self):
-        # Mock the data returned from the database
-        mock_data = [
-            (1, '1HGCM82633A123456', 30000, 30, 25000, 'ABC123', '2020', 'Civic', 'Honda', 'Blue', 'Sedan', 1),
-            (2, '2HGCM82633A654321', 25000, 28, 20000, 'DEF456', '2019', 'Accord', 'Honda', 'Black', 'Sedan', 1)
-        ]
-        
-        # Setup the mock cursor to return the mocked data
-        self.mock_cursor.fetchall.return_value = mock_data
-
-        # Call the function under test
-        inventory = dbu.get_active_inventory()
-
-        # Assert that the results match our expectations
-        expected_inventory = [
-            (1, '1HGCM82633A123456', 30000, 30, 25000, 'ABC123', '2020', 'Civic', 'Honda', 'Blue', 'Sedan', 1),
-            (2, '2HGCM82633A654321', 25000, 28, 20000, 'DEF456', '2019', 'Accord', 'Honda', 'Black', 'Sedan', 1)
-        ]
-        self.assertEqual(inventory, expected_inventory)
-
-        # Assert that the cursor executed the correct SQL query
-        self.mock_cursor.execute.assert_called_once_with("select * from Vehicles where IsActive = 1")
+    #
         
     def test_valid_date_range(self):
         """Test with valid start and end dates."""

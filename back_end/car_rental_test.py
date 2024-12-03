@@ -1,4 +1,5 @@
 from .car_rental import CarRentalService 
+import datetime
 
 
 def test_admin_login_allgood():
@@ -38,7 +39,7 @@ def test_admin_login_badpw():
     
     user = car_rental_obj.admin_login("johnnyaguilar", "notrightpassword")
     
-    assert user is False
+    assert user is None
 
 def test_admin_login_baduser():
 # Need username and password at the beginning
@@ -55,7 +56,7 @@ def test_admin_login_baduser():
     
     user = car_rental_obj.admin_login("johnny", "password")
 
-    assert user is False
+    assert user is None
 
 def test_customer_login_allgood():
     # Need username and password at the beginning
@@ -76,7 +77,8 @@ def test_customer_login_allgood():
     assert user.email == "elijahsagaran@gmail.com"
     assert user.username == "cust_elijah" 
     assert user.password ==  "$2b$12$kNmpB3yAbMqBh3//SBeZR.clgYfMvK/2K6In8mvBBsSImxQWD28.i"
-    assert user.dob == "2000-10-02"
+    check_dob = datetime.date(2000, 10, 2)
+    assert user.dob == check_dob
 
 
 def test_customer_login_badpw():
@@ -94,7 +96,7 @@ def test_customer_login_badpw():
     
     user = car_rental_obj.customer_login("cust_elijah", "notrightpassword")
     
-    assert user is False
+    assert user is None
 
 def test_customer_login_baduser():
 # Need username and password at the beginning
@@ -111,6 +113,6 @@ def test_customer_login_baduser():
     
     user = car_rental_obj.customer_login("johnny", "password123")
 
-    assert user is False
+    assert user is None
 
 
