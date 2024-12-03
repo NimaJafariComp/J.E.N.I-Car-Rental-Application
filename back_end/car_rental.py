@@ -649,6 +649,11 @@ class CarRentalService:
         Author: Elijah
         Updates:
         """
+        usernames = dbu.get_customer_usernames()
+        
+        if self.search(input_username, usernames) == -1:
+            return False
+        
         if not self.check_password(input_username, input_password, "customer"):
             return False
         
