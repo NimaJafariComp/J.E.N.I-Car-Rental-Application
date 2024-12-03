@@ -620,9 +620,9 @@ class CarRentalService:
         
         if self.search(input_username, usernames) == -1:
             is_valid_login = False
-        
-        if not self.check_password(input_username, input_password, "admin"):
-            is_valid_login = False
+        else:
+            if not self.check_password(input_username, input_password, "admin"):
+                is_valid_login = False
         
         
         if is_valid_login == True:
@@ -658,9 +658,9 @@ class CarRentalService:
         
         if self.search(input_username, usernames) == -1:
             is_valid_login = False
-        
-        if not self.check_password(input_username, input_password, "customer"):
-            is_valid_login = False
+        else:
+            if not self.check_password(input_username, input_password, "customer"):
+                is_valid_login = False
         
         
         if is_valid_login == True:
