@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from .config.font import font
+from .currentUser import CurrentUser
+from .api import api
 
 class admin_login(QWidget):
     '''
@@ -17,6 +19,7 @@ class admin_login(QWidget):
 
         # Set up the main layout and inner login window
         self.main_window = main_window
+        self.api = api()
         self.login_layout = QVBoxLayout(self)
         self.login_window = QWidget()
         self.login_window_layout = QVBoxLayout(self.login_window)
@@ -34,6 +37,9 @@ class admin_login(QWidget):
 
         # Create label and set font
         self.admin_label = QLabel("Admin Login")
+        self.wrong_login = QLabel("Passwords do not match try again.")
+        self.wrong_login.setStyleSheet("border : none; color : red;")
+        self.wrong_login.hide()
 
         # username box
         self.user_box = QLineEdit()
@@ -98,6 +104,7 @@ class admin_login(QWidget):
         self.login_window_layout.addWidget(self.logo, alignment=Qt.AlignCenter)
         self.login_window_layout.addStretch()
         self.login_window_layout.addWidget(self.admin_label, alignment=Qt.AlignCenter)
+        self.login_window_layout.addWidget(self.wrong_login, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.user_box, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.pw_box, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.buttons, alignment=Qt.AlignCenter)
@@ -178,12 +185,18 @@ class admin_login(QWidget):
         pw = "password"
         entered_user = self.user_box.text()
         entered_pw = self.pw_box.text()
+        user = self.api.car_rental_obj.user_login(entered_user, entered_pw, "admin")
+        currentUser = CurrentUser()
+        currentUser.set_user(user)
 
-        if pw == entered_pw and user == entered_user: 
+        if user is not False: 
             self.main_window.stacked_widget.setCurrentIndex(6)
             self.main_window.a_window.bottom_layout.setCurrentIndex(0)
             self.user_box.clear()
             self.pw_box.clear()
+        else:
+            self.wrong_login.show()
+
 
     def on_label_click(self):
         self.main_window.stacked_widget.setCurrentIndex(4)

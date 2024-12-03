@@ -4,12 +4,15 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from ..config.font import font
 from .selectionWindow import selection_window
+from ..currentUser import CurrentUser
 
 class admin_window(QWidget):
     def __init__(self):
         super().__init__()
         # setup admin window layout
         self.admin_layout = QVBoxLayout(self)
+        self.currentUser = CurrentUser()
+        print(self.currentUser.get_user())
 
         # setup diffrent Qframes
         self.top_frame = QFrame()
