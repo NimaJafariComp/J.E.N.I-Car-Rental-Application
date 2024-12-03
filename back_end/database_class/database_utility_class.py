@@ -748,3 +748,19 @@ def get_admin_usernames():
     usernames.sort()
     
     return usernames
+
+def get_customer_username():
+    """
+    
+    """
+    usernames = []
+    sql_select_usernames = "select Username from Customers"
+    mycursor.execute(sql_select_usernames)
+    myresult = mycursor.fetchall()
+    
+    for username in myresult:
+        usernames.append(username)
+        
+    usernames.sort()
+    
+    return usernames
