@@ -657,6 +657,11 @@ def confirm_reservation(reservation_id: int) -> None:
     @param reservation_id: int - The ID of the reservation to be confirmed.
     @return None
     """
+    
+    # Check if the reservation_id is invalid (None or negative)
+    if reservation_id is None or reservation_id < 0:
+        print(f"Invalid reservation ID: {reservation_id}. It must be a positive integer.")
+        return
 
     # Check if the reservation is already canceled
     check_canceled_query = "SELECT Canceled FROM Reservations WHERE ReservationId = %s"
