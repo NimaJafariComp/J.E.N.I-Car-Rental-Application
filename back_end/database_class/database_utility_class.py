@@ -28,6 +28,7 @@ def initialize_connection(my_host: str, my_port: str, username: str, upassword: 
     Author: Elijah Sagaran, 10/1
     Updates:
     """
+    global mycursor, mydb
     mydb = mysql.connector.connect(
         host = my_host,
         user = username,
@@ -749,7 +750,7 @@ def get_admin_usernames():
     
     return usernames
 
-def get_customer_username():
+def get_customer_usernames():
     """
     
     """
