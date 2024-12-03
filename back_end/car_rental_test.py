@@ -57,5 +57,60 @@ def test_admin_login_baduser():
 
     assert user is False
 
+def test_customer_login_allgood():
+    # Need username and password at the beginning
+    username = 'admin'
+    password = 'jenipassword'
+    host = '127.0.0.1' 
+    port = 3307
+    # Needs to happen every single time, this is how the connection
+    # to MySQL is initiated
+    
+    # initialize_database(self.host, self.port, self.username, self.password)
+    car_rental_obj = CarRentalService(host, port, username, password)
+    car_rental_obj.connect_to_mysql()
+    
+    user = car_rental_obj.customer_login("cust_elijah", "password123")
+    assert user.cust_id == 1
+    assert user.user == "Elijah Sagaran" 
+    assert user.email == "elijahsagaran@gmail.com"
+    assert user.username == "cust_elijah" 
+    assert user.password ==  "$2b$12$kNmpB3yAbMqBh3//SBeZR.clgYfMvK/2K6In8mvBBsSImxQWD28.i"
+    assert user.dob == "2000-10-02"
+
+
+def test_customer_login_badpw():
+    # Need username and password at the beginning
+    username = 'admin'
+    password = 'jenipassword'
+    host = '127.0.0.1' 
+    port = 3307
+    # Needs to happen every single time, this is how the connection
+    # to MySQL is initiated
+    
+    # initialize_database(self.host, self.port, self.username, self.password)
+    car_rental_obj = CarRentalService(host, port, username, password)
+    car_rental_obj.connect_to_mysql()
+    
+    user = car_rental_obj.customer_login("cust_elijah", "notrightpassword")
+    
+    assert user is False
+
+def test_customer_login_baduser():
+# Need username and password at the beginning
+    username = 'admin'
+    password = 'jenipassword'
+    host = '127.0.0.1' 
+    port = 3307
+    # Needs to happen every single time, this is how the connection
+    # to MySQL is initiated
+    
+    # initialize_database(self.host, self.port, self.username, self.password)
+    car_rental_obj = CarRentalService(host, port, username, password)
+    car_rental_obj.connect_to_mysql()
+    
+    user = car_rental_obj.customer_login("johnny", "password123")
+
+    assert user is False
 
 
