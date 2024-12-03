@@ -1,7 +1,7 @@
 from .car_rental import CarRentalService 
 
 
-def test_admin_login_good():
+def test_admin_login_allgood():
     # Need username and password at the beginning
     username = 'admin'
     password = 'jenipassword'
@@ -23,7 +23,7 @@ def test_admin_login_good():
     assert user.dob is None
 
 
-def test_admin_login_bad():
+def test_admin_login_badpw():
     # Need username and password at the beginning
     username = 'admin'
     password = 'jenipassword'
@@ -39,4 +39,23 @@ def test_admin_login_bad():
     user = car_rental_obj.admin_login("johnnyaguilar", "notrightpassword")
     
     assert user is False
+
+def test_admin_login_baduser():
+# Need username and password at the beginning
+    username = 'admin'
+    password = 'jenipassword'
+    host = '127.0.0.1' 
+    port = 3307
+    # Needs to happen every single time, this is how the connection
+    # to MySQL is initiated
+    
+    # initialize_database(self.host, self.port, self.username, self.password)
+    car_rental_obj = CarRentalService(host, port, username, password)
+    car_rental_obj.connect_to_mysql()
+    
+    user = car_rental_obj.admin_login("johnny", "password")
+
+    assert user is False
+
+
 
