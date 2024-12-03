@@ -1,7 +1,7 @@
 import unittest
 from report_class import report
 
-class TestReport(unittest.TestCase):
+class report_test(unittest.TestCase):
     def setUp(self):
         """Set up a report instance for testing."""
         self.report = report("Scratch on front bumper", 3.5, 101, 202)
