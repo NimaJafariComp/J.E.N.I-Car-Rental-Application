@@ -1,5 +1,6 @@
 import mysql.connector
 from datetime import datetime
+global mydb, mycursor
 """
 Date of Creation: October 1, 2024
 Author: Elijah Sagaran and Nima Jafari
@@ -27,7 +28,6 @@ def initialize_connection(my_host: str, my_port: str, username: str, upassword: 
     Author: Elijah Sagaran, 10/1
     Updates:
     """
-    global mydb, mycursor
     mydb = mysql.connector.connect(
         host = my_host,
         user = username,
