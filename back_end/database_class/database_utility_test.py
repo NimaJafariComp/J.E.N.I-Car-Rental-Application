@@ -14,7 +14,7 @@ class database_utility_test(unittest.TestCase):
         dbu.mycursor = self.mock_cursor
         dbu.mydb = self.mock_db
     
-    #
+    # calculate_days method
         
     def test_valid_date_range(self):
         """Test with valid start and end dates."""
@@ -50,6 +50,8 @@ class database_utility_test(unittest.TestCase):
         end_date = '2024-01-01'
         result = dbu.calculate_days(start_date, end_date)
         self.assertEqual(result, 0)  # Expecting 0 days
+    
+    # confirm_reservations_setter method
     
     def test_confirm_reservation_success(self):
         """Test confirming a reservation successfully."""

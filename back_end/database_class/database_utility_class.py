@@ -505,7 +505,6 @@ def get_reports(car_id):
     return reports
 
 def calculate_days(start_date: str, end_date: str) -> int:
-    
     """
     Calculate the number of days
     Args:
