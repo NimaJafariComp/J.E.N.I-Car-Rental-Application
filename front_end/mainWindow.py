@@ -9,6 +9,7 @@ from .adminLogin import admin_login
 from .customerLogin import customer_login
 from .customerSignup import customer_signup
 from .adminSignup import admin_signup
+from .currentUser import CurrentUser    
 
 class main_window(QMainWindow):
     '''
@@ -62,45 +63,19 @@ class main_window(QMainWindow):
         self.stacked_widget.addWidget(self.a_window)
         self.stacked_widget.setCurrentIndex(0) 
 
-        self.c_window.signout_button.clicked.connect(self.on_click_admin)
-        self.a_window.signout_button.clicked.connect(self.on_click_customer)
+        self.c_window.signout_button.clicked.connect(self.click_signout)
+        self.a_window.signout_button.clicked.connect(self.click_signout)
 
-    def on_click_admin(self):
+    def click_signout(self):
         '''
         funtion to set up the login button.
         '''
+        currentUser = CurrentUser()
+        currentUser.set_user(None)
+        print(currentUser.get_user())
+
         self.stacked_widget.setCurrentIndex(0)
-        # self.log_window.login_button.clicked.connect(self.switch_to_admin)
-        # self.log_window.pw_box.returnPressed.connect(self.switch_to_admin)
-        # self.log_window.back_button.clicked.connect(self.login_back)
 
-    # def switch_to_admin(self):
-    #     '''
-    #     funtion to check login information and login to admin side when login button in login window is pressed.
-    #     '''
-    #     self.user = "admin"
-    #     self.pw = "password"
-    #     self.entered_user = self.log_window.user_box.text()
-    #     self.entered_pw = self.log_window.pw_box.text()
-
-    #     if self.pw == self.entered_pw and self.user == self.entered_user: 
-    #         self.stacked_widget.setCurrentIndex(1)
-    #         self.a_window.bottom_layout.setCurrentIndex(0)
-    #         self.log_window.pw_box.clear()
-
-    def on_click_customer(self):
-        '''
-        funtion to go to customer window when customer button is clicked.
-        '''
-        self.stacked_widget.setCurrentIndex(0)
-        
-    # def login_back(self):
-    #     '''
-    #     funtion to go back to customer window when in login screen and pressed back button.
-    #     '''
-    #     self.stacked_widget.setCurrentIndex(0)
-
-    # Method to center the window on the screen
     def center(self):
         '''
         funtion to center the application in the screen.
