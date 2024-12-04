@@ -4,6 +4,8 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from .config.font import font
 from .adminLogin import admin_login
+from .currentUser import CurrentUser
+from .api import api
 
 class customer_login(QWidget):
     '''
@@ -15,6 +17,7 @@ class customer_login(QWidget):
         '''
         super().__init__()
         self.main_window = main_window
+        self.api = api()
 
         # Set up the main layout and inner login window
         self.login_layout = QVBoxLayout(self)
@@ -34,6 +37,10 @@ class customer_login(QWidget):
 
         # Create label and set font
         self.admin_label = QLabel("Customer Login")
+        self.admin_label = QLabel("Admin Login")
+        self.wrong_login = QLabel("Passwords or Username incorrect try again.")
+        self.wrong_login.setStyleSheet("border : none; color : red;")
+        self.wrong_login.hide()
 
         # username box
         self.user_box = QLineEdit()
@@ -97,6 +104,7 @@ class customer_login(QWidget):
         self.login_window_layout.addWidget(self.logo, alignment=Qt.AlignCenter)
         self.login_window_layout.addStretch()
         self.login_window_layout.addWidget(self.admin_label, alignment=Qt.AlignCenter)
+        self.login_window_layout.addWidget(self.wrong_login, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.user_box, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.pw_box, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.buttons, alignment=Qt.AlignCenter)
@@ -173,19 +181,24 @@ class customer_login(QWidget):
         
 
     def click_login(self):
-        '''
+        """
         funtion to check login information and login to admin side when login button in login window is pressed.
-        '''
-        user = "customer"
+        """
+        user = "admin"
         pw = "password"
         entered_user = self.user_box.text()
         entered_pw = self.pw_box.text()
+        user = self.api.car_rental_obj.user_login(entered_user, entered_pw, "customer")
+        currentUser = CurrentUser()
+        currentUser.set_user(user)
 
-        if pw == entered_pw and user == entered_user: 
-            self.main_window.stacked_widget.setCurrentIndex(5)
+        if user is not None:
+            self.main_window.stacked_widget.setCurrentIndex(6)
             self.main_window.a_window.bottom_layout.setCurrentIndex(0)
             self.user_box.clear()
             self.pw_box.clear()
+        else:
+            self.wrong_login.show()
 
     def on_label_click(self):
         self.main_window.stacked_widget.setCurrentIndex(3)

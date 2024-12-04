@@ -3,7 +3,7 @@ import os
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-
+from .api import api 
 from .config.font import font
 
 
@@ -18,6 +18,7 @@ class customer_signup(QWidget):
         """
         super().__init__()
         self.main_window = main_window
+        self.api = api()
 
         # Set up the main layout and inner login window
         self.login_layout = QVBoxLayout(self)
@@ -100,6 +101,7 @@ class customer_signup(QWidget):
         self.login_window_layout.addWidget(self.logo, alignment=Qt.AlignCenter)
         self.login_window_layout.addStretch()
         self.login_window_layout.addWidget(self.admin_label, alignment=Qt.AlignCenter)
+        self.login_window_layout.addWidget(self.pw_not_same, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(
             self.first_name_box, alignment=Qt.AlignCenter
         )
@@ -187,9 +189,9 @@ class customer_signup(QWidget):
             username = self.user_box.text()
             email = self.email.text()
             pw = self.pw_box.text()
-            dob = None
+            dob = "01/01/1900"
             self.api.car_rental_obj.user_signup(
-                name, username, email, pw, dob.toString("MM/dd/yyyy"), "admin"
+                name, username, email, pw, dob, "customer"
             )
             self.main_window.stacked_widget.setCurrentIndex(0)
         else:

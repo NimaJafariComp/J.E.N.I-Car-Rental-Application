@@ -191,9 +191,9 @@ class admin_signup(QWidget):
             username = self.user_box.text()
             email = self.email.text()
             pw = self.pw_box.text()
-            dob = None
+            dob = "01/01/1900"
             self.api.car_rental_obj.user_signup(
-                name, username, email, pw, dob.toString("MM/dd/yyyy"), "admin"
+                name, username, email, pw, dob, "admin"
             )
             self.main_window.stacked_widget.setCurrentIndex(0)
         else:
