@@ -20,11 +20,11 @@ class reservations_history(QWidget):
         # Make columns stretch to fill the width
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
-    def setup_table(self, user_email):
-        email = user_email
-        self.reservations = self.api.car_rental_obj.resevation_history(email)
+    def setup_table(self, user_ID):
+        Id = user_ID
+        self.reservations = self.api.car_rental_obj.resevation_history(Id)
         self.table.setRowCount(0)
-        self.table.setRowCount(len(self.reservations) + 1)
+        self.table.setRowCount(len(self.reservations))
         self.table.setColumnCount(10)
 
         # Set the column headers

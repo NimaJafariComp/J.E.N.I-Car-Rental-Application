@@ -203,4 +203,4 @@ class customer_signup(QWidget):
         self.pw_confirm_box.clear()
 
     def click_back(self):
-        self.main_window.stacked_widget.setCurrentIndex(2)
+        self.main_window.stacked_widget.setCurrentIndex(1)

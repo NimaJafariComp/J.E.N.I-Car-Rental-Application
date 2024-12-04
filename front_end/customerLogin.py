@@ -40,7 +40,6 @@ class customer_login(QWidget):
 
         # Create label and set font
         self.admin_label = QLabel("Customer Login")
-        self.admin_label = QLabel("Admin Login")
         self.wrong_login = QLabel("Passwords or Username incorrect try again.")
         self.wrong_login.setStyleSheet("border : none; color : red;")
         self.wrong_login.hide()
