@@ -251,6 +251,7 @@ class CarRentalService:
             ELijah, 11/10
             Nima jafari, 11/26
             Nima jafari, 11/27
+            Nima jafari, 12/04
         """
         index = self.inv_obj.search_car(car_id)
         if index == -1:

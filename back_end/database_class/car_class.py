@@ -39,6 +39,7 @@ class car:
     Elijah, 10/22
     Elijah, 10/29
     Elijah, 11/10
+    Nima, 12/04
     """
 
     def __init__(self, vin: str, mileage: int, mpg: int, price: float, license_plate: str, car_year: str, model: str, make: str, color: str, car_type: str):
