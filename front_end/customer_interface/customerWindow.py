@@ -9,7 +9,7 @@ from ..config.carTileScroll import carTile_scroll
 from ..config.font import font
 from ..currentUser import CurrentUser
 from .carTile import car_tile
-from .revenueHistory import reservations_history
+from .reservationHistory import reservations_history
 from .searchBar import search_bar
 from .sideBar import side_bar
 from .test import searchCar
@@ -233,7 +233,7 @@ class customer_window(QWidget):
         currentUser = CurrentUser()
         user = currentUser.get_user()
         self.bottom_layout.setCurrentIndex(2)
-        self.reservations_history.setup_table(user.email)
+        self.reservations_history.setup_table(user.cust_id)
 
     def home_clicked(self):
         self.bottom_layout.setCurrentIndex(0)

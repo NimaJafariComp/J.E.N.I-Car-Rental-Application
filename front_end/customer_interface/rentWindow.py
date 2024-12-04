@@ -131,6 +131,7 @@ class rent_window(QWidget):
             self.end_date.toString("yyyy-MM-dd"),
             self.check_insurance.isChecked(),
             user.email,
+            user.cust_id,
             self.car[0],
         )
 
