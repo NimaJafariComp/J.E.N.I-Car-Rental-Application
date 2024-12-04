@@ -210,3 +210,4 @@ class admin_login(QWidget):
         self.main_window.stacked_widget.setCurrentIndex(0)
         self.user_box.clear()
         self.pw_box.clear()
+        self.wrong_login.hide()
