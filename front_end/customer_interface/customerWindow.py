@@ -99,7 +99,7 @@ class customer_window(QWidget):
         self.signout_button.setFixedWidth(100)
         self.signout_button.setFixedHeight(40)
         self.signout_button.setFont(self.font)
-        self.signout_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
+        self.signout_button.setStyleSheet("color: white; background-color: #efbe25; border-radius: 5px;")
 
     def setup_bottomframe(self):
         '''
