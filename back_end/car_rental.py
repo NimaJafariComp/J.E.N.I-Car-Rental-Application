@@ -34,6 +34,7 @@ class CarRentalService:
         self.host = my_host
         self.port = my_port
         self.inv_obj = inv()
+        
     
     def connect_to_mysql(self):
         """
@@ -271,7 +272,7 @@ class CarRentalService:
         #print(total_price)
             
         self.inv_obj.get_inventory()[index].add_reservation(start_date, end_date, insurance, customer_email, customer_id, car_id, total_price)
-        
+        self.send_invoice("nimaj8082@gmail.com",2,"2029-05-10", 0, "2025-05-10", 10, 10, 20) #dummy invoice sender to make sure sendgrid api works every time
         self.send_invoice(customer_email, car_id, start_date, insurance, end_date, total_price, total_days, daily_price) #send invoice after reservation is done, so we dont have to search database for reservations and then send em
     
     def send_invoice(self, customer_email: str, car_id: int, start_date: str, insurance: bool, end_date: str, total_price:float, total_days:float, daily_price:float) -> None:

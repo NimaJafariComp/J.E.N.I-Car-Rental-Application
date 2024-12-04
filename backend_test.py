@@ -61,5 +61,5 @@ def main():
     
     print(customer)
     print(car_rental_obj.check_password("cust_elijah", "password123", "customer"))
-    car_rental_obj.make_reservation("2024-05-04", "2024-05-08", 0,"hhhiiiihhihihihihihih@gmail.com",1,1)
+    car_rental_obj.make_reservation("2027-05-04", "2027-05-08", 0,"nima.mona56@gmail.com",1,5)
 main()
