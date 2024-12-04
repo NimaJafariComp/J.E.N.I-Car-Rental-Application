@@ -5,6 +5,7 @@ from PyQt5.QtGui import *
 from ..config.font import font
 from .carTile import car_tile
 from .searchBar import search_bar
+from .sideBar import side_bar
 from .test import searchCar
 from ..api import api
 from ..config.carTileScroll import carTile_scroll
@@ -23,7 +24,19 @@ class customer_window(QWidget):
         self.api = api()
 
         # setup customer window layout
-        self.customer_layout = QVBoxLayout(self)
+        self.main_layout = QHBoxLayout(self)
+        self.sub_window = QFrame()
+        #self.sub_window.setStyleSheet("border: none; background-color: white;")
+        self.customer_layout = QVBoxLayout(self.sub_window)
+        self.main_layout.setContentsMargins(0, 0, 0, 0)  # Left, Top, Right, Bottom margins
+        self.main_layout.setSpacing(0)  # Spacing between widgets
+        self.customer_layout.setContentsMargins(0, 0, 0, 0)  # Left, Top, Right, Bottom margins
+        self.customer_layout.setSpacing(0)  # Spacing between widgets
+
+
+        # setup sidebar
+        self.side_bar = side_bar()
+        self.side_bar.menu_button.clicked.connect(self.menu_clicked)
 
         # setup Qframes
         self.top_frame = QFrame()
@@ -51,12 +64,6 @@ class customer_window(QWidget):
         # setup sub widgets
         self.signout_button = QPushButton("Sign Out")
 
-        # setup logo
-        self.logo = QLabel()
-        self.current_dir = os.path.dirname(__file__)
-        self.logo_dir = os.path.join(os.path.dirname(self.current_dir), "logo/HalfLogo.png")
-        self.pixmap = QPixmap(self.logo_dir)
-
         # setup font
         self.set_font = font()
         self.font = QFont(self.set_font.font_family, 16)
@@ -65,31 +72,20 @@ class customer_window(QWidget):
         self.list = []
         self.carList = []
 
-        self.setup_logo()
         self.setup_topframe()
         self.setup_bottomframe()
         self.setup_tiles()
         self.setup_button()
         self.setup_widget()
 
-    def setup_logo(self):#set up logo img
-        '''
-        function to set up the logo for the customer window.
-        '''
-        self.logo.setPixmap(self.pixmap)
-        self.logo.resize(self.pixmap.width(), self.pixmap.height())
-        self.scaled_pixmap = self.pixmap.scaled(60, 60, aspectRatioMode=1)  # width, height
-        self.logo.setPixmap(self.scaled_pixmap)
-        self.logo.setStyleSheet("border: none;")
-
     def setup_topframe(self):
         '''
         function to setup the parameter for the top frame of the customer window that has the sign out button and the logo.
         '''
         self.top_frame.setFrameShape(QFrame.StyledPanel)
-        self.top_frame.setFixedHeight(int(100))
+        self.top_frame.setFixedHeight(75)
         self.top_frame.setStyleSheet("background: white;")
-        self.top_frame_layout.addWidget(self.logo)
+        self.top_frame_layout.addWidget(self.side_bar.menu_button)
         self.top_frame_layout.addStretch()
 
     def setup_button(self):
@@ -130,6 +126,8 @@ class customer_window(QWidget):
         self.top_frame_layout.addWidget(self.signout_button)
         self.customer_layout.addWidget(self.top_frame)
         self.customer_layout.addWidget(self.bottom_frame)
+        self.main_layout.addWidget(self.side_bar)
+        self.main_layout.addWidget(self.sub_window)
 
     def click_search(self):
         '''
@@ -165,7 +163,7 @@ class customer_window(QWidget):
         for i in range(len(self.carList)):
             self.list.append(car_tile(self.carList[i], self, num_days, start_date, end_date))
             self.scroll_area.scroll_frameLayout.addWidget(self.list[i], alignment=Qt.AlignCenter) 
- 
+
     def clear_layout(self, layout):
         """
         Remove all widgets from a given layout.
@@ -177,6 +175,14 @@ class customer_window(QWidget):
             # If the item is a widget, delete it
             if item.widget():
                 item.widget().deleteLater()
+
+    def menu_clicked(self):
+        if self.side_bar.hiden_bar.isHidden() is True:
+            self.side_bar.hiden_bar.show()
+            self.side_bar.shown_bar.hide()
+        else:
+            self.side_bar.hiden_bar.hide()
+            self.side_bar.shown_bar.show()
 
 
 
