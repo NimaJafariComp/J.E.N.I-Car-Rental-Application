@@ -47,6 +47,7 @@ class customer_signup(QWidget):
         self.user_box = QLineEdit()
         self.email = QLineEdit()
         self.pw_box = QLineEdit()
+        self.pw_confirm_box = QLineEdit()
 
         # Login button
         self.buttons = QFrame()
@@ -106,6 +107,9 @@ class customer_signup(QWidget):
         self.login_window_layout.addWidget(self.user_box, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.email, alignment=Qt.AlignCenter)
         self.login_window_layout.addWidget(self.pw_box, alignment=Qt.AlignCenter)
+        self.login_window_layout.addWidget(
+            self.pw_confirm_box, alignment=Qt.AlignCenter
+        )
         self.login_window_layout.addWidget(self.buttons, alignment=Qt.AlignCenter)
         self.login_window_layout.addStretch()
 
@@ -148,6 +152,12 @@ class customer_signup(QWidget):
         self.pw_box.setFixedHeight(40)
         self.pw_box.setEchoMode(QLineEdit.Password)
         self.pw_box.setStyleSheet(self.label_style)
+
+        self.pw_confirm_box.setPlaceholderText("Re-Enter Password")
+        self.pw_confirm_box.setFixedWidth(300)
+        self.pw_confirm_box.setFixedHeight(40)
+        self.pw_confirm_box.setEchoMode(QLineEdit.Password)
+        self.pw_confirm_box.setStyleSheet(self.label_style)
 
     def setup_login_button(self):
         """
