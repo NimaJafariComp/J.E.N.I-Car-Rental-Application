@@ -193,7 +193,7 @@ class customer_login(QWidget):
         currentUser.set_user(user)
 
         if user is not None:
-            self.main_window.stacked_widget.setCurrentIndex(6)
+            self.main_window.stacked_widget.setCurrentIndex(5)
             self.main_window.a_window.bottom_layout.setCurrentIndex(0)
             self.user_box.clear()
             self.pw_box.clear()
