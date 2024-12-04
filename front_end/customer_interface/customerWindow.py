@@ -7,7 +7,9 @@ from PyQt5.QtWidgets import *
 from ..api import api
 from ..config.carTileScroll import carTile_scroll
 from ..config.font import font
+from ..currentUser import CurrentUser
 from .carTile import car_tile
+from .revenueHistory import reservations_history
 from .searchBar import search_bar
 from .sideBar import side_bar
 from .test import searchCar
@@ -43,6 +45,10 @@ class customer_window(QWidget):
         # setup sidebar
         self.side_bar = side_bar()
         self.side_bar.menu_button.clicked.connect(self.menu_clicked)
+        self.side_bar.h_home_button.clicked.connect(self.home_clicked)
+        self.side_bar.s_home_button.clicked.connect(self.home_clicked)
+        self.side_bar.h_table_button.clicked.connect(self.table_clicked)
+        self.side_bar.s_table_button.clicked.connect(self.table_clicked)
 
         # setup Qframes
         self.top_frame = QFrame()
@@ -51,6 +57,7 @@ class customer_window(QWidget):
         # set up scrollable bottom frame
         self.bottom_frame = QFrame()
         self.scroll_area = carTile_scroll()
+        self.reservations_history = reservations_history()
 
         # setup tile layout
         self.tile_widget = QFrame()
@@ -114,6 +121,7 @@ class customer_window(QWidget):
         self.bottom_layout = QStackedLayout(self.bottom_frame)
         self.bottom_layout.addWidget(self.search_bar)
         self.bottom_layout.addWidget(self.tile_widget)
+        self.bottom_layout.addWidget(self.reservations_history)
         self.bottom_layout.setCurrentIndex(0)
 
     def setup_tiles(self):
@@ -220,6 +228,15 @@ class customer_window(QWidget):
         else:
             self.side_bar.hiden_bar.hide()
             self.side_bar.shown_bar.show()
+
+    def table_clicked(self):
+        currentUser = CurrentUser()
+        user = currentUser.get_user()
+        self.bottom_layout.setCurrentIndex(2)
+        self.reservations_history.setup_table(user.email)
+
+    def home_clicked(self):
+        self.bottom_layout.setCurrentIndex(0)
 
 
 if __name__ == "__main__":

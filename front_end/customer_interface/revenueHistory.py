@@ -3,32 +3,29 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
 from ..api import api
+from ..currentUser import CurrentUser
 
 
-class reservations(QWidget):
+class reservations_history(QWidget):
     def __init__(self):
         super().__init__()
         # setup main window layout
         self.main_layout = QVBoxLayout(self)
         self.api = api()
         self.table = QTableWidget()
-        self.checkedout_button = QPushButton("Check Out Cars")
-        self.check_box = []
 
         self.button_style = "background-color: #efbe25; color: white; border: none; border-radius : 5px; outline: none;"
         self.main_layout.addWidget(self.table)
-        self.main_layout.addWidget(self.checkedout_button, alignment=Qt.AlignCenter)
 
         # Make columns stretch to fill the width
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
-        self.setup_table()
-
-    def setup_table(self):
-        self.reservations = self.api.car_rental_obj.get_reservations()
+    def setup_table(self, user_email):
+        email = user_email
+        self.reservations = self.api.car_rental_obj.resevation_history(email)
         self.table.setRowCount(0)
         self.table.setRowCount(len(self.reservations) + 1)
-        self.table.setColumnCount(11)
+        self.table.setColumnCount(10)
 
         # Set the column headers
         self.table.setHorizontalHeaderLabels(
@@ -43,7 +40,6 @@ class reservations(QWidget):
                 "Price",
                 "Canceled",
                 "Checked Out",
-                "To Check Out",
             ]
         )
         self.table.verticalHeader().setVisible(False)
@@ -72,20 +68,6 @@ class reservations(QWidget):
             self.table.setItem(row, 7, QTableWidgetItem(str(price)))
             self.table.setItem(row, 8, QTableWidgetItem(str(bool(canceled))))
             self.table.setItem(row, 9, QTableWidgetItem(str(bool(confirmed))))
-
-            self.check_box.append(QCheckBox())
-            self.table.setCellWidget(row, 10, self.check_box[row])
-
-    def click_checkedout(self):
-        for i in range(len(self.check_box)):
-            if self.check_box[i].isChecked() and self.reservations[i][9] == 0:
-                reservatioID = self.reservations[i][0]
-                print(reservatioID)
-                self.api.car_rental_obj.reservation_confirm_setter(reservatioID)
-                self.check_box[i].setCheckState(Qt.Unchecked)
-
-        self.check_box.clear()
-        self.setup_table()
 
 
 if __name__ == "__main__":
