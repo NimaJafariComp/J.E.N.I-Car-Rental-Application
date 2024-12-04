@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from ..config.font import font
+from ..currentUser import CurrentUser
 from .invoiceWindow import invoice_window
 from ..api import api
     # Index 0: Car ID 
@@ -55,8 +56,6 @@ class rent_window(QWidget):
         self.Car_Make  = QLabel("Car Make: " + str(self.car[6]))
         self.Car_Color = QLabel("Car Color: " + str(self.car[7]))
         self.Car_Type  = QLabel("Car Type: " + str(self.car[8]))
-        self.email = QLineEdit()
-        self.email.setPlaceholderText("Email")
         self.check_insurance = QCheckBox("Include Insurance")
         self.button_frame()
         self.form_layout.addRow(self.start)
@@ -69,7 +68,6 @@ class rent_window(QWidget):
         self.form_layout.addRow(self.Car_Make )
         self.form_layout.addRow(self.Car_Color)
         self.form_layout.addRow(self.Car_Type )
-        self.form_layout.addRow(self.email)
         self.form_layout.addRow(self.check_insurance)
         self.form_layout.addRow(self.button_Qframe)
         self.make_button.clicked.connect(self.make_clicked)
@@ -107,11 +105,13 @@ class rent_window(QWidget):
         '''
         function for when make button is clicked then sends the request to the backend and makes a Reservation then goes to the invoice window.
         '''
+        currentUser = CurrentUser()
+        user = currentUser.get_user()
         self.rent_window = invoice_window(self.customer_window, self.car, self.num_days, self.start_date, self.end_date, self.check_insurance.isChecked())
         self.customer_window.bottom_layout.removeWidget(self.customer_window.bottom_layout.widget(4)) 
         self.customer_window.bottom_layout.insertWidget(4, self.rent_window)
         self.customer_window.bottom_layout.setCurrentIndex(4)
-        self.api.car_rental_obj.make_reservation(self.start_date.toString('yyyy-MM-dd'), self.end_date.toString('yyyy-MM-dd'), self.check_insurance.isChecked(), self.email.text(), self.car[0])
+        self.api.car_rental_obj.make_reservation(self.start_date.toString('yyyy-MM-dd'), self.end_date.toString('yyyy-MM-dd'), self.check_insurance.isChecked(), user.email , self.car[0])
 
     def back_clicked(self):
         '''
@@ -120,12 +120,3 @@ class rent_window(QWidget):
         self.customer_window.bottom_layout.setCurrentIndex(1)
 
  
-if __name__ == "__main__":
-    import sys
-    from ..config.screenConfig import screen_config
-    screen_config = screen_config()
-    app = QApplication(sys.argv)
-    list = []
-    window = rent_window()
-    window.show()
-    sys.exit(app.exec_())
