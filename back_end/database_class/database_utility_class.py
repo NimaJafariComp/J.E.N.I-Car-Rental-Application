@@ -701,14 +701,14 @@ def get_customer_info(input_username):
     
     return result
 
-def get_reservations_history(customer_email: str) -> list[tuple]:
+def get_reservations_history(customer_id: int) -> list[tuple]:
     """
     Retrieves all reservations made by a specific customer.
 
     Parameters
     ----------
-    customer_email: str
-        The email of the customer whose reservations are to be retrieved.
+    customer_id: str
+        The ID of the customer whose reservations are to be retrieved.
 
     Returns
     -------
@@ -717,10 +717,11 @@ def get_reservations_history(customer_email: str) -> list[tuple]:
 
     Author: Nima Jafari
     Updates:
+    Nima Jafari 12/04
     """
     reservations = []
-    sql_select_reservations = "SELECT * FROM Reservations WHERE CustomerEmail = %s"
-    mycursor.execute(sql_select_reservations, (customer_email,))
+    sql_select_reservations = "SELECT * FROM Reservations WHERE CustomerID = %s"
+    mycursor.execute(sql_select_reservations, (customer_id,))
     
     myresult = mycursor.fetchall()
     for reservation in myresult:

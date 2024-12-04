@@ -671,14 +671,14 @@ class CarRentalService:
         else:
             return None
     
-    def resevation_history(self, customer_email: str) -> list[tuple]:
+    def resevation_history(self, customer_id: int) -> list[tuple]:
         """
         Function to retrieve the reservation history of a customer based on their email.
         
         Parameters
         ----------
-        customer_email: str
-            The email of the customer whose reservation history is to be retrieved.
+        customer_id: int
+            The ID of the customer whose reservation history is to be retrieved.
         
         Returns
         -------
@@ -687,9 +687,10 @@ class CarRentalService:
         
         Author: [Nima jafari], [12/01]
         Updates:
+        [Nima jafari], [12/04]
         """
-        customer_history = dbu.get_reservations_history(customer_email=customer_email)
-        print(customer_history)
+        customer_history = dbu.get_reservations_history(customer_id=customer_id)
+        return customer_history
     
     def search(self, username: str, username_list: list) -> int:
         low, high, mid = 0, len(username_list) - 1, 0
