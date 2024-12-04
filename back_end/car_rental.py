@@ -214,7 +214,7 @@ class CarRentalService:
         """
         return dbu.search_database(start_date, end_date, car_type)
     
-    def make_reservation(self, start_date: str, end_date: str, insurance: int, customer_email: str, car_id: int) -> None:
+    def make_reservation(self, start_date: str, end_date: str, insurance: int, customer_email: str, customer_id: int, car_id: int) -> None:
         """
         Calls add_reservation from car class to assign a reservation to a car
         
@@ -228,6 +228,8 @@ class CarRentalService:
             Values 0 or 1, boolean value. Indicates if customer wants to include insurance
         customer_email: str
             Email of the customer for the invoice/confirmation email
+        customer_id: id
+            ID of the customer for the invoice/confirmation
         car_id: int
             The car ID of the desired car
         total_price: float
@@ -268,7 +270,7 @@ class CarRentalService:
         
         #print(total_price)
             
-        self.inv_obj.get_inventory()[index].add_reservation(start_date, end_date, insurance, customer_email, car_id, total_price)
+        self.inv_obj.get_inventory()[index].add_reservation(start_date, end_date, insurance, customer_email, customer_id, car_id, total_price)
         
         self.send_invoice(customer_email, car_id, start_date, insurance, end_date, total_price, total_days, daily_price) #send invoice after reservation is done, so we dont have to search database for reservations and then send em
     

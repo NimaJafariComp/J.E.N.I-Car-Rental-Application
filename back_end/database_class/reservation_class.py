@@ -12,6 +12,8 @@ class reservation:
         Values 0 or 1, boolean value. Indicates if customer wants to include insurance
     customer_email: str
         Email of the customer for the invoice/confirmation email
+    customer_id: int
+        id of the customer
     car_id: int
         The car ID of the desired car
     cancelled: int
@@ -23,11 +25,12 @@ class reservation:
         Elijah, 10/29
         Nima, 11/18
     """
-    def __init__(self, start_date, end_date, insurance, customer_email, vehicle, canceled):
+    def __init__(self, start_date, end_date, insurance, customer_email, customer_id, vehicle, canceled):
         self.start_date = start_date
         self.end_date = end_date
         self.insurance = insurance
         self.customer_email = customer_email
+        self.customer_id = customer_id
         self.vehicle = vehicle
         self.reservation_id = None
         self.canceled = canceled

@@ -163,7 +163,7 @@ class car:
         
         self.reports.append(repr(report_object))
 
-    def add_reservation(self, start_date: str, end_date: str, insurance: int, customer_email: str, car_id: int, total_price: float) -> None:
+    def add_reservation(self, start_date: str, end_date: str, insurance: int, customer_email: str, customer_id: int, car_id: int, total_price: float) -> None:
         """
         Creates an object of the reservation type, and then adds it to the current list of reservations for the car
         
@@ -177,6 +177,8 @@ class car:
             Values 0 or 1, boolean value. Indicates if customer wants to include insurance
         customer_email: str
             Email of the customer for the invoice/confirmation email
+        customer_id: int
+            ID of the customer
         car_id: int
             The car ID of the desired car
         total_price: float
@@ -187,8 +189,8 @@ class car:
         None
         
         """
-        rsvp_obj = rsvp(start_date, end_date, insurance, customer_email, car_id, total_price)
-        rsvp_obj.set_reservation_id(insert_reservation(start_date, end_date, insurance, customer_email, car_id, 0, total_price))
+        rsvp_obj = rsvp(start_date, end_date, insurance, customer_email, customer_id, car_id, total_price)
+        rsvp_obj.set_reservation_id(insert_reservation(start_date, end_date, insurance, customer_email, customer_id, car_id, 0, total_price))
         
         self.reservations.append(repr(rsvp_obj))
 

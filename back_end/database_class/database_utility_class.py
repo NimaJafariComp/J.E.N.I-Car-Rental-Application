@@ -460,7 +460,7 @@ def get_vins():
 
     return inventory 
 
-def insert_reservation(start_date: str, end_date: str, insurance: bool, customer_email: str, car_id: int, canceled: bool, total_price: float) -> int:
+def insert_reservation(start_date: str, end_date: str, insurance: bool, customer_email: str, customer_id: int,car_id: int, canceled: bool, total_price: float) -> int:
     """
     Insert a new reservation into the database.
 
@@ -474,9 +474,9 @@ def insert_reservation(start_date: str, end_date: str, insurance: bool, customer
     @return int - The ID of the newly created reservation.
     """
 
-    sql_insert_reservation = "insert into Reservations (StartDate, EndDate, Insurance, CustomerEmail, Vehicle, Canceled, TotalPrice) \
-                            values (%s, %s, %s, %s, %s,%s,%s)"
-    reservation_values = (start_date, end_date, insurance, customer_email, car_id, canceled, total_price)
+    sql_insert_reservation = "insert into Reservations (StartDate, EndDate, Insurance, CustomerEmail, CustomerID, Vehicle, Canceled, TotalPrice) \
+                            values (%s, %s, %s, %s, %s, %s, %s, %s)"
+    reservation_values = (start_date, end_date, insurance, customer_email, customer_id, car_id, canceled, total_price)
     
     mycursor.execute(sql_insert_reservation, reservation_values)
     mydb.commit()
