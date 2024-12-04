@@ -233,7 +233,7 @@ class customer_window(QWidget):
         currentUser = CurrentUser()
         user = currentUser.get_user()
         self.bottom_layout.setCurrentIndex(2)
-        self.reservations_history.setup_table(user.cust_id)
+        self.reservations_history.setup_table(user.cust_id, user.user)
 
     def home_clicked(self):
         self.bottom_layout.setCurrentIndex(0)
