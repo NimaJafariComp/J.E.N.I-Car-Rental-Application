@@ -55,7 +55,7 @@ class admin_login(QWidget):
         self.buttons_layout = QHBoxLayout(self.buttons)
         self.login_button = QPushButton("Login")
         self.back_button = QPushButton("Back")
-        self.buttons.setStyleSheet("border: none;")
+        self.buttons.setStyleSheet("border: none; outline: none;")
 
         # setup clickable sign up label
         self.signup_label = QLabel('<a href="https://example.com">Sign Up Here</a>')
@@ -167,12 +167,12 @@ class admin_login(QWidget):
         self.back_button.setFixedWidth(125)
         self.back_button.setFixedHeight(40)
         self.login_button.setStyleSheet(
-            "background-color: #efbe25; color: white;"
+            "background-color: #efbe25; color: white; outline: none;"
             "border: none;"
             "border-radius : 5px;"
         )
         self.back_button.setStyleSheet(
-            "background-color: #efbe25; color: white;"
+            "background-color: #efbe25; color: white; outline: none;"
             "border: none;"
             "border-radius : 5px;"
         )

@@ -3,7 +3,8 @@ import os
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from .api import api 
+
+from .api import api
 from .config.font import font
 
 
@@ -55,7 +56,7 @@ class customer_signup(QWidget):
         self.buttons_layout = QHBoxLayout(self.buttons)
         self.login_button = QPushButton("Sign Up")
         self.back_button = QPushButton("Back")
-        self.button_style = "background-color: #efbe25; color: white; border: none; border-radius : 5px;"
+        self.button_style = "background-color: #efbe25; color: white; border: none; border-radius : 5px; outline: none;"
         self.buttons.setStyleSheet("border: none;")
 
         # function calls

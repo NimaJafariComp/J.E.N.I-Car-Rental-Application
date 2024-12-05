@@ -1,7 +1,9 @@
-from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
 from ..api import api
+
 
 class reservations(QWidget):
     def __init__(self):
@@ -13,7 +15,7 @@ class reservations(QWidget):
         self.checkedout_button = QPushButton("Check Out Cars")
         self.check_box = []
 
-        self.button_style = "background-color: #efbe25; color: white; border: none; border-radius : 5px;"
+        self.button_style = "background-color: #efbe25; color: white; border: none; border-radius : 5px; outline: none;"
         self.checkedout_button.clicked.connect(self.click_checkedout)
         self.main_layout.addWidget(self.table)
         self.main_layout.addWidget(self.checkedout_button, alignment=Qt.AlignCenter)
@@ -23,23 +25,49 @@ class reservations(QWidget):
 
         # Make columns stretch to fill the width
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        
+
         self.setup_table()
 
     def setup_table(self):
         self.reservations = self.api.car_rental_obj.get_reservations()
         self.table.setRowCount(0)
-        self.table.setRowCount(len(self.reservations)+1)
+        self.table.setRowCount(len(self.reservations) + 1)
         self.table.setColumnCount(11)
 
         # Set the column headers
-        self.table.setHorizontalHeaderLabels(['Reservation Id', 'Start Date', 'End Date', 'Insurance', 'Customer ID', 'CustomerEmail', 'Car ID', 'Price', 'Canceled', 'Checked Out', 'To Check Out'])
+        self.table.setHorizontalHeaderLabels(
+            [
+                "Reservation Id",
+                "Start Date",
+                "End Date",
+                "Insurance",
+                "Customer ID",
+                "CustomerEmail",
+                "Car ID",
+                "Price",
+                "Canceled",
+                "Checked Out",
+                "To Check Out",
+            ]
+        )
         self.table.verticalHeader().setVisible(False)
 
-
-        for row, (id, start, end, insurance, customerID, customerEmail, carID, canceled, price, confirmed) in enumerate(self.reservations):
+        for row, (
+            id,
+            start,
+            end,
+            insurance,
+            customerID,
+            customerEmail,
+            carID,
+            canceled,
+            price,
+            confirmed,
+        ) in enumerate(self.reservations):
             self.table.setItem(row, 0, QTableWidgetItem(str(id)))
-            self.table.setItem(row, 1, QTableWidgetItem(str(start.strftime("%Y-%m-%d"))))
+            self.table.setItem(
+                row, 1, QTableWidgetItem(str(start.strftime("%Y-%m-%d")))
+            )
             self.table.setItem(row, 2, QTableWidgetItem(str(end.strftime("%Y-%m-%d"))))
             self.table.setItem(row, 3, QTableWidgetItem(str(bool(insurance))))
             self.table.setItem(row, 4, QTableWidgetItem(str(customerID)))
@@ -63,9 +91,12 @@ class reservations(QWidget):
         self.check_box.clear()
         self.setup_table()
 
+
 if __name__ == "__main__":
     import sys
+
     from ..config.screenConfig import screen_config
+
     screen_config = screen_config()
     app = QApplication(sys.argv)
     window = reservations()

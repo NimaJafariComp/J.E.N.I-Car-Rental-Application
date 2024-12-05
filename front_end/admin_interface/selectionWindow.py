@@ -30,7 +30,7 @@ class selection_window(QWidget):
         self.add_button.setFixedSize(200, 150)
         self.add_button.setFont(self.font)
         self.add_button.setStyleSheet(
-            "color: white; background:#efbe25; border-radius: 5px;"
+            "color: white; background:#efbe25; border-radius: 5px; outline: none;"
         )
         self.main_layout.addWidget(self.add_button, 0, 0)
         self.add_button.clicked.connect(self.clicked_add)
@@ -40,7 +40,7 @@ class selection_window(QWidget):
         self.delete_button.setFixedSize(200, 150)
         self.delete_button.setFont(self.font)
         self.delete_button.setStyleSheet(
-            "color: white; background:#efbe25; border-radius: 5px;"
+            "color: white; background:#efbe25; border-radius: 5px; outline: none;"
         )
         self.main_layout.addWidget(self.delete_button, 0, 1)
         self.delete_button.clicked.connect(self.clicked_delete)
@@ -50,7 +50,7 @@ class selection_window(QWidget):
         self.reservations_button.setFixedSize(200, 150)
         self.reservations_button.setFont(self.font)
         self.reservations_button.setStyleSheet(
-            "color: white; background:#efbe25; border-radius: 5px;"
+            "color: white; background:#efbe25; border-radius: 5px; outline: none;"
         )
         self.main_layout.addWidget(self.reservations_button, 0, 2)
         self.reservations_button.clicked.connect(self.clicked_reservation)

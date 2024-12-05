@@ -1,24 +1,27 @@
 import os
-from PyQt5.QtWidgets import *
+
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+from ..api import api
+from ..config.carTileScroll import carTile_scroll
 from ..config.font import font
 from .carTile import car_tile
 from .searchBar import search_bar
 from .sideBar import side_bar
 from .test import searchCar
-from ..api import api
-from ..config.carTileScroll import carTile_scroll
 
 
 class customer_window(QWidget):
-    '''
+    """
     A class to make the customer side of the application where you can search for cars to rent and make the reservations.
-    '''
+    """
+
     def __init__(self):
-        '''
+        """
         Initializes the customer window class.
-        '''
+        """
         super().__init__()
         # setup api call obj
         self.api = api()
@@ -26,13 +29,16 @@ class customer_window(QWidget):
         # setup customer window layout
         self.main_layout = QHBoxLayout(self)
         self.sub_window = QFrame()
-        #self.sub_window.setStyleSheet("border: none; background-color: white;")
+        # self.sub_window.setStyleSheet("border: none; background-color: white;")
         self.customer_layout = QVBoxLayout(self.sub_window)
-        self.main_layout.setContentsMargins(0, 0, 0, 0)  # Left, Top, Right, Bottom margins
+        self.main_layout.setContentsMargins(
+            0, 0, 0, 0
+        )  # Left, Top, Right, Bottom margins
         self.main_layout.setSpacing(0)  # Spacing between widgets
-        self.customer_layout.setContentsMargins(0, 0, 0, 0)  # Left, Top, Right, Bottom margins
+        self.customer_layout.setContentsMargins(
+            0, 0, 0, 0
+        )  # Left, Top, Right, Bottom margins
         self.customer_layout.setSpacing(0)  # Spacing between widgets
-
 
         # setup sidebar
         self.side_bar = side_bar()
@@ -42,7 +48,7 @@ class customer_window(QWidget):
         self.top_frame = QFrame()
         self.top_frame_layout = QHBoxLayout(self.top_frame)
 
-        #set up scrollable bottom frame
+        # set up scrollable bottom frame
         self.bottom_frame = QFrame()
         self.scroll_area = carTile_scroll()
 
@@ -79,9 +85,9 @@ class customer_window(QWidget):
         self.setup_widget()
 
     def setup_topframe(self):
-        '''
+        """
         function to setup the parameter for the top frame of the customer window that has the sign out button and the logo.
-        '''
+        """
         self.top_frame.setFrameShape(QFrame.StyledPanel)
         self.top_frame.setFixedHeight(75)
         self.top_frame.setStyleSheet("background: white;")
@@ -89,18 +95,20 @@ class customer_window(QWidget):
         self.top_frame_layout.addStretch()
 
     def setup_button(self):
-        '''
+        """
         function to set up the parameters for the sign out button.
-        '''
+        """
         self.signout_button.setFixedWidth(100)
         self.signout_button.setFixedHeight(40)
         self.signout_button.setFont(self.font)
-        self.signout_button.setStyleSheet("color: white; background-color: #efbe25; border-radius: 5px;")
+        self.signout_button.setStyleSheet(
+            "color: white; background-color: #efbe25; border-radius: 5px; outline: none;"
+        )
 
     def setup_bottomframe(self):
-        '''
+        """
         function to set up the parameters for the bottom frame and add the widget for the inital search window and the window that shows all the car tiles.
-        '''
+        """
         self.bottom_frame.setFrameShape(QFrame.StyledPanel)
         self.bottom_frame.setFrameShadow(QFrame.Raised)
         self.bottom_layout = QStackedLayout(self.bottom_frame)
@@ -109,18 +117,18 @@ class customer_window(QWidget):
         self.bottom_layout.setCurrentIndex(0)
 
     def setup_tiles(self):
-        '''
+        """
         function to setup the window that shows the search bar and car tiles after the inital search.
-        '''
+        """
         self.tile_search = search_bar()
         self.tile_layout.addWidget(self.tile_search, alignment=Qt.AlignCenter)
         self.tile_layout.addWidget(self.scroll_area)
         self.tile_search.search_button.clicked.connect(self.click_research)
-        
+
     def setup_widget(self):
-        '''
+        """
         function to set up the layout of the customer window.
-        '''
+        """
         self.customer_layout.setContentsMargins(0, 0, 0, 0)
         self.customer_layout.setSpacing(0)
         self.top_frame_layout.addWidget(self.signout_button)
@@ -130,40 +138,68 @@ class customer_window(QWidget):
         self.main_layout.addWidget(self.sub_window)
 
     def click_search(self):
-        '''
+        """
         function that when inital search is clicked it calls backend api to get a list of abvilable cars and displays them.
-        '''
+        """
         self.bottom_layout.setCurrentIndex(1)
         start_date = self.search.date_range.start_date_edit.date()
         end_date = self.search.date_range.end_date_edit.date()
-        num_days = start_date.daysTo(end_date) 
+        num_days = start_date.daysTo(end_date)
         self.list.clear()
         self.carList.clear()
-        print(start_date.toString('yyyy-MM-dd') + " " + end_date.toString('yyyy-MM-dd') + " " + self.search.type_box.currentText())
-        self.carList = self.api.car_rental_obj.customer_search(start_date.toString('yyyy-MM-dd'), end_date.toString('yyyy-MM-dd'), self.search.type_box.currentText())
+        print(
+            start_date.toString("yyyy-MM-dd")
+            + " "
+            + end_date.toString("yyyy-MM-dd")
+            + " "
+            + self.search.type_box.currentText()
+        )
+        self.carList = self.api.car_rental_obj.customer_search(
+            start_date.toString("yyyy-MM-dd"),
+            end_date.toString("yyyy-MM-dd"),
+            self.search.type_box.currentText(),
+        )
         self.clear_layout(self.scroll_area.scroll_frameLayout)
 
         for i in range(len(self.carList)):
-            self.list.append(car_tile(self.carList[i], self, num_days, start_date, end_date))
-            self.scroll_area.scroll_frameLayout.addWidget(self.list[i], alignment=Qt.AlignCenter) 
+            self.list.append(
+                car_tile(self.carList[i], self, num_days, start_date, end_date)
+            )
+            self.scroll_area.scroll_frameLayout.addWidget(
+                self.list[i], alignment=Qt.AlignCenter
+            )
 
     def click_research(self):
-        '''
+        """
         function that when serach is clicked after the inital search call the backend api to get a new list of cars to display.
-        '''
+        """
         self.bottom_layout.setCurrentIndex(1)
         start_date = self.tile_search.date_range.start_date_edit.date()
         end_date = self.tile_search.date_range.end_date_edit.date()
-        num_days = start_date.daysTo(end_date) 
+        num_days = start_date.daysTo(end_date)
         self.list.clear()
         self.carList.clear()
-        self.carList = self.api.car_rental_obj.customer_search(start_date.toString('yyyy-MM-dd'), end_date.toString('yyyy-MM-dd'), self.tile_search.type_box.currentText())
-        print(start_date.toString('yyyy-MM-dd') + " " + end_date.toString('yyyy-MM-dd') + " " + self.tile_search.type_box.currentText())
+        self.carList = self.api.car_rental_obj.customer_search(
+            start_date.toString("yyyy-MM-dd"),
+            end_date.toString("yyyy-MM-dd"),
+            self.tile_search.type_box.currentText(),
+        )
+        print(
+            start_date.toString("yyyy-MM-dd")
+            + " "
+            + end_date.toString("yyyy-MM-dd")
+            + " "
+            + self.tile_search.type_box.currentText()
+        )
         self.clear_layout(self.scroll_area.scroll_frameLayout)
-        
+
         for i in range(len(self.carList)):
-            self.list.append(car_tile(self.carList[i], self, num_days, start_date, end_date))
-            self.scroll_area.scroll_frameLayout.addWidget(self.list[i], alignment=Qt.AlignCenter) 
+            self.list.append(
+                car_tile(self.carList[i], self, num_days, start_date, end_date)
+            )
+            self.scroll_area.scroll_frameLayout.addWidget(
+                self.list[i], alignment=Qt.AlignCenter
+            )
 
     def clear_layout(self, layout):
         """
@@ -186,11 +222,11 @@ class customer_window(QWidget):
             self.side_bar.shown_bar.show()
 
 
-
-
 if __name__ == "__main__":
     import sys
+
     from ..config.screenConfig import screen_config
+
     screen_config = screen_config()
     app = QApplication(sys.argv)
     window = customer_window()

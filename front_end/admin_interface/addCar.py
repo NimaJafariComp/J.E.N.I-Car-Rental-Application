@@ -1,9 +1,11 @@
-from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-from ..config.font import font
+from PyQt5.QtWidgets import *
+
 from ..api import api
+from ..config.font import font
 from .imgAdder import img_adder
+
 
 class add_car(QWidget):
     def __init__(self):
@@ -11,8 +13,8 @@ class add_car(QWidget):
         # setup api to backend
         self.api = api()
 
-        #Main Layout for the Widget
-        self.setFixedSize(800,400) 
+        # Main Layout for the Widget
+        self.setFixedSize(800, 400)
         self.right_frame = QFrame()
         self.right_layout = QVBoxLayout(self.right_frame)
         self.main_layout = QHBoxLayout()
@@ -21,11 +23,11 @@ class add_car(QWidget):
         self.set_font = font()
         self.font = QFont(self.set_font.font_family, 20)
 
-        #From layout to handle car details
+        # From layout to handle car details
         self.form = QWidget()
         self.form_layout = QFormLayout(self.form)
 
-        #Input fields for the car attributes
+        # Input fields for the car attributes
         self.vin_input = QLineEdit()
         self.mileage_input = QLineEdit()
         self.mpg_input = QLineEdit()
@@ -37,7 +39,7 @@ class add_car(QWidget):
         self.color_input = QLineEdit()
         self.car_type_input = QComboBox()
 
-        #Add placeholders to guide user input
+        # Add placeholders to guide user input
         self.vin_input.setPlaceholderText("VIN")
         self.mileage_input.setPlaceholderText("Mileage")
         self.mpg_input.setPlaceholderText("MPG")
@@ -47,9 +49,9 @@ class add_car(QWidget):
         self.model_input.setPlaceholderText("Model")
         self.make_input.setPlaceholderText("Make")
         self.color_input.setPlaceholderText("Color")
-        self.car_type_input.addItems(['Sedan', 'Truck', 'Coupe', 'SUV'])
+        self.car_type_input.addItems(["Sedan", "Truck", "Coupe", "SUV"])
 
-        #Add rows of labels and input fields to  wthe form layout
+        # Add rows of labels and input fields to  wthe form layout
         self.form_layout.addRow("VIN:", self.vin_input)
         self.form_layout.addRow("Mileage:", self.mileage_input)
         self.form_layout.addRow("MPG:", self.mpg_input)
@@ -61,19 +63,21 @@ class add_car(QWidget):
         self.form_layout.addRow("Color:", self.color_input)
         self.form_layout.addRow("Car Type:", self.car_type_input)
 
-        #Create a button to submit the new car
+        # Create a button to submit the new car
         self.add_button = QPushButton("Add Car")
         self.add_button.clicked.connect(self.add_car_to_inventory)
-        self.add_button.setFixedSize(150,50)
+        self.add_button.setFixedSize(150, 50)
         self.add_button.setFont(self.font)
-        self.add_button.setStyleSheet("color: white; background:#efbe25; border-radius: 5px;")
+        self.add_button.setStyleSheet(
+            "color: white; background:#efbe25; border-radius: 5px; outline: none;"
+        )
 
-        #Add the form and button to the main layout
+        # Add the form and button to the main layout
         self.right_layout.addWidget(self.form, alignment=Qt.AlignCenter)
         self.right_layout.addWidget(self.add_button, alignment=Qt.AlignCenter)
         self.setup_img()
 
-        #Set the layout for the widget
+        # Set the layout for the widget
         self.setLayout(self.main_layout)
 
     def setup_img(self):
@@ -81,9 +85,8 @@ class add_car(QWidget):
         self.main_layout.addWidget(self.img_adder)
         self.main_layout.addWidget(self.right_frame)
 
-
     def add_car_to_inventory(self):
-        #Retrieve input date from fields
+        # Retrieve input date from fields
         vin = self.vin_input.text()
         mileage = int(self.mileage_input.text())
         mpg = int(self.mpg_input.text())
@@ -95,11 +98,22 @@ class add_car(QWidget):
         color = self.color_input.text()
         car_type = self.car_type_input.currentText()
 
-        #Create a new Car object using the input data
-        self.api.car_rental_obj.add_car(vin, mileage, mpg, price, license_plate, car_year, model, make, color, car_type)
+        # Create a new Car object using the input data
+        self.api.car_rental_obj.add_car(
+            vin,
+            mileage,
+            mpg,
+            price,
+            license_plate,
+            car_year,
+            model,
+            make,
+            color,
+            car_type,
+        )
         self.img_adder.save_file(str(vin))
 
-        #Optionally, reset input fields after adding the car
+        # Optionally, reset input fields after adding the car
         self.clear_input_fields()
 
     def clear_input_fields(self):
@@ -115,9 +129,12 @@ class add_car(QWidget):
         self.color_input.clear()
         self.car_type_input.clear()
 
+
 if __name__ == "__main__":
     import sys
+
     from ..config.screenConfig import screen_config
+
     screen_config = screen_config()
     app = QApplication(sys.argv)
     window = add_car()

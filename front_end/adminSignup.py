@@ -57,7 +57,7 @@ class admin_signup(QWidget):
         self.buttons_layout = QHBoxLayout(self.buttons)
         self.login_button = QPushButton("Sign Up")
         self.back_button = QPushButton("Back")
-        self.button_style = "background-color: #efbe25; color: white; border: none; border-radius : 5px;"
+        self.button_style = "background-color: #efbe25; color: white; border: none; border-radius : 5px; outline: none;"
         self.buttons.setStyleSheet("border: none;")
 
         # function calls
@@ -192,9 +192,7 @@ class admin_signup(QWidget):
             email = self.email.text()
             pw = self.pw_box.text()
             dob = "01/01/1900"
-            self.api.car_rental_obj.user_signup(
-                name, username, email, pw, dob, "admin"
-            )
+            self.api.car_rental_obj.user_signup(name, username, email, pw, dob, "admin")
             self.main_window.stacked_widget.setCurrentIndex(0)
         else:
             self.pw_not_same.show()

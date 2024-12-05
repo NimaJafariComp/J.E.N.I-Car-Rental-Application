@@ -1,10 +1,13 @@
 import os
-from PyQt5.QtWidgets import * 
+
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
 from ..config.font import font
-from .selectionWindow import selection_window
 from ..currentUser import CurrentUser
+from .selectionWindow import selection_window
+
 
 class admin_window(QWidget):
     def __init__(self):
@@ -25,7 +28,9 @@ class admin_window(QWidget):
         # set up logo
         self.logo = QLabel()
         self.current_dir = os.path.dirname(__file__)
-        self.logo_dir = os.path.join(os.path.dirname(self.current_dir), "logo/HalfLogo.png")
+        self.logo_dir = os.path.join(
+            os.path.dirname(self.current_dir), "logo/HalfLogo.png"
+        )
         self.pixmap = QPixmap(self.logo_dir)
 
         # Set up the font
@@ -41,7 +46,9 @@ class admin_window(QWidget):
     def setup_logo(self):
         self.logo.setPixmap(self.pixmap)
         self.logo.resize(self.pixmap.width(), self.pixmap.height())
-        self.scaled_pixmap = self.pixmap.scaled(60, 60, aspectRatioMode=1)  # width, height
+        self.scaled_pixmap = self.pixmap.scaled(
+            60, 60, aspectRatioMode=1
+        )  # width, height
         self.logo.setPixmap(self.scaled_pixmap)
         self.logo.setStyleSheet("border: none;")
 
@@ -53,13 +60,14 @@ class admin_window(QWidget):
         self.top_frame_layout.addWidget(self.logo)
         self.top_frame_layout.addStretch()
         self.top_frame_layout.addWidget(self.signout_button)
-        
+
     def setup_button(self):
         self.signout_button.setFixedWidth(100)
         self.signout_button.setFixedHeight(40)
         self.signout_button.setFont(self.font)
-        self.signout_button.setStyleSheet("color: white; background: #efbe25; border-radius: 5px;")
-
+        self.signout_button.setStyleSheet(
+            "color: white; background: #efbe25; border-radius: 5px; outline: none;"
+        )
 
     def setup_bottom(self):
         self.bottom_frame.setFrameShape(QFrame.StyledPanel)
@@ -78,9 +86,12 @@ class admin_window(QWidget):
         self.admin_layout.addWidget(self.top_frame)
         self.admin_layout.addWidget(self.bottom_frame)
 
+
 if __name__ == "__main__":
     import sys
+
     from ..config.screenConfig import screen_config
+
     screen_config = screen_config()
     app = QApplication(sys.argv)
     window = admin_window()
