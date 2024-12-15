@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>back_end.revenue_class.revenue &#8212; J.E.N.I Car Rental App  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for back_end.revenue_class.revenue</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+
+<div class="viewcode-block" id="Revenue">
+<a class="viewcode-back" href="../../../back_end.revenue_class.html#back_end.revenue_class.revenue.Revenue">[docs]</a>
+<span class="k">class</span> <span class="nc">Revenue</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="Revenue.revenue">
+<a class="viewcode-back" href="../../../back_end.revenue_class.html#back_end.revenue_class.revenue.Revenue.revenue">[docs]</a>
+    <span class="k">def</span> <span class="nf">revenue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reservations</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates weekly, monthly, and yearly revenue from reservations. Partitioned based on starting day (pay day).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        reservations : list[tuple]</span>
+<span class="sd">            A list of reservations where each tuple contains reservation information.</span>
+<span class="sd">            Tuple format: (id, start_date, end_date, ..., total_price)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            A dictionary with keys for weekly, monthly, and yearly revenue. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Initialize revenue containers</span>
+        <span class="n">weekly_revenue</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">monthly_revenue</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">yearly_revenue</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">reservation</span> <span class="ow">in</span> <span class="n">reservations</span><span class="p">:</span>
+            <span class="c1"># Extract necessary fields from each reservation</span>
+            <span class="n">start_date</span> <span class="o">=</span> <span class="n">reservation</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">total_price</span> <span class="o">=</span> <span class="n">reservation</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Assuming total_price is the last field</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">):</span>
+                <span class="k">continue</span>  <span class="c1"># Skip invalid data</span>
+
+            <span class="c1"># Calculate year, month, and ISO week</span>
+            <span class="n">year</span> <span class="o">=</span> <span class="n">start_date</span><span class="o">.</span><span class="n">year</span>
+            <span class="n">month</span> <span class="o">=</span> <span class="n">start_date</span><span class="o">.</span><span class="n">month</span>
+            <span class="n">week</span> <span class="o">=</span> <span class="n">start_date</span><span class="o">.</span><span class="n">isocalendar</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># Calculate the start and end dates for the week</span>
+            <span class="n">start_of_week</span> <span class="o">=</span> <span class="n">start_date</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">start_date</span><span class="o">.</span><span class="n">weekday</span><span class="p">())</span>
+            <span class="n">end_of_week</span> <span class="o">=</span> <span class="n">start_of_week</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+            <span class="c1"># Format the week range</span>
+            <span class="n">week_range</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">start_of_week</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">end_of_week</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+            <span class="c1"># Accumulate revenues</span>
+            <span class="n">weekly_revenue</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">week</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">week_range</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">total_price</span>
+            <span class="n">monthly_revenue</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">total_price</span>
+            <span class="n">yearly_revenue</span><span class="p">[</span><span class="n">year</span><span class="p">]</span> <span class="o">+=</span> <span class="n">total_price</span>
+
+        <span class="c1"># Convert defaultdict to regular dict for cleaner output</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;weekly&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">weekly_revenue</span><span class="p">),</span>
+            <span class="s2">&quot;monthly&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">),</span>
+            <span class="s2">&quot;yearly&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">yearly_revenue</span><span class="p">),</span>
+        <span class="p">}</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">J.E.N.I Car Rental App</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Nima Jafari.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

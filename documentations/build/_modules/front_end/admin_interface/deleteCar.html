@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>front_end.admin_interface.deleteCar &#8212; J.E.N.I Car Rental App  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for front_end.admin_interface.deleteCar</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">PyQt5.QtWidgets</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtCore</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtGui</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="delete_car">
+<a class="viewcode-back" href="../../../front_end.admin_interface.html#front_end.admin_interface.deleteCar.delete_car">[docs]</a>
+<span class="k">class</span> <span class="nc">delete_car</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">700</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s2">&quot;Car Deletion and Filters&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Main Layout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_layout</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># Filter Panel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter_panel</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter_panel</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+        <span class="c1"># Filter sections</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_filter_section</span><span class="p">(</span><span class="s2">&quot;Make and Model&quot;</span><span class="p">,</span> <span class="n">QLineEdit</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_filter_section</span><span class="p">(</span><span class="s2">&quot;Model Year (min - max)&quot;</span><span class="p">,</span> <span class="n">QHBoxLayout</span><span class="p">(),</span> <span class="p">[</span><span class="s2">&quot;min&quot;</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_filter_section</span><span class="p">(</span><span class="s2">&quot;Paint Color&quot;</span><span class="p">,</span> <span class="n">QListWidget</span><span class="p">(),</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Reset Filters button</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Reset Filters&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_button</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_button</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;background-color: #A6A6A6; color: white; border-radius: 5px;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reset_filters</span><span class="p">)</span>
+
+        <span class="c1"># Add reset button to filter panel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter_panel</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reset_button</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+
+        <span class="c1"># Car Table</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span> <span class="o">=</span> <span class="n">QTableWidget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">setColumnCount</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">setHorizontalHeaderLabels</span><span class="p">([</span><span class="s2">&quot;VIN&quot;</span><span class="p">,</span> <span class="s2">&quot;Model&quot;</span><span class="p">,</span> <span class="s2">&quot;Make&quot;</span><span class="p">,</span> <span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="s2">&quot;Color&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">setEditTriggers</span><span class="p">(</span><span class="n">QAbstractItemView</span><span class="o">.</span><span class="n">NoEditTriggers</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">setSelectionBehavior</span><span class="p">(</span><span class="n">QAbstractItemView</span><span class="o">.</span><span class="n">SelectRows</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">.</span><span class="n">setSectionResizeMode</span><span class="p">(</span><span class="n">QHeaderView</span><span class="o">.</span><span class="n">Stretch</span><span class="p">)</span>
+
+        <span class="c1"># Load Data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car_data</span> <span class="o">=</span> <span class="p">[</span>  <span class="c1"># Keeping raw data to enable filtering</span>
+            <span class="p">{</span><span class="s2">&quot;vin&quot;</span><span class="p">:</span> <span class="s2">&quot;123ABC&quot;</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Model X&quot;</span><span class="p">,</span> <span class="s2">&quot;make&quot;</span><span class="p">:</span> <span class="s2">&quot;Tesla&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2022&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;Red&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;vin&quot;</span><span class="p">:</span> <span class="s2">&quot;456DEF&quot;</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Civic&quot;</span><span class="p">,</span> <span class="s2">&quot;make&quot;</span><span class="p">:</span> <span class="s2">&quot;Honda&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2021&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;Blue&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;vin&quot;</span><span class="p">:</span> <span class="s2">&quot;789GHI&quot;</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Corolla&quot;</span><span class="p">,</span> <span class="s2">&quot;make&quot;</span><span class="p">:</span> <span class="s2">&quot;Toyota&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2020&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;White&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;vin&quot;</span><span class="p">:</span> <span class="s2">&quot;101JKL&quot;</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Mustang&quot;</span><span class="p">,</span> <span class="s2">&quot;make&quot;</span><span class="p">:</span> <span class="s2">&quot;Ford&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2023&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;Black&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;vin&quot;</span><span class="p">:</span> <span class="s2">&quot;112MNO&quot;</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Model S&quot;</span><span class="p">,</span> <span class="s2">&quot;make&quot;</span><span class="p">:</span> <span class="s2">&quot;Tesla&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2019&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;Silver&quot;</span><span class="p">},</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_car_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">car_data</span><span class="p">)</span>
+
+        <span class="c1"># Delete Button</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Delete Selected&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_button</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_button</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">QFont</span><span class="p">(</span><span class="s2">&quot;Arial&quot;</span><span class="p">,</span> <span class="mi">14</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_button</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;color: white; background-color: #efbe25; border-radius: 5px;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_selected</span><span class="p">)</span>
+
+        <span class="c1"># Add table and delete button to main layout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table_layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_button</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+
+        <span class="c1"># Add layouts to main layout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filter_panel</span><span class="p">,</span> <span class="n">stretch</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table_layout</span><span class="p">,</span> <span class="n">stretch</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<div class="viewcode-block" id="delete_car.create_filter_section">
+<a class="viewcode-back" href="../../../front_end.admin_interface.html#front_end.admin_interface.deleteCar.delete_car.create_filter_section">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_filter_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">range_fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a section for filters.&quot;&quot;&quot;</span>
+        <span class="n">group_box</span> <span class="o">=</span> <span class="n">QGroupBox</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">group_box</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">QFont</span><span class="p">(</span><span class="s2">&quot;Arial&quot;</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+        <span class="n">layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">is_list</span><span class="p">:</span>
+            <span class="n">widget</span><span class="o">.</span><span class="n">setSelectionMode</span><span class="p">(</span><span class="n">QAbstractItemView</span><span class="o">.</span><span class="n">MultiSelection</span><span class="p">)</span>
+            <span class="c1"># Only add the specified colors</span>
+            <span class="n">color_options</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Black&quot;</span><span class="p">,</span> <span class="s2">&quot;Blue&quot;</span><span class="p">,</span> <span class="s2">&quot;Silver&quot;</span><span class="p">,</span> <span class="s2">&quot;White&quot;</span><span class="p">,</span> <span class="s2">&quot;Red&quot;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">color_options</span><span class="p">:</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">QListWidgetItem</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">setCheckState</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">Unchecked</span><span class="p">)</span>
+                <span class="n">widget</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span> <span class="o">=</span> <span class="n">widget</span>  <span class="c1"># Save for filtering logic</span>
+        <span class="k">elif</span> <span class="n">range_fields</span><span class="p">:</span>
+            <span class="n">min_field</span> <span class="o">=</span> <span class="n">QLineEdit</span><span class="p">()</span>
+            <span class="n">min_field</span><span class="o">.</span><span class="n">setPlaceholderText</span><span class="p">(</span><span class="n">range_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">max_field</span> <span class="o">=</span> <span class="n">QLineEdit</span><span class="p">()</span>
+            <span class="n">max_field</span><span class="o">.</span><span class="n">setPlaceholderText</span><span class="p">(</span><span class="n">range_fields</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">range_layout</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+            <span class="n">range_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">min_field</span><span class="p">)</span>
+            <span class="n">range_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">max_field</span><span class="p">)</span>
+            <span class="n">layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">range_layout</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;Year&quot;</span> <span class="ow">in</span> <span class="n">label</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">min_year_filter</span> <span class="o">=</span> <span class="n">min_field</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">max_year_filter</span> <span class="o">=</span> <span class="n">max_field</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">make_model_filter</span> <span class="o">=</span> <span class="n">widget</span>  <span class="c1"># Save for filtering logic</span>
+
+        <span class="n">group_box</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter_panel</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">group_box</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="delete_car.load_car_data">
+<a class="viewcode-back" href="../../../front_end.admin_interface.html#front_end.admin_interface.deleteCar.delete_car.load_car_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">load_car_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads car data into the table.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">setRowCount</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">row</span><span class="p">,</span> <span class="n">car</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">car</span><span class="p">[</span><span class="s2">&quot;vin&quot;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">car</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">car</span><span class="p">[</span><span class="s2">&quot;make&quot;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">car</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">car</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]))</span></div>
+
+
+<div class="viewcode-block" id="delete_car.reset_filters">
+<a class="viewcode-back" href="../../../front_end.admin_interface.html#front_end.admin_interface.deleteCar.delete_car.reset_filters">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resets all filters.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">make_model_filter</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_year_filter</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_year_filter</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span><span class="o">.</span><span class="n">count</span><span class="p">()):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">setCheckState</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">Unchecked</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_car_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">car_data</span><span class="p">)</span>  <span class="c1"># Reset table to show all data</span></div>
+
+
+<div class="viewcode-block" id="delete_car.apply_filters">
+<a class="viewcode-back" href="../../../front_end.admin_interface.html#front_end.admin_interface.deleteCar.delete_car.apply_filters">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Applies filters to the car table and returns the data that meets the filters, excluding discarded data.&quot;&quot;&quot;</span>
+        <span class="n">filtered_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">car_data</span><span class="p">[:]</span>  <span class="c1"># Start with all data to apply filters on</span>
+        <span class="n">discarded_data</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># List to hold discarded cars</span>
+
+        <span class="c1"># Filter by Make and Model</span>
+        <span class="n">make_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_model_filter</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">make_model</span><span class="p">:</span>
+            <span class="n">filtered_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">car</span> <span class="k">for</span> <span class="n">car</span> <span class="ow">in</span> <span class="n">filtered_data</span> <span class="k">if</span>
+                             <span class="n">make_model</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">car</span><span class="p">[</span><span class="s2">&quot;make&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> <span class="n">make_model</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">car</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+            <span class="n">discarded_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">car</span> <span class="k">for</span> <span class="n">car</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">car_data</span> <span class="k">if</span> <span class="n">car</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">filtered_data</span><span class="p">]</span>
+
+        <span class="c1"># Filter by Year Range (minimum only)</span>
+        <span class="n">min_year</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_year_filter</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">min_year</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+            <span class="n">min_year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">min_year</span><span class="p">)</span>
+            <span class="c1"># Keep cars that are equal to or greater than the minimum year and discard the rest</span>
+            <span class="n">cars_above_min_year</span> <span class="o">=</span> <span class="p">[</span><span class="n">car</span> <span class="k">for</span> <span class="n">car</span> <span class="ow">in</span> <span class="n">filtered_data</span> <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">car</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="n">min_year</span><span class="p">]</span>
+            <span class="n">discarded_data</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">car</span> <span class="k">for</span> <span class="n">car</span> <span class="ow">in</span> <span class="n">filtered_data</span> <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">car</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">min_year</span><span class="p">])</span>
+            <span class="n">filtered_data</span> <span class="o">=</span> <span class="n">cars_above_min_year</span>
+
+        <span class="c1"># Filter by Paint Color</span>
+        <span class="n">selected_colors</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span><span class="o">.</span><span class="n">count</span><span class="p">())</span> <span class="k">if</span>
+                           <span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">checkState</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Checked</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">selected_colors</span><span class="p">:</span>
+            <span class="c1"># Further filter to keep only cars matching the selected colors</span>
+            <span class="n">cars_matching_colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">car</span> <span class="k">for</span> <span class="n">car</span> <span class="ow">in</span> <span class="n">filtered_data</span> <span class="k">if</span> <span class="n">car</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">selected_colors</span><span class="p">]</span>
+            <span class="n">discarded_data</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">car</span> <span class="k">for</span> <span class="n">car</span> <span class="ow">in</span> <span class="n">filtered_data</span> <span class="k">if</span> <span class="n">car</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cars_matching_colors</span><span class="p">])</span>
+            <span class="n">filtered_data</span> <span class="o">=</span> <span class="n">cars_matching_colors</span>
+
+        <span class="c1"># Remove duplicates in discarded_data</span>
+        <span class="n">discarded_data</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">())</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">discarded_data</span><span class="p">}]</span>
+
+        <span class="k">return</span> <span class="n">filtered_data</span><span class="p">,</span> <span class="n">discarded_data</span>  <span class="c1"># Return both the filtered data and the discarded data</span></div>
+
+
+<div class="viewcode-block" id="delete_car.delete_selected">
+<a class="viewcode-back" href="../../../front_end.admin_interface.html#front_end.admin_interface.deleteCar.delete_car.delete_selected">[docs]</a>
+    <span class="k">def</span> <span class="nf">delete_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes rows matching any of the applied filters.&quot;&quot;&quot;</span>
+        <span class="c1"># Get the filter criteria</span>
+        <span class="n">make_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_model_filter</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">min_year</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_year_filter</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">max_year</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_year_filter</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">selected_colors</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span><span class="o">.</span><span class="n">count</span><span class="p">())</span> <span class="k">if</span>
+                           <span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">checkState</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Checked</span><span class="p">]</span>
+
+        <span class="c1"># Create a list of rows to delete based on the filters</span>
+        <span class="n">rows_to_delete</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()):</span>
+            <span class="n">car</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;vin&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                <span class="s2">&quot;make&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+            <span class="p">}</span>
+
+            <span class="c1"># Initialize flags for each filter</span>
+            <span class="n">matches_make_model</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">matches_year_range</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">matches_color</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="c1"># Check if the car matches the Make/Model filter</span>
+            <span class="k">if</span> <span class="n">make_model</span><span class="p">:</span>
+                <span class="n">matches_make_model</span> <span class="o">=</span> <span class="n">make_model</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">car</span><span class="p">[</span><span class="s2">&quot;make&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> <span class="n">make_model</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">car</span><span class="p">[</span>
+                    <span class="s2">&quot;model&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+            <span class="c1"># Check if the car matches the Year range filter</span>
+            <span class="k">if</span> <span class="n">min_year</span> <span class="ow">and</span> <span class="n">min_year</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                <span class="n">matches_year_range</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">car</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">])</span> <span class="o">&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">min_year</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">max_year</span> <span class="ow">and</span> <span class="n">max_year</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                <span class="n">matches_year_range</span> <span class="o">=</span> <span class="n">matches_year_range</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">car</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">max_year</span><span class="p">)</span>
+
+            <span class="c1"># Check if the car matches the Color filter</span>
+            <span class="k">if</span> <span class="n">selected_colors</span><span class="p">:</span>
+                <span class="n">matches_color</span> <span class="o">=</span> <span class="n">car</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">selected_colors</span>
+
+            <span class="c1"># If any of the filters match, add the row index to rows_to_delete</span>
+            <span class="k">if</span> <span class="n">matches_make_model</span> <span class="ow">or</span> <span class="n">matches_year_range</span> <span class="ow">or</span> <span class="n">matches_color</span><span class="p">:</span>
+                <span class="n">rows_to_delete</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+        <span class="c1"># Delete matching rows from the table</span>
+        <span class="k">if</span> <span class="n">rows_to_delete</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">rows_to_delete</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">car_table</span><span class="o">.</span><span class="n">removeRow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+            <span class="n">QMessageBox</span><span class="o">.</span><span class="n">information</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;Success&quot;</span><span class="p">,</span> <span class="s2">&quot;Selected rows matching the filters have been deleted!&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">QMessageBox</span><span class="o">.</span><span class="n">information</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;No Matches&quot;</span><span class="p">,</span> <span class="s2">&quot;No rows matched the selected filters.&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="n">delete_car</span><span class="p">()</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">())</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">J.E.N.I Car Rental App</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Nima Jafari.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

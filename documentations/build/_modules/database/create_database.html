@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>database.create_database &#8212; J.E.N.I Car Rental App  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for database.create_database</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">mysql.connector</span>
+
+<div class="viewcode-block" id="create_database">
+<a class="viewcode-back" href="../../database.html#database.create_database.create_database">[docs]</a>
+<span class="k">def</span> <span class="nf">create_database</span><span class="p">(</span><span class="n">my_host</span><span class="p">,</span> <span class="n">my_port</span><span class="p">,</span> <span class="n">my_username</span><span class="p">,</span> <span class="n">my_password</span><span class="p">):</span>
+    <span class="n">mydb</span> <span class="o">=</span> <span class="n">mysql</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span> <span class="o">=</span> <span class="n">my_host</span><span class="p">,</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">my_username</span><span class="p">,</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="n">my_password</span><span class="p">,</span>
+        <span class="n">port</span> <span class="o">=</span> <span class="n">my_port</span>
+    <span class="p">)</span>
+     
+    <span class="c1"># creating instance of cursor class</span>
+    <span class="n">mycursor</span> <span class="o">=</span> <span class="n">mydb</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     
+    <span class="c1"># remove the previously made database making it possible to run the code again after modification</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DROP DATABASE IF EXISTS CARAPP&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># creating databases </span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;create database CARAPP&quot;</span><span class="p">)</span></div>
+
+     
+    <span class="c1"># getting a list of databases in localhost</span>
+    <span class="c1"># mycursor.execute(&quot;show databases&quot;)</span>
+     
+    <span class="c1"># prints all values in the list mycursor</span>
+    <span class="c1"># for x in mycursor:</span>
+       <span class="c1"># print(x)</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">J.E.N.I Car Rental App</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Nima Jafari.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>back_end.car_rental &#8212; J.E.N.I Car Rental App  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for back_end.car_rental</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.database_class</span> <span class="kn">import</span> <span class="n">database_utility_class</span> <span class="k">as</span> <span class="n">dbu</span>
+<span class="kn">from</span> <span class="nn">.database_class.inventory_class</span> <span class="kn">import</span> <span class="n">inventory</span> <span class="k">as</span> <span class="n">inv</span>
+<span class="kn">from</span> <span class="nn">.invoice_class.invoice_class</span> <span class="kn">import</span> <span class="n">InvoiceSender</span>
+<span class="kn">from</span> <span class="nn">.revenue_class.revenue</span> <span class="kn">import</span> <span class="n">Revenue</span>
+<span class="kn">from</span> <span class="nn">.database_class.admin_class</span> <span class="kn">import</span> <span class="n">Administrator</span> <span class="k">as</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">.database_class.customer_class</span> <span class="kn">import</span> <span class="n">Customer</span> <span class="k">as</span> <span class="n">cust</span>
+<span class="kn">import</span> <span class="nn">bcrypt</span>
+
+<div class="viewcode-block" id="CarRentalService">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService">[docs]</a>
+<span class="k">class</span> <span class="nc">CarRentalService</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Date of Creation: October 22, 2024</span>
+<span class="sd">    Author: Elijah Sagaran and Nima Jafari</span>
+<span class="sd">    </span>
+<span class="sd">    Overarching class for the backend. Contains the API calls that front end needs to call for integration.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    my_host: str</span>
+<span class="sd">        The hosting server for the AWS database</span>
+<span class="sd">    my_port: int</span>
+<span class="sd">        Port being used to connect MySQL and AWS</span>
+<span class="sd">    username: str</span>
+<span class="sd">        AWS Account username</span>
+<span class="sd">    password: str</span>
+<span class="sd">        AWS Account password</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">my_host</span><span class="p">,</span> <span class="n">my_port</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the CarRentalService with host, port, username, and password</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">username</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">my_host</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">my_port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv_obj</span> <span class="o">=</span> <span class="n">inv</span><span class="p">()</span>
+        
+    
+<div class="viewcode-block" id="CarRentalService.connect_to_mysql">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.connect_to_mysql">[docs]</a>
+    <span class="k">def</span> <span class="nf">connect_to_mysql</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the connection to databse for future queries</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Elijah Sagaran, 10/22</span>
+<span class="sd">        Updates: </span>
+<span class="sd">            Elijah, 10/22</span>
+<span class="sd">            Johnny, 10/24</span>
+<span class="sd">            Elijah, 10/31</span>
+<span class="sd">            Elijah, 11/7</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dbu</span><span class="o">.</span><span class="n">initialize_connection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv_obj</span><span class="o">.</span><span class="n">initialize_inventory</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.add_car">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.add_car">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_car</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vin</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mileage</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mpg</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">price</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">license_plate</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+                <span class="n">car_year</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">make</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="p">,</span> <span class="n">car_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calls the function of inventory class to add car to current inventory</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vin: str</span>
+<span class="sd">            The unique VIN number of the vehicle to be added.</span>
+<span class="sd">        mileage: int</span>
+<span class="sd">            The current mileage of the car.</span>
+<span class="sd">        mpg: int</span>
+<span class="sd">            The current miles per gallon of the car.</span>
+<span class="sd">        price: double</span>
+<span class="sd">            The price that is assigned for the car. Unit is $/day.</span>
+<span class="sd">        license_plate: str</span>
+<span class="sd">            The unique license plate of the vehicle to be added </span>
+<span class="sd">        car_year: str</span>
+<span class="sd">            The year of the model of the vehicle</span>
+<span class="sd">        model: str</span>
+<span class="sd">            The model of the car. i.e. Corolla, Civic, and Prius</span>
+<span class="sd">        make: str</span>
+<span class="sd">            The brand of the car. i.e. Toyota and Honda </span>
+<span class="sd">        color: str</span>
+<span class="sd">            The color of the car. i.e. Red, Blue, and Yellow</span>
+<span class="sd">        car_type: str</span>
+<span class="sd">            The classification of the car. i.e. Sedan, SUV, and Truck</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Elijah Sagaran, 10/22</span>
+<span class="sd">        Updates: </span>
+<span class="sd">            Elijah, 10/31</span>
+<span class="sd">            Elijah, 11/7</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv_obj</span><span class="o">.</span><span class="n">add_car</span><span class="p">(</span><span class="n">vin</span><span class="p">,</span> <span class="n">mileage</span><span class="p">,</span> <span class="n">mpg</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">license_plate</span><span class="p">,</span> <span class="n">car_year</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">make</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">car_type</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.delete_multiple_cars">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.delete_multiple_cars">[docs]</a>
+    <span class="k">def</span> <span class="nf">delete_multiple_cars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">car_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A loop function for delete_car to be able to delete multiple cars</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        car_ids: list[int]</span>
+<span class="sd">            List of the Car IDs that needs to be deleted from inventory</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Elijah Sagaran, 10/22</span>
+<span class="sd">        Updates:</span>
+<span class="sd">            Elijah, 11/7</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">car_id</span> <span class="ow">in</span> <span class="n">car_ids</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">delete_car</span><span class="p">(</span><span class="n">car_id</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.delete_car">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.delete_car">[docs]</a>
+    <span class="k">def</span> <span class="nf">delete_car</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">car_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calls retire_car from car class to delete the car</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        car_id: int</span>
+<span class="sd">            Car Id of vehicle to be deleted </span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        </span>
+<span class="sd">        Exception</span>
+<span class="sd">        ---------</span>
+<span class="sd">        Does nothing if the car_id passed is not valid</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Elijah Sagaran, 10/22</span>
+<span class="sd">        Updates: </span>
+<span class="sd">            Elijah, 10/22</span>
+<span class="sd">            Elijah, 10/31</span>
+<span class="sd">            Elijah, 11/7</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_obj</span><span class="o">.</span><span class="n">search_car</span><span class="p">(</span><span class="n">car_id</span><span class="p">)</span>
+        
+        <span class="c1"># Error Check: Is car_id a valid id</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span>
+            
+        <span class="c1"># call to car class&#39; retire_car() method</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv_obj</span><span class="o">.</span><span class="n">get_car_from_inventory</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">retire_car</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.add_report">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.add_report">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">car_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">damages</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">gas_amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                    <span class="n">reservation_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calls add_report from car class to assign a report to a car</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        car_id: int</span>
+<span class="sd">            Car ID assigned to the vehicle</span>
+<span class="sd">        damages: str</span>
+<span class="sd">            Description of damages that the vehicle has</span>
+<span class="sd">        gas_amount: int</span>
+<span class="sd">            Current gas amount of vehicle after customer returned it</span>
+<span class="sd">        reservation_id: int</span>
+<span class="sd">            Reservation ID that is associated with the car and return date</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        </span>
+<span class="sd">        Exception</span>
+<span class="sd">        ---------</span>
+<span class="sd">        Does nothing if the car_id passed is not valid</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Elijah Sagaran, 10/22</span>
+<span class="sd">        Updates:</span>
+<span class="sd">            Elijah, 10/31</span>
+<span class="sd">            Elijah, 11/7</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_obj</span><span class="o">.</span><span class="n">search_car</span><span class="p">(</span><span class="n">car_id</span><span class="p">)</span>
+        
+        <span class="c1"># Error Check: Is car_id a valid id </span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span>
+        
+        <span class="c1"># call to car class add_report() method</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv_obj</span><span class="o">.</span><span class="n">get_inventory</span><span class="p">()[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">add_report</span><span class="p">(</span><span class="n">damages</span><span class="p">,</span> <span class="n">gas_amount</span><span class="p">,</span> <span class="n">car_id</span><span class="p">,</span> <span class="n">reservation_id</span><span class="p">)</span></div>
+
+        
+        <span class="c1"># need to call the update_mileage in this function? could be called in the add_report function in car class too</span>
+    
+<div class="viewcode-block" id="CarRentalService.customer_search">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.customer_search">[docs]</a>
+    <span class="k">def</span> <span class="nf">customer_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">car_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calls the search_database() method from database utility class</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        start_date: str</span>
+<span class="sd">            The start date of the desired reservation</span>
+<span class="sd">        end_date: str</span>
+<span class="sd">            The end date of the desired reservation</span>
+<span class="sd">        car_type: str</span>
+<span class="sd">            The type of car that customer wants to see. i.e. SUV and Sedan</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list[tuple]</span>
+<span class="sd">            Each tuple in the list has all the information about the car</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Elijah Sagaran, 10/22</span>
+<span class="sd">        Updates: </span>
+<span class="sd">            Elijah, 10/22</span>
+<span class="sd">            Elijah, 10/31</span>
+<span class="sd">            Elijah, 11/7</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">dbu</span><span class="o">.</span><span class="n">search_database</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">car_type</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.make_reservation">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.make_reservation">[docs]</a>
+    <span class="k">def</span> <span class="nf">make_reservation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">insurance</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">customer_email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">car_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calls add_reservation from car class to assign a reservation to a car</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        start_date: str</span>
+<span class="sd">            The start date of the reservation</span>
+<span class="sd">        end_date: str</span>
+<span class="sd">            The end date of the reservation</span>
+<span class="sd">        insurance: int</span>
+<span class="sd">            Values 0 or 1, boolean value. Indicates if customer wants to include insurance</span>
+<span class="sd">        customer_email: str</span>
+<span class="sd">            Email of the customer for the invoice/confirmation email</span>
+<span class="sd">        customer_id: id</span>
+<span class="sd">            ID of the customer for the invoice/confirmation</span>
+<span class="sd">        car_id: int</span>
+<span class="sd">            The car ID of the desired car</span>
+<span class="sd">        total_price: float</span>
+<span class="sd">            The total reservation price, initially 0 calculated for invoice</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        </span>
+<span class="sd">        Exception</span>
+<span class="sd">        ---------</span>
+<span class="sd">        Does nothing if the car_id passed is not valid</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Elijah Sagaran, 10/22</span>
+<span class="sd">        Updates:</span>
+<span class="sd">            Elijah, 10/29</span>
+<span class="sd">            Elijah, 11/7</span>
+<span class="sd">            ELijah, 11/10</span>
+<span class="sd">            Nima jafari, 11/26</span>
+<span class="sd">            Nima jafari, 11/27</span>
+<span class="sd">            Nima jafari, 12/04</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_obj</span><span class="o">.</span><span class="n">search_car</span><span class="p">(</span><span class="n">car_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;index -1&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="n">car</span> <span class="o">=</span> <span class="n">dbu</span><span class="o">.</span><span class="n">get_car_info</span><span class="p">(</span><span class="n">car_id</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">car</span><span class="p">:</span> <span class="c1">#not customer or not car:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Unable to fetch customer or vehicle information.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+            
+        <span class="n">daily_price</span> <span class="o">=</span> <span class="n">car</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        
+        <span class="n">total_days</span> <span class="o">=</span> <span class="n">dbu</span><span class="o">.</span><span class="n">calculate_days</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">)</span>
+        
+        <span class="n">total_price</span> <span class="o">=</span> <span class="n">daily_price</span> <span class="o">*</span> <span class="n">total_days</span>
+        
+        <span class="c1">#print(total_price)</span>
+            
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv_obj</span><span class="o">.</span><span class="n">get_inventory</span><span class="p">()[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">add_reservation</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">insurance</span><span class="p">,</span> <span class="n">customer_email</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">car_id</span><span class="p">,</span> <span class="n">total_price</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_invoice</span><span class="p">(</span><span class="s2">&quot;nimaj8082@gmail.com&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;2029-05-10&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;2025-05-10&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="c1">#dummy invoice sender to make sure sendgrid api works every time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_invoice</span><span class="p">(</span><span class="n">customer_email</span><span class="p">,</span> <span class="n">car_id</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">insurance</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">total_price</span><span class="p">,</span> <span class="n">total_days</span><span class="p">,</span> <span class="n">daily_price</span><span class="p">)</span> <span class="c1">#send invoice after reservation is done, so we dont have to search database for reservations and then send em</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.send_invoice">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.send_invoice">[docs]</a>
+    <span class="k">def</span> <span class="nf">send_invoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer_email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">car_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">insurance</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">end_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">total_price</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">total_days</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">daily_price</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sends the invoice to customer&#39;s email after they reserve a car</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        customer_email: str</span>
+<span class="sd">            Email of the customer that will receive the invoice/confirmation</span>
+<span class="sd">        car_id: int</span>
+<span class="sd">            Car ID of the vehicle that is being reserved</span>
+<span class="sd">        start_date: str</span>
+<span class="sd">            The start date of the reservation</span>
+<span class="sd">        insurance: bool</span>
+<span class="sd">            Indicates if customer wants to include insurance for the reservation</span>
+<span class="sd">        end_date: str</span>
+<span class="sd">            The end date of the reservation</span>
+<span class="sd">        total_price: float</span>
+<span class="sd">            The total price of the reservation.</span>
+<span class="sd">        total_days: float</span>
+<span class="sd">            The total number of rental days.</span>
+<span class="sd">        daily_price: float</span>
+<span class="sd">            The price per day for the car rental.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        </span>
+<span class="sd">        Exception</span>
+<span class="sd">        ---------</span>
+<span class="sd">        Invoice cannot be sent to the customer</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Nima Jafari, 10/28</span>
+<span class="sd">        Updates:</span>
+<span class="sd">            Nima, 10/28</span>
+<span class="sd">            Elijah, 10/29</span>
+<span class="sd">            Elijah, 11/10</span>
+<span class="sd">            Nima, 11/26</span>
+<span class="sd">            Nima, 11/27</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="c1"># customer = dbu.get_customer_info(customer_id)</span>
+        <span class="n">car</span> <span class="o">=</span> <span class="n">dbu</span><span class="o">.</span><span class="n">get_car_info</span><span class="p">(</span><span class="n">car_id</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">car</span><span class="p">:</span> <span class="c1">#not customer or not car:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Unable to fetch customer or vehicle information.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="n">daily_price</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">total_days</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">total_price</span><span class="p">)</span>
+        
+        <span class="c1"># Prepare dynamic data for the template</span>
+        <span class="n">dynamic_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="c1"># &quot;customer_name&quot;: customer[&#39;FullName&#39;],</span>
+            <span class="s2">&quot;customer_email&quot;</span><span class="p">:</span> <span class="n">customer_email</span><span class="p">,</span>
+            <span class="s2">&quot;car_model&quot;</span><span class="p">:</span> <span class="n">car</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span>
+            <span class="s2">&quot;car_brand&quot;</span><span class="p">:</span> <span class="n">car</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+            <span class="s2">&quot;car_year&quot;</span><span class="p">:</span> <span class="n">car</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+            <span class="s2">&quot;daily_price&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="n">daily_price</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;start_date&quot;</span><span class="p">:</span> <span class="n">start_date</span><span class="p">,</span>
+            <span class="s2">&quot;end_date&quot;</span><span class="p">:</span> <span class="n">end_date</span><span class="p">,</span>
+            <span class="s2">&quot;total_days&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">total_days</span><span class="p">),</span>
+            <span class="s2">&quot;total_price&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="n">total_price</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;insurance_status&quot;</span><span class="p">:</span> <span class="s2">&quot;Yes&quot;</span> <span class="k">if</span> <span class="n">insurance</span> <span class="k">else</span> <span class="s2">&quot;No&quot;</span>
+        <span class="p">}</span>
+        
+        <span class="n">invoice_sender</span> <span class="o">=</span> <span class="n">InvoiceSender</span><span class="p">()</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">invoice_sender</span><span class="o">.</span><span class="n">send_email</span><span class="p">(</span><span class="n">customer_email</span><span class="p">,</span> <span class="s2">&quot;Your Car Rental Invoice&quot;</span><span class="p">,</span> <span class="n">dynamic_data</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invoice sent successfully.&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error sending invoice: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.get_reservations">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.get_reservations">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_reservations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets all the reservation that is in the database</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list[tuple]</span>
+<span class="sd">            Each tuple in the list contains all the information about the reservation</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Elijah Sagaran, 10/29</span>
+<span class="sd">        Updates:</span>
+<span class="sd">            Elijah, 11/10</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">dbu</span><span class="o">.</span><span class="n">get_reservations</span><span class="p">()</span></div>
+
+        
+    
+<div class="viewcode-block" id="CarRentalService.get_inventory_admin">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.get_inventory_admin">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_inventory_admin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets all the active vehicle in the database </span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list[tuple]</span>
+<span class="sd">            Each tuple in the list contains all the information about the car</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Elijah Sagaran, 10/30</span>
+<span class="sd">        Updates:</span>
+<span class="sd">            Elijah, 11/10</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">dbu</span><span class="o">.</span><span class="n">get_active_inventory</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.check_password">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.check_password">[docs]</a>
+    <span class="k">def</span> <span class="nf">check_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">person_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if the input password matches with the password stored in the database for the input username</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        input_username: str</span>
+<span class="sd">            The username of the person</span>
+<span class="sd">        input_password: str</span>
+<span class="sd">            The password of the person</span>
+<span class="sd">        person_type: str</span>
+<span class="sd">            admin or customer, indicates which table we need to query the password from</span>
+<span class="sd">        </span>
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Retuns true, if input password matches with stored password</span>
+<span class="sd">            Returns false, if input password does not match with stored password</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Elijah Sagaran, 11/14</span>
+<span class="sd">        Updates:</span>
+<span class="sd">            Elijah, 11/16</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">hashed_password</span> <span class="o">=</span> <span class="n">dbu</span><span class="o">.</span><span class="n">get_hashed_password</span><span class="p">(</span><span class="n">input_username</span><span class="p">,</span> <span class="n">person_type</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bcrypt</span><span class="o">.</span><span class="n">checkpw</span><span class="p">(</span><span class="n">input_password</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">hashed_password</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.hash_password">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.hash_password">[docs]</a>
+    <span class="k">def</span> <span class="nf">hash_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_password</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Hashes the input password from siging up</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        input_password: str</span>
+<span class="sd">            The password that needs to be hashed</span>
+<span class="sd">        </span>
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        str</span>
+<span class="sd">            Hashed password</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Elijah Sagaran, 11/16</span>
+<span class="sd">        Updates:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">bcrypt</span><span class="o">.</span><span class="n">hashpw</span><span class="p">(</span><span class="n">input_password</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">bcrypt</span><span class="o">.</span><span class="n">gensalt</span><span class="p">())</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.create_admin">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.create_admin">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_admin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dob</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Takes in input from user and stores values in database by calling admin_sign_up function</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name: str</span>
+<span class="sd">            Name of the user</span>
+<span class="sd">        input_username: str</span>
+<span class="sd">            Chosen username of the user</span>
+<span class="sd">        email: str</span>
+<span class="sd">            email of the user</span>
+<span class="sd">        input_password: str</span>
+<span class="sd">        </span>
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        None</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Elijah Sagaran, 11/16</span>
+<span class="sd">        Updates:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">hashed_password</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_password</span><span class="p">(</span><span class="n">input_password</span><span class="p">)</span>
+        <span class="n">dbu</span><span class="o">.</span><span class="n">admin_sign_up</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">input_username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">hashed_password</span><span class="p">,</span> <span class="n">dob</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.create_customer">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.create_customer">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_customer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dob</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">hashed_password</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_password</span><span class="p">(</span><span class="n">input_password</span><span class="p">)</span>
+        <span class="n">dbu</span><span class="o">.</span><span class="n">customer_sign_up</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">input_username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">hashed_password</span><span class="p">,</span> <span class="n">dob</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.revenue">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.revenue">[docs]</a>
+    <span class="k">def</span> <span class="nf">revenue</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate weekly, monthly, and yearly revenue from reservations.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            A dictionary containing weekly, monthly, and yearly revenue.</span>
+<span class="sd">        </span>
+<span class="sd">        Author: [Nima jafari], [11/27]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">reservations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_reservations</span><span class="p">()</span>
+        <span class="n">revenue_instance</span> <span class="o">=</span> <span class="n">Revenue</span><span class="p">()</span>
+        <span class="n">calculated_revenue</span> <span class="o">=</span> <span class="n">revenue_instance</span><span class="o">.</span><span class="n">revenue</span><span class="p">(</span><span class="n">reservations</span><span class="o">=</span><span class="n">reservations</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">calculated_revenue</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="CarRentalService.reservation_cancel_setter">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.reservation_cancel_setter">[docs]</a>
+    <span class="k">def</span> <span class="nf">reservation_cancel_setter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reservation_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function to mark a reservation as canceled in the database.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        reservation_id: int</span>
+<span class="sd">            The ID of the reservation to be canceled.</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        None</span>
+<span class="sd">        </span>
+<span class="sd">        Author: [Nima jafari], [11/27]</span>
+<span class="sd">        Updates:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dbu</span><span class="o">.</span><span class="n">cancel_reservation</span><span class="p">(</span><span class="n">reservation_id</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.reservation_confirm_setter">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.reservation_confirm_setter">[docs]</a>
+    <span class="k">def</span> <span class="nf">reservation_confirm_setter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reservation_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function to mark a reservation as confirmed in the database.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        reservation_id: int</span>
+<span class="sd">            The ID of the reservation to be confirmed.</span>
+<span class="sd">            </span>
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        None</span>
+<span class="sd">        </span>
+<span class="sd">        Author: [Nima jafari], [11/27]</span>
+<span class="sd">        Updates:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dbu</span><span class="o">.</span><span class="n">confirm_reservation</span><span class="p">(</span><span class="n">reservation_id</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.user_login">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.user_login">[docs]</a>
+    <span class="k">def</span> <span class="nf">user_login</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_username</span><span class="p">,</span> <span class="n">input_password</span><span class="p">,</span> <span class="n">person_type</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function to handle user login based on their role (customer or admin).</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        input_username: str</span>
+<span class="sd">            The username of the user attempting to log in.</span>
+<span class="sd">        input_password: str</span>
+<span class="sd">            The password of the user attempting to log in.</span>
+<span class="sd">        person_type: str</span>
+<span class="sd">            The role of the user, either &#39;customer&#39; or &#39;admin&#39;.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        admin or cust or bool</span>
+<span class="sd">            If successful, returns the corresponding user object (admin or customer).</span>
+<span class="sd">            If unsuccessful, returns False.</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Elijah</span>
+<span class="sd">        Updates:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">person_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;customer&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">customer_login</span><span class="p">(</span><span class="n">input_username</span><span class="p">,</span> <span class="n">input_password</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">person_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;admin&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">admin_login</span><span class="p">(</span><span class="n">input_username</span><span class="p">,</span> <span class="n">input_password</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.user_signup">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.user_signup">[docs]</a>
+    <span class="k">def</span> <span class="nf">user_signup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dob</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">person_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function to handle user registration based on their role (customer or admin).</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name: str</span>
+<span class="sd">            The full name of the user.</span>
+<span class="sd">        input_username: str</span>
+<span class="sd">            The username chosen by the user.</span>
+<span class="sd">        email: str</span>
+<span class="sd">            The email address of the user.</span>
+<span class="sd">        input_password: str</span>
+<span class="sd">            The password chosen by the user.</span>
+<span class="sd">        dob: str</span>
+<span class="sd">            The date of birth of the user.</span>
+<span class="sd">        person_type: str</span>
+<span class="sd">            The role of the user, either &#39;customer&#39; or &#39;admin&#39;.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Elijah </span>
+<span class="sd">        Updates:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">person_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;customer&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">create_customer</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">input_username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">input_password</span><span class="p">,</span> <span class="n">dob</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">person_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;admin&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">create_admin</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">input_username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">input_password</span><span class="p">,</span> <span class="n">dob</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.user_update_password">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.user_update_password">[docs]</a>
+    <span class="k">def</span> <span class="nf">user_update_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">person_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function to update the password of a user (customer or admin).</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        input_username: str</span>
+<span class="sd">            The username of the user whose password needs to be updated.</span>
+<span class="sd">        input_password: str</span>
+<span class="sd">            The new password for the user.</span>
+<span class="sd">        person_type: str</span>
+<span class="sd">            The role of the user, either &#39;customer&#39; or &#39;admin&#39;.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Elijah</span>
+<span class="sd">        Updates:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">hashed_password</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_password</span><span class="p">(</span><span class="n">input_password</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">person_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;customer&quot;</span><span class="p">:</span>
+            <span class="n">dbu</span><span class="o">.</span><span class="n">change_password</span><span class="p">(</span><span class="n">input_username</span><span class="p">,</span> <span class="n">hashed_password</span><span class="p">,</span> <span class="n">person_type</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">person_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;admin&quot;</span><span class="p">:</span>
+            <span class="n">dbu</span><span class="o">.</span><span class="n">change_password</span><span class="p">(</span><span class="n">input_username</span><span class="p">,</span> <span class="n">hashed_password</span><span class="p">,</span> <span class="n">person_type</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.admin_login">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.admin_login">[docs]</a>
+    <span class="k">def</span> <span class="nf">admin_login</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_password</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">admin</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function to authenticate an admin and retrieve their details.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        input_username: str</span>
+<span class="sd">            The username of the admin attempting to log in.</span>
+<span class="sd">        input_password: str</span>
+<span class="sd">            The password of the admin attempting to log in.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        admin</span>
+<span class="sd">            The admin object containing the admin&#39;s information if authentication is successful.</span>
+<span class="sd">            Returns False if authentication fails.</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Elijah</span>
+<span class="sd">        Updates:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">is_valid_login</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">usernames</span> <span class="o">=</span> <span class="n">dbu</span><span class="o">.</span><span class="n">get_admin_usernames</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">input_username</span><span class="p">,</span> <span class="n">usernames</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">is_valid_login</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_password</span><span class="p">(</span><span class="n">input_username</span><span class="p">,</span> <span class="n">input_password</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">):</span>
+                <span class="n">is_valid_login</span> <span class="o">=</span> <span class="kc">False</span>
+        
+        
+        <span class="k">if</span> <span class="n">is_valid_login</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="n">dbu</span><span class="o">.</span><span class="n">get_admin_info</span><span class="p">(</span><span class="n">input_username</span><span class="p">)</span>
+            <span class="n">admin_obj</span> <span class="o">=</span> <span class="n">admin</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">info</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">info</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">info</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">info</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">info</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">admin_obj</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">admin_obj</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.customer_login">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.customer_login">[docs]</a>
+    <span class="k">def</span> <span class="nf">customer_login</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_password</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">cust</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function to authenticate a customer and retrieve their details.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        input_username: str</span>
+<span class="sd">            The username of the customer attempting to log in.</span>
+<span class="sd">        input_password: str</span>
+<span class="sd">            The password of the customer attempting to log in.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        cust</span>
+<span class="sd">            The customer object containing the customer&#39;s information if authentication is successful.</span>
+<span class="sd">            Returns False if authentication fails.</span>
+<span class="sd">        </span>
+<span class="sd">        Author: Elijah</span>
+<span class="sd">        Updates:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">is_valid_login</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">usernames</span> <span class="o">=</span> <span class="n">dbu</span><span class="o">.</span><span class="n">get_customer_usernames</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">input_username</span><span class="p">,</span> <span class="n">usernames</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">is_valid_login</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_password</span><span class="p">(</span><span class="n">input_username</span><span class="p">,</span> <span class="n">input_password</span><span class="p">,</span> <span class="s2">&quot;customer&quot;</span><span class="p">):</span>
+                <span class="n">is_valid_login</span> <span class="o">=</span> <span class="kc">False</span>
+        
+        
+        <span class="k">if</span> <span class="n">is_valid_login</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="n">dbu</span><span class="o">.</span><span class="n">get_customer_info</span><span class="p">(</span><span class="n">input_username</span><span class="p">)</span>
+            <span class="n">customer_obj</span> <span class="o">=</span> <span class="n">cust</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">info</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">info</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">info</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">info</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">info</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">customer_obj</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">customer_obj</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.resevation_history">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.resevation_history">[docs]</a>
+    <span class="k">def</span> <span class="nf">resevation_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function to retrieve the reservation history of a customer based on their email.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        customer_id: int</span>
+<span class="sd">            The ID of the customer whose reservation history is to be retrieved.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list[tuple]</span>
+<span class="sd">            A list of tuples, where each tuple contains details of a reservation made by the customer.</span>
+<span class="sd">        </span>
+<span class="sd">        Author: [Nima jafari], [12/01]</span>
+<span class="sd">        Updates:</span>
+<span class="sd">        [Nima jafari], [12/04]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">customer_history</span> <span class="o">=</span> <span class="n">dbu</span><span class="o">.</span><span class="n">get_reservations_history</span><span class="p">(</span><span class="n">customer_id</span><span class="o">=</span><span class="n">customer_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">customer_history</span></div>
+
+    
+<div class="viewcode-block" id="CarRentalService.search">
+<a class="viewcode-back" href="../../back_end.html#back_end.car_rental.CarRentalService.search">[docs]</a>
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">username_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">mid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">username_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+        
+        <span class="k">while</span> <span class="n">low</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="p">:</span>
+            <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">high</span> <span class="o">+</span> <span class="n">low</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+            
+            <span class="k">if</span> <span class="n">username_list</span><span class="p">[</span><span class="n">mid</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">username</span><span class="p">:</span>
+                <span class="n">low</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">username_list</span><span class="p">[</span><span class="n">mid</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">username</span><span class="p">:</span>
+                <span class="n">high</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">mid</span>
+        
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span></div>
+</div>
+
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">J.E.N.I Car Rental App</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Nima Jafari.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

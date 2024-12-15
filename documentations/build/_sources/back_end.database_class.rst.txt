@@ -4,6 +4,14 @@ back\_end.database\_class package
 Submodules
 ----------
 
+back\_end.database\_class.admin\_class module
+---------------------------------------------
+
+.. automodule:: back_end.database_class.admin_class
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 back\_end.database\_class.car\_class module
 -------------------------------------------
 
@@ -36,6 +44,14 @@ back\_end.database\_class.database\_utility\_class module
    :undoc-members:
    :show-inheritance:
 
+back\_end.database\_class.database\_utility\_test module
+--------------------------------------------------------
+
+.. automodule:: back_end.database_class.database_utility_test
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 back\_end.database\_class.inventory\_class module
 -------------------------------------------------
 
@@ -64,6 +80,14 @@ back\_end.database\_class.report\_class module
 ----------------------------------------------
 
 .. automodule:: back_end.database_class.report_class
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+back\_end.database\_class.report\_test module
+---------------------------------------------
+
+.. automodule:: back_end.database_class.report_test
    :members:
    :undoc-members:
    :show-inheritance:

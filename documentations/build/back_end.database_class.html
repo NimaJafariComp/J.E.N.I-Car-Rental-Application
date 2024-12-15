@@ -13,7 +13,7 @@
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="database_class package" href="database_class.html" />
+    <link rel="next" title="back_end.invoice_class package" href="back_end.invoice_class.html" />
     <link rel="prev" title="back_end package" href="back_end.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -37,15 +37,44 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
 </section>
+<section id="module-back_end.database_class.admin_class">
+<span id="back-end-database-class-admin-class-module"></span><h2>back_end.database_class.admin_class module<a class="headerlink" href="#module-back_end.database_class.admin_class" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="back_end.database_class.admin_class.Administrator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">back_end.database_class.admin_class.</span></span><span class="sig-name descname"><span class="pre">Administrator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">admin_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/admin_class.html#Administrator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.admin_class.Administrator" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Date of Creation: November 26, 2024
+Author: Elijah Sagaran and Nima Jafari</p>
+<p>Class that will hold informaiton about admin and the functionalities that the admin can do</p>
+<section id="attributes">
+<h3>Attributes:<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>admin_id: int</dt><dd><p>ID assigned by database to user</p>
+</dd>
+<dt>user: str</dt><dd><p>name of the user</p>
+</dd>
+<dt>email: str</dt><dd><p>Email of the user</p>
+</dd>
+<dt>username: str</dt><dd><p>the username of the user that will be used for logging in</p>
+</dd>
+<dt>user_password: str</dt><dd><p>the password of the user that will be used for logging in</p>
+</dd>
+<dt>dob: str</dt><dd><p>date of birth of the user, used for authentication of resetting password</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
 <section id="module-back_end.database_class.car_class">
 <span id="back-end-database-class-car-class-module"></span><h2>back_end.database_class.car_class module<a class="headerlink" href="#module-back_end.database_class.car_class" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="back_end.database_class.car_class.car">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">back_end.database_class.car_class.</span></span><span class="sig-name descname"><span class="pre">car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mileage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mpg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">license_plate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">make</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.car_class.car" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">back_end.database_class.car_class.</span></span><span class="sig-name descname"><span class="pre">car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mileage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mpg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">license_plate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">make</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/car_class.html#car"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.car_class.car" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class that lets users control car information. This includes adding, deleting, and modifying attributes that the car has.</p>
-<section id="attributes">
-<h3>Attributes:<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h3>
+<section id="id1">
+<h3>Attributes:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <dl class="simple">
 <dt>vin: str</dt><dd><p>The unique VIN number of the vehicle to be added.</p>
 </dd>
@@ -70,139 +99,127 @@
 </dl>
 <p>Date of Creation: 10/12
 Author: Elijah Sagaran
-Updates: 
+Updates:
 Elijah, 10/12
 Elijah, 10/13
 Elijah, 10/13
 Elijah, 10/22
 Elijah, 10/22
 Elijah, 10/29
-Elijah, 11/10</p>
+Elijah, 11/10
+Nima, 12/04</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.car_class.car.add_report">
-<span class="sig-name descname"><span class="pre">add_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">damages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reservation_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.car_class.car.add_report" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">add_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">damages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reservation_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/car_class.html#car.add_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.car_class.car.add_report" title="Link to this definition">¶</a></dt>
 <dd><p>Creates an object of type report with the passed parameters, and then adds it to the current list of reports for the car</p>
-<section id="parameters">
-<h4>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">¶</a></h4>
-<dl class="simple">
-<dt>damages: str</dt><dd><p>The description for all the damages the car has when returned by the customer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>damages</strong> (<em>str</em>) – The description for all the damages the car has when returned by the customer</p></li>
+<li><p><strong>gas_amount</strong> (<em>int</em>) – The gas amount of the vehicle when returned by the customer</p></li>
+<li><p><strong>car_id</strong> (<em>int</em>) – The car ID of which the report needs to be associated with</p></li>
+<li><p><strong>reservation_id</strong> (<em>int</em>) – The reservation ID of which the report needs to be associated with</p></li>
+</ul>
 </dd>
-<dt>gas_amount: int</dt><dd><p>The gas amount of the vehicle when returned by the customer</p>
-</dd>
-<dt>car_id: int</dt><dd><p>The car ID of which the report needs to be associated with</p>
-</dd>
-<dt>reservation_id: int</dt><dd><p>The reservation ID of which the report needs to be associated with</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-</section>
-<section id="returns">
-<h4>Returns<a class="headerlink" href="#returns" title="Link to this heading">¶</a></h4>
-<p>None</p>
-</section>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.car_class.car.add_reservation">
-<span class="sig-name descname"><span class="pre">add_reservation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insurance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">customer_email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.car_class.car.add_reservation" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">add_reservation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insurance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">customer_email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">customer_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/car_class.html#car.add_reservation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.car_class.car.add_reservation" title="Link to this definition">¶</a></dt>
 <dd><p>Creates an object of the reservation type, and then adds it to the current list of reservations for the car</p>
-<section id="id1">
-<h4>Parameters<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
-<dl class="simple">
-<dt>start_date: str</dt><dd><p>The start date of the reservation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_date</strong> (<em>str</em>) – The start date of the reservation</p></li>
+<li><p><strong>end_date</strong> (<em>str</em>) – The end date of the reservation</p></li>
+<li><p><strong>insurance</strong> (<em>int</em>) – Values 0 or 1, boolean value. Indicates if customer wants to include insurance</p></li>
+<li><p><strong>customer_email</strong> (<em>str</em>) – Email of the customer for the invoice/confirmation email</p></li>
+<li><p><strong>customer_id</strong> (<em>int</em>) – ID of the customer</p></li>
+<li><p><strong>car_id</strong> (<em>int</em>) – The car ID of the desired car</p></li>
+<li><p><strong>total_price</strong> (<em>float</em>) – The total price of reservations, initially 0 then calculated</p></li>
+</ul>
 </dd>
-<dt>end_date: str</dt><dd><p>The end date of the reservation</p>
-</dd>
-<dt>insurance: int</dt><dd><p>Values 0 or 1, boolean value. Indicates if customer wants to include insurance</p>
-</dd>
-<dt>customer_email: str</dt><dd><p>Email of the customer for the invoice/confirmation email</p>
-</dd>
-<dt>car_id: int</dt><dd><p>The car ID of the desired car</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-</section>
-<section id="id2">
-<h4>Returns<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
-<p>None</p>
-</section>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.car_class.car.get_car_id">
-<span class="sig-name descname"><span class="pre">get_car_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#back_end.database_class.car_class.car.get_car_id" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_car_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/back_end/database_class/car_class.html#car.get_car_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.car_class.car.get_car_id" title="Link to this definition">¶</a></dt>
 <dd><p>Getter function for the car_id attribute</p>
-<section id="id3">
-<h4>Parameters<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
-<p>None</p>
-</section>
-<section id="id4">
-<h4>Returns<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h4>
-<dl class="simple">
-<dt>int</dt><dd><p>The car_id of the car object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The car_id of the car object</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
 </dd>
 </dl>
-</section>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.car_class.car.initialize_reports">
-<span class="sig-name descname"><span class="pre">initialize_reports</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.car_class.car.initialize_reports" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">initialize_reports</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/car_class.html#car.initialize_reports"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.car_class.car.initialize_reports" title="Link to this definition">¶</a></dt>
 <dd><p>Assigns all the reports that is associated with the car, from the database</p>
-<section id="id5">
-<h4>Parameters<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h4>
-<p>None</p>
-</section>
-<section id="id6">
-<h4>Returns<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h4>
-<p>None</p>
-</section>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.car_class.car.retire_car">
-<span class="sig-name descname"><span class="pre">retire_car</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.car_class.car.retire_car" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">retire_car</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/car_class.html#car.retire_car"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.car_class.car.retire_car" title="Link to this definition">¶</a></dt>
 <dd><p>Calls the deactive_car function of the database_utility_class</p>
-<section id="id7">
-<h4>Parameters<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h4>
-<p>None</p>
-</section>
-<section id="id8">
-<h4>Returns<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h4>
-<p>None</p>
-</section>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.car_class.car.set_car_id">
-<span class="sig-name descname"><span class="pre">set_car_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.car_class.car.set_car_id" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">set_car_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/car_class.html#car.set_car_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.car_class.car.set_car_id" title="Link to this definition">¶</a></dt>
 <dd><p>Setter function for the car_id attribute</p>
-<section id="id9">
-<h4>Parameters<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h4>
-<dl class="simple">
-<dt>car_id: int</dt><dd><p>The car ID value that the databse assigns to newly added cars</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>car_id</strong> (<em>int</em>) – The car ID value that the databse assigns to newly added cars</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-</section>
-<section id="id10">
-<h4>Returns<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h4>
-<p>None</p>
-</section>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.car_class.car.update_mileage">
-<span class="sig-name descname"><span class="pre">update_mileage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_mileage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.car_class.car.update_mileage" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">update_mileage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_mileage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/car_class.html#car.update_mileage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.car_class.car.update_mileage" title="Link to this definition">¶</a></dt>
 <dd><p>Calls the change_mileage function of the database_utility_class</p>
-<section id="id11">
-<h4>Parameters<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h4>
-<dl class="simple">
-<dt>new_mileage: int</dt><dd><p>The current mileage of the vehicle</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>new_mileage</strong> (<em>int</em>) – The current mileage of the vehicle</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-</section>
-<section id="id12">
-<h4>Returns<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h4>
-<p>None</p>
-</section>
 </dd></dl>
 
 </section>
@@ -213,12 +230,12 @@ Elijah, 11/10</p>
 <span id="back-end-database-class-class-database-module"></span><h2>back_end.database_class.class_database module<a class="headerlink" href="#module-back_end.database_class.class_database" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="back_end.database_class.class_database.test">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">back_end.database_class.class_database.</span></span><span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">my_host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">my_port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">my_username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">my_password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.class_database.test" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">back_end.database_class.class_database.</span></span><span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">my_host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">my_port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">my_username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">my_password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/class_database.html#test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.class_database.test" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A class to handle interactions with a MySQL database for a car rental application.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.class_database.test.add_car">
-<span class="sig-name descname"><span class="pre">add_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uVIN</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uMileage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uMPG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uPrice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uIsActive</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uLicensePlate</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.class_database.test.add_car" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">add_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uVIN</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uMileage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uMPG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uPrice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uIsActive</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uLicensePlate</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/class_database.html#test.add_car"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.class_database.test.add_car" title="Link to this definition">¶</a></dt>
 <dd><p>Adds a new car to the MySQL database.</p>
 <p>Parameters:
 uVIN (str): Vehicle Identification Number of the car.
@@ -233,12 +250,12 @@ Prints the CarID of the newly added car or a message if the car already exists.<
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.class_database.test.connect_to_mysql">
-<span class="sig-name descname"><span class="pre">connect_to_mysql</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.class_database.test.connect_to_mysql" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">connect_to_mysql</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/class_database.html#test.connect_to_mysql"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.class_database.test.connect_to_mysql" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.class_database.test.get_car_id">
-<span class="sig-name descname"><span class="pre">get_car_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uVIN</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.class_database.test.get_car_id" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_car_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uVIN</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/class_database.html#test.get_car_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.class_database.test.get_car_id" title="Link to this definition">¶</a></dt>
 <dd><p>Retrieves the CarID associated with the given VIN.</p>
 <p>Parameters:
 uVIN (str): Vehicle Identification Number.</p>
@@ -248,7 +265,7 @@ int: CarID if found, otherwise None.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.class_database.test.get_car_info">
-<span class="sig-name descname"><span class="pre">get_car_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CarID</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.class_database.test.get_car_info" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_car_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CarID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/class_database.html#test.get_car_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.class_database.test.get_car_info" title="Link to this definition">¶</a></dt>
 <dd><p>Retrieves information about a car based on its CarID.</p>
 <p>Parameters:
 CarID (int): CarID of the vehicle.</p>
@@ -258,7 +275,7 @@ None. Prints the car details.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.class_database.test.remove_customer">
-<span class="sig-name descname"><span class="pre">remove_customer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CustomerID</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.class_database.test.remove_customer" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">remove_customer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CustomerID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/class_database.html#test.remove_customer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.class_database.test.remove_customer" title="Link to this definition">¶</a></dt>
 <dd><p>Remove an existing customer and their associated reservations.</p>
 <p>&#64;param CustomerID: int - ID of the customer to remove.
 &#64;return None</p>
@@ -266,7 +283,7 @@ None. Prints the car details.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.class_database.test.remove_report">
-<span class="sig-name descname"><span class="pre">remove_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ReportID</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.class_database.test.remove_report" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">remove_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ReportID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/class_database.html#test.remove_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.class_database.test.remove_report" title="Link to this definition">¶</a></dt>
 <dd><p>Remove an existing report from the database.</p>
 <p>&#64;param ReportID: int - ID of the report to remove.
 &#64;return None</p>
@@ -274,7 +291,7 @@ None. Prints the car details.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.class_database.test.remove_reservation">
-<span class="sig-name descname"><span class="pre">remove_reservation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ReservationID</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.class_database.test.remove_reservation" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">remove_reservation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ReservationID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/class_database.html#test.remove_reservation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.class_database.test.remove_reservation" title="Link to this definition">¶</a></dt>
 <dd><p>Remove an existing reservation from the database.</p>
 <p>&#64;param ReservationID: int - ID of the reservation to remove.
 &#64;return None</p>
@@ -282,7 +299,7 @@ None. Prints the car details.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.class_database.test.update_customer">
-<span class="sig-name descname"><span class="pre">update_customer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CustomerID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FullName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DOB</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Email</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.class_database.test.update_customer" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">update_customer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CustomerID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FullName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DOB</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Email</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/class_database.html#test.update_customer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.class_database.test.update_customer" title="Link to this definition">¶</a></dt>
 <dd><p>Update an existing customer’s details by their CustomerID.</p>
 <p>&#64;param CustomerID: int - ID of the customer to update.
 &#64;param FullName: str, optional - Updated full name of the customer.
@@ -293,7 +310,7 @@ None. Prints the car details.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.class_database.test.update_mileage">
-<span class="sig-name descname"><span class="pre">update_mileage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CarID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updated_mileage</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.class_database.test.update_mileage" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">update_mileage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CarID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updated_mileage</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/class_database.html#test.update_mileage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.class_database.test.update_mileage" title="Link to this definition">¶</a></dt>
 <dd><p>Updates the mileage of a car in the database.</p>
 <p>Parameters:
 CarID (int): CarID of the vehicle.
@@ -304,7 +321,7 @@ None.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.class_database.test.update_report">
-<span class="sig-name descname"><span class="pre">update_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ReportID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Damages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">GasAmount</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vehicle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ReservationID</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.class_database.test.update_report" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">update_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ReportID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Damages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">GasAmount</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vehicle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ReservationID</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/class_database.html#test.update_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.class_database.test.update_report" title="Link to this definition">¶</a></dt>
 <dd><p>Update an existing report by its ReportID.</p>
 <p>&#64;param ReportID: int - ID of the report to update.
 &#64;param Damages: str, optional - Updated damages information.
@@ -316,7 +333,7 @@ None.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.class_database.test.update_reservation">
-<span class="sig-name descname"><span class="pre">update_reservation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ReservationID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">StartDate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">EndDate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Insurance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CustomerID</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vehicle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.class_database.test.update_reservation" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">update_reservation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ReservationID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">StartDate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">EndDate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Insurance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CustomerID</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vehicle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/class_database.html#test.update_reservation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.class_database.test.update_reservation" title="Link to this definition">¶</a></dt>
 <dd><p>Updates an existing reservation in the database.</p>
 <p>Parameters:
 ReservationID (int): ID of the reservation to update.
@@ -332,19 +349,45 @@ None.</p>
 </dd></dl>
 
 </section>
-<section id="back-end-database-class-customer-class-module">
-<h2>back_end.database_class.customer_class module<a class="headerlink" href="#back-end-database-class-customer-class-module" title="Link to this heading">¶</a></h2>
+<section id="module-back_end.database_class.customer_class">
+<span id="back-end-database-class-customer-class-module"></span><h2>back_end.database_class.customer_class module<a class="headerlink" href="#module-back_end.database_class.customer_class" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="back_end.database_class.customer_class.Customer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">back_end.database_class.customer_class.</span></span><span class="sig-name descname"><span class="pre">Customer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cust_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/customer_class.html#Customer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.customer_class.Customer" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Date of Creation: November 26, 2024
+Author: Elijah Sagaran and Nima Jafari</p>
+<p>Class that will hold informaiton about admin and the functionalities that the admin can do</p>
+<section id="id2">
+<h3>Attributes:<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>cust_id: int</dt><dd><p>ID assigned by database to user</p>
+</dd>
+<dt>user: str</dt><dd><p>name of the user</p>
+</dd>
+<dt>email: str</dt><dd><p>Email of the user</p>
+</dd>
+<dt>username: str</dt><dd><p>the username of the user that will be used for logging in</p>
+</dd>
+<dt>user_password: str</dt><dd><p>the password of the user that will be used for logging in</p>
+</dd>
+<dt>dob: str</dt><dd><p>date of birth of the user, used for authentication of resetting password</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
 </section>
 <section id="module-back_end.database_class.database_utility_class">
 <span id="back-end-database-class-database-utility-class-module"></span><h2>back_end.database_class.database_utility_class module<a class="headerlink" href="#module-back_end.database_class.database_utility_class" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.add_car">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">add_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mileage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mpg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">license_plate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_make</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.add_car" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">add_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mileage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mpg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">license_plate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_make</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#add_car"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.add_car" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.admin_sign_up">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">admin_sign_up</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signup_username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.admin_sign_up" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">admin_sign_up</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signup_username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#admin_sign_up"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.admin_sign_up" title="Link to this definition">¶</a></dt>
 <dd><p>Register a new admin user.</p>
 <p>&#64;param name: str - Name of the admin.
 &#64;param signup_username: str - Username for the admin.
@@ -355,48 +398,52 @@ None.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.calculate_days">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">calculate_days</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.calculate_days" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">calculate_days</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#calculate_days"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.calculate_days" title="Link to this definition">¶</a></dt>
 <dd><p>Calculate the number of days
-Args:</p>
-<blockquote>
-<div><p>start_date YYYY-MM-DD
-end_date YYYY-MM-DD</p>
-</div></blockquote>
-<dl class="simple">
-<dt>Returns:</dt><dd><p>Number of days between the two dates 
+:param start_date YYYY-MM-DD:
+:param end_date YYYY-MM-DD:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Number of days between the two dates
 Returns -1 if error</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="back_end.database_class.database_utility_class.cancel_reservation">
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">cancel_reservation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reservation_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#cancel_reservation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.cancel_reservation" title="Link to this definition">¶</a></dt>
+<dd><p>Cancel a reservation by updating its status to canceled.</p>
+<p>&#64;param reservation_id: int - The ID of the reservation to be canceled.
+&#64;return None</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.change_mileage">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">change_mileage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_mileage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.change_mileage" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">change_mileage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_mileage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#change_mileage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.change_mileage" title="Link to this definition">¶</a></dt>
 <dd><p>Function to change the value at column Mileage for the car with id car_id</p>
-<section id="id13">
-<h3>Parameters<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
-<dl class="simple">
-<dt>car_id: int</dt><dd><p>The car ID of the car</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>car_id</strong> (<em>int</em>) – The car ID of the car</p></li>
+<li><p><strong>new_mileage</strong> (<em>int</em>) – The new value of mileage</p></li>
+</ul>
 </dd>
-<dt>new_mileage: int</dt><dd><p>The new value of mileage</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>None</em></p></li>
+<li><p><strong>Author</strong> (<em>Elijah Sagaran, 10/2</em>)</p></li>
+<li><p><em>Updates</em> – Nima Jafari, 10/2
+Elijah Sagaran, 10/7</p></li>
+</ul>
+</p>
 </dd>
 </dl>
-</section>
-<section id="id14">
-<h3>Returns<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
-<p>None</p>
-<p>Author: Elijah Sagaran, 10/2
-Updates:</p>
-<blockquote>
-<div><p>Nima Jafari, 10/2
-Elijah Sagaran, 10/7</p>
-</div></blockquote>
-</section>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.change_password">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">change_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">person_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.change_password" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">change_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">person_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#change_password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.change_password" title="Link to this definition">¶</a></dt>
 <dd><p>Change the password for a user.</p>
 <p>&#64;param input_username: str - Username of the user.
 &#64;param input_password: str - New password for the user.
@@ -405,81 +452,117 @@ Elijah Sagaran, 10/7</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="back_end.database_class.database_utility_class.confirm_reservation">
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">confirm_reservation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reservation_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#confirm_reservation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.confirm_reservation" title="Link to this definition">¶</a></dt>
+<dd><p>Confirm a reservation by updating its status to confirmed.
+A reservation cannot be confirmed if it is already marked as canceled.</p>
+<p>&#64;param reservation_id: int - The ID of the reservation to be confirmed.
+&#64;return None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="back_end.database_class.database_utility_class.customer_sign_up">
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">customer_sign_up</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signup_username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#customer_sign_up"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.customer_sign_up" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.deactivate_car">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">deactivate_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.deactivate_car" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">deactivate_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#deactivate_car"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.deactivate_car" title="Link to this definition">¶</a></dt>
 <dd><p>Sets the IsActive field in databse to 0, making the car inactive</p>
-<section id="id15">
-<h3>Parameters<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
-<dl class="simple">
-<dt>car_id: int</dt><dd><p>The ID of the car</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>car_id</strong> (<em>int</em>) – The ID of the car</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>None</em></p></li>
+<li><p><strong>Author</strong> (<em>Elijah Sagaran, 10/7</em>)</p></li>
+<li><p><em>Updates</em></p></li>
+</ul>
+</p>
 </dd>
 </dl>
-</section>
-<section id="id16">
-<h3>Returns<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
-<p>None</p>
-<p>Author: Elijah Sagaran, 10/7
-Updates:</p>
-</section>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.get_active_inventory">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_active_inventory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.get_active_inventory" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_active_inventory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#get_active_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.get_active_inventory" title="Link to this definition">¶</a></dt>
 <dd><p>Queries all rows that is not retired from Vehicles table in database</p>
-<section id="id17">
-<h3>Parameters<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
-<p>None</p>
-</section>
-<section id="id18">
-<h3>Returns<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h3>
-<dl class="simple">
-<dt>list[tuple]:</dt><dd><p>each tuple contains all the information about a car that is stored in the database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>list[tuple]</em> – each tuple contains all the information about a car that is stored in the database</p></li>
+<li><p><strong>Author</strong> (<em>Elijah Sagaran, 10/7</em>)</p></li>
+<li><p><em>Updates</em></p></li>
+</ul>
+</p>
 </dd>
 </dl>
-<p>Author: Elijah Sagaran, 10/7
-Updates:</p>
-</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="back_end.database_class.database_utility_class.get_admin_info">
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_admin_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_username</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#get_admin_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.get_admin_info" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="back_end.database_class.database_utility_class.get_admin_usernames">
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_admin_usernames</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#get_admin_usernames"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.get_admin_usernames" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves all admin username</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>Author</strong> (<em>Elijah Sagaran</em>)</p></li>
+<li><p><em>Updates</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.get_car_id">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_car_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.get_car_id" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_car_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#get_car_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.get_car_id" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.get_car_info">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_car_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.get_car_info" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_car_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#get_car_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.get_car_info" title="Link to this definition">¶</a></dt>
 <dd><p>Function to get a car’s information from database through car ID</p>
-<section id="id19">
-<h3>Parameters<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h3>
-<dl class="simple">
-<dt>car_id: int</dt><dd><p>The car ID of the car</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>car_id</strong> (<em>int</em>) – The car ID of the car</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>tuple</em> – contains the car’s information</p></li>
+<li><p><strong>Author</strong> (<em>Elijah Sagaran, 10/1</em>)</p></li>
+<li><p><em>Updates</em></p></li>
+</ul>
+</p>
 </dd>
 </dl>
-</section>
-<section id="id20">
-<h3>Returns<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h3>
-<dl class="simple">
-<dt>tuple:</dt><dd><p>contains the car’s information</p>
-</dd>
-</dl>
-<p>Author: Elijah Sagaran, 10/1
-Updates:</p>
-</section>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.get_customer_info">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_customer_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">customer_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.get_customer_info" title="Link to this definition">¶</a></dt>
-<dd><p>Retrieve customer information by their ID.</p>
-<p>&#64;param customer_id: int - ID of the customer.
-&#64;return dict: A dictionary containing the customer’s information, or None if not found.</p>
-</dd></dl>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_customer_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_username</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#get_customer_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.get_customer_info" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="back_end.database_class.database_utility_class.get_customer_usernames">
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_customer_usernames</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#get_customer_usernames"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.get_customer_usernames" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.get_hashed_password">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_hashed_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">login_username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">person_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.get_hashed_password" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_hashed_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">login_username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">person_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#get_hashed_password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.get_hashed_password" title="Link to this definition">¶</a></dt>
 <dd><p>Retrieve the hashed password for a user.</p>
 <p>&#64;param login_username: int - The username or ID of the user.
 &#64;param person_type: str - The type of user (‘customer’ or ‘admin’).
@@ -488,26 +571,26 @@ Updates:</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.get_inventory">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_inventory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.get_inventory" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_inventory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#get_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.get_inventory" title="Link to this definition">¶</a></dt>
 <dd><p>Queries all rows from Vehicles table in database</p>
-<section id="id21">
-<h3>Parameters<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h3>
-<p>None</p>
-</section>
-<section id="id22">
-<h3>Returns<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h3>
-<dl class="simple">
-<dt>list[tuple]:</dt><dd><p>each tuple contains all the information about a car that is stored in the database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>list[tuple]</em> – each tuple contains all the information about a car that is stored in the database</p></li>
+<li><p><strong>Author</strong> (<em>Elijah Sagaran, 10/7</em>)</p></li>
+<li><p><em>Updates</em></p></li>
+</ul>
+</p>
 </dd>
 </dl>
-<p>Author: Elijah Sagaran, 10/7
-Updates:</p>
-</section>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.get_reports">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_reports</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.database_utility_class.get_reports" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_reports</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#get_reports"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.get_reports" title="Link to this definition">¶</a></dt>
 <dd><p>Retrieve all reports for a specific vehicle.</p>
 <p>&#64;param car_id: int - ID of the vehicle.
 &#64;return list: A list of reports associated with the vehicle.</p>
@@ -515,51 +598,70 @@ Updates:</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.get_reservations">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_reservations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.database_utility_class.get_reservations" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_reservations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#get_reservations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.get_reservations" title="Link to this definition">¶</a></dt>
 <dd><p>Retrieve all reservations from the database.</p>
 <p>&#64;return list: A list of all reservations.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="back_end.database_class.database_utility_class.get_reservations_history">
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_reservations_history</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">customer_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#get_reservations_history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.get_reservations_history" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves all reservations made by a specific customer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>customer_id</strong> (<em>str</em>) – The ID of the customer whose reservations are to be retrieved.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>list[tuple]</em> – A list of tuples, where each tuple contains information about a reservation.</p></li>
+<li><p><strong>Author</strong> (<em>Nima Jafari</em>)</p></li>
+<li><p><em>Updates</em></p></li>
+<li><p><em>Nima Jafari 12/04</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.get_vins">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_vins</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.database_utility_class.get_vins" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">get_vins</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#get_vins"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.get_vins" title="Link to this definition">¶</a></dt>
 <dd><p>Retrieve a list of all Vehicle Identification Numbers (VINs) from the database.</p>
 <p>&#64;return list - A list of VINs.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.initialize_connection">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">initialize_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">my_host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">my_port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upassword</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.initialize_connection" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">initialize_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">my_host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">my_port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upassword</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#initialize_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.initialize_connection" title="Link to this definition">¶</a></dt>
 <dd><p>Initializes the connetion to database, must be called in application startup</p>
-<section id="id23">
-<h3>Parameters<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h3>
-<dl class="simple">
-<dt>my_host: str</dt><dd><p>The hosting server for the AWS database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>my_host</strong> (<em>str</em>) – The hosting server for the AWS database</p></li>
+<li><p><strong>my_port</strong> (<em>int</em>) – Port being used to connect MySQL and AWS</p></li>
+<li><p><strong>username</strong> (<em>str</em>) – AWS Account username</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – AWS Account password</p></li>
+</ul>
 </dd>
-<dt>my_port: int</dt><dd><p>Port being used to connect MySQL and AWS</p>
-</dd>
-<dt>username: str</dt><dd><p>AWS Account username</p>
-</dd>
-<dt>password: str</dt><dd><p>AWS Account password</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>None</em></p></li>
+<li><p><strong>Author</strong> (<em>Elijah Sagaran, 10/1</em>)</p></li>
+<li><p><em>Updates</em></p></li>
+</ul>
+</p>
 </dd>
 </dl>
-</section>
-<section id="id24">
-<h3>Returns<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h3>
-<p>None</p>
-<p>Author: Elijah Sagaran, 10/1
-Updates:</p>
-</section>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.insert_report">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">insert_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">damages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reservation_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.insert_report" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">insert_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">damages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reservation_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#insert_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.insert_report" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.insert_reservation">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">insert_reservation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insurance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">customer_email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">canceled</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.insert_reservation" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">insert_reservation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insurance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">customer_email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">customer_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">canceled</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#insert_reservation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.insert_reservation" title="Link to this definition">¶</a></dt>
 <dd><p>Insert a new reservation into the database.</p>
 <p>&#64;param start_date: str - Reservation start date in ‘YYYY-MM-DD’ format.
 &#64;param end_date: str - Reservation end date in ‘YYYY-MM-DD’ format.
@@ -567,153 +669,172 @@ Updates:</p>
 &#64;param customer_email: str - Customer’s email address.
 &#64;param car_id: int - ID of the reserved car.
 &#64;param canceled: bool - Indicates if the reservation is canceled.
+&#64;param total_price: float - total price for reservation, initially 0 to be calculated
 &#64;return int - The ID of the newly created reservation.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.remove_customer">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">remove_customer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">customer_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.remove_customer" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">remove_customer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">customer_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#remove_customer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.remove_customer" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.remove_report">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">remove_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">report_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.remove_report" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">remove_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">report_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#remove_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.remove_report" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.remove_reservation">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">remove_reservation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reservation_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.remove_reservation" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">remove_reservation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reservation_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#remove_reservation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.remove_reservation" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.search_database">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">search_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.search_database" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">search_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#search_database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.search_database" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.update_customer">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">update_customer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">customer_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.update_customer" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">update_customer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">customer_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#update_customer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.update_customer" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.update_report">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">update_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">report_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">damages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_amount</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reservation_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.update_report" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">update_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">report_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">damages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_amount</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reservation_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#update_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.update_report" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.database_utility_class.update_reservation">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">update_reservation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reservation_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insurance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">customer_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uVehicle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">canceled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.database_utility_class.update_reservation" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.database_utility_class.</span></span><span class="sig-name descname"><span class="pre">update_reservation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reservation_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insurance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">customer_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uVehicle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">canceled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_price</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/database_utility_class.html#update_reservation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.database_utility_class.update_reservation" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
+</section>
+<section id="back-end-database-class-database-utility-test-module">
+<h2>back_end.database_class.database_utility_test module<a class="headerlink" href="#back-end-database-class-database-utility-test-module" title="Link to this heading">¶</a></h2>
 </section>
 <section id="module-back_end.database_class.inventory_class">
 <span id="back-end-database-class-inventory-class-module"></span><h2>back_end.database_class.inventory_class module<a class="headerlink" href="#module-back_end.database_class.inventory_class" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="back_end.database_class.inventory_class.inventory">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">back_end.database_class.inventory_class.</span></span><span class="sig-name descname"><span class="pre">inventory</span></span><a class="headerlink" href="#back_end.database_class.inventory_class.inventory" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">back_end.database_class.inventory_class.</span></span><span class="sig-name descname"><span class="pre">inventory</span></span><a class="reference internal" href="_modules/back_end/database_class/inventory_class.html#inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.inventory_class.inventory" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class where all car objects are stored</p>
-<section id="id25">
-<h3>Attributes<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h3>
-<dl class="simple">
-<dt>inventory: Car</dt><dd><p>The list of car objects that are in the database</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="back_end.database_class.inventory_class.inventory.inventory">
+<span class="sig-name descname"><span class="pre">inventory</span></span><a class="headerlink" href="#back_end.database_class.inventory_class.inventory.inventory" title="Link to this definition">¶</a></dt>
+<dd><p>The list of car objects that are in the database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Car</p>
 </dd>
 </dl>
-<p>Date of Creation: 10/13
-Author: Elijah Sagaran
-Updates:</p>
-<blockquote>
-<div><p>Elijah, 10/13
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Date</span> <span class="pre">of</span> <span class="pre">Creation</span></span></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>10/13</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="back_end.database_class.inventory_class.inventory.Author">
+<span class="sig-name descname"><span class="pre">Author</span></span><a class="headerlink" href="#back_end.database_class.inventory_class.inventory.Author" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Elijah Sagaran</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="back_end.database_class.inventory_class.inventory.Updates">
+<span class="sig-name descname"><span class="pre">Updates</span></span><a class="headerlink" href="#back_end.database_class.inventory_class.inventory.Updates" title="Link to this definition">¶</a></dt>
+<dd><p>Elijah, 10/13
 Elijah, 10/22
 Elijah, 10/22
 Elijah, 10/22</p>
-</div></blockquote>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.inventory_class.inventory.add_car">
-<span class="sig-name descname"><span class="pre">add_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mileage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mpg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">license_plate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">make</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.inventory_class.inventory.add_car" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">add_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mileage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mpg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">license_plate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">make</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/inventory_class.html#inventory.add_car"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.inventory_class.inventory.add_car" title="Link to this definition">¶</a></dt>
 <dd><p>Creates a car object with the passed parameters, appends it to the array, and calls add_car function in database utility class</p>
-<section id="id26">
-<h4>Parameters<a class="headerlink" href="#id26" title="Link to this heading">¶</a></h4>
-<dl class="simple">
-<dt>vin: str</dt><dd><p>The unique VIN number of the vehicle to be added.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vin</strong> (<em>str</em>) – The unique VIN number of the vehicle to be added.</p></li>
+<li><p><strong>mileage</strong> (<em>int</em>) – The current mileage of the car.</p></li>
+<li><p><strong>mpg</strong> (<em>int</em>) – The current miles per gallon of the car.</p></li>
+<li><p><strong>price</strong> (<em>double</em>) – The price that is assigned for the car. Unit is $/day.</p></li>
+<li><p><strong>license_plate</strong> (<em>str</em>) – The unique license plate of the vehicle to be added</p></li>
+<li><p><strong>car_year</strong> (<em>str</em>) – The year of the model of the vehicle</p></li>
+<li><p><strong>model</strong> (<em>str</em>) – The model of the car. i.e. Corolla, Civic, and Prius</p></li>
+<li><p><strong>make</strong> (<em>str</em>) – The brand of the car. i.e. Toyota and Honda</p></li>
+<li><p><strong>color</strong> (<em>str</em>) – The color of the car. i.e. Red, Blue, and Yellow</p></li>
+<li><p><strong>car_type</strong> (<em>str</em>) – The classification of the car. i.e. Sedan, SUV, and Truck</p></li>
+</ul>
 </dd>
-<dt>mileage: int</dt><dd><p>The current mileage of the car.</p>
-</dd>
-<dt>mpg: int</dt><dd><p>The current miles per gallon of the car.</p>
-</dd>
-<dt>price: double</dt><dd><p>The price that is assigned for the car. Unit is $/day.</p>
-</dd>
-<dt>license_plate: str</dt><dd><p>The unique license plate of the vehicle to be added</p>
-</dd>
-<dt>car_year: str</dt><dd><p>The year of the model of the vehicle</p>
-</dd>
-<dt>model: str</dt><dd><p>The model of the car. i.e. Corolla, Civic, and Prius</p>
-</dd>
-<dt>make: str</dt><dd><p>The brand of the car. i.e. Toyota and Honda</p>
-</dd>
-<dt>color: str</dt><dd><p>The color of the car. i.e. Red, Blue, and Yellow</p>
-</dd>
-<dt>car_type: str</dt><dd><p>The classification of the car. i.e. Sedan, SUV, and Truck</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-</section>
-<section id="id27">
-<h4>Returns<a class="headerlink" href="#id27" title="Link to this heading">¶</a></h4>
-<p>None</p>
-</section>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.inventory_class.inventory.delete_car">
-<span class="sig-name descname"><span class="pre">delete_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uCarID</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.inventory_class.inventory.delete_car" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">delete_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uCarID</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/inventory_class.html#inventory.delete_car"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.inventory_class.inventory.delete_car" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.inventory_class.inventory.get_car_from_inventory">
-<span class="sig-name descname"><span class="pre">get_car_from_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.inventory_class.inventory.get_car_from_inventory" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_car_from_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/inventory_class.html#inventory.get_car_from_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.inventory_class.inventory.get_car_from_inventory" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.inventory_class.inventory.get_inventory">
-<span class="sig-name descname"><span class="pre">get_inventory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.inventory_class.inventory.get_inventory" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_inventory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/inventory_class.html#inventory.get_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.inventory_class.inventory.get_inventory" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.inventory_class.inventory.initialize_inventory">
-<span class="sig-name descname"><span class="pre">initialize_inventory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.inventory_class.inventory.initialize_inventory" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">initialize_inventory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/inventory_class.html#inventory.initialize_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.inventory_class.inventory.initialize_inventory" title="Link to this definition">¶</a></dt>
 <dd><p>Gets all the information of each car from the database and stores it in a car object, then stores car objects in an array</p>
-<section id="id28">
-<h4>Parameters<a class="headerlink" href="#id28" title="Link to this heading">¶</a></h4>
-<p>None</p>
-</section>
-<section id="return">
-<h4>Return<a class="headerlink" href="#return" title="Link to this heading">¶</a></h4>
-<p>None</p>
-</section>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.inventory_class.inventory.search_car">
-<span class="sig-name descname"><span class="pre">search_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#back_end.database_class.inventory_class.inventory.search_car" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">search_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/back_end/database_class/inventory_class.html#inventory.search_car"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.inventory_class.inventory.search_car" title="Link to this definition">¶</a></dt>
 <dd><p>Binary search to see if car_id is in current inventory</p>
 <section id="parameter">
-<h4>Parameter<a class="headerlink" href="#parameter" title="Link to this heading">¶</a></h4>
+<h3>Parameter<a class="headerlink" href="#parameter" title="Link to this heading">¶</a></h3>
 <dl class="simple">
 <dt>car_id: int</dt><dd><p>The car ID that needs to be checked</p>
 </dd>
 </dl>
-</section>
-<section id="id29">
-<h4>Return<a class="headerlink" href="#id29" title="Link to this heading">¶</a></h4>
-<dl class="simple">
-<dt>int:</dt><dd><p>Returns car ID if it is present in the current inventory
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns car ID if it is present in the current inventory
 Returns -1 if not</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
 </dd>
 </dl>
 </section>
 </dd></dl>
 
-</section>
 </dd></dl>
 
 </section>
@@ -724,7 +845,7 @@ Returns -1 if not</p>
 <span id="back-end-database-class-print-tables-module"></span><h2>back_end.database_class.print_tables module<a class="headerlink" href="#module-back_end.database_class.print_tables" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="back_end.database_class.print_tables.print_tables">
-<span class="sig-prename descclassname"><span class="pre">back_end.database_class.print_tables.</span></span><span class="sig-name descname"><span class="pre">print_tables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">my_host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">my_port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">my_username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">my_password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.print_tables.print_tables" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">back_end.database_class.print_tables.</span></span><span class="sig-name descname"><span class="pre">print_tables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">my_host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">my_port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">my_username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">my_password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/print_tables.html#print_tables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.print_tables.print_tables" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -732,110 +853,228 @@ Returns -1 if not</p>
 <span id="back-end-database-class-report-class-module"></span><h2>back_end.database_class.report_class module<a class="headerlink" href="#module-back_end.database_class.report_class" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="back_end.database_class.report_class.report">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">back_end.database_class.report_class.</span></span><span class="sig-name descname"><span class="pre">report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">damages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_amount</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reservation_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.report_class.report" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">back_end.database_class.report_class.</span></span><span class="sig-name descname"><span class="pre">report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">damages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_amount</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reservation_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/report_class.html#report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.report_class.report" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>A class to represent a report for a car rental, detailing damages, gas amount, 
+<p>A class to represent a report for a car rental, detailing damages, gas amount,
 and associated car and reservation IDs.</p>
-<section id="id30">
-<h3>Attributes<a class="headerlink" href="#id30" title="Link to this heading">¶</a></h3>
-<dl class="simple">
-<dt>report_id<span class="classifier">int or None</span></dt><dd><p>The unique identifier for the report (assigned later).</p>
-</dd>
-<dt>damages<span class="classifier">str</span></dt><dd><p>Description of any damages to the car.</p>
-</dd>
-<dt>gas_amount<span class="classifier">float</span></dt><dd><p>The amount of gas remaining in the car.</p>
-</dd>
-<dt>car_id<span class="classifier">int</span></dt><dd><p>The ID of the car associated with this report.</p>
-</dd>
-<dt>reservation_id<span class="classifier">int</span></dt><dd><p>The ID of the reservation associated with this report.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="back_end.database_class.report_class.report.report_id">
+<span class="sig-name descname"><span class="pre">report_id</span></span><a class="headerlink" href="#back_end.database_class.report_class.report.report_id" title="Link to this definition">¶</a></dt>
+<dd><p>The unique identifier for the report (assigned later).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int or None</p>
 </dd>
 </dl>
-</section>
-<section id="methods">
-<h3>Methods<a class="headerlink" href="#methods" title="Link to this heading">¶</a></h3>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="back_end.database_class.report_class.report.damages">
+<span class="sig-name descname"><span class="pre">damages</span></span><a class="headerlink" href="#back_end.database_class.report_class.report.damages" title="Link to this definition">¶</a></dt>
+<dd><p>Description of any damages to the car.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="back_end.database_class.report_class.report.gas_amount">
+<span class="sig-name descname"><span class="pre">gas_amount</span></span><a class="headerlink" href="#back_end.database_class.report_class.report.gas_amount" title="Link to this definition">¶</a></dt>
+<dd><p>The amount of gas remaining in the car.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="back_end.database_class.report_class.report.car_id">
+<span class="sig-name descname"><span class="pre">car_id</span></span><a class="headerlink" href="#back_end.database_class.report_class.report.car_id" title="Link to this definition">¶</a></dt>
+<dd><p>The ID of the car associated with this report.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="back_end.database_class.report_class.report.reservation_id">
+<span class="sig-name descname"><span class="pre">reservation_id</span></span><a class="headerlink" href="#back_end.database_class.report_class.report.reservation_id" title="Link to this definition">¶</a></dt>
+<dd><p>The ID of the reservation associated with this report.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.report_class.report.get_car_id">
-<span class="sig-name descname"><span class="pre">get_car_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#back_end.database_class.report_class.report.get_car_id" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_car_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/back_end/database_class/report_class.html#report.get_car_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.report_class.report.get_car_id" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the ID of the car associated with this report.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.report_class.report.get_damage">
-<span class="sig-name descname"><span class="pre">get_damage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#back_end.database_class.report_class.report.get_damage" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_damage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/back_end/database_class/report_class.html#report.get_damage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.report_class.report.get_damage" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a description of the damages to the car.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.report_class.report.get_gas_amount">
-<span class="sig-name descname"><span class="pre">get_gas_amount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#back_end.database_class.report_class.report.get_gas_amount" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_gas_amount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/back_end/database_class/report_class.html#report.get_gas_amount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.report_class.report.get_gas_amount" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the amount of gas remaining in the car.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.report_class.report.get_report_id">
-<span class="sig-name descname"><span class="pre">get_report_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.report_class.report.get_report_id" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_report_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/report_class.html#report.get_report_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.report_class.report.get_report_id" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the unique identifier for the report, if set.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.report_class.report.get_reservation_id">
-<span class="sig-name descname"><span class="pre">get_reservation_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#back_end.database_class.report_class.report.get_reservation_id" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_reservation_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/back_end/database_class/report_class.html#report.get_reservation_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.report_class.report.get_reservation_id" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the ID of the reservation associated with this report.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.report_class.report.set_report_id">
-<span class="sig-name descname"><span class="pre">set_report_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">report_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#back_end.database_class.report_class.report.set_report_id" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">set_report_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">report_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/back_end/database_class/report_class.html#report.set_report_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.report_class.report.set_report_id" title="Link to this definition">¶</a></dt>
 <dd><p>Sets the unique identifier for the report.</p>
-<section id="id31">
-<h4>Parameters<a class="headerlink" href="#id31" title="Link to this heading">¶</a></h4>
-<dl class="simple">
-<dt>report_id<span class="classifier">int</span></dt><dd><p>The unique identifier to assign to this report.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>report_id</strong> (<em>int</em>) – The unique identifier to assign to this report.</p>
 </dd>
 </dl>
-</section>
+</dd></dl>
+
 </dd></dl>
 
 </section>
-</dd></dl>
-
+<section id="back-end-database-class-report-test-module">
+<h2>back_end.database_class.report_test module<a class="headerlink" href="#back-end-database-class-report-test-module" title="Link to this heading">¶</a></h2>
 </section>
 <section id="module-back_end.database_class.reservation_class">
 <span id="back-end-database-class-reservation-class-module"></span><h2>back_end.database_class.reservation_class module<a class="headerlink" href="#module-back_end.database_class.reservation_class" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="back_end.database_class.reservation_class.reservation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">back_end.database_class.reservation_class.</span></span><span class="sig-name descname"><span class="pre">reservation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insurance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">customer_email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vehicle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">canceled</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.reservation_class.reservation" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">back_end.database_class.reservation_class.</span></span><span class="sig-name descname"><span class="pre">reservation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insurance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">customer_email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">customer_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vehicle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">canceled</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/reservation_class.html#reservation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.reservation_class.reservation" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class to hold data for each reservation for a car</p>
-<section id="id32">
-<h3>Attributes<a class="headerlink" href="#id32" title="Link to this heading">¶</a></h3>
-<dl class="simple">
-<dt>start_date: str</dt><dd><p>The start date of the reservation</p>
-</dd>
-<dt>end_date: str</dt><dd><p>The end date of the reservation</p>
-</dd>
-<dt>insurance: int</dt><dd><p>Values 0 or 1, boolean value. Indicates if customer wants to include insurance</p>
-</dd>
-<dt>customer_email: str</dt><dd><p>Email of the customer for the invoice/confirmation email</p>
-</dd>
-<dt>car_id: int</dt><dd><p>The car ID of the desired car</p>
-</dd>
-<dt>cancelled: int</dt><dd><p>0, if not cancelled. 1, if it is</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="back_end.database_class.reservation_class.reservation.start_date">
+<span class="sig-name descname"><span class="pre">start_date</span></span><a class="headerlink" href="#back_end.database_class.reservation_class.reservation.start_date" title="Link to this definition">¶</a></dt>
+<dd><p>The start date of the reservation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
-<p>Date of Creation: 10/22
-Author: Elijah Sagaran and Nima Jafari
-Updates:</p>
-<blockquote>
-<div><p>Elijah, 10/29
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="back_end.database_class.reservation_class.reservation.end_date">
+<span class="sig-name descname"><span class="pre">end_date</span></span><a class="headerlink" href="#back_end.database_class.reservation_class.reservation.end_date" title="Link to this definition">¶</a></dt>
+<dd><p>The end date of the reservation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="back_end.database_class.reservation_class.reservation.insurance">
+<span class="sig-name descname"><span class="pre">insurance</span></span><a class="headerlink" href="#back_end.database_class.reservation_class.reservation.insurance" title="Link to this definition">¶</a></dt>
+<dd><p>Values 0 or 1, boolean value. Indicates if customer wants to include insurance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="back_end.database_class.reservation_class.reservation.customer_email">
+<span class="sig-name descname"><span class="pre">customer_email</span></span><a class="headerlink" href="#back_end.database_class.reservation_class.reservation.customer_email" title="Link to this definition">¶</a></dt>
+<dd><p>Email of the customer for the invoice/confirmation email</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="back_end.database_class.reservation_class.reservation.customer_id">
+<span class="sig-name descname"><span class="pre">customer_id</span></span><a class="headerlink" href="#back_end.database_class.reservation_class.reservation.customer_id" title="Link to this definition">¶</a></dt>
+<dd><p>id of the customer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="back_end.database_class.reservation_class.reservation.car_id">
+<span class="sig-name descname"><span class="pre">car_id</span></span><a class="headerlink" href="#back_end.database_class.reservation_class.reservation.car_id" title="Link to this definition">¶</a></dt>
+<dd><p>The car ID of the desired car</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="back_end.database_class.reservation_class.reservation.cancelled">
+<span class="sig-name descname"><span class="pre">cancelled</span></span><a class="headerlink" href="#back_end.database_class.reservation_class.reservation.cancelled" title="Link to this definition">¶</a></dt>
+<dd><p>0, if not cancelled. 1, if it is</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Date</span> <span class="pre">of</span> <span class="pre">Creation</span></span></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>10/22</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="back_end.database_class.reservation_class.reservation.Author">
+<span class="sig-name descname"><span class="pre">Author</span></span><a class="headerlink" href="#back_end.database_class.reservation_class.reservation.Author" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Elijah Sagaran and Nima Jafari</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="back_end.database_class.reservation_class.reservation.Updates">
+<span class="sig-name descname"><span class="pre">Updates</span></span><a class="headerlink" href="#back_end.database_class.reservation_class.reservation.Updates" title="Link to this definition">¶</a></dt>
+<dd><p>Elijah, 10/29
 Nima, 11/18</p>
-</div></blockquote>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="back_end.database_class.reservation_class.reservation.set_reservation_id">
-<span class="sig-name descname"><span class="pre">set_reservation_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reservation_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#back_end.database_class.reservation_class.reservation.set_reservation_id" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">set_reservation_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reservation_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/back_end/database_class/reservation_class.html#reservation.set_reservation_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#back_end.database_class.reservation_class.reservation.set_reservation_id" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</section>
 </dd></dl>
 
 </section>
@@ -866,27 +1105,37 @@ Nima, 11/18</p>
 <h3>Navigation</h3>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="back_end.html">back_end package</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="back_end.html#subpackages">Subpackages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="back_end.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="back_end.html#back-end-backend-test-module">back_end.backend_test module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="back_end.html#module-back_end.car_rental">back_end.car_rental module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="back_end.html#module-back_end">Module contents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="database.html">database package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="front_end.html">front_end package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="back_end.html">back_end package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="back_end.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">back_end.database_class package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="back_end.invoice_class.html">back_end.invoice_class package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="back_end.report_class.html">back_end.report_class package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="back_end.revenue_class.html">back_end.revenue_class package</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="database_class.html">database_class package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">invoice_class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="report_class.html">report_class module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="invoice_class.html">invoice_class module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="back_end.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="back_end.html#back-end-backend-test-module">back_end.backend_test module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="back_end.html#module-back_end.car_rental">back_end.car_rental module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="back_end.html#module-back_end.car_rental_test">back_end.car_rental_test module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="back_end.html#module-back_end">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">modules</a><ul>
   <li><a href="back_end.html">back_end package</a><ul>
       <li>Previous: <a href="back_end.html" title="previous chapter">back_end package</a></li>
-      <li>Next: <a href="database_class.html" title="next chapter">database_class package</a></li>
+      <li>Next: <a href="back_end.invoice_class.html" title="next chapter">back_end.invoice_class package</a></li>
+  </ul></li>
   </ul></li>
   </ul></li>
 </ul>

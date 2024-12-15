@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>front_end.customer_interface package &#8212; J.E.N.I Car Rental App  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="back_end package" href="back_end.html" />
+    <link rel="prev" title="front_end.config package" href="front_end.config.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="front-end-customer-interface-package">
+<h1>front_end.customer_interface package<a class="headerlink" href="#front-end-customer-interface-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-front_end.customer_interface.carTile">
+<span id="front-end-customer-interface-cartile-module"></span><h2>front_end.customer_interface.carTile module<a class="headerlink" href="#module-front_end.customer_interface.carTile" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="front_end.customer_interface.carTile.car_tile">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">front_end.customer_interface.carTile.</span></span><span class="sig-name descname"><span class="pre">car_tile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_days</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/carTile.html#car_tile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.carTile.car_tile" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<p>A class to make a tile object that shows the car img and car info to user and have the ablility to rent the car.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.carTile.car_tile.apply_rounded_mask">
+<span class="sig-name descname"><span class="pre">apply_rounded_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pixmap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/carTile.html#car_tile.apply_rounded_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.carTile.car_tile.apply_rounded_mask" title="Link to this definition">¶</a></dt>
+<dd><p>Applies a mask with rounded corners only on the left side and ensures the image fills the QLabel.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.carTile.car_tile.img_setup">
+<span class="sig-name descname"><span class="pre">img_setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/carTile.html#car_tile.img_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.carTile.car_tile.img_setup" title="Link to this definition">¶</a></dt>
+<dd><p>funtion to setup the img that is on the left side of the tile.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.carTile.car_tile.middle_setup">
+<span class="sig-name descname"><span class="pre">middle_setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/carTile.html#car_tile.middle_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.carTile.car_tile.middle_setup" title="Link to this definition">¶</a></dt>
+<dd><p>function to setup the middle part of the tile that shows the car info.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.carTile.car_tile.rent_clicked">
+<span class="sig-name descname"><span class="pre">rent_clicked</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/carTile.html#car_tile.rent_clicked"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.carTile.car_tile.rent_clicked" title="Link to this definition">¶</a></dt>
+<dd><p>function that when rent is clicked it makes a rent window and displays it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.carTile.car_tile.right_setup">
+<span class="sig-name descname"><span class="pre">right_setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/carTile.html#car_tile.right_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.carTile.car_tile.right_setup" title="Link to this definition">¶</a></dt>
+<dd><p>function to setup the right side of the tile which has the price and reservation button.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.carTile.car_tile.tile_setup">
+<span class="sig-name descname"><span class="pre">tile_setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/carTile.html#car_tile.tile_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.carTile.car_tile.tile_setup" title="Link to this definition">¶</a></dt>
+<dd><p>function to setup the layout for the whole tile.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="front_end.customer_interface.carTile.fileName">
+<span class="sig-prename descclassname"><span class="pre">front_end.customer_interface.carTile.</span></span><span class="sig-name descname"><span class="pre">fileName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vin</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/carTile.html#fileName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.carTile.fileName" title="Link to this definition">¶</a></dt>
+<dd><p>funtion to get the path to the img of the car.</p>
+</dd></dl>
+
+</section>
+<section id="module-front_end.customer_interface.customerWindow">
+<span id="front-end-customer-interface-customerwindow-module"></span><h2>front_end.customer_interface.customerWindow module<a class="headerlink" href="#module-front_end.customer_interface.customerWindow" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="front_end.customer_interface.customerWindow.customer_window">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">front_end.customer_interface.customerWindow.</span></span><span class="sig-name descname"><span class="pre">customer_window</span></span><a class="reference internal" href="_modules/front_end/customer_interface/customerWindow.html#customer_window"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.customerWindow.customer_window" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<p>A class to make the customer side of the application where you can search for cars to rent and make the reservations.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.customerWindow.customer_window.clear_layout">
+<span class="sig-name descname"><span class="pre">clear_layout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layout</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/customerWindow.html#customer_window.clear_layout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.customerWindow.customer_window.clear_layout" title="Link to this definition">¶</a></dt>
+<dd><p>Remove all widgets from a given layout.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.customerWindow.customer_window.click_research">
+<span class="sig-name descname"><span class="pre">click_research</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/customerWindow.html#customer_window.click_research"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.customerWindow.customer_window.click_research" title="Link to this definition">¶</a></dt>
+<dd><p>function that when serach is clicked after the inital search call the backend api to get a new list of cars to display.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.customerWindow.customer_window.click_search">
+<span class="sig-name descname"><span class="pre">click_search</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/customerWindow.html#customer_window.click_search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.customerWindow.customer_window.click_search" title="Link to this definition">¶</a></dt>
+<dd><p>function that when inital search is clicked it calls backend api to get a list of abvilable cars and displays them.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.customerWindow.customer_window.home_clicked">
+<span class="sig-name descname"><span class="pre">home_clicked</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/customerWindow.html#customer_window.home_clicked"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.customerWindow.customer_window.home_clicked" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.customerWindow.customer_window.menu_clicked">
+<span class="sig-name descname"><span class="pre">menu_clicked</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/customerWindow.html#customer_window.menu_clicked"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.customerWindow.customer_window.menu_clicked" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.customerWindow.customer_window.setup_bottomframe">
+<span class="sig-name descname"><span class="pre">setup_bottomframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/customerWindow.html#customer_window.setup_bottomframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.customerWindow.customer_window.setup_bottomframe" title="Link to this definition">¶</a></dt>
+<dd><p>function to set up the parameters for the bottom frame and add the widget for the inital search window and the window that shows all the car tiles.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.customerWindow.customer_window.setup_button">
+<span class="sig-name descname"><span class="pre">setup_button</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/customerWindow.html#customer_window.setup_button"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.customerWindow.customer_window.setup_button" title="Link to this definition">¶</a></dt>
+<dd><p>function to set up the parameters for the sign out button.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.customerWindow.customer_window.setup_tiles">
+<span class="sig-name descname"><span class="pre">setup_tiles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/customerWindow.html#customer_window.setup_tiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.customerWindow.customer_window.setup_tiles" title="Link to this definition">¶</a></dt>
+<dd><p>function to setup the window that shows the search bar and car tiles after the inital search.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.customerWindow.customer_window.setup_topframe">
+<span class="sig-name descname"><span class="pre">setup_topframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/customerWindow.html#customer_window.setup_topframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.customerWindow.customer_window.setup_topframe" title="Link to this definition">¶</a></dt>
+<dd><p>function to setup the parameter for the top frame of the customer window that has the sign out button and the logo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.customerWindow.customer_window.setup_widget">
+<span class="sig-name descname"><span class="pre">setup_widget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/customerWindow.html#customer_window.setup_widget"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.customerWindow.customer_window.setup_widget" title="Link to this definition">¶</a></dt>
+<dd><p>function to set up the layout of the customer window.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.customerWindow.customer_window.table_clicked">
+<span class="sig-name descname"><span class="pre">table_clicked</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/customerWindow.html#customer_window.table_clicked"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.customerWindow.customer_window.table_clicked" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-front_end.customer_interface.invoiceWindow">
+<span id="front-end-customer-interface-invoicewindow-module"></span><h2>front_end.customer_interface.invoiceWindow module<a class="headerlink" href="#module-front_end.customer_interface.invoiceWindow" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="front_end.customer_interface.invoiceWindow.invoice_window">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">front_end.customer_interface.invoiceWindow.</span></span><span class="sig-name descname"><span class="pre">invoice_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">customer_window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_days</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ins</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/invoiceWindow.html#invoice_window"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.invoiceWindow.invoice_window" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<p>A class that makes a invoice window to show the information for the reservation that was made when make was pressed.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.invoiceWindow.invoice_window.clicked_home">
+<span class="sig-name descname"><span class="pre">clicked_home</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/invoiceWindow.html#invoice_window.clicked_home"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.invoiceWindow.invoice_window.clicked_home" title="Link to this definition">¶</a></dt>
+<dd><p>function for when home button is clicked to go back to the start window.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.invoiceWindow.invoice_window.setup_form">
+<span class="sig-name descname"><span class="pre">setup_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/invoiceWindow.html#invoice_window.setup_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.invoiceWindow.invoice_window.setup_form" title="Link to this definition">¶</a></dt>
+<dd><p>function to set up parameters for the form, makes the widgets, and adds them to the form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.invoiceWindow.invoice_window.setup_main">
+<span class="sig-name descname"><span class="pre">setup_main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/invoiceWindow.html#invoice_window.setup_main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.invoiceWindow.invoice_window.setup_main" title="Link to this definition">¶</a></dt>
+<dd><p>fucntion to set up the main layout.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-front_end.customer_interface.rentWindow">
+<span id="front-end-customer-interface-rentwindow-module"></span><h2>front_end.customer_interface.rentWindow module<a class="headerlink" href="#module-front_end.customer_interface.rentWindow" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="front_end.customer_interface.rentWindow.rent_window">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">front_end.customer_interface.rentWindow.</span></span><span class="sig-name descname"><span class="pre">rent_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">customer_window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_days</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/rentWindow.html#rent_window"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.rentWindow.rent_window" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<p>A Class to make the rent window after selecting a car.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.rentWindow.rent_window.back_clicked">
+<span class="sig-name descname"><span class="pre">back_clicked</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/rentWindow.html#rent_window.back_clicked"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.rentWindow.rent_window.back_clicked" title="Link to this definition">¶</a></dt>
+<dd><p>function for when the back button is clicked to got back.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.rentWindow.rent_window.button_frame">
+<span class="sig-name descname"><span class="pre">button_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/rentWindow.html#rent_window.button_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.rentWindow.rent_window.button_frame" title="Link to this definition">¶</a></dt>
+<dd><p>function to setup the parameters for the back and make button.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.rentWindow.rent_window.make_clicked">
+<span class="sig-name descname"><span class="pre">make_clicked</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/rentWindow.html#rent_window.make_clicked"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.rentWindow.rent_window.make_clicked" title="Link to this definition">¶</a></dt>
+<dd><p>function for when make button is clicked then sends the request to the backend and makes a Reservation then goes to the invoice window.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.rentWindow.rent_window.setup_form">
+<span class="sig-name descname"><span class="pre">setup_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/rentWindow.html#rent_window.setup_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.rentWindow.rent_window.setup_form" title="Link to this definition">¶</a></dt>
+<dd><p>funtion to set up the parameters of the form widget, makes the widgets to go in the form, and adds them to the form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.rentWindow.rent_window.setup_main">
+<span class="sig-name descname"><span class="pre">setup_main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/rentWindow.html#rent_window.setup_main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.rentWindow.rent_window.setup_main" title="Link to this definition">¶</a></dt>
+<dd><p>function to setup a main the main layout.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-front_end.customer_interface.reservationHistory">
+<span id="front-end-customer-interface-reservationhistory-module"></span><h2>front_end.customer_interface.reservationHistory module<a class="headerlink" href="#module-front_end.customer_interface.reservationHistory" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="front_end.customer_interface.reservationHistory.reservations_history">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">front_end.customer_interface.reservationHistory.</span></span><span class="sig-name descname"><span class="pre">reservations_history</span></span><a class="reference internal" href="_modules/front_end/customer_interface/reservationHistory.html#reservations_history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.reservationHistory.reservations_history" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.reservationHistory.reservations_history.clear_layout">
+<span class="sig-name descname"><span class="pre">clear_layout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layout</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/reservationHistory.html#reservations_history.clear_layout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.reservationHistory.reservations_history.clear_layout" title="Link to this definition">¶</a></dt>
+<dd><p>Remove all widgets from a given layout.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.reservationHistory.reservations_history.setup_table">
+<span class="sig-name descname"><span class="pre">setup_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_ID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/reservationHistory.html#reservations_history.setup_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.reservationHistory.reservations_history.setup_table" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-front_end.customer_interface.searchBar">
+<span id="front-end-customer-interface-searchbar-module"></span><h2>front_end.customer_interface.searchBar module<a class="headerlink" href="#module-front_end.customer_interface.searchBar" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="front_end.customer_interface.searchBar.date_picker">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">front_end.customer_interface.searchBar.</span></span><span class="sig-name descname"><span class="pre">date_picker</span></span><a class="reference internal" href="_modules/front_end/customer_interface/searchBar.html#date_picker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.searchBar.date_picker" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<p>A class to make the dropdown calendar to pick the dates.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.searchBar.date_picker.update_end_date_minimum">
+<span class="sig-name descname"><span class="pre">update_end_date_minimum</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/searchBar.html#date_picker.update_end_date_minimum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.searchBar.date_picker.update_end_date_minimum" title="Link to this definition">¶</a></dt>
+<dd><p>Update the minimum date of the end date selector.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="front_end.customer_interface.searchBar.search_bar">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">front_end.customer_interface.searchBar.</span></span><span class="sig-name descname"><span class="pre">search_bar</span></span><a class="reference internal" href="_modules/front_end/customer_interface/searchBar.html#search_bar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.searchBar.search_bar" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<p>A class that makes a search widget to search the data base for a list of cars from a spescific date range and type.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.searchBar.search_bar.setup_button">
+<span class="sig-name descname"><span class="pre">setup_button</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/searchBar.html#search_bar.setup_button"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.searchBar.search_bar.setup_button" title="Link to this definition">¶</a></dt>
+<dd><p>function to set the parameters for the search button.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.searchBar.search_bar.setup_search">
+<span class="sig-name descname"><span class="pre">setup_search</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/searchBar.html#search_bar.setup_search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.searchBar.search_bar.setup_search" title="Link to this definition">¶</a></dt>
+<dd><p>function to call all setup functions and add widgets to layout.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.searchBar.search_bar.setup_typebox">
+<span class="sig-name descname"><span class="pre">setup_typebox</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/searchBar.html#search_bar.setup_typebox"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.searchBar.search_bar.setup_typebox" title="Link to this definition">¶</a></dt>
+<dd><p>function to set up the parameters for type combo box.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-front_end.customer_interface.sideBar">
+<span id="front-end-customer-interface-sidebar-module"></span><h2>front_end.customer_interface.sideBar module<a class="headerlink" href="#module-front_end.customer_interface.sideBar" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="front_end.customer_interface.sideBar.side_bar">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">front_end.customer_interface.sideBar.</span></span><span class="sig-name descname"><span class="pre">side_bar</span></span><a class="reference internal" href="_modules/front_end/customer_interface/sideBar.html#side_bar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.sideBar.side_bar" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.sideBar.side_bar.hiden_bar_setup">
+<span class="sig-name descname"><span class="pre">hiden_bar_setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/sideBar.html#side_bar.hiden_bar_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.sideBar.side_bar.hiden_bar_setup" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.sideBar.side_bar.menu_setup">
+<span class="sig-name descname"><span class="pre">menu_setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/sideBar.html#side_bar.menu_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.sideBar.side_bar.menu_setup" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.sideBar.side_bar.setup_logo">
+<span class="sig-name descname"><span class="pre">setup_logo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/sideBar.html#side_bar.setup_logo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.sideBar.side_bar.setup_logo" title="Link to this definition">¶</a></dt>
+<dd><p>function to set up the logo for the customer window.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.sideBar.side_bar.setup_logo_2">
+<span class="sig-name descname"><span class="pre">setup_logo_2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/sideBar.html#side_bar.setup_logo_2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.sideBar.side_bar.setup_logo_2" title="Link to this definition">¶</a></dt>
+<dd><p>function to set up the logo for the customer window.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.sideBar.side_bar.setup_main_layout">
+<span class="sig-name descname"><span class="pre">setup_main_layout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/sideBar.html#side_bar.setup_main_layout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.sideBar.side_bar.setup_main_layout" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="front_end.customer_interface.sideBar.side_bar.shown_bar_setup">
+<span class="sig-name descname"><span class="pre">shown_bar_setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/sideBar.html#side_bar.shown_bar_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.sideBar.side_bar.shown_bar_setup" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-front_end.customer_interface.test">
+<span id="front-end-customer-interface-test-module"></span><h2>front_end.customer_interface.test module<a class="headerlink" href="#module-front_end.customer_interface.test" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="front_end.customer_interface.test.searchCar">
+<span class="sig-prename descclassname"><span class="pre">front_end.customer_interface.test.</span></span><span class="sig-name descname"><span class="pre">searchCar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/front_end/customer_interface/test.html#searchCar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#front_end.customer_interface.test.searchCar" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-front_end.customer_interface">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-front_end.customer_interface" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">J.E.N.I Car Rental App</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="database.html">database package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="front_end.html">front_end package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="front_end.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="front_end.admin_interface.html">front_end.admin_interface package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="front_end.config.html">front_end.config package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">front_end.customer_interface package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="front_end.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="front_end.html#module-front_end.adminLogin">front_end.adminLogin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="front_end.html#module-front_end.adminSignup">front_end.adminSignup module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="front_end.html#module-front_end.api">front_end.api module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="front_end.html#module-front_end.currentUser">front_end.currentUser module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="front_end.html#module-front_end.customerLogin">front_end.customerLogin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="front_end.html#module-front_end.customerSignup">front_end.customerSignup module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="front_end.html#module-front_end.login">front_end.login module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="front_end.html#module-front_end.mainWindow">front_end.mainWindow module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="front_end.html#module-front_end">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="back_end.html">back_end package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">modules</a><ul>
+  <li><a href="front_end.html">front_end package</a><ul>
+      <li>Previous: <a href="front_end.config.html" title="previous chapter">front_end.config package</a></li>
+      <li>Next: <a href="back_end.html" title="next chapter">back_end package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Nima Jafari.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/front_end.customer_interface.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

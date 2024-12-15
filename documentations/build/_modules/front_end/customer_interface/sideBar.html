@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>front_end.customer_interface.sideBar &#8212; J.E.N.I Car Rental App  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for front_end.customer_interface.sideBar</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">PyQt5.QtCore</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtGui</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtWidgets</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">..config.font</span> <span class="kn">import</span> <span class="n">font</span>
+
+
+<div class="viewcode-block" id="side_bar">
+<a class="viewcode-back" href="../../../front_end.customer_interface.html#front_end.customer_interface.sideBar.side_bar">[docs]</a>
+<span class="k">class</span> <span class="nc">side_bar</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_style</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;color: black; background-color: #D3D3D3; border: none; outline: none;&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span>
+            <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="p">)</span>  <span class="c1"># Left, Top, Right, Bottom margins</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_layout</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Spacing between widgets</span>
+
+        <span class="c1"># setup font</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_font</span> <span class="o">=</span> <span class="n">font</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">font</span> <span class="o">=</span> <span class="n">QFont</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_font</span><span class="o">.</span><span class="n">font_family</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">hiden_bar_setup</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shown_bar_setup</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu_setup</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_main_layout</span><span class="p">()</span>
+
+<div class="viewcode-block" id="side_bar.hiden_bar_setup">
+<a class="viewcode-back" href="../../../front_end.customer_interface.html#front_end.customer_interface.sideBar.side_bar.hiden_bar_setup">[docs]</a>
+    <span class="k">def</span> <span class="nf">hiden_bar_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hiden_bar</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hiden_bar</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hiden_bar_layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hiden_bar</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hiden_bar</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">70</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;background-color: #D3D3D3;&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_home_button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_home_button</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_style</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">home_icon</span> <span class="o">=</span> <span class="n">QIcon</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_dir</span><span class="p">),</span> <span class="s2">&quot;icons/homeicon.png&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_home_button</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">home_icon</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_home_button</span><span class="o">.</span><span class="n">setIconSize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h_home_button</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_home_button</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_table_button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_table_button</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_style</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table_icon</span> <span class="o">=</span> <span class="n">QIcon</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_dir</span><span class="p">),</span> <span class="s2">&quot;icons/tableicon.png&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_table_button</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table_icon</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_table_button</span><span class="o">.</span><span class="n">setIconSize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h_table_button</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_table_button</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+
+        <span class="c1"># setup logo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_dir</span><span class="p">),</span> <span class="s2">&quot;logo/HalfLogo.png&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span> <span class="o">=</span> <span class="n">QPixmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logo_dir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_logo</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">hiden_bar_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hiden_bar_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h_home_button</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hiden_bar_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h_table_button</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hiden_bar_layout</span><span class="o">.</span><span class="n">addStretch</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="side_bar.shown_bar_setup">
+<a class="viewcode-back" href="../../../front_end.customer_interface.html#front_end.customer_interface.sideBar.side_bar.shown_bar_setup">[docs]</a>
+    <span class="k">def</span> <span class="nf">shown_bar_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shown_bar</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shown_bar</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shown_bar_layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shown_bar</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shown_bar</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;background-color: #D3D3D3;&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">s_home_button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Home&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s_home_button</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s_home_button</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_style</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s_home_button</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">home_icon</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s_home_button</span><span class="o">.</span><span class="n">setIconSize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">s_home_button</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s_home_button</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">110</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">s_table_button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Table&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s_table_button</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s_table_button</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_style</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s_table_button</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table_icon</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s_table_button</span><span class="o">.</span><span class="n">setIconSize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">s_table_button</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s_table_button</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">115</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+
+        <span class="c1"># setup logo 2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo_2</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jeni_label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;J.E.N.I&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jeni_label</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jeni_label</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_logo_2</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo_w_text</span> <span class="o">=</span> <span class="n">QFrame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo_w_text_layout</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logo_w_text</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo_w_text_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logo_2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo_w_text_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jeni_label</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">shown_bar_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logo_w_text</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignLeft</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shown_bar_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">s_home_button</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignLeft</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shown_bar_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">s_table_button</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignLeft</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shown_bar_layout</span><span class="o">.</span><span class="n">addStretch</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="side_bar.menu_setup">
+<a class="viewcode-back" href="../../../front_end.customer_interface.html#front_end.customer_interface.sideBar.side_bar.menu_setup">[docs]</a>
+    <span class="k">def</span> <span class="nf">menu_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu_button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu_button</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
+            <span class="s2">&quot;background-color: white; border: none; outline: none;&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu_icon</span> <span class="o">=</span> <span class="n">QIcon</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_dir</span><span class="p">),</span> <span class="s2">&quot;icons/menuicon.png&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu_button</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu_icon</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu_button</span><span class="o">.</span><span class="n">setIconSize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu_button</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu_button</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="side_bar.setup_logo">
+<a class="viewcode-back" href="../../../front_end.customer_interface.html#front_end.customer_interface.sideBar.side_bar.setup_logo">[docs]</a>
+    <span class="k">def</span> <span class="nf">setup_logo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># set up logo img</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        function to set up the logo for the customer window.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaled_pixmap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span>
+            <span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="n">aspectRatioMode</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>  <span class="c1"># width, height</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scaled_pixmap</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;border: none;&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="side_bar.setup_logo_2">
+<a class="viewcode-back" href="../../../front_end.customer_interface.html#front_end.customer_interface.sideBar.side_bar.setup_logo_2">[docs]</a>
+    <span class="k">def</span> <span class="nf">setup_logo_2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># set up logo img</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        function to set up the logo for the customer window.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo_2</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo_2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaled_pixmap_2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span>
+            <span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="n">aspectRatioMode</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>  <span class="c1"># width, height</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo_2</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scaled_pixmap</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo_2</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;border: none;&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="side_bar.setup_main_layout">
+<a class="viewcode-back" href="../../../front_end.customer_interface.html#front_end.customer_interface.sideBar.side_bar.setup_main_layout">[docs]</a>
+    <span class="k">def</span> <span class="nf">setup_main_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hiden_bar</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shown_bar</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+
+    <span class="kn">from</span> <span class="nn">..config.screenConfig</span> <span class="kn">import</span> <span class="n">screen_config</span>
+
+    <span class="n">screen_config</span> <span class="o">=</span> <span class="n">screen_config</span><span class="p">()</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="n">side_bar</span><span class="p">()</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">())</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">J.E.N.I Car Rental App</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Nima Jafari.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

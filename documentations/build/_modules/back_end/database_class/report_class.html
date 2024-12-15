@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>back_end.database_class.report_class &#8212; J.E.N.I Car Rental App  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for back_end.database_class.report_class</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="report">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.report_class.report">[docs]</a>
+<span></span><span class="k">class</span> <span class="nc">report</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class to represent a report for a car rental, detailing damages, gas amount, </span>
+<span class="sd">    and associated car and reservation IDs.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    report_id : int or None</span>
+<span class="sd">        The unique identifier for the report (assigned later).</span>
+<span class="sd">    damages : str</span>
+<span class="sd">        Description of any damages to the car.</span>
+<span class="sd">    gas_amount : float</span>
+<span class="sd">        The amount of gas remaining in the car.</span>
+<span class="sd">    car_id : int</span>
+<span class="sd">        The ID of the car associated with this report.</span>
+<span class="sd">    reservation_id : int</span>
+<span class="sd">        The ID of the reservation associated with this report.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">damages</span><span class="p">,</span> <span class="n">gas_amount</span><span class="p">,</span> <span class="n">car_id</span><span class="p">,</span> <span class="n">reservation_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes a report instance with details of damages, gas amount, car ID, and reservation ID.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        damages : str</span>
+<span class="sd">            Description of any damages to the car.</span>
+<span class="sd">        gas_amount : float</span>
+<span class="sd">            The amount of gas remaining in the car.</span>
+<span class="sd">        car_id : int</span>
+<span class="sd">            The ID of the car associated with this report.</span>
+<span class="sd">        reservation_id : int</span>
+<span class="sd">            The ID of the reservation associated with this report.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">report_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">damages</span> <span class="o">=</span> <span class="n">damages</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gas_amount</span> <span class="o">=</span> <span class="n">gas_amount</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car_id</span> <span class="o">=</span> <span class="n">car_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reservation_id</span> <span class="o">=</span> <span class="n">reservation_id</span> 
+        
+<div class="viewcode-block" id="report.get_car_id">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.report_class.report.get_car_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_car_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the ID of the car associated with this report.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">car_id</span></div>
+
+        
+<div class="viewcode-block" id="report.get_damage">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.report_class.report.get_damage">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_damage</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a description of the damages to the car.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">damages</span></div>
+
+            
+<div class="viewcode-block" id="report.get_gas_amount">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.report_class.report.get_gas_amount">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_gas_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the amount of gas remaining in the car.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gas_amount</span></div>
+
+    
+<div class="viewcode-block" id="report.get_reservation_id">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.report_class.report.get_reservation_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_reservation_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the ID of the reservation associated with this report.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reservation_id</span></div>
+
+    
+<div class="viewcode-block" id="report.get_report_id">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.report_class.report.get_report_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_report_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the unique identifier for the report, if set.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_id</span></div>
+
+        
+<div class="viewcode-block" id="report.set_report_id">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.report_class.report.set_report_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_report_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">report_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the unique identifier for the report.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        report_id : int</span>
+<span class="sd">            The unique identifier to assign to this report.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">report_id</span> <span class="o">=</span> <span class="n">report_id</span></div>
+
+    
+    
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;Report ID: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">report_id</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">J.E.N.I Car Rental App</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Nima Jafari.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

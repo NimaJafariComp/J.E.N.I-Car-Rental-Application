@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>front_end.admin_interface.deleteTile &#8212; J.E.N.I Car Rental App  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for front_end.admin_interface.deleteTile</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtWidgets</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtCore</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtGui</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">..config.font</span> <span class="kn">import</span> <span class="n">font</span>
+
+<div class="viewcode-block" id="delete_tile">
+<a class="viewcode-back" href="../../../front_end.admin_interface.html#front_end.admin_interface.deleteTile.delete_tile">[docs]</a>
+<span class="k">class</span> <span class="nc">delete_tile</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span> 
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">car</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">num_days</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># knows customer window</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">customer_window</span> <span class="o">=</span> <span class="n">window</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_days</span> <span class="o">=</span> <span class="n">num_days</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_date</span> <span class="o">=</span> <span class="n">start_date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end_date</span> <span class="o">=</span> <span class="n">end_date</span>
+
+        <span class="c1"># variables that need imput</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car</span> <span class="o">=</span> <span class="n">car</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">car</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">car</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">car</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mpg</span> <span class="o">=</span> <span class="n">car</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">car</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">car</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">img_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s2">&quot;car_img/corolla.jpg&quot;</span><span class="p">)</span>
+
+        <span class="c1"># setup font</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_font</span> <span class="o">=</span> <span class="n">font</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">font</span> <span class="o">=</span> <span class="n">QFont</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_font</span><span class="o">.</span><span class="n">font_family</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car_tile_layout</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+       
+        <span class="bp">self</span><span class="o">.</span><span class="n">img</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span> <span class="o">=</span> <span class="n">QPixmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">middle</span> <span class="o">=</span> <span class="n">QFrame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">middle_layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">middle</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">QFrame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right_layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">middle_setup</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right_setup</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">img_setup</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tile_setup</span><span class="p">()</span>
+       
+
+<div class="viewcode-block" id="delete_tile.middle_setup">
+<a class="viewcode-back" href="../../../front_end.admin_interface.html#front_end.admin_interface.deleteTile.delete_tile.middle_setup">[docs]</a>
+    <span class="k">def</span> <span class="nf">middle_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">middle</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">middle</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;border : 1px solid lightgrey;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name_label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name_label</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;border: none; font-size: 10pt; font-weight: bold;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">year_label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;year: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">year_label</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;border: none;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mpg_label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;MPG: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mpg</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mpg_label</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;border: none;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Type: &quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_label</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;border: none;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">middle_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name_label</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">middle_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year_label</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">middle_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mpg_label</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">middle_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_label</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="delete_tile.right_setup">
+<a class="viewcode-back" href="../../../front_end.admin_interface.html#front_end.admin_interface.deleteTile.delete_tile.right_setup">[docs]</a>
+    <span class="k">def</span> <span class="nf">right_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;border : 1px solid lightgrey; border-bottom-right-radius: 15px; border-top-right-radius: 15px&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="delete_tile.tile_setup">
+<a class="viewcode-back" href="../../../front_end.admin_interface.html#front_end.admin_interface.deleteTile.delete_tile.tile_setup">[docs]</a>
+    <span class="k">def</span> <span class="nf">tile_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car_tile_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car_tile_layout</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car_tile_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car_tile_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">middle</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car_tile_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">)</span></div>
+
+        
+
+<div class="viewcode-block" id="delete_tile.img_setup">
+<a class="viewcode-back" href="../../../front_end.admin_interface.html#front_end.admin_interface.deleteTile.delete_tile.img_setup">[docs]</a>
+    <span class="k">def</span> <span class="nf">img_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Set the size of the QLabel to match the QFrame</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+    
+        <span class="c1"># Scale the image to fully fill the QLabel, keeping aspect ratio</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaled_pixmap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">Qt</span><span class="o">.</span><span class="n">KeepAspectRatioByExpanding</span><span class="p">,</span> <span class="n">Qt</span><span class="o">.</span><span class="n">SmoothTransformation</span><span class="p">)</span>
+    
+        <span class="c1"># Create a QPixmap with rounded corners only on the left side</span>
+        <span class="n">rounded_pixmap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_rounded_mask</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scaled_pixmap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">size</span><span class="p">(),</span> <span class="mi">15</span><span class="p">)</span>  <span class="c1"># Adjust the radius here to match the QFrame</span>
+    
+        <span class="c1"># Set the QPixmap with rounded corners to the QLabel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">rounded_pixmap</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;border: 1px solid lightgrey; border-bottom-left-radius: 15px; border-top-left-radius: 15px;&quot;</span><span class="p">)</span>   
+        <span class="bp">self</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="delete_tile.apply_rounded_mask">
+<a class="viewcode-back" href="../../../front_end.admin_interface.html#front_end.admin_interface.deleteTile.delete_tile.apply_rounded_mask">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_rounded_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pixmap</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Applies a mask with rounded corners only on the left side and ensures the image fills the QLabel.&quot;&quot;&quot;</span>
+        <span class="c1"># Create a new transparent QPixmap with the same size as QLabel</span>
+        <span class="n">rounded_pixmap</span> <span class="o">=</span> <span class="n">QPixmap</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">rounded_pixmap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">transparent</span><span class="p">)</span>
+    
+        <span class="c1"># Set up the painter for drawing the rounded image</span>
+        <span class="n">painter</span> <span class="o">=</span> <span class="n">QPainter</span><span class="p">(</span><span class="n">rounded_pixmap</span><span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setRenderHint</span><span class="p">(</span><span class="n">QPainter</span><span class="o">.</span><span class="n">Antialiasing</span><span class="p">)</span>
+    
+        <span class="c1"># Create a path for rounding only the top-left and bottom-left corners</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">QPainterPath</span><span class="p">()</span>
+    
+        <span class="c1"># Top-left corner</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">arcTo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">radius</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">radius</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+    
+        <span class="c1"># Left side</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">lineTo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">radius</span><span class="p">)</span>
+    
+        <span class="c1"># Bottom-left corner</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">arcTo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">radius</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">radius</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">radius</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+    
+        <span class="c1"># Bottom-right and top-right are sharp</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">lineTo</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="n">size</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">lineTo</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">lineTo</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    
+        <span class="c1"># Set the clipping path to ensure only the left corners are rounded</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setClipPath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    
+        <span class="c1"># Center the image in the QLabel</span>
+        <span class="n">x_offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="n">pixmap</span><span class="o">.</span><span class="n">width</span><span class="p">())</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">y_offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">pixmap</span><span class="o">.</span><span class="n">height</span><span class="p">())</span> <span class="o">//</span> <span class="mi">2</span>
+    
+        <span class="c1"># Draw the pixmap scaled to the QLabel&#39;s size</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawPixmap</span><span class="p">(</span><span class="n">x_offset</span><span class="p">,</span> <span class="n">y_offset</span><span class="p">,</span> <span class="n">pixmap</span><span class="p">)</span>
+    
+        <span class="n">painter</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">rounded_pixmap</span></div>
+</div>
+
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="kn">from</span> <span class="nn">..config.screenConfig</span> <span class="kn">import</span> <span class="n">screen_config</span>
+    <span class="n">screen_config</span> <span class="o">=</span> <span class="n">screen_config</span><span class="p">()</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># window = delete_tile(list)</span>
+    <span class="c1"># window.show()</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">())</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">J.E.N.I Car Rental App</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Nima Jafari.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

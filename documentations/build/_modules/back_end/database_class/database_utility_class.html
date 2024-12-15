@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>back_end.database_class.database_utility_class &#8212; J.E.N.I Car Rental App  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for back_end.database_class.database_utility_class</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">mysql.connector</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="k">global</span> <span class="n">mydb</span><span class="p">,</span> <span class="n">mycursor</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Date of Creation: October 1, 2024</span>
+<span class="sd">Author: Elijah Sagaran and Nima Jafari</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="initialize_connection">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.initialize_connection">[docs]</a>
+<span class="k">def</span> <span class="nf">initialize_connection</span><span class="p">(</span><span class="n">my_host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">my_port</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">upassword</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initializes the connetion to database, must be called in application startup</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    my_host: str</span>
+<span class="sd">        The hosting server for the AWS database</span>
+<span class="sd">    my_port: int</span>
+<span class="sd">        Port being used to connect MySQL and AWS</span>
+<span class="sd">    username: str</span>
+<span class="sd">        AWS Account username</span>
+<span class="sd">    password: str</span>
+<span class="sd">        AWS Account password    </span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">    </span>
+<span class="sd">    Author: Elijah Sagaran, 10/1</span>
+<span class="sd">    Updates:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">mycursor</span><span class="p">,</span> <span class="n">mydb</span>
+    <span class="n">mydb</span> <span class="o">=</span> <span class="n">mysql</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span> <span class="o">=</span> <span class="n">my_host</span><span class="p">,</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">username</span><span class="p">,</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="n">upassword</span><span class="p">,</span>
+        <span class="n">port</span> <span class="o">=</span> <span class="n">my_port</span><span class="p">,</span>
+        <span class="n">database</span> <span class="o">=</span> <span class="s2">&quot;CARAPP&quot;</span>
+    <span class="p">)</span>
+    
+    <span class="n">mycursor</span> <span class="o">=</span> <span class="n">mydb</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="add_car">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.add_car">[docs]</a>
+<span class="k">def</span> <span class="nf">add_car</span><span class="p">(</span><span class="n">vin</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mileage</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mpg</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">price</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">license_plate</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">car_year</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">car_model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">car_make</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">car_color</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">car_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">sql_insert_vehicle</span> <span class="o">=</span> <span class="s2">&quot;insert into Vehicles (VIN, Mileage, MPG, Price, LicensePlate, CarYear, Model, Make, Color, CarType) values (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">)&quot;</span>
+    <span class="n">vehicle_value</span> <span class="o">=</span> <span class="p">(</span><span class="n">vin</span><span class="p">,</span> <span class="n">mileage</span><span class="p">,</span> <span class="n">mpg</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">license_plate</span><span class="p">,</span> <span class="n">car_year</span><span class="p">,</span> <span class="n">car_model</span><span class="p">,</span> <span class="n">car_make</span><span class="p">,</span> <span class="n">car_color</span><span class="p">,</span> <span class="n">car_type</span><span class="p">)</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_insert_vehicle</span><span class="p">,</span> <span class="n">vehicle_value</span><span class="p">)</span>
+    <span class="n">mydb</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to add a singular car to database</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    vin: str</span>
+<span class="sd">        The unique VIN number of the vehicle to be added.</span>
+<span class="sd">    mileage: int</span>
+<span class="sd">        The current mileage of the car.</span>
+<span class="sd">    mpg: int</span>
+<span class="sd">        The current miles per gallon of the car.</span>
+<span class="sd">    price: double</span>
+<span class="sd">        The price that is assigned for the car. Unit is $/day.</span>
+<span class="sd">    license_plate: str</span>
+<span class="sd">        The unique license plate of the vehicle to be added </span>
+<span class="sd">    car_year: str</span>
+<span class="sd">        The year of the model of the vehicle</span>
+<span class="sd">    car_model: str</span>
+<span class="sd">        The model of the car. i.e. Corolla, Civic, and Prius</span>
+<span class="sd">    car_make: str</span>
+<span class="sd">        The brand of the car. i.e. Toyota and Honda </span>
+<span class="sd">    car_color: str</span>
+<span class="sd">        The color of the car. i.e. Red, Blue, and Yellow</span>
+<span class="sd">    car_type: str</span>
+<span class="sd">        The classification of the car. i.e. Sedan, SUV, and Truck</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">    </span>
+<span class="sd">    Author: Elijah Sagaran, 10/1</span>
+<span class="sd">    Updates:</span>
+<span class="sd">        Nima Jafari, 10/2</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="get_car_id">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.get_car_id">[docs]</a>
+<span class="k">def</span> <span class="nf">get_car_id</span><span class="p">(</span><span class="n">vin</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">select_prompt</span> <span class="o">=</span> <span class="s2">&quot;select CarID from Vehicles where VIN = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">select_prompt</span><span class="p">,</span> <span class="p">[</span><span class="n">vin</span><span class="p">])</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to get assigned CarID number by database</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    vin: str</span>
+<span class="sd">        The unique VIN number of the vehicle</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        The car ID assigned by the database</span>
+<span class="sd">    </span>
+<span class="sd">    Author: Elijah Sagaran, 10/1</span>
+<span class="sd">    Updates:</span>
+<span class="sd">        Nima Jafari, 10/2</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="get_car_info">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.get_car_info">[docs]</a>
+<span class="k">def</span> <span class="nf">get_car_info</span><span class="p">(</span><span class="n">car_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to get a car&#39;s information from database through car ID</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    car_id: int</span>
+<span class="sd">        The car ID of the car</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple:</span>
+<span class="sd">        contains the car&#39;s information</span>
+<span class="sd">    </span>
+<span class="sd">    Author: Elijah Sagaran, 10/1</span>
+<span class="sd">    Updates:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">select_prompt</span> <span class="o">=</span> <span class="s2">&quot;select * from Vehicles where CarID = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">select_prompt</span><span class="p">,</span> <span class="p">[</span><span class="n">car_id</span><span class="p">])</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="change_mileage">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.change_mileage">[docs]</a>
+<span class="k">def</span> <span class="nf">change_mileage</span><span class="p">(</span><span class="n">car_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">new_mileage</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to change the value at column Mileage for the car with id car_id</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    car_id: int</span>
+<span class="sd">        The car ID of the car</span>
+<span class="sd">    new_mileage: int</span>
+<span class="sd">        The new value of mileage</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">    </span>
+<span class="sd">    Author: Elijah Sagaran, 10/2</span>
+<span class="sd">    Updates:</span>
+<span class="sd">        Nima Jafari, 10/2</span>
+<span class="sd">        Elijah Sagaran, 10/7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sql_update_mileage</span> <span class="o">=</span> <span class="s2">&quot;update Vehicles set Mileage = </span><span class="si">%s</span><span class="s2"> </span><span class="se">\</span>
+<span class="s2">                        where CarId = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">update_value</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_mileage</span><span class="p">,</span> <span class="n">car_id</span><span class="p">)</span>
+    
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_update_mileage</span><span class="p">,</span> <span class="n">update_value</span><span class="p">)</span>
+    <span class="n">mydb</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="get_inventory">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.get_inventory">[docs]</a>
+<span class="k">def</span> <span class="nf">get_inventory</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Queries all rows from Vehicles table in database</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    None</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list[tuple]:</span>
+<span class="sd">        each tuple contains all the information about a car that is stored in the database</span>
+<span class="sd">    </span>
+<span class="sd">    Author: Elijah Sagaran, 10/7</span>
+<span class="sd">    Updates:</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">inventory</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="n">sql_select_car</span> <span class="o">=</span> <span class="s2">&quot;select CarID, VIN, Mileage, MPG, Price, LicensePlate, CarYear, Model, Make, </span><span class="se">\</span>
+<span class="s2">                        Color, CarType from Vehicles&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_select_car</span><span class="p">)</span>
+    <span class="n">myresult</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">myresult</span><span class="p">:</span>
+        <span class="n">inventory</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">inventory</span></div>
+
+
+<div class="viewcode-block" id="get_active_inventory">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.get_active_inventory">[docs]</a>
+<span class="k">def</span> <span class="nf">get_active_inventory</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Queries all rows that is not retired from Vehicles table in database</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    None</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list[tuple]:</span>
+<span class="sd">        each tuple contains all the information about a car that is stored in the database</span>
+<span class="sd">    </span>
+<span class="sd">    Author: Elijah Sagaran, 10/7</span>
+<span class="sd">    Updates:</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">inventory</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select * from Vehicles where IsActive = 1&quot;</span><span class="p">)</span>
+    <span class="n">myresult</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">myresult</span><span class="p">:</span>
+        <span class="n">inventory</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">inventory</span></div>
+
+
+<div class="viewcode-block" id="deactivate_car">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.deactivate_car">[docs]</a>
+<span class="k">def</span> <span class="nf">deactivate_car</span><span class="p">(</span><span class="n">car_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sets the IsActive field in databse to 0, making the car inactive</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    car_id: int</span>
+<span class="sd">        The ID of the car</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">    </span>
+<span class="sd">    Author: Elijah Sagaran, 10/7</span>
+<span class="sd">    Updates:</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sql_retire_car</span> <span class="o">=</span> <span class="s2">&quot;update Vehicles set IsActive = </span><span class="si">%s</span><span class="s2"> where CarID = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">car_id</span><span class="p">)</span>
+    
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_retire_car</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="n">mydb</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></div>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"># Function: insert_report(damages, gas_amount, car_id, reservation_id)</span>
+<span class="sd"># Input: damages, a string</span>
+<span class="sd">#        gas_amount, an integer</span>
+<span class="sd">#        car_id, an integer</span>
+<span class="sd">#        reservation_id, an integer</span>
+<span class="sd"># Output: an integer</span>
+<span class="sd"># Description: inserts a new row into database in table Reports and </span>
+<span class="sd">#               returns the assigned report_id by database</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="insert_report">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.insert_report">[docs]</a>
+<span class="k">def</span> <span class="nf">insert_report</span><span class="p">(</span><span class="n">damages</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">gas_amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">car_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">reservation_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">sql_insert_report</span> <span class="o">=</span> <span class="s2">&quot;insert into Reports (Damages, GasAmount, Vehicle, ReservationID) </span><span class="se">\</span>
+<span class="s2">                            values (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">)&quot;</span>
+    <span class="n">report_values</span> <span class="o">=</span> <span class="p">(</span><span class="n">damages</span><span class="p">,</span> <span class="n">gas_amount</span><span class="p">,</span> <span class="n">car_id</span><span class="p">,</span> <span class="n">reservation_id</span><span class="p">)</span>
+    
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_insert_report</span><span class="p">,</span> <span class="n">report_values</span><span class="p">)</span>
+    <span class="n">mydb</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select last_insert_id()&quot;</span><span class="p">)</span>
+    
+    <span class="n">myresult</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">myresult</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">get_reports</span><span class="p">(</span><span class="n">car_id</span><span class="p">):</span>
+    <span class="n">reports</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sql_select_reports</span> <span class="o">=</span> <span class="s2">&quot;select * from Reports where Vehicle = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_select_reports</span><span class="p">,</span> <span class="p">[</span><span class="n">car_id</span><span class="p">])</span>
+    
+    <span class="n">myresult</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">myresult</span><span class="p">:</span>
+        <span class="n">reports</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">reports</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"># update an existing reservation by ReservationID</span>
+<span class="sd"># Input: ReservationID, an integer - ID of the reservation to update</span>
+<span class="sd">#        StartDate, EndDate, Insurance, CustomerID, Vehicle, optional values to update</span>
+<span class="sd"># Output: None        </span>
+<span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="update_reservation">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.update_reservation">[docs]</a>
+<span class="k">def</span> <span class="nf">update_reservation</span><span class="p">(</span><span class="n">reservation_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">insurance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">customer_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">uVehicle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">canceled</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">total_price</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">update_query</span> <span class="o">=</span> <span class="s2">&quot;UPDATE Reservations SET &quot;</span>
+    <span class="n">update_values</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">start_date</span><span class="p">:</span>
+        <span class="n">update_query</span> <span class="o">+=</span> <span class="s2">&quot;StartDate = </span><span class="si">%s</span><span class="s2">, &quot;</span>
+        <span class="n">update_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start_date</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">end_date</span><span class="p">:</span>
+        <span class="n">update_query</span> <span class="o">+=</span> <span class="s2">&quot;EndDate = </span><span class="si">%s</span><span class="s2">, &quot;</span>
+        <span class="n">update_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">end_date</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">insurance</span><span class="p">:</span>
+        <span class="n">update_query</span> <span class="o">+=</span> <span class="s2">&quot;Insurance = </span><span class="si">%s</span><span class="s2">, &quot;</span>
+        <span class="n">update_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">insurance</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">customer_id</span><span class="p">:</span>
+        <span class="n">update_query</span> <span class="o">+=</span> <span class="s2">&quot;CustomerID = </span><span class="si">%s</span><span class="s2">, &quot;</span>
+        <span class="n">update_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">uVehicle</span><span class="p">:</span>
+        <span class="n">update_query</span> <span class="o">+=</span> <span class="s2">&quot;Vehicle = </span><span class="si">%s</span><span class="s2">, &quot;</span>
+        <span class="n">update_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">uVehicle</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">canceled</span><span class="p">:</span>
+        <span class="n">update_query</span> <span class="o">+=</span> <span class="s2">&quot;Canceled = </span><span class="si">%s</span><span class="s2">, &quot;</span>
+        <span class="n">update_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">canceled</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">total_price</span><span class="p">:</span>
+        <span class="n">update_query</span> <span class="o">+=</span> <span class="s2">&quot;TotalPrice = </span><span class="si">%s</span><span class="s2">, &quot;</span>
+        <span class="n">update_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_price</span><span class="p">)</span>
+        
+    <span class="n">update_query</span> <span class="o">=</span> <span class="n">update_query</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; WHERE ReservationID = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">update_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reservation_id</span><span class="p">)</span>
+    
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">update_query</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">update_values</span><span class="p">))</span>
+    <span class="n">mydb</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    
+    <span class="c1"># For testing purposes</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reservation </span><span class="si">{</span><span class="n">reservation_id</span><span class="si">}</span><span class="s2"> updated.&quot;</span><span class="p">)</span></div>
+
+<span class="w">    </span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"># remove an existing reservation</span>
+<span class="sd"># Input: ReservationID, an integer - ID of the reservation to remove</span>
+<span class="sd"># Output: None        </span>
+<span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="remove_reservation">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.remove_reservation">[docs]</a>
+<span class="k">def</span> <span class="nf">remove_reservation</span><span class="p">(</span><span class="n">reservation_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">delete_query</span> <span class="o">=</span> <span class="s2">&quot;DELETE FROM Reservations WHERE ReservationID = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">delete_query</span><span class="p">,</span> <span class="p">(</span><span class="n">reservation_id</span><span class="p">,))</span>
+    <span class="n">mydb</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    
+    <span class="c1"># For testing purposes</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reservation </span><span class="si">{</span><span class="n">reservation_id</span><span class="si">}</span><span class="s2"> has been removed.&quot;</span><span class="p">)</span></div>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"># update an existing report by ReportID</span>
+<span class="sd"># Input: ReportID, an integer - ID of the report to update</span>
+<span class="sd">#        Damages, GasAmount, Vehicle, Customer, optional values to update</span>
+<span class="sd"># Output: None</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="update_report">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.update_report">[docs]</a>
+<span class="k">def</span> <span class="nf">update_report</span><span class="p">(</span><span class="n">report_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">damages</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gas_amount</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">car_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reservation_id</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">update_query</span> <span class="o">=</span> <span class="s2">&quot;UPDATE Reports SET &quot;</span>
+    <span class="n">update_values</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">if</span> <span class="n">damages</span><span class="p">:</span>
+        <span class="n">update_query</span> <span class="o">+=</span> <span class="s2">&quot;Damages = </span><span class="si">%s</span><span class="s2">, &quot;</span>
+        <span class="n">update_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">damages</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">gas_amount</span><span class="p">:</span>
+        <span class="n">update_query</span> <span class="o">+=</span> <span class="s2">&quot;GasAmount = </span><span class="si">%s</span><span class="s2">, &quot;</span>
+        <span class="n">update_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gas_amount</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">car_id</span><span class="p">:</span>
+        <span class="n">update_query</span> <span class="o">+=</span> <span class="s2">&quot;Vehicle = </span><span class="si">%s</span><span class="s2">, &quot;</span>
+        <span class="n">update_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">car_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">reservation_id</span><span class="p">:</span>
+        <span class="n">update_query</span> <span class="o">+=</span> <span class="s2">&quot;ReservationID = </span><span class="si">%s</span><span class="s2">, &quot;</span>
+        <span class="n">update_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reservation_id</span><span class="p">)</span>
+        
+    <span class="n">update_query</span> <span class="o">=</span> <span class="n">update_query</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; WHERE ReportID = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">update_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">report_id</span><span class="p">)</span>
+    
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">update_query</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">update_values</span><span class="p">))</span>
+    <span class="n">mydb</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    
+    <span class="c1"># For testing</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Report </span><span class="si">{</span><span class="n">report_id</span><span class="si">}</span><span class="s2"> updated.&quot;</span><span class="p">)</span></div>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"># remove an existing report</span>
+<span class="sd"># Input: ReportID, an integer - ID of the report to remove</span>
+<span class="sd"># Output: None</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="remove_report">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.remove_report">[docs]</a>
+<span class="k">def</span> <span class="nf">remove_report</span><span class="p">(</span><span class="n">report_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">delete_query</span> <span class="o">=</span> <span class="s2">&quot;DELETE FROM Reports WHERE ReportID = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">delete_query</span><span class="p">,</span> <span class="p">(</span><span class="n">report_id</span><span class="p">,))</span>
+    <span class="n">mydb</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    
+    <span class="c1"># For testing</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Report </span><span class="si">{</span><span class="n">report_id</span><span class="si">}</span><span class="s2"> has been removed.&quot;</span><span class="p">)</span></div>
+
+<span class="w">    </span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">#update an existing customer by CustomerID</span>
+<span class="sd"># Input: CustomerID, an integer - ID of the customer to update</span>
+<span class="sd">#        FullName, DOB, Email, optional values to update</span>
+<span class="sd"># Output: None</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="update_customer">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.update_customer">[docs]</a>
+<span class="k">def</span> <span class="nf">update_customer</span><span class="p">(</span><span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">full_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">update_query</span> <span class="o">=</span> <span class="s2">&quot;UPDATE Customers SET &quot;</span>
+    <span class="n">update_values</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">if</span> <span class="n">full_name</span><span class="p">:</span>
+        <span class="n">update_query</span> <span class="o">+=</span> <span class="s2">&quot;FullName = </span><span class="si">%s</span><span class="s2">, &quot;</span>
+        <span class="n">update_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">full_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dob</span><span class="p">:</span>
+        <span class="n">update_query</span> <span class="o">+=</span> <span class="s2">&quot;DOB = </span><span class="si">%s</span><span class="s2">, &quot;</span>
+        <span class="n">update_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dob</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">email</span><span class="p">:</span>
+        <span class="n">update_query</span> <span class="o">+=</span> <span class="s2">&quot;Email = </span><span class="si">%s</span><span class="s2">, &quot;</span>
+        <span class="n">update_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+        
+    <span class="n">update_query</span> <span class="o">=</span> <span class="n">update_query</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; WHERE CustomerID = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">update_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span>
+    
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">update_query</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">update_values</span><span class="p">))</span>
+    <span class="n">mydb</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    
+    <span class="c1"># For testing</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Customer </span><span class="si">{</span><span class="n">customer_id</span><span class="si">}</span><span class="s2"> updated.&quot;</span><span class="p">)</span></div>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"># Remove an existing customer</span>
+<span class="sd"># Input: CustomerID, an integer - ID of the customer to remove</span>
+<span class="sd"># Output: None</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="remove_customer">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.remove_customer">[docs]</a>
+<span class="k">def</span> <span class="nf">remove_customer</span><span class="p">(</span><span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1"># Delete the customer from the Customers table</span>
+    <span class="n">delete_customer_query</span> <span class="o">=</span> <span class="s2">&quot;DELETE FROM Customers WHERE CustomerID = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">delete_customer_query</span><span class="p">,</span> <span class="p">(</span><span class="n">customer_id</span><span class="p">,))</span>
+    
+    <span class="c1"># Commit all the changes</span>
+    <span class="n">mydb</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+    <span class="c1"># Print confirmation</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Customer </span><span class="si">{</span><span class="n">customer_id</span><span class="si">}</span><span class="s2"> has been removed along with their reservations.&quot;</span><span class="p">)</span></div>
+
+<span class="w">    </span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"># Function: search(startDate, endDate)</span>
+<span class="sd"># Input: startDate, a date with format yyyy-mm-dd</span>
+<span class="sd">#        endDate, a date with format yyyy-mm-dd</span>
+<span class="sd"># Output: list of tuples </span>
+<span class="sd"># Description: returns a list that contains tuples. Tuples</span>
+<span class="sd"># in the list contains the information about cars that are available</span>
+<span class="sd"># during the desired reservation period</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="search_database">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.search_database">[docs]</a>
+<span class="k">def</span> <span class="nf">search_database</span><span class="p">(</span><span class="n">start_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">car_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]:</span>
+    <span class="n">inventory</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sql_select_search</span> <span class="o">=</span> <span class="s2">&quot;select CarID, Mileage, MPG, Price, CarYear, Model, Make, Color, CarType, VIN from Vehicles </span><span class="se">\</span>
+<span class="s2">                        where CarType = </span><span class="si">%s</span><span class="s2"> and </span><span class="se">\</span>
+<span class="s2">                        CarId not in </span><span class="se">\</span>
+<span class="s2">                        (select Vehicle from Reservations </span><span class="se">\</span>
+<span class="s2">                        where </span><span class="si">%s</span><span class="s2"> &lt; EndDate and </span><span class="se">\</span>
+<span class="s2">                        </span><span class="si">%s</span><span class="s2"> &gt; StartDate)&quot;</span>
+    <span class="n">date_values</span> <span class="o">=</span> <span class="p">(</span><span class="n">car_type</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">)</span>
+    
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_select_search</span><span class="p">,</span> <span class="n">date_values</span><span class="p">)</span>
+    <span class="n">myresult</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">car</span> <span class="ow">in</span> <span class="n">myresult</span><span class="p">:</span>
+        <span class="n">inventory</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">car</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">inventory</span></div>
+
+
+<div class="viewcode-block" id="get_vins">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.get_vins">[docs]</a>
+<span class="k">def</span> <span class="nf">get_vins</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve a list of all Vehicle Identification Numbers (VINs) from the database.</span>
+
+<span class="sd">    @return list - A list of VINs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">inventory</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sql_select_vins</span> <span class="o">=</span> <span class="s2">&quot;select VIN from Vehicles&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_select_vins</span><span class="p">)</span>
+    <span class="n">myresult</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">myresult</span><span class="p">:</span>
+        <span class="n">inventory</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">inventory</span> </div>
+
+
+<div class="viewcode-block" id="insert_reservation">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.insert_reservation">[docs]</a>
+<span class="k">def</span> <span class="nf">insert_reservation</span><span class="p">(</span><span class="n">start_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">insurance</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">customer_email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span><span class="n">car_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">canceled</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">total_price</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Insert a new reservation into the database.</span>
+
+<span class="sd">    @param start_date: str - Reservation start date in &#39;YYYY-MM-DD&#39; format.</span>
+<span class="sd">    @param end_date: str - Reservation end date in &#39;YYYY-MM-DD&#39; format.</span>
+<span class="sd">    @param insurance: bool - Indicates if insurance is included.</span>
+<span class="sd">    @param customer_email: str - Customer&#39;s email address.</span>
+<span class="sd">    @param car_id: int - ID of the reserved car.</span>
+<span class="sd">    @param canceled: bool - Indicates if the reservation is canceled.</span>
+<span class="sd">    @param total_price: float - total price for reservation, initially 0 to be calculated</span>
+<span class="sd">    @return int - The ID of the newly created reservation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">sql_insert_reservation</span> <span class="o">=</span> <span class="s2">&quot;insert into Reservations (StartDate, EndDate, Insurance, CustomerEmail, CustomerID, Vehicle, Canceled, TotalPrice) </span><span class="se">\</span>
+<span class="s2">                            values (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">)&quot;</span>
+    <span class="n">reservation_values</span> <span class="o">=</span> <span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">insurance</span><span class="p">,</span> <span class="n">customer_email</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">car_id</span><span class="p">,</span> <span class="n">canceled</span><span class="p">,</span> <span class="n">total_price</span><span class="p">)</span>
+    
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_insert_reservation</span><span class="p">,</span> <span class="n">reservation_values</span><span class="p">)</span>
+    <span class="n">mydb</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select last_insert_id()&quot;</span><span class="p">)</span>
+    
+    <span class="n">myresult</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">myresult</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="get_reports">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.get_reports">[docs]</a>
+<span class="k">def</span> <span class="nf">get_reports</span><span class="p">(</span><span class="n">car_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve all reports for a specific vehicle.</span>
+
+<span class="sd">    @param car_id: int - ID of the vehicle.</span>
+<span class="sd">    @return list: A list of reports associated with the vehicle.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">reports</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sql_select_reports</span> <span class="o">=</span> <span class="s2">&quot;select * from Reports where Vehicle = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_select_reports</span><span class="p">,</span> <span class="p">[</span><span class="n">car_id</span><span class="p">])</span>
+    
+    <span class="n">myresult</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">myresult</span><span class="p">:</span>
+        <span class="n">reports</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">reports</span></div>
+
+
+<div class="viewcode-block" id="calculate_days">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.calculate_days">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_days</span><span class="p">(</span><span class="n">start_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the number of days</span>
+<span class="sd">    Args:</span>
+<span class="sd">        start_date YYYY-MM-DD</span>
+<span class="sd">        end_date YYYY-MM-DD</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Number of days between the two dates </span>
+<span class="sd">        Returns -1 if error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Convert string inputs to datetime objects</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">end_date</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+        
+        <span class="c1"># Calculate the difference in days</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
+        
+        <span class="c1"># Ensure valid date range</span>
+        <span class="k">if</span> <span class="n">delta</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: wrong start and end date&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+        
+        <span class="k">return</span> <span class="n">delta</span>
+    
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid date format: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span></div>
+
+
+<span class="k">def</span> <span class="nf">get_customer_info</span><span class="p">(</span><span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve customer information by their ID.</span>
+
+<span class="sd">    @param customer_id: int - ID of the customer.</span>
+<span class="sd">    @return dict: A dictionary containing the customer&#39;s information, or None if not found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">select_prompt</span> <span class="o">=</span> <span class="s2">&quot;SELECT CustomerID, FullName, DOB, Email FROM Customers WHERE CustomerID = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">select_prompt</span><span class="p">,</span> <span class="p">(</span><span class="n">customer_id</span><span class="p">,))</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+        <span class="c1"># Create a dictionary for the customer info</span>
+        <span class="n">customer_info</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;CustomerID&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="s1">&#39;FullName&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="s1">&#39;DOB&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+            <span class="s1">&#39;Email&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">customer_info</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="get_reservations">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.get_reservations">[docs]</a>
+<span class="k">def</span> <span class="nf">get_reservations</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve all reservations from the database.</span>
+
+<span class="sd">    @return list: A list of all reservations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">reservations</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sql_select_reservations</span> <span class="o">=</span> <span class="s2">&quot;select * from Reservations&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_select_reservations</span><span class="p">)</span>
+    
+    <span class="n">myresult</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">myresult</span><span class="p">:</span>
+        <span class="n">reservations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">reservations</span></div>
+
+
+<div class="viewcode-block" id="get_hashed_password">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.get_hashed_password">[docs]</a>
+<span class="k">def</span> <span class="nf">get_hashed_password</span><span class="p">(</span><span class="n">login_username</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">person_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve the hashed password for a user.</span>
+
+<span class="sd">    @param login_username: int - The username or ID of the user.</span>
+<span class="sd">    @param person_type: str - The type of user (&#39;customer&#39; or &#39;admin&#39;).</span>
+<span class="sd">    @return str: The hashed password of the user.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">person_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;customer&quot;</span><span class="p">):</span>
+        <span class="n">sql_select_password</span> <span class="o">=</span> <span class="s2">&quot;select Password from Customers where Username = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="k">elif</span><span class="p">(</span><span class="n">person_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;admin&quot;</span><span class="p">):</span>
+        <span class="n">sql_select_password</span> <span class="o">=</span> <span class="s2">&quot;select Password from Administrator where Username = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_select_password</span><span class="p">,</span> <span class="p">[</span><span class="n">login_username</span><span class="p">])</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="admin_sign_up">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.admin_sign_up">[docs]</a>
+<span class="k">def</span> <span class="nf">admin_sign_up</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">signup_username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dob</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Register a new admin user.</span>
+
+<span class="sd">    @param name: str - Name of the admin.</span>
+<span class="sd">    @param signup_username: str - Username for the admin.</span>
+<span class="sd">    @param email: str - Email address of the admin.</span>
+<span class="sd">    @param password: str - Password for the admin account.</span>
+<span class="sd">    @return None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">sql_insert_admin</span> <span class="o">=</span> <span class="s2">&quot;insert into Administrator (User, Email, Password, Username, DOB) values (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">)&quot;</span>
+    <span class="n">admin_values</span> <span class="o">=</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">signup_username</span><span class="p">,</span> <span class="n">dob</span><span class="p">)</span>
+    
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_insert_admin</span><span class="p">,</span> <span class="n">admin_values</span><span class="p">)</span>
+    <span class="n">mydb</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="customer_sign_up">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.customer_sign_up">[docs]</a>
+<span class="k">def</span> <span class="nf">customer_sign_up</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">signup_username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dob</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">sql_insert_customer</span> <span class="o">=</span> <span class="s2">&quot;insert into Customers (FullName, DOB, Email, Username, Password) values (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">)&quot;</span>
+    <span class="n">customer_values</span> <span class="o">=</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">dob</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">signup_username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+    
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_insert_customer</span><span class="p">,</span> <span class="n">customer_values</span><span class="p">)</span>
+    <span class="n">mydb</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="change_password">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.change_password">[docs]</a>
+<span class="k">def</span> <span class="nf">change_password</span><span class="p">(</span><span class="n">input_username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">person_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Change the password for a user.</span>
+
+<span class="sd">    @param input_username: str - Username of the user.</span>
+<span class="sd">    @param input_password: str - New password for the user.</span>
+<span class="sd">    @param person_type: str - The type of user (&#39;customer&#39; or &#39;admin&#39;).</span>
+<span class="sd">    @return None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">person_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;customer&quot;</span><span class="p">):</span>
+        <span class="n">sql_update</span> <span class="o">=</span> <span class="s2">&quot;update Customers set Password = </span><span class="si">%s</span><span class="s2"> where Username = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="k">elif</span><span class="p">(</span><span class="n">person_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;admin&quot;</span><span class="p">):</span>
+        <span class="n">sql_update</span> <span class="o">=</span> <span class="s2">&quot;update Administrator set Password = </span><span class="si">%s</span><span class="s2"> where Username = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    
+    <span class="n">values</span> <span class="o">=</span> <span class="p">(</span><span class="n">input_password</span><span class="p">,</span> <span class="n">input_username</span><span class="p">)</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_update</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+    <span class="n">mydb</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="cancel_reservation">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.cancel_reservation">[docs]</a>
+<span class="k">def</span> <span class="nf">cancel_reservation</span><span class="p">(</span><span class="n">reservation_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Cancel a reservation by updating its status to canceled.</span>
+
+<span class="sd">    @param reservation_id: int - The ID of the reservation to be canceled.</span>
+<span class="sd">    @return None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Update the Canceled column in the Reservations table</span>
+    <span class="n">set_canceld_to_one</span> <span class="o">=</span> <span class="s2">&quot;UPDATE Reservations SET Canceled = 1 WHERE ReservationId = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">set_canceld_to_one</span><span class="p">,</span> <span class="p">(</span><span class="n">reservation_id</span><span class="p">,))</span>
+    
+    <span class="c1"># Commit all the changes</span>
+    <span class="n">mydb</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+    <span class="c1"># Print confirmation</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reservation </span><span class="si">{</span><span class="n">reservation_id</span><span class="si">}</span><span class="s2"> has been canceled.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="confirm_reservation">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.confirm_reservation">[docs]</a>
+<span class="k">def</span> <span class="nf">confirm_reservation</span><span class="p">(</span><span class="n">reservation_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Confirm a reservation by updating its status to confirmed.</span>
+<span class="sd">    A reservation cannot be confirmed if it is already marked as canceled.</span>
+
+<span class="sd">    @param reservation_id: int - The ID of the reservation to be confirmed.</span>
+<span class="sd">    @return None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Check if the reservation_id is invalid (None or negative)</span>
+    <span class="k">if</span> <span class="n">reservation_id</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">reservation_id</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid reservation ID: </span><span class="si">{</span><span class="n">reservation_id</span><span class="si">}</span><span class="s2">. It must be a positive integer.&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Check if the reservation is already canceled</span>
+    <span class="n">check_canceled_query</span> <span class="o">=</span> <span class="s2">&quot;SELECT Canceled FROM Reservations WHERE ReservationId = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">check_canceled_query</span><span class="p">,</span> <span class="p">(</span><span class="n">reservation_id</span><span class="p">,))</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No reservation found with ID </span><span class="si">{</span><span class="n">reservation_id</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reservation </span><span class="si">{</span><span class="n">reservation_id</span><span class="si">}</span><span class="s2"> is canceled and cannot be confirmed.&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+    
+    
+    <span class="c1"># Update the Canceled column in the Reservations table</span>
+    <span class="n">set_confirmed_to_one</span> <span class="o">=</span> <span class="s2">&quot;UPDATE Reservations SET Confirmed = 1 WHERE ReservationId = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">set_confirmed_to_one</span><span class="p">,</span> <span class="p">(</span><span class="n">reservation_id</span><span class="p">,))</span>
+    
+    <span class="c1"># Commit all the changes</span>
+    <span class="n">mydb</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+    <span class="c1"># Print confirmation</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reservation </span><span class="si">{</span><span class="n">reservation_id</span><span class="si">}</span><span class="s2"> has been confirmed.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_admin_info">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.get_admin_info">[docs]</a>
+<span class="k">def</span> <span class="nf">get_admin_info</span><span class="p">(</span><span class="n">input_username</span><span class="p">):</span>
+    <span class="n">sql_select</span> <span class="o">=</span> <span class="s2">&quot;select * from Administrator where Username = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_select</span><span class="p">,</span> <span class="p">[</span><span class="n">input_username</span><span class="p">])</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="get_customer_info">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.get_customer_info">[docs]</a>
+<span class="k">def</span> <span class="nf">get_customer_info</span><span class="p">(</span><span class="n">input_username</span><span class="p">):</span>
+    <span class="n">sql_select</span> <span class="o">=</span> <span class="s2">&quot;select * from Customers where Username = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_select</span><span class="p">,</span> <span class="p">[</span><span class="n">input_username</span><span class="p">])</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="get_reservations_history">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.get_reservations_history">[docs]</a>
+<span class="k">def</span> <span class="nf">get_reservations_history</span><span class="p">(</span><span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves all reservations made by a specific customer.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    customer_id: str</span>
+<span class="sd">        The ID of the customer whose reservations are to be retrieved.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list[tuple]:</span>
+<span class="sd">        A list of tuples, where each tuple contains information about a reservation.</span>
+
+<span class="sd">    Author: Nima Jafari</span>
+<span class="sd">    Updates:</span>
+<span class="sd">    Nima Jafari 12/04</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">reservations</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sql_select_reservations</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM Reservations WHERE CustomerID = </span><span class="si">%s</span><span class="s2">&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_select_reservations</span><span class="p">,</span> <span class="p">(</span><span class="n">customer_id</span><span class="p">,))</span>
+    
+    <span class="n">myresult</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">reservation</span> <span class="ow">in</span> <span class="n">myresult</span><span class="p">:</span>
+        <span class="n">reservations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reservation</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">reservations</span></div>
+
+
+<div class="viewcode-block" id="get_admin_usernames">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.get_admin_usernames">[docs]</a>
+<span class="k">def</span> <span class="nf">get_admin_usernames</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves all admin username</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    None</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    </span>
+<span class="sd">    Author: Elijah Sagaran</span>
+<span class="sd">    Updates</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">usernames</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sql_select_usernames</span> <span class="o">=</span> <span class="s2">&quot;select Username from Administrator&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_select_usernames</span><span class="p">)</span>
+    <span class="n">myresult</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">username</span> <span class="ow">in</span> <span class="n">myresult</span><span class="p">:</span>
+        <span class="n">usernames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+    
+    <span class="n">usernames</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">usernames</span></div>
+
+
+<div class="viewcode-block" id="get_customer_usernames">
+<a class="viewcode-back" href="../../../back_end.database_class.html#back_end.database_class.database_utility_class.get_customer_usernames">[docs]</a>
+<span class="k">def</span> <span class="nf">get_customer_usernames</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">usernames</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sql_select_usernames</span> <span class="o">=</span> <span class="s2">&quot;select Username from Customers&quot;</span>
+    <span class="n">mycursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_select_usernames</span><span class="p">)</span>
+    <span class="n">myresult</span> <span class="o">=</span> <span class="n">mycursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">username</span> <span class="ow">in</span> <span class="n">myresult</span><span class="p">:</span>
+        <span class="n">usernames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+        
+    <span class="n">usernames</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">usernames</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">J.E.N.I Car Rental App</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Nima Jafari.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

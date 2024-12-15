@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>front_end.login &#8212; J.E.N.I Car Rental App  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for front_end.login</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">PyQt5.QtCore</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtGui</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtWidgets</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">.adminLogin</span> <span class="kn">import</span> <span class="n">admin_login</span>
+<span class="kn">from</span> <span class="nn">.config.font</span> <span class="kn">import</span> <span class="n">font</span>
+
+
+<div class="viewcode-block" id="login">
+<a class="viewcode-back" href="../../front_end.html#front_end.login.login">[docs]</a>
+<span class="k">class</span> <span class="nc">login</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Widget to make the login window.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">main_window</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the login window.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># Set the background color of the main window to dark grey</span>
+
+        <span class="c1"># Set up the main layout and inner login window</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_window</span> <span class="o">=</span> <span class="n">main_window</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_window</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_window_layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">login_window</span><span class="p">)</span>
+
+        <span class="c1"># set up logo img</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;logo/HalfLogo.png&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span> <span class="o">=</span> <span class="n">QPixmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logo_dir</span><span class="p">)</span>
+
+        <span class="c1"># Set up the font</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_font</span> <span class="o">=</span> <span class="n">font</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">font</span> <span class="o">=</span> <span class="n">QFont</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_font</span><span class="o">.</span><span class="n">font_family</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="c1"># self.font.setBold(True)</span>
+
+        <span class="c1"># Create label and set font</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Select Login&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Login button</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">customer_login_button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Customer Login&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">admin_login_button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Admin Login&quot;</span><span class="p">)</span>
+
+        <span class="c1"># function calls</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_layout</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_logo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_admin_label</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_login_button</span><span class="p">()</span>
+
+<div class="viewcode-block" id="login.setup_logo">
+<a class="viewcode-back" href="../../front_end.html#front_end.login.login.setup_logo">[docs]</a>
+    <span class="k">def</span> <span class="nf">setup_logo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        function to set parameters for the image logo for the login window.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaled_pixmap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span>
+            <span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">aspectRatioMode</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>  <span class="c1"># width, height</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scaled_pixmap</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;border: none;&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="login.setup_layout">
+<a class="viewcode-back" href="../../front_end.html#front_end.login.login.setup_layout">[docs]</a>
+    <span class="k">def</span> <span class="nf">setup_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        function to setup the main layou for the login window.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;background-color:darkgrey;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_layout</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># Create the inner login window</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_window</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_window</span><span class="o">.</span><span class="n">setFixedHeight</span><span class="p">(</span><span class="mi">600</span><span class="p">)</span>
+
+        <span class="c1"># Style for the login window</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_window</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
+            <span class="s2">&quot;background-color:white;&quot;</span>
+            <span class="s2">&quot;border : 3px solid lightgrey;&quot;</span>
+            <span class="s2">&quot;border-radius: 25px;&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Layout for the inner login window</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_window_layout</span><span class="o">.</span><span class="n">addStretch</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_window_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_window_layout</span><span class="o">.</span><span class="n">addStretch</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_window_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">login_label</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_window_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">customer_login_button</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_window_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">admin_login_button</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_window_layout</span><span class="o">.</span><span class="n">addStretch</span><span class="p">()</span>
+
+        <span class="c1"># Add the login window to the main layout, centering it</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">login_window</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="login.setup_admin_label">
+<a class="viewcode-back" href="../../front_end.html#front_end.login.login.setup_admin_label">[docs]</a>
+    <span class="k">def</span> <span class="nf">setup_admin_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        funtion to set up the parameters for the admin label.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_label</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_label</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;color: #efbe25; border: none;&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="login.setup_login_button">
+<a class="viewcode-back" href="../../front_end.html#front_end.login.login.setup_login_button">[docs]</a>
+    <span class="k">def</span> <span class="nf">setup_login_button</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        function to set up the parameters for the login button.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">customer_login_button</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">admin_login_button</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">customer_login_button</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">customer_login_button</span><span class="o">.</span><span class="n">setFixedHeight</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">admin_login_button</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">admin_login_button</span><span class="o">.</span><span class="n">setFixedHeight</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">customer_login_button</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
+            <span class="s2">&quot;background-color: #efbe25; color: white;&quot;</span>
+            <span class="s2">&quot;border: none;&quot;</span>
+            <span class="s2">&quot;border-radius : 5px; outline: none;&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">admin_login_button</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
+            <span class="s2">&quot;background-color: #efbe25; color: white;&quot;</span>
+            <span class="s2">&quot;border: none;&quot;</span>
+            <span class="s2">&quot;border-radius : 5px; outline: none;&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">admin_login_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">click_admin_button</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">customer_login_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">click_customer_button</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="login.click_admin_button">
+<a class="viewcode-back" href="../../front_end.html#front_end.login.login.click_admin_button">[docs]</a>
+    <span class="k">def</span> <span class="nf">click_admin_button</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_window</span><span class="o">.</span><span class="n">stacked_widget</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="login.click_customer_button">
+<a class="viewcode-back" href="../../front_end.html#front_end.login.login.click_customer_button">[docs]</a>
+    <span class="k">def</span> <span class="nf">click_customer_button</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_window</span><span class="o">.</span><span class="n">stacked_widget</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+
+    <span class="kn">from</span> <span class="nn">.config.screenConfig</span> <span class="kn">import</span> <span class="n">screen_config</span>
+
+    <span class="n">screen_config</span> <span class="o">=</span> <span class="n">screen_config</span><span class="p">()</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="n">login</span><span class="p">()</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">())</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">J.E.N.I Car Rental App</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Nima Jafari.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

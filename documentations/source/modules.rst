@@ -1,7 +1,9 @@
-invoice_class
-=============
+modules
+========
 
 .. toctree::
    :maxdepth: 4
 
-   invoice_class
+   database
+   front_end
+   back_end
