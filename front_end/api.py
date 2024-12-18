@@ -22,7 +22,7 @@ class api:
             self.initialized = True              
 
             # Making a ssh tunnel
-            self.tunnel = SSHTunnel()
+            # self.tunnel = SSHTunnel()
 
             # Need username and password at the beginning
             self.username = 'admin'

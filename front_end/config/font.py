@@ -1,5 +1,4 @@
-import os
-from PyQt5.QtGui import QFontDatabase, QFont
+from PyQt5.QtGui import QFont
 
 class font:
     '''
@@ -7,22 +6,16 @@ class font:
     '''
     def __init__(self):
         '''
-        Initializes the font from the tff file.
+        Initializes the font using a built-in system font.
         '''
-        # Construct the absolute path to the font file
-        font_path = os.path.join(os.path.dirname(__file__), "fonts/Staatliches-Regular.ttf")
+        # Use a standard built-in system font
+        self.staaliches = "Arial"  # Replace with another common system font if needed
         
-        # Load the font using the absolute path
-        self.staaliches = QFontDatabase.addApplicationFont(font_path)
+        # Check if the font is available
+        if not QFont(self.staaliches).exactMatch():
+            raise ValueError(f"The specified font '{self.staaliches}' is not available on this system")
         
-        # Check if the font was loaded successfully
-        if self.staaliches == -1:
-            raise ValueError(f"Failed to load font from {font_path}")
+        # Set the font family to the chosen font
+        self.font_family = self.staaliches
 
-        # Get the font family name, if available
-        font_families = QFontDatabase.applicationFontFamilies(self.staaliches)
-        if not font_families:
-            raise ValueError("No font families found for the loaded font")
-        
-        self.font_family = font_families[0]
 
